@@ -121,3 +121,32 @@
 .studio-page img:not(.brand-mark) {
   outline-color: color-mix(in oklab, var(--color-ink) 10%, transparent);
 }
+
+/* Lepini Digital home: foglio da disegno, matita, lampada calda */
+.carta-page {
+  background-color: #f1eadb;
+  background-image:
+    radial-gradient(ellipse 70% 45% at 88% -10%, rgba(212, 148, 72, 0.28), transparent 58%),
+    radial-gradient(ellipse 50% 35% at 8% 108%, rgba(181, 113, 58, 0.1), transparent 55%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 31px,
+      rgba(40, 32, 18, 0.045) 31px 32px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 31px,
+      rgba(40, 32, 18, 0.03) 31px 32px
+    );
+  color: var(--color-ink);
+}
+
+.carta-page h1,
+.carta-page h2,
+.carta-page h3 {
+  color: var(--color-ink);
+}
+
+.carta-page img:not(.brand-mark) {
+  outline-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+}

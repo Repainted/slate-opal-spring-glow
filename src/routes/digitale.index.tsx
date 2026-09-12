@@ -3,9 +3,8 @@ import { useState } from "react";
 import { JsonLd } from "@/components/JsonLd";
 import { DigitalShell } from "@/components/layout/DigitalShell";
 import { ProveGallery } from "@/components/ProveGallery";
-import { Eyebrow, SectionHead } from "@/components/SectionHead";
 import { Button } from "@/components/ui/button";
-import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, PRODOTTO, SERVIZI } from "@/data/digitale";
+import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI } from "@/data/digitale";
 
 export const Route = createFileRoute("/digitale/")({
   head: () => ({
@@ -34,166 +33,112 @@ function DigitalePage() {
         }}
       />
 
-      <section className="relative overflow-hidden border-b border-copper/40">
-        <div className="mx-auto grid min-h-[88vh] max-w-6xl items-stretch md:grid-cols-12">
-          <div className="flex flex-col justify-end px-5 pb-12 pt-28 md:col-span-6 md:px-12 md:pb-16">
-            <Eyebrow>{PITCH.heroKicker}</Eyebrow>
-            <h1 className="mt-4 font-display text-[clamp(2.6rem,6vw,4.8rem)] font-semibold leading-[0.92] text-cream">
-              {PITCH.heroTitle}
-              <span className="mt-3 block font-medium italic text-olive-light">{PITCH.heroItalic}</span>
-            </h1>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{PITCH.heroLead}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-5">
-              <a href="#contatti">
-                <Button>Parliamone</Button>
-              </a>
-              <a href="#servizi" className="text-sm text-olive-light hover:text-cream">
-                Cosa facciamo
-              </a>
-            </div>
+      <section className="relative overflow-hidden">
+        <Matita />
+        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-28 md:px-12 md:pb-24 md:pt-32">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.heroKicker}</p>
+          <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.6rem,6vw,4.8rem)] font-semibold leading-[0.92] text-ink">
+            {PITCH.heroTitle}
+            <span className="mt-3 block font-medium italic text-copper">{PITCH.heroItalic}</span>
+          </h1>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">{PITCH.heroLead}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <a href="#contatti">
+              <Button variant="ink">Parliamone</Button>
+            </a>
+            <a href="#servizi" className="text-sm text-ink-soft hover:text-ink">
+              Cosa facciamo
+            </a>
           </div>
-          <figure className="relative min-h-[52vh] md:col-span-6 md:min-h-0">
-            <img
-              src="/images/digitale/close-olio.jpg"
-              alt="Goccia d'olio sul collo di una bottiglia, ravvicinato"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </figure>
         </div>
       </section>
 
-      <section className="border-b border-cream/10">
-        <div className="mx-auto grid max-w-6xl divide-cream/10 md:grid-cols-3 md:divide-x">
+      <section className="border-y border-ink/10">
+        <div className="mx-auto grid max-w-6xl divide-ink/10 md:grid-cols-3 md:divide-x">
           {DIGITAL_STATS.map((s) => (
             <div key={s.l} className="px-5 py-8 md:px-12">
-              <p className="font-display text-5xl leading-none text-cream md:text-6xl">{s.k}</p>
-              <p className="mt-3 max-w-[16rem] font-mono text-xs uppercase tracking-[0.16em] text-muted">{s.l}</p>
+              <p className="font-display text-5xl leading-none text-ink md:text-6xl">{s.k}</p>
+              <p className="mt-3 max-w-[16rem] font-mono text-xs uppercase tracking-[0.16em] text-ink-soft">{s.l}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16 md:px-12 md:py-20">
-        <blockquote className="max-w-3xl font-display text-3xl leading-snug text-cream md:text-[2.5rem] md:leading-[1.15]">
+        <blockquote className="max-w-3xl font-display text-3xl leading-snug text-ink md:text-[2.4rem] md:leading-[1.18]">
           {PITCH.quote}
         </blockquote>
-        <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {[
-            { src: "/images/digitale/close-oliva.jpg", alt: "Pelle di un'oliva", cap: "Frutto" },
-            { src: "/images/digitale/close-morsa.jpg", alt: "Morsa e legno", cap: "Banco" },
-            { src: "/images/digitale/close-legno.jpg", alt: "Vena del legno e chiodi", cap: "Mestiere" },
-            { src: "/images/digitale/close-calcare.jpg", alt: "Calcare e rame", cap: "Pietra" },
-          ].map((f) => (
-            <figure key={f.src} className="overflow-hidden rounded-xl bg-navy-card">
-              <img src={f.src} alt={f.alt} className="aspect-square w-full object-cover" />
-              <figcaption className="px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-muted">{f.cap}</figcaption>
-            </figure>
-          ))}
-        </div>
       </section>
 
-      <section id="prodotto" className="border-y border-cream/10 bg-navy-deep">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-12 md:px-12">
-          <div className="md:col-span-4">
-            <SectionHead
-              kicker="Close-up"
-              title="Il lavoro, da vicino"
-              lead="Olio, morsa, legno. Niente panorami inventati: la materia di chi produce."
-            />
-          </div>
-          <div className="grid gap-3 sm:grid-cols-3 md:col-span-8">
-            {PRODOTTO.map((p) => (
-              <figure key={p.src} className="overflow-hidden rounded-xl bg-navy-card">
-                <img src={p.src} alt={p.alt} className="aspect-square w-full object-cover" />
-                <figcaption className="p-4">
-                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-copper-light">{p.caption}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">{p.nota}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="servizi" className="mx-auto max-w-6xl px-5 py-20 md:px-12">
-        <SectionHead kicker={PITCH.serviziKicker} title={PITCH.serviziTitle} lead={PITCH.serviziLead} />
-        <ol className="mt-14 divide-y divide-cream/10 border-y border-cream/10">
+      <section id="servizi" className="mx-auto max-w-6xl px-5 pb-20 md:px-12">
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.serviziKicker}</p>
+        <h2 className="mt-3 max-w-xl font-display text-4xl text-ink md:text-5xl">{PITCH.serviziTitle}</h2>
+        <p className="mt-4 max-w-xl text-ink-soft">{PITCH.serviziLead}</p>
+        <ol className="mt-14 divide-y divide-ink/10 border-y border-ink/10">
           {SERVIZI.map((s) => (
-            <li key={s.code} className="grid items-center gap-4 py-8 md:grid-cols-12">
-              <img
-                src={s.foto}
-                alt=""
-                className="size-16 rounded-lg object-cover md:col-span-1 md:size-14"
-              />
-              <p className="font-display text-2xl text-copper-light md:col-span-1">{s.code}</p>
-              <h3 className="font-display text-2xl md:col-span-3">{s.titolo}</h3>
-              <p className="max-w-md text-sm leading-relaxed text-cream-soft md:col-span-7">{s.testo}</p>
+            <li key={s.code} className="grid items-baseline gap-3 py-8 md:grid-cols-12">
+              <p className="font-display text-2xl text-copper md:col-span-2">{s.code}</p>
+              <h3 className="font-display text-2xl text-ink md:col-span-3">{s.titolo}</h3>
+              <p className="max-w-md text-sm leading-relaxed text-ink-soft md:col-span-7">{s.testo}</p>
             </li>
           ))}
         </ol>
       </section>
 
-      <section id="metodo" className="border-y border-cream/10 bg-navy-deep">
+      <section id="metodo" className="border-y border-ink/10 bg-paper-card/70">
         <div className="mx-auto max-w-6xl px-5 py-20 md:px-12">
-          <SectionHead
-            kicker={PITCH.metodoKicker}
-            title={PITCH.metodoTitle}
-            lead={PITCH.metodoLead}
-          />
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.metodoKicker}</p>
+          <h2 className="mt-3 font-display text-4xl text-ink">{PITCH.metodoTitle}</h2>
+          <p className="mt-4 max-w-xl text-ink-soft">{PITCH.metodoLead}</p>
           <ol className="mt-14 grid gap-10 md:grid-cols-4">
             {METODO.map((m, i) => (
-              <li key={m.titolo} className="border-t border-copper/40 pt-5">
-                <p className="font-mono text-xs text-olive-light">0{i + 1}</p>
-                <h3 className="mt-2 font-display text-xl md:text-2xl">{m.titolo}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{m.testo}</p>
+              <li key={m.titolo} className="border-t border-ink/15 pt-5">
+                <p className="font-mono text-xs text-copper">0{i + 1}</p>
+                <h3 className="mt-2 font-display text-xl text-ink md:text-2xl">{m.titolo}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{m.testo}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="relative h-[38vh] min-h-[220px] overflow-hidden">
-        <img
-          src="/images/digitale/close-legno.jpg"
-          alt="Vena del legno d'ulivo e chiodi di rame"
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
-        <p className="absolute bottom-8 left-5 max-w-md font-display text-2xl italic text-cream md:left-12 md:text-3xl">
-          Dal banco, verso mercati che prima erano lontani.
-        </p>
+      <section id="opere" className="mx-auto max-w-6xl px-5 py-20 md:px-12">
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.opereKicker}</p>
+        <h2 className="mt-3 max-w-2xl font-display text-4xl text-ink">{PITCH.opereTitle}</h2>
+        <p className="mt-4 max-w-xl text-ink-soft">{PITCH.opereLead}</p>
+        <ProveGallery light />
       </section>
 
-      <section id="opere" className="bg-navy">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:px-12">
-          <SectionHead
-            kicker={PITCH.opereKicker}
-            title={PITCH.opereTitle}
-            lead={PITCH.opereLead}
-          />
-          <ProveGallery />
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-12 md:py-20">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.origineKicker}</p>
+          <h2 className="mt-3 max-w-xl font-display text-4xl text-ink">{PITCH.origineTitle}</h2>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">{PITCH.origineLead}</p>
         </div>
-      </section>
-
-      <section className="mx-auto grid max-w-6xl items-end gap-10 px-5 py-20 md:grid-cols-2 md:px-12">
-        <div>
-          <SectionHead
-            kicker={PITCH.origineKicker}
-            title={PITCH.origineTitle}
-            lead={PITCH.origineLead}
-          />
-        </div>
-        <figure className="overflow-hidden rounded-xl">
-          <img
-            src="/images/digitale/close-oliva.jpg"
-            alt="Pelle di un'oliva lucida d'olio"
-            className="aspect-square w-full object-cover"
-          />
-        </figure>
       </section>
 
       <Contatti />
     </DigitalShell>
+  );
+}
+
+function Matita() {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full text-ink"
+      viewBox="0 0 1200 720"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden
+    >
+      <g fill="none" stroke="currentColor" strokeWidth="0.7" opacity="0.22">
+        <path d="M-20 420 C 180 380, 280 460, 420 400 S 680 330, 860 370 S 1100 440, 1220 400" />
+        <path d="M-20 460 C 160 420, 300 500, 460 440 S 720 370, 900 410 S 1120 480, 1220 440" />
+        <path d="M-20 500 C 140 460, 320 540, 500 480 S 760 410, 940 450 S 1140 520, 1220 480" />
+        <path d="M-20 540 C 120 500, 340 580, 540 520 S 800 450, 980 490 S 1160 560, 1220 520" />
+        <path d="M-20 360 C 200 320, 260 400, 400 340 S 640 280, 820 320 S 1080 390, 1220 350" />
+        <path d="M-20 320 C 220 280, 240 360, 380 300 S 620 240, 800 280 S 1060 350, 1220 310" />
+      </g>
+    </svg>
   );
 }
 
@@ -212,16 +157,16 @@ function Contatti() {
   const href = `mailto:${DIGITAL_MAIL}?subject=${encodeURIComponent("Lepini Digital — un salto")}&body=${encodeURIComponent(body)}`;
 
   const field =
-    "w-full border-0 border-b border-cream/20 bg-transparent py-3 text-cream placeholder:text-muted/70 focus:border-copper focus:outline-none";
+    "w-full border-0 border-b border-ink/20 bg-transparent py-3 text-ink placeholder:text-ink-soft/70 focus:border-copper focus:outline-none";
 
   return (
-    <section id="contatti" className="border-t-[3px] border-copper bg-navy-deep">
+    <section id="contatti" className="border-t-[3px] border-copper bg-paper-card/80">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-12 md:px-12">
         <div className="md:col-span-5 md:sticky md:top-28 md:self-start">
-          <Eyebrow>Contatti</Eyebrow>
-          <h2 className="mt-4 font-display text-4xl leading-[1.08] md:text-5xl">{PITCH.contactTitle}</h2>
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-cream-soft">{PITCH.contactLead}</p>
-          <p className="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-muted">{PITCH.contactHint}</p>
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">Contatti</p>
+          <h2 className="mt-4 font-display text-4xl leading-[1.08] text-ink md:text-5xl">{PITCH.contactTitle}</h2>
+          <p className="mt-5 max-w-md text-lg leading-relaxed text-ink-soft">{PITCH.contactLead}</p>
+          <p className="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-ink-soft">{PITCH.contactHint}</p>
         </div>
 
         <form
@@ -233,7 +178,7 @@ function Contatti() {
         >
           <div className="grid gap-8 sm:grid-cols-2">
             <p>
-              <label htmlFor="nome" className="block text-sm text-cream-soft">
+              <label htmlFor="nome" className="block text-sm text-ink-soft">
                 Nome
               </label>
               <input
@@ -247,7 +192,7 @@ function Contatti() {
               />
             </p>
             <p>
-              <label htmlFor="azienda" className="block text-sm text-cream-soft">
+              <label htmlFor="azienda" className="block text-sm text-ink-soft">
                 Azienda
               </label>
               <input
@@ -263,10 +208,10 @@ function Contatti() {
           </div>
 
           <p className="mt-10">
-            <label htmlFor="msg" className="block font-display text-2xl text-cream">
+            <label htmlFor="msg" className="block font-display text-2xl text-ink">
               Il salto
             </label>
-            <span className="mt-1 block text-sm text-muted">Identità, mercati, passaggio, o un processo che vi frena.</span>
+            <span className="mt-1 block text-sm text-ink-soft">Identità, mercati, passaggio, o un processo che vi frena.</span>
             <textarea
               id="msg"
               name="messaggio"
@@ -280,15 +225,16 @@ function Contatti() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
-            <Button type="submit">Parliamone</Button>
-            <a href={`mailto:${DIGITAL_MAIL}`} className="font-mono text-sm text-olive-light hover:text-cream">
+            <Button type="submit" variant="ink">
+              Parliamone
+            </Button>
+            <a href={`mailto:${DIGITAL_MAIL}`} className="font-mono text-sm text-copper hover:text-ink">
               {DIGITAL_MAIL}
             </a>
           </div>
-          <p className="mt-4 text-sm text-muted">Si apre la tua posta. Niente iscrizione.</p>
+          <p className="mt-4 text-sm text-ink-soft">Si apre la tua posta. Niente iscrizione.</p>
         </form>
       </div>
     </section>
   );
 }
-
