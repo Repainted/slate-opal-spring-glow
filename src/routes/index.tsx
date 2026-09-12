@@ -18,10 +18,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: SITE.description },
     ],
   }),
-  component: Home,
+  component: HomePage,
 });
 
-function Home() {
+export function HomePage() {
   const mese = MESI[new Date().getMonth()]!;
   const tci = COMUNI.filter((c) => c.bandieraArancione).length;
 
