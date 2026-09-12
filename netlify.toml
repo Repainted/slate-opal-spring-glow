@@ -11,32 +11,42 @@
   node_bundler = "esbuild"
   included_files = ["public/**"]
 
-# Dominio agenzia: la home apre il B2B.
-# Portale, Lab e le altre sezioni restano sugli stessi path.
-# Non si applica a portaledeilepini.netlify.app.
+# 1) Tutto il traffico su HTTPS + dominio principale (senza www)
+[[redirects]]
+  from = "http://lepinidigital.com/*"
+  to = "https://lepinidigital.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.lepinidigital.com/*"
+  to = "https://lepinidigital.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.lepinidigital.com/*"
+  to = "https://lepinidigital.com/:splat"
+  status = 301
+  force = true
+
+# 2) Home del dominio = agenzia B2B
 [[redirects]]
   from = "https://lepinidigital.com"
-  to = "/digitale"
+  to = "https://lepinidigital.com/digitale"
   status = 301
   force = true
 
 [[redirects]]
   from = "https://lepinidigital.com/"
-  to = "/digitale"
+  to = "https://lepinidigital.com/digitale"
   status = 301
   force = true
 
-[[redirects]]
-  from = "https://www.lepinidigital.com"
-  to = "/digitale"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.lepinidigital.com/"
-  to = "/digitale"
-  status = 301
-  force = true
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
 [[headers]]
   for = "/lab/*"
