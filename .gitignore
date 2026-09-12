@@ -3,3 +3,11 @@ node_modules/
 .github_repo
 .env
 .env.*
+.netlify/
+dist/
+.output/
+.nitro/
+.tanstack/
+artifacts/
+screenshots/
+
