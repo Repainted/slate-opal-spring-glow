@@ -24,7 +24,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
         overlay ? "absolute inset-x-0 top-0" : "relative bg-navy-deep/80 border-b border-cream/10",
       )}
     >
-      <Link to="/" className="flex items-center gap-3 text-cream" aria-label="Home Portale Monti Lepini">
+      <Link to="/portale" className="flex items-center gap-3 text-cream" aria-label="Home Portale Monti Lepini">
         <BrandMark variant="mark" className="h-8 w-auto md:h-9" />
         <span className="flex flex-col leading-tight font-display">
           <span className="text-xl tracking-wide">Monti Lepini</span>

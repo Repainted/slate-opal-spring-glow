@@ -1,4 +1,6 @@
 export const DIGITAL_MAIL = "lepinilab@lepinidigital.com";
+export const DIGITAL_URL = "https://lepinidigital.com/digitale";
+export const DIGITAL_OG_IMAGE = "https://lepinidigital.com/images/brand/icon-180.png";
 
 export const PITCH = {
   metaTitle: "Lepini Digital — Servizi digitali per imprese",
@@ -35,49 +37,29 @@ export const PITCH = {
   contactHint: "La prima volta è senza impegno",
 } as const;
 
+export function digitalMeta(title = PITCH.metaTitle) {
+  return [
+    { title },
+    { name: "description", content: PITCH.metaDesc },
+    { name: "apple-mobile-web-app-title", content: "Lepini Digital" },
+    { name: "application-name", content: "Lepini Digital" },
+    { property: "og:site_name", content: "Lepini Digital" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: PITCH.metaDesc },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: DIGITAL_URL },
+    { property: "og:image", content: DIGITAL_OG_IMAGE },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: PITCH.metaDesc },
+    { name: "twitter:image", content: DIGITAL_OG_IMAGE },
+  ];
+}
+
 export const DIGITAL_STATS = [
   { k: "Bottega", l: "Artigiani, frantoi, ferramenta, magazzini" },
   { k: "Qui", l: "Formazione al banco, non da lontano" },
   { k: "Vostro", l: "Identità e strumenti che restano in azienda" },
-] as const;
-
-export const FOTO = [
-  {
-    src: "/images/digitale/close-oliva.jpg",
-    alt: "Close-up della pelle di un'oliva lucida d'olio",
-    caption: "Frutto",
-  },
-  {
-    src: "/images/digitale/close-morsa.jpg",
-    alt: "Mascelle di una morsa e legno d'ulivo, ravvicinato",
-    caption: "Banco",
-  },
-  {
-    src: "/images/digitale/close-calcare.jpg",
-    alt: "Calcare bagnato e un chiodo di rame, macro",
-    caption: "Pietra",
-  },
-] as const;
-
-export const PRODOTTO = [
-  {
-    src: "/images/digitale/close-olio.jpg",
-    alt: "Collo di bottiglia e goccia d'olio, macro",
-    caption: "Brand",
-    nota: "Quello che esce dal frantoio deve avere un volto, anche lontano dalla stretta.",
-  },
-  {
-    src: "/images/digitale/close-morsa.jpg",
-    alt: "Morsa e legno d'ulivo, macro",
-    caption: "Mestiere",
-    nota: "Il passaggio generazionale parte da qui: gli attrezzi, e chi li usa dopo.",
-  },
-  {
-    src: "/images/digitale/close-legno.jpg",
-    alt: "Vena del legno d'ulivo e chiodi di rame",
-    caption: "Utilità",
-    nota: "Tecnologia vera: il banco, non un'app da scaricare e dimenticare.",
-  },
 ] as const;
 
 export const SERVIZI = [
@@ -86,40 +68,30 @@ export const SERVIZI = [
     titolo: "Coscienza digitale",
     testo:
       "Capire cosa serve e cosa è moda. Dove perdete tempo, cosa può aspettare. Una chiacchierata onesta, prima di qualsiasi programma.",
-    foto: "/images/digitale/close-calcare.jpg",
-    fotoAlt: "Calcare e chiodo di rame, macro",
   },
   {
     code: "02",
     titolo: "Formazione",
     testo:
       "Al banco, con chi c'è. Chi ha sessant'anni e chi ha venticinque. Stessi strumenti, parole diverse. Non un PDF da ottanta pagine.",
-    foto: "/images/digitale/close-morsa.jpg",
-    fotoAlt: "Morsa e legno d'ulivo",
   },
   {
     code: "03",
     titolo: "Identità e brand",
     testo:
       "Come si chiama il vostro lavoro, come si vede, come si racconta. Nome, foto, sito. Un olio, un ferro, un mobile: un volto che resiste anche lontano dalla bottega.",
-    foto: "/images/digitale/close-olio.jpg",
-    fotoAlt: "Goccia d'olio sul collo della bottiglia",
   },
   {
     code: "04",
     titolo: "Mercati lontani",
     testo:
       "Arrivare da chi non può salire in bottega. Vetrina, canali, lingue. Non un marketplace che vi mangia il margine: un modo vostro per far viaggiare il lavoro.",
-    foto: "/images/digitale/close-oliva.jpg",
-    fotoAlt: "Pelle di un'oliva, macro",
   },
   {
     code: "05",
     titolo: "Tecnologie e passaggio",
     testo:
       "Gestionali, automazione, solo quello che userete. E il passaggio generazionale: il mestiere che resta, gli strumenti che cambiano, nessuno lasciato indietro.",
-    foto: "/images/digitale/close-legno.jpg",
-    fotoAlt: "Legno d'ulivo e chiodi di rame",
   },
 ] as const;
 
@@ -147,7 +119,7 @@ export const PROVE = [
     src: "/images/digitale/prove/portale.jpg",
     caption: "Portale",
     nota: "Enciclopedia dei 26 comuni",
-    to: "/",
+    to: "/portale",
     wide: true,
   },
   {
@@ -195,4 +167,3 @@ export const PROVE = [
     to: "/lab/faggeta",
   },
 ] as const;
-

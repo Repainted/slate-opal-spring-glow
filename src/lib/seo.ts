@@ -3,6 +3,7 @@ export const SITE = {
   tagline: "26 borghi. 3000 anni di storia. Una natura straordinaria.",
   description:
     "Enciclopedia digitale dei 26 comuni dei Monti Lepini, tra Latina, Roma e Frosinone: borghi, sentieri, natura, calendario e imprese del territorio.",
+  url: "https://lepinidigital.com",
 };
 
 export function titleFor(page: string) {
