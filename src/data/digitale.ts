@@ -3,37 +3,38 @@ export const DIGITAL_URL = "https://lepinidigital.com/digitale";
 export const DIGITAL_OG_IMAGE = "https://lepinidigital.com/images/brand/icon-180.png";
 
 export const PITCH = {
-  metaTitle: "Lepini Digital — Servizi digitali per imprese",
+  metaTitle: "Lepini Digital — Gestionali, dati e siti per imprese dei Lepini",
   metaDesc:
-    "Lepini Digital fa coscienza digitale, identità, brand e tecnologie per le piccole imprese dei Monti Lepini. Il Portale e il Lab sono l'esempio pubblico.",
+    "Lepini Digital, Montelanico: recupero dati, gestionali snelli, automazione di preventivi e DDT, siti veloci e assistenti ancorati al catalogo. Per ferramenta, magazzini, artigiani e commercianti dei Monti Lepini.",
   jsonld:
-    "Lepini Digital fa strumenti per le piccole e medie imprese dei Monti Lepini: coscienza digitale, formazione, identità, brand, mercati, tecnologie utili. Ha costruito il Portale Monti Lepini e Lepini Lab come esempio pubblico.",
+    "Lepini Digital è lo studio di Montelanico che porta gestionali, continuità dei dati, automazione e siti alle micro, piccole e medie imprese dei Monti Lepini. Lepini Lab è il laboratorio territoriale open data, distinto dall'attività commerciale.",
   heroKicker: "Lepini Digital · Montelanico (RM)",
-  heroTitle: "Strumenti digitali",
-  heroItalic: "per chi lavora davvero.",
+  heroTitle: "I vostri dati restano.",
+  heroItalic: "Gli strumenti si usano al banco.",
   heroLead:
-    "Facciamo coscienza digitale, identità, brand e tecnologie per le piccole imprese dei Monti Lepini. Cose che servono in bottega e in ufficio — non una vetrina da chiudere dopo tre mesi.",
+    "Recuperiamo Excel, carta e vecchi archivi. Poi un gestionale che sta sul PC del banco e sul telefono in cantiere: giacenze, ordini, DDT, preventivi. Niente parole vuote. Ore in meno, errori di copia a zero.",
   quote:
-    "Un frantoio, una ferramenta, un magazzino: strumenti che usano davvero. Non una vetrina da abbandonare dopo tre mesi.",
+    "Nessuno ricomincia da zero. Lo storico entra nel sistema. I conti li fa il programma, non una chiacchiera.",
   serviziKicker: "Cosa facciamo",
-  serviziTitle: "Cinque lavori",
+  serviziTitle: "Quattro lavori, misurabili",
   serviziLead:
-    "Niente licenze care, niente sistemi più grandi dell'azienda. Coscienza, identità, mercati, passaggio. Solo quello che il team userà.",
+    "Canone o commessa. Per ferramenta, magazzini edili, artigiani e negozi. L'intelligenza artificiale cerca e risponde: prezzi, scorte e sconti restano calcoli precisi.",
   metodoKicker: "Come lavoriamo",
-  metodoTitle: "Prima il lavoro, poi il codice",
-  metodoLead: "Partiamo dal bancone, dal magazzino, dall'ufficio. Non da un modello già pronto.",
-  opereKicker: "Cosa abbiamo costruito",
-  opereTitle: "Il Portale e il Lab sono l'esempio",
+  metodoTitle: "Prima i vostri fogli, poi il programma",
+  metodoLead: "Partiamo da quello che già usate. Se non entra lo storico, non si parte.",
+  opereKicker: "Lepini Lab, a parte",
+  opereTitle: "Il Portale e il Lab non sono il prodotto",
   opereLead:
-    "Li abbiamo fatti noi. Servono a mostrare, in pubblico, cosa si può fare per un'impresa — un'enciclopedia del territorio e simulatori 3D.",
+    "Sono ricerca territoriale open data sui 26 comuni. Servono a far vedere come lavoriamo. L'attività commerciale è un'altra: gestionali, dati, automazione, siti per le imprese.",
   origineKicker: "Da dove veniamo",
-  origineTitle: "A Montelanico, per chi ha radici qui",
+  origineTitle: "A Montelanico, per chi ha il banco qui",
   origineLead:
-    "Edilizia, ferramenta, logistica, artigianato, olio. Il digitale, da noi, è un modo per far lavorare meglio aziende che restano sul crinale.",
-  footer: "Studio a Montelanico. Ha costruito il Portale e il Lab. Lavora per le imprese del crinale.",
-  contactTitle: "Hai un processo che ti fa perdere tempo?",
+    "Edilizia, ferramenta, logistica, artigianato, commercio. Stessa valle, stesse ore persi a ricopiare. Il lavoro resta sul crinale; cambiano solo i passaggi inutili.",
+  footer:
+    "Lepini Digital è l'attività commerciale a Montelanico. Lepini Lab è il laboratorio open data dei 26 comuni. Due cose distinte.",
+  contactTitle: "Quante ore perdete a ricopiare?",
   contactLead:
-    "O un brand da far uscire dalla valle, un passaggio da preparare. Scrivici. In una chiacchierata capiamo se c'è un modo più semplice.",
+    "Giacenze, preventivi, DDT, listini sul telefono. Scriveteci. Alla prima chiacchierata capiamo se i vostri fogli si possono portare dentro senza ricominciare.",
   contactHint: "La prima volta è senza impegno",
 } as const;
 
@@ -57,60 +58,54 @@ export function digitalMeta(title = PITCH.metaTitle) {
 }
 
 export const DIGITAL_STATS = [
-  { k: "Bottega", l: "Artigiani, frantoi, ferramenta, magazzini" },
-  { k: "Qui", l: "Formazione al banco, non da lontano" },
-  { k: "Vostro", l: "Identità e strumenti che restano in azienda" },
+  { k: "Storico", l: "Excel, carta e database: entra tutto" },
+  { k: "Banco + cantiere", l: "Stesso gestionale su PC e telefono" },
+  { k: "Conti precisi", l: "Prezzi e scorte non li decide l'IA" },
 ] as const;
 
 export const SERVIZI = [
   {
     code: "01",
-    titolo: "Coscienza digitale",
+    titolo: "Continuità dei dati",
     testo:
-      "Capire cosa serve e cosa è moda. Dove perdete tempo, cosa può aspettare. Una chiacchierata onesta, prima di qualsiasi programma.",
+      "Portiamo dentro file Excel, fogli cartacei e vecchi database. Nessun cliente ricomincia da zero. Lo storico resta, completo.",
   },
   {
     code: "02",
-    titolo: "Formazione",
+    titolo: "Gestionali snelli",
     testo:
-      "Al banco, con chi c'è. Chi ha sessant'anni e chi ha venticinque. Stessi strumenti, parole diverse. Non un PDF da ottanta pagine.",
+      "Giacenze, ordini fornitore, DDT, preventivi. Solo quello che serve. Sul PC del banco e sul telefono o tablet in cantiere.",
   },
   {
     code: "03",
-    titolo: "Identità e brand",
+    titolo: "Automazione di processo",
     testo:
-      "Come si chiama il vostro lavoro, come si vede, come si racconta. Nome, foto, sito. Un olio, un ferro, un mobile: un volto che resiste anche lontano dalla bottega.",
+      "Margini e sconti cliente calcolati dal programma. Preventivi e documenti di trasporto in PDF, subito. Zero ricopiatura, zero errori di trascrizione.",
   },
   {
     code: "04",
-    titolo: "Mercati lontani",
+    titolo: "Sito e assistente",
     testo:
-      "Arrivare da chi non può salire in bottega. Vetrina, canali, lingue. Non un marketplace che vi mangia il margine: un modo vostro per far viaggiare il lavoro.",
-  },
-  {
-    code: "05",
-    titolo: "Tecnologie e passaggio",
-    testo:
-      "Gestionali, automazione, solo quello che userete. E il passaggio generazionale: il mestiere che resta, gli strumenti che cambiano, nessuno lasciato indietro.",
+      "Sito veloce, senza cookie e senza traccianti. Assistente che risponde solo su catalogo, orari e dati vostri. Non inventa prezzi.",
   },
 ] as const;
 
 export const METODO = [
   {
-    titolo: "Ascolto",
-    testo: "Chi fa cosa, con quali carte, chi prende il testimone. Dove si perde tempo, dove il racconto non esce dalla valle.",
+    titolo: "I fogli",
+    testo: "Prima si vede cosa avete già: Excel, quaderni, gestionale vecchio. Se lo storico non entra, si ferma tutto.",
   },
   {
-    titolo: "Prototipo",
-    testo: "In pochi giorni qualcosa da provare con i vostri dati, le vostre foto, i vostri clienti. Non una presentazione.",
+    titolo: "Il banco",
+    testo: "Si prova con i vostri articoli, i vostri sconti, i vostri clienti. Al banco e in cantiere, non in una slide.",
   },
   {
-    titolo: "Consegna",
-    testo: "Identità e strumenti restano vostri. Funzionano anche senza un abbonamento che scade.",
+    titolo: "I conti",
+    testo: "Prezzi, giacenze, margini: regole fisse. L'assistente cerca e risponde. Non tocca i numeri.",
   },
   {
-    titolo: "Affiancamento",
-    testo: "Si usa insieme. Formazione a chi resta e a chi arriva. Si aggiusta. Non un corso e via.",
+    titolo: "Il canone",
+    testo: "Commessa o canone, strumenti che restano usabili. Si aggiusta con chi sta al banco, tutte le età.",
   },
 ] as const;
 
@@ -118,14 +113,14 @@ export const PROVE = [
   {
     src: "/images/digitale/prove/portale.jpg",
     caption: "Portale",
-    nota: "Enciclopedia dei 26 comuni",
+    nota: "Enciclopedia dei 26 comuni — Lab, non il prodotto",
     to: "/portale",
     wide: true,
   },
   {
     src: "/images/digitale/prove/volo.jpg",
     caption: "Lab · Volo",
-    nota: "Drone sul crinale, DEM e satellite",
+    nota: "Ricerca territoriale, distinta dal commerciale",
     to: "/lab/volo",
     wide: true,
   },
