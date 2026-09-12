@@ -11,6 +11,33 @@
   node_bundler = "esbuild"
   included_files = ["public/**"]
 
+# Dominio agenzia: la home apre il B2B.
+# Portale, Lab e le altre sezioni restano sugli stessi path.
+# Non si applica a portaledeilepini.netlify.app.
+[[redirects]]
+  from = "https://lepinidigital.com"
+  to = "/digitale"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://lepinidigital.com/"
+  to = "/digitale"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.lepinidigital.com"
+  to = "/digitale"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.lepinidigital.com/"
+  to = "/digitale"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/lab/*"
   [headers.values]
