@@ -4,17 +4,11 @@ import { JsonLd } from "@/components/JsonLd";
 import { DigitalShell } from "@/components/layout/DigitalShell";
 import { ProveGallery } from "@/components/ProveGallery";
 import { Button } from "@/components/ui/button";
-import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI } from "@/data/digitale";
+import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI, digitalMeta } from "@/data/digitale";
 
 export const Route = createFileRoute("/digitale/")({
   head: () => ({
-    meta: [
-      { title: PITCH.metaTitle },
-      {
-        name: "description",
-        content: PITCH.metaDesc,
-      },
-    ],
+    meta: digitalMeta(),
   }),
   component: DigitalePage,
 });
@@ -29,7 +23,7 @@ function DigitalePage() {
           description: PITCH.jsonld,
           email: DIGITAL_MAIL,
           areaServed: "Monti Lepini",
-          url: "https://lepinidigital.com",
+          url: "https://lepinidigital.com/digitale",
         }}
       />
 
