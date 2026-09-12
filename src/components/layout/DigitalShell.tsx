@@ -47,7 +47,7 @@ function DigitalHeader() {
         <Link to="/digitale/studio" className="hover:text-ink">
           Studio
         </Link>
-        <Link to="/" className="hover:text-ink">
+        <Link to="/portale" className="hover:text-ink">
           Portale
         </Link>
         <Link to="/lab" className="hover:text-ink">
@@ -83,7 +83,7 @@ function DigitalHeader() {
             <Link to="/digitale/studio" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
               Studio
             </Link>
-            <Link to="/" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+            <Link to="/portale" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
               Portale
             </Link>
             <Link to="/lab" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
