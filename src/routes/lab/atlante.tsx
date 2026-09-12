@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useRef, useState } from "react";
 import { COMUNI } from "@/data/comuni";
+import { Carta2D } from "@/lab/Carta2D";
 import { LabNav, LabTop, Telemetry, WebGLHost, useLabView, useReducedMotion } from "@/lab/LabStage";
 import { SchedaComune } from "@/lab/Schede";
 import { startAtlante, type Label } from "@/lab/atlante";
@@ -26,6 +27,7 @@ function AtlantePage() {
   const slugRef = useRef<string | null>("sermoneta");
   const [slug, setSlug] = useState("sermoneta");
   const [labels, setLabels] = useState<Label[]>([]);
+  const [map2d, setMap2d] = useState(false);
   const comune = COMUNI.find((c) => c.slug === slug) ?? COMUNI[0]!;
 
   const start = useCallback(
@@ -52,7 +54,7 @@ function AtlantePage() {
     <div className="relative h-dvh overflow-hidden bg-navy-deep text-cream">
       <WebGLHost start={start} />
       <LabTop code="00" title="Atlante" />
-      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} />
+      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} onMap2d={() => setMap2d(true)} />
       {labels.map((l) => (
         <button
           key={l.slug}
@@ -91,6 +93,7 @@ function AtlantePage() {
         ))}
       </nav>
       <Telemetry items={["26 schede", "stesso dataset del Portale", comune.nome]} />
+      <Carta2D open={map2d} onClose={() => setMap2d(false)} carta={carta} onPick={pick} highlight={slug} />
     </div>
   );
 }

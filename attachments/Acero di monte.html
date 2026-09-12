@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Acero di monte (Acer pseudoplatanus) — 3D</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  three-d-stage { width: 100vw; height: 100vh; display: block; }
+</style>
+</head>
+<body>
+<three-d-stage name="acero_di_monte" background="#e9e6df"></three-d-stage>
+<script src="./three-d-stage.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { buildTree, makeClumpGeo, makeRandom } from './tree-builder.js';
+
+const stage = document.querySelector('three-d-stage');
+await stage.ready;
+
+
+const geoRnd = makeRandom(77);
+const barkMat = new THREE.MeshStandardMaterial({ name: 'corteccia_acero', color: 0x6a5f52, roughness: 0.85, metalness: 0 });
+const leafA = new THREE.MeshStandardMaterial({ name: 'foglia_acero_scura', color: 0x2f4a24, roughness: 0.5, metalness: 0 });
+const leafB = new THREE.MeshStandardMaterial({ name: 'foglia_acero_media', color: 0x3f5a30, roughness: 0.5, metalness: 0 });
+const leafC = new THREE.MeshStandardMaterial({ name: 'foglia_acero_chiara', color: 0x4f6a3c, roughness: 0.5, metalness: 0 });
+const clumpGeos = [
+  makeClumpGeo(THREE, 'broad', 0.44, 1, 0.45, geoRnd),
+  makeClumpGeo(THREE, 'broad', 0.28, 1, 0.5, geoRnd),
+  makeClumpGeo(THREE, 'broad', 0.17, 0, 0.5, geoRnd),
+];
+const tree = buildTree(THREE, {
+  seed: 77, name: 'acero_di_monte', barkMat, leafMats: [leafA, leafB, leafC],
+  rootFlare: { radius: 0.36, squash: 0.7 },
+  stems: [{ origin: new THREE.Vector3(0, 0.05, 0), dir: new THREE.Vector3(0.06, 1, 0.04), length: 3.0, radius0: 0.3, radius1: 0.19 }],
+  maxDepth: 3, branchesPerNode: (d) => (d === 0 ? 5 : 3), curviness: 0.14, lengthDecay: 0.64, radiusDecay: 0.56,
+  foliageMode: 'envelope', envelope: { center: new THREE.Vector3(0, 6.8, 0), radiusXZ: 2.5, radiusY: 2.7 },
+  layers: [
+    { geo: clumpGeos[0], count: 230, scaleMin: 0.5, scaleMax: 0.8, shellMin: 0.7, shellSpread: 0.3 },
+    { geo: clumpGeos[1], count: 420, scaleMin: 0.45, scaleMax: 0.75, shellMin: 0.5, shellSpread: 0.45 },
+    { geo: clumpGeos[2], count: 540, scaleMin: 0.55, scaleMax: 0.9, shellMin: 0.3, shellSpread: 0.65 },
+  ],
+});
+
+
+stage.setObject(tree);
+</script>
+</body>
+</html>

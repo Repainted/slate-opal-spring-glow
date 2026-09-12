@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { HABITAT, SPECIE, specieId } from "@/data/natura";
 import { STATS } from "@/data/comuni";
+import { ALBERI, startAlbero, type AlberoId } from "@/lab/alberi";
+import { WebGLHost } from "@/lab/LabStage";
 import { titleFor } from "@/lib/seo";
 
 export const Route = createFileRoute("/natura")({
@@ -21,10 +23,13 @@ export const Route = createFileRoute("/natura")({
 
 type Filtro = "tutte" | "flora" | "fauna" | "orchidee";
 
+const MODELLI = new Set(Object.values(ALBERI).map((a) => a.scientifico));
+
 function NaturaPage() {
   const [filtro, setFiltro] = useState<Filtro>("tutte");
   const list = useMemo(() => {
     return SPECIE.filter((s) => {
+      if (MODELLI.has(s.scientifico)) return false;
       if (filtro === "flora") return s.gruppo === "flora";
       if (filtro === "fauna") return s.gruppo === "fauna";
       if (filtro === "orchidee")
@@ -83,6 +88,8 @@ function NaturaPage() {
           ))}
         </div>
 
+        {(filtro === "tutte" || filtro === "flora") && <AlberoStudio />}
+
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((s) => (
             <li key={specieId(s)} id={specieId(s)} className="scroll-mt-24 overflow-hidden rounded-xl bg-navy-card shadow-[var(--shadow-border)]">
@@ -111,5 +118,47 @@ function NaturaPage() {
         </ul>
       </div>
     </SiteShell>
+  );
+}
+
+function AlberoStudio() {
+  const ids = Object.keys(ALBERI) as AlberoId[];
+  const [id, setId] = useState<AlberoId>("leccio");
+  const spec = ALBERI[id];
+  const start = useCallback((c: HTMLCanvasElement) => startAlbero(c, id), [id]);
+  const s = SPECIE.find((x) => x.scientifico === spec.scientifico);
+  return (
+    <article className="mt-8 overflow-hidden rounded-xl bg-navy-card shadow-[var(--shadow-border)] md:grid md:grid-cols-2">
+      <div className="relative min-h-[320px] bg-navy-deep md:min-h-[420px]">
+        <WebGLHost start={start} />
+      </div>
+      <div className="flex flex-col">
+        <div className="flex flex-wrap gap-1 p-4">
+          {ids.map((k) => (
+            <button
+              key={k}
+              type="button"
+              onClick={() => setId(k)}
+              className={
+                id === k
+                  ? "rounded-full bg-copper px-3 py-1.5 text-xs text-cream"
+                  : "rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream-soft"
+              }
+            >
+              {ALBERI[k].comune}
+            </button>
+          ))}
+        </div>
+        {s?.foto ? <img src={s.foto} alt={spec.comune} className="h-36 w-full object-cover" /> : null}
+        <div className="p-5">
+          <p className="font-mono text-[0.65rem] uppercase tracking-wider text-copper-light">
+            Flora · 3D · {spec.forma} · trascina
+          </p>
+          <h2 className="mt-1 font-display text-3xl text-cream">{spec.comune}</h2>
+          <p className="font-mono text-xs italic text-olive-light">{spec.scientifico}</p>
+          <p className="mt-3 text-sm leading-relaxed text-cream-soft">{s?.habitat}</p>
+        </div>
+      </div>
+    </article>
   );
 }

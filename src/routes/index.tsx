@@ -54,8 +54,11 @@ function Home() {
             Schede dei 26 comuni, sentieri numerati, natura e imprese. Senza pubblicità. Un progetto di Lepini Digital.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
-            <Link to="/comuni">
-              <Button>Esplora i comuni</Button>
+            <Link to="/parco">
+              <Button>Esplora il parco</Button>
+            </Link>
+            <Link to="/comuni" className="text-sm text-olive-light hover:text-cream">
+              26 comuni
             </Link>
             <Link to="/lab" className="text-sm text-olive-light hover:text-cream">
               Lepini Lab

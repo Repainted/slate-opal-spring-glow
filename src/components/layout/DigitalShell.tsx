@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { BrandMark } from "@/components/BrandMark";
-import { DIGITAL_MAIL } from "@/data/digitale";
+import { DIGITAL_MAIL, PITCH } from "@/data/digitale";
 
 export function DigitalShell({ children }: { children: ReactNode }) {
   return (
@@ -38,6 +38,9 @@ function DigitalHeader() {
         <a href="#metodo" className="text-cream/90 hover:text-cream">
           Metodo
         </a>
+        <Link to="/digitale/studio" className="text-cream/90 hover:text-cream">
+          Studio
+        </Link>
         <Link to="/" className="text-cream/90 hover:text-cream">
           Portale
         </Link>
@@ -78,6 +81,9 @@ function DigitalHeader() {
             <a href="#metodo" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
               Metodo
             </a>
+            <Link to="/digitale/studio" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Studio
+            </Link>
             <Link to="/" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
               Portale
             </Link>
@@ -106,7 +112,7 @@ function DigitalFooter() {
             {DIGITAL_MAIL}
           </a>
           <p className="mt-2 max-w-sm">
-            Studio a Montelanico. Ha costruito il Portale e il Lab. Lavora per le imprese del crinale.
+            {PITCH.footer}
           </p>
         </div>
       </div>

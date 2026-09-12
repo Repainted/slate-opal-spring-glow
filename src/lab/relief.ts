@@ -2,16 +2,16 @@ import {
   DEM_B64,
   DEM_EAST,
   DEM_H,
-  DEM_MAX,
-  DEM_MIN,
   DEM_NORTH,
   DEM_SOUTH,
   DEM_W,
   DEM_WEST,
 } from "./demData";
+import { LEPINI } from "./tiles";
 
-/** World Y per metre. ~80 m → 1 unit, so Semprevisa resta nel inquadratura. */
-export const Y_PER_M = 1 / 80;
+/** World Y per metre. Lepini max ~1536 m → ~12.8 units. Esagerazione ~1.3×, non aghi. */
+export const Y_PER_M = 1 / 120;
+const VETTA_M = 1536;
 
 const DEM = decodeDem(DEM_B64);
 
@@ -26,10 +26,16 @@ function clamp01(v: number) {
   return v < 0 ? 0 : v > 1 ? 1 : v;
 }
 
-/** Quote EU-DEM (Mapzen terrarium, z12) in metri. */
-export function metersAt(x: number, z: number): number {
-  const u = clamp01((x + 100) / 200) * (DEM_W - 1);
-  const v = clamp01((80 - z) / 160) * (DEM_H - 1);
+function lngLatFromWorld(x: number, z: number) {
+  return {
+    lng: LEPINI.west + clamp01((x + 100) / 200) * (LEPINI.east - LEPINI.west),
+    lat: LEPINI.north - clamp01((z + 80) / 160) * (LEPINI.north - LEPINI.south),
+  };
+}
+
+function sampleDem(lng: number, lat: number): number {
+  const u = clamp01((lng - DEM_WEST) / (DEM_EAST - DEM_WEST)) * (DEM_W - 1);
+  const v = clamp01((DEM_NORTH - lat) / (DEM_NORTH - DEM_SOUTH)) * (DEM_H - 1);
   const x0 = Math.floor(u);
   const y0 = Math.floor(v);
   const x1 = Math.min(x0 + 1, DEM_W - 1);
@@ -40,7 +46,13 @@ export function metersAt(x: number, z: number): number {
   const b = DEM[y0 * DEM_W + x1]!;
   const c = DEM[y1 * DEM_W + x0]!;
   const d = DEM[y1 * DEM_W + x1]!;
-  return Math.max(0, a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty);
+  return a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty;
+}
+
+/** Quote EU-DEM in metri, ritagliate al comprensorio lepino. Semprevisa 1536 m è il tetto. */
+export function metersAt(x: number, z: number): number {
+  const { lng, lat } = lngLatFromWorld(x, z);
+  return Math.max(0, Math.min(VETTA_M, sampleDem(lng, lat)));
 }
 
 export function heightAt(x: number, z: number): number {
@@ -49,18 +61,18 @@ export function heightAt(x: number, z: number): number {
 
 export function projectComune(lng: number, lat: number) {
   return {
-    x: (lng - 13.08) * 180,
-    z: (41.58 - lat) * 220,
+    x: ((lng - LEPINI.west) / (LEPINI.east - LEPINI.west)) * 200 - 100,
+    z: ((LEPINI.north - lat) / (LEPINI.north - LEPINI.south)) * 160 - 80,
   };
 }
 
 export const DEM_INFO = {
-  source: "EU-DEM via Mapzen terrarium tiles z12",
-  west: DEM_WEST,
-  east: DEM_EAST,
-  south: DEM_SOUTH,
-  north: DEM_NORTH,
-  min: DEM_MIN,
-  max: DEM_MAX,
-  cellM: 360,
+  source: "EU-DEM via Mapzen terrarium tiles z12 · ritaglio Monti Lepini",
+  west: LEPINI.west,
+  east: LEPINI.east,
+  south: LEPINI.south,
+  north: LEPINI.north,
+  min: 0,
+  max: VETTA_M,
+  cellM: 160,
 } as const;

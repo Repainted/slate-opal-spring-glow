@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Nocciolo (Corylus avellana) — 3D</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  three-d-stage { width: 100vw; height: 100vh; display: block; }
+</style>
+</head>
+<body>
+<three-d-stage name="nocciolo" background="#e9e6df"></three-d-stage>
+<script src="./three-d-stage.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { buildTree, makeClumpGeo, makeRandom } from './tree-builder.js';
+
+const stage = document.querySelector('three-d-stage');
+await stage.ready;
+
+
+const geoRnd = makeRandom(32);
+const barkMat = new THREE.MeshStandardMaterial({ name: 'corteccia_nocciolo', color: 0x6b573f, roughness: 0.9, metalness: 0 });
+const leafA = new THREE.MeshStandardMaterial({ name: 'foglia_nocciolo_scura', color: 0x37481f, roughness: 0.8, metalness: 0 });
+const leafB = new THREE.MeshStandardMaterial({ name: 'foglia_nocciolo_media', color: 0x4a6027, roughness: 0.8, metalness: 0 });
+const leafC = new THREE.MeshStandardMaterial({ name: 'foglia_nocciolo_chiara', color: 0x5d7a34, roughness: 0.78, metalness: 0 });
+
+const clumpGeos = [
+  makeClumpGeo(THREE, 'broad', 0.4, 1, 0.5, geoRnd),
+  makeClumpGeo(THREE, 'broad', 0.26, 1, 0.55, geoRnd),
+  makeClumpGeo(THREE, 'ico', 0.15, 0, 0.55, geoRnd),
+];
+
+const stems = [];
+const stemCount = 5;
+for (let i = 0; i < stemCount; i++) {
+  const ang = (i / stemCount) * Math.PI * 2 + 0.3;
+  stems.push({
+    origin: new THREE.Vector3(Math.cos(ang) * 0.12, 0.05, Math.sin(ang) * 0.12),
+    dir: new THREE.Vector3(Math.cos(ang) * 0.5, 1, Math.sin(ang) * 0.5),
+    length: 1.9 + (i % 2) * 0.3, radius0: 0.09, radius1: 0.055,
+  });
+}
+
+const tree = buildTree(THREE, {
+  seed: 32,
+  name: 'nocciolo',
+  barkMat,
+  leafMats: [leafA, leafB, leafC],
+  rootFlare: { radius: 0.2, squash: 0.6 },
+  stems,
+  maxDepth: 3,
+  branchesPerNode: 2,
+  curviness: 0.18,
+  lengthDecay: 0.68,
+  radiusDecay: 0.62,
+  foliageMode: 'anchors',
+  layers: [
+    { geo: clumpGeos[0], count: 4, scaleMin: 0.6, scaleMax: 0.95, spreadMul: 1.1, shellMin: 0.55, shellSpread: 0.35 },
+    { geo: clumpGeos[1], count: 7, scaleMin: 0.55, scaleMax: 0.9, spreadMul: 1.0, shellMin: 0.35, shellSpread: 0.5 },
+    { geo: clumpGeos[2], count: 10, scaleMin: 0.65, scaleMax: 1.0, spreadMul: 0.9, shellMin: 0.2, shellSpread: 0.6 },
+  ],
+});
+
+
+stage.setObject(tree);
+</script>
+</body>
+</html>

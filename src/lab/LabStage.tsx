@@ -104,12 +104,14 @@ export function LabNav({
   carta,
   setCarta,
   maps = true,
+  onMap2d,
 }: {
   zoomIn: () => void;
   zoomOut: () => void;
   carta?: Carta;
   setCarta?: (c: Carta) => void;
   maps?: boolean;
+  onMap2d?: () => void;
 }) {
   return (
     <div className="pointer-events-auto absolute left-3 top-20 z-20 flex flex-col items-start gap-2 md:left-8 md:top-24">
@@ -154,6 +156,15 @@ export function LabNav({
               {label}
             </button>
           ))}
+          {onMap2d ? (
+            <button
+              type="button"
+              onClick={onMap2d}
+              className="min-h-10 rounded-full border border-cream/15 bg-navy-deep/80 px-3 text-left text-sm text-cream-soft"
+            >
+              Carta 2D
+            </button>
+          ) : null}
         </div>
       ) : null}
       <p className="max-w-48 text-left font-mono text-[0.62rem] leading-relaxed text-muted">

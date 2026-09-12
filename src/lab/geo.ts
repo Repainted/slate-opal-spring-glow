@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { COMUNI } from "@/data/comuni";
-import { heightAt, projectComune } from "./relief";
+import { heightAt, projectComune, Y_PER_M } from "./relief";
 
 export { heightAt, projectComune };
 
@@ -24,6 +24,7 @@ export function buildTerrain(segments = 128, maps?: { sat: THREE.Texture; osm: T
       uSat: { value: maps?.sat ?? dummy },
       uOsm: { value: maps?.osm ?? dummy },
       uLayer: { value: 0 },
+      uYPerM: { value: Y_PER_M },
     },
     vertexShader: `
       varying vec3 vW;
@@ -39,6 +40,7 @@ export function buildTerrain(segments = 128, maps?: { sat: THREE.Texture; osm: T
       uniform sampler2D uSat;
       uniform sampler2D uOsm;
       uniform float uLayer;
+      uniform float uYPerM;
       varying vec3 vW;
       varying vec3 vN;
       void main() {
@@ -48,8 +50,9 @@ export function buildTerrain(segments = 128, maps?: { sat: THREE.Texture; osm: T
         vec3 copper = vec3(0.71, 0.44, 0.227);
         vec3 col = mix(grass, rock, smoothstep(0.12, 0.52, slope));
         vec3 plain = vec3(0.16, 0.17, 0.13);
-        col = mix(plain, col, smoothstep(1.2, 6.0, vW.y));
-        col = mix(col, copper, smoothstep(10.0, 19.0, vW.y) * 0.45);
+        float m = vW.y / max(uYPerM, 0.0001);
+        col = mix(plain, col, smoothstep(80.0, 420.0, m));
+        col = mix(col, copper, smoothstep(900.0, 1480.0, m) * 0.4);
         float ndl = clamp(dot(vN, normalize(vec3(-0.45, 0.72, 0.28))), 0.18, 1.0);
         col *= ndl;
         vec2 uv = vec2((vW.x + 100.0) / 200.0, (80.0 - vW.z) / 160.0);

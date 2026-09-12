@@ -1,0 +1,25 @@
+# Exported by three-d-stage
+newmtl corteccia_nocciolo
+Kd 0.1470 0.0953 0.0497
+Ks 0.2000 0.2000 0.2000
+Ns 20
+d 1.0000
+
+newmtl foglia_nocciolo_media
+Kd 0.0685 0.1170 0.0203
+Ks 0.2000 0.2000 0.2000
+Ns 40
+d 1.0000
+
+newmtl foglia_nocciolo_chiara
+Kd 0.1095 0.1946 0.0343
+Ks 0.2000 0.2000 0.2000
+Ns 44
+d 1.0000
+
+newmtl foglia_nocciolo_scura
+Kd 0.0382 0.0648 0.0137
+Ks 0.2000 0.2000 0.2000
+Ns 40
+d 1.0000
+

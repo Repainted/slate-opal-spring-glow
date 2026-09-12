@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Provincia } from "@/data/types";
+import { Carta2D } from "@/lab/Carta2D";
 import { LabNav, LabTop, PlayGate, Telemetry, TouchKeys, WebGLHost, useLabView, useReducedMotion } from "@/lab/LabStage";
 import { SchedaComune } from "@/lab/Schede";
 import { startVolo } from "@/lab/volo";
@@ -37,6 +38,7 @@ function VoloPage() {
   const { view, carta, setCarta, zoomIn, zoomOut } = useLabView();
   const [open, setOpen] = useState(true);
   const [hud, setHud] = useState(EMPTY);
+  const [map2d, setMap2d] = useState(false);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -71,7 +73,7 @@ function VoloPage() {
     <div className="relative h-dvh overflow-hidden bg-navy-deep text-cream">
       <WebGLHost start={start} />
       <LabTop code="01" title="Volo" />
-      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} />
+      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} onMap2d={() => setMap2d(true)} />
       <PlayGate
         open={open}
         kicker="Esperimento 01"
@@ -125,6 +127,7 @@ function VoloPage() {
           />
         </>
       ) : null}
+      <Carta2D open={map2d} onClose={() => setMap2d(false)} carta={carta} highlight={hud.slug} />
     </div>
   );
 }

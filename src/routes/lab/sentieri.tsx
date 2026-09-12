@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { SENTIERI } from "@/data/sentieri";
 import { getTraccia, profilo } from "@/data/tracce";
+import { Carta2D } from "@/lab/Carta2D";
 import { LabNav, LabTop, Telemetry, WebGLHost, useLabView, useReducedMotion } from "@/lab/LabStage";
 import { SchedaSentiero } from "@/lab/Schede";
 import { startSentieri3d } from "@/lab/sentieri3d";
@@ -30,6 +31,7 @@ function SentieriLab() {
   const [slug, setSlug] = useState("cai-701");
   const [walk, setWalk] = useState(false);
   const [along, setAlong] = useState({ t: 0, alt: 0 });
+  const [map2d, setMap2d] = useState(false);
 
   const sentiero = SENTIERI.find((s) => s.slug === slug) ?? SENTIERI[1]!;
   const traccia = getTraccia(slug);
@@ -59,7 +61,7 @@ function SentieriLab() {
     <div className="relative h-dvh overflow-hidden bg-navy-deep text-cream">
       <WebGLHost start={start} />
       <LabTop code="04" title="Sentieri" />
-      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} />
+      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} onMap2d={() => setMap2d(true)} />
 
       <p className="pointer-events-none absolute left-4 top-[22rem] z-10 max-w-sm font-mono text-[0.65rem] uppercase tracking-[0.14em] text-olive-light md:left-8">
         Traccia schematica sul modello · non è un GPX CAI
@@ -108,6 +110,7 @@ function SentieriLab() {
           walk ? `${along.alt} m` : traccia?.ridge ? "segue il crinale" : "itinerario",
         ]}
       />
+      <Carta2D open={map2d} onClose={() => setMap2d(false)} carta={carta} />
     </div>
   );
 }

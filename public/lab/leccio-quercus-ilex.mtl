@@ -1,0 +1,25 @@
+# Exported by three-d-stage
+newmtl corteccia
+Kd 0.0685 0.0437 0.0252
+Ks 0.2000 0.2000 0.2000
+Ns 0
+d 1.0000
+
+newmtl foglia_media
+Kd 0.0887 0.1221 0.0252
+Ks 0.2000 0.2000 0.2000
+Ns 30
+d 1.0000
+
+newmtl foglia_scura
+Kd 0.0409 0.0545 0.0137
+Ks 0.2000 0.2000 0.2000
+Ns 30
+d 1.0000
+
+newmtl foglia_chiara
+Kd 0.1590 0.2122 0.0423
+Ks 0.2000 0.2000 0.2000
+Ns 40
+d 1.0000
+

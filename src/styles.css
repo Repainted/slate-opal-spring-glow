@@ -18,6 +18,10 @@
   --color-muted: #a29a8c;
   --color-primary: #b5713a;
   --color-ring: #ce8b4e;
+  --color-paper: #f3efe6;
+  --color-paper-card: #fffcf7;
+  --color-ink: #161410;
+  --color-ink-soft: #5c564c;
   --font-display: "EB Garamond", "Iowan Old Style", Palatino, Georgia, serif;
   --font-sans: "Source Sans 3", "Source Sans Pro", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -101,4 +105,19 @@
     outline: 1px solid color-mix(in oklab, var(--color-cream) 12%, transparent);
     outline-offset: -1px;
   }
+}
+
+.studio-page {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.studio-page h1,
+.studio-page h2,
+.studio-page h3 {
+  color: var(--color-ink);
+}
+
+.studio-page img:not(.brand-mark) {
+  outline-color: color-mix(in oklab, var(--color-ink) 10%, transparent);
 }

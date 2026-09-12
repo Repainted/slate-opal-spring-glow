@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SPECIE } from "@/data/natura";
+import { Carta2D } from "@/lab/Carta2D";
 import { LabNav, LabTop, PlayGate, Telemetry, WebGLHost, useLabView, useReducedMotion } from "@/lab/LabStage";
 import { SchedaSpecie } from "@/lab/Schede";
 import { startFaggeta } from "@/lab/faggeta";
@@ -25,6 +26,7 @@ function FaggetaPage() {
   const { view, carta, setCarta, zoomIn, zoomOut } = useLabView();
   const [open, setOpen] = useState(true);
   const [hud, setHud] = useState({ fps: 0, heading: "N" });
+  const [map2d, setMap2d] = useState(false);
   const drag = useRef(false);
   const last = useRef({ x: 0, y: 0 });
   const host = useRef<HTMLDivElement>(null);
@@ -76,7 +78,7 @@ function FaggetaPage() {
     >
       <WebGLHost start={start} />
       <LabTop code="02" title="Faggeta" />
-      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} />
+      <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} onMap2d={() => setMap2d(true)} />
       <PlayGate
         open={open}
         kicker="Esperimento 02"
@@ -101,6 +103,7 @@ function FaggetaPage() {
           </div>
         </>
       ) : null}
+      <Carta2D open={map2d} onClose={() => setMap2d(false)} carta={carta} />
     </div>
   );
 }

@@ -50,6 +50,18 @@ const EXPERIMENTS = [
     title: "Sentieri",
     text: "I sentieri sul rilievo vero. 701, 702, 736: gli stessi numeri del Portale.",
   },
+  {
+    to: "/lab/parco" as const,
+    code: "05",
+    title: "Parco",
+    text: "ZPS e siti Natura 2000 sul crinale. Non è un parco regionale: è ciò che esiste.",
+  },
+  {
+    to: "/lab/alberi" as const,
+    code: "06",
+    title: "Alberi",
+    text: "Leccio e nocciolo da three-d-stage. Tocca un esemplare: si apre la scheda.",
+  },
 ];
 
 function LabHome() {

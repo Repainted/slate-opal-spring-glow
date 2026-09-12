@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { to: "/comuni", label: "Comuni" },
+  { to: "/parco", label: "Parco" },
   { to: "/natura", label: "Natura" },
   { to: "/sentieri", label: "Sentieri" },
   { to: "/lab", label: "Lab" },

@@ -14,6 +14,9 @@ const buttonVariants = cva(
         ghost: "text-olive-light hover:text-cream rounded-full px-4",
         olive:
           "border border-olive-light/50 text-olive-light hover:bg-olive/20 rounded-full px-5",
+        ink: "bg-ink text-paper hover:bg-copper hover:text-cream-soft rounded-full px-7",
+        "ink-outline":
+          "border border-ink/20 text-ink hover:border-copper hover:text-copper rounded-full px-7 bg-transparent",
       },
       size: {
         md: "text-base py-2.5",

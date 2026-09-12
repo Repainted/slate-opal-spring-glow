@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { addDuskLights, buildTerrain, duskSky, heightAt, makeRenderer, resizeRenderer } from "./geo";
+import { metersAt } from "./relief";
+import { ALBERI } from "./alberi";
 import { loadCarta } from "./carta";
 import { bindZoom, type ViewCtl } from "./view";
 
@@ -48,7 +50,8 @@ export function startFaggeta(
     const x = (Math.random() - 0.5) * 70;
     const z = (Math.random() - 0.5) * 70;
     const y = heightAt(x, z);
-    if (y < 4 || y > 14) continue;
+    const m = metersAt(x, z);
+    if (m < 850 || m > 1480) continue;
     dummy.position.set(x, y + 2.1, z);
     dummy.rotation.y = Math.random() * Math.PI;
     dummy.updateMatrix();
@@ -63,6 +66,58 @@ export function startFaggeta(
   trunks.instanceMatrix.needsUpdate = true;
   canopies.instanceMatrix.needsUpdate = true;
   scene.add(trunks, canopies);
+
+  const nLec = mobile ? 18 : 36;
+  const nNoc = mobile ? 12 : 24;
+  const lecTrunkGeo = new THREE.CylinderGeometry(0.14, 0.22, 2.4, 6);
+  const lecCanopyGeo = new THREE.IcosahedronGeometry(1.15, 1);
+  const nocTrunkGeo = new THREE.CylinderGeometry(0.07, 0.11, 1.4, 5);
+  const nocCanopyGeo = new THREE.SphereGeometry(0.95, 8, 6);
+  const lecT = new THREE.MeshStandardMaterial({ color: ALBERI.leccio.tronco, roughness: 0.95 });
+  const lecC = new THREE.MeshStandardMaterial({ color: ALBERI.leccio.chioma, roughness: 0.82 });
+  const nocT = new THREE.MeshStandardMaterial({ color: ALBERI.nocciolo.tronco, roughness: 0.95 });
+  const nocC = new THREE.MeshStandardMaterial({ color: ALBERI.nocciolo.chioma, roughness: 0.8 });
+  const lecTrunks = new THREE.InstancedMesh(lecTrunkGeo, lecT, nLec);
+  const lecCans = new THREE.InstancedMesh(lecCanopyGeo, lecC, nLec);
+  const nocTrunks = new THREE.InstancedMesh(nocTrunkGeo, nocT, nNoc);
+  const nocCans = new THREE.InstancedMesh(nocCanopyGeo, nocC, nNoc);
+
+  const placeBelt = (
+    count: number,
+    minM: number,
+    maxM: number,
+    trunksM: THREE.InstancedMesh,
+    cans: THREE.InstancedMesh,
+    trunkH: number,
+    canopyH: number,
+    canopyS: number,
+  ) => {
+    let k = 0;
+    let g = 0;
+    while (k < count && g < 900) {
+      g++;
+      const x = (Math.random() - 0.5) * 78;
+      const z = (Math.random() - 0.5) * 78;
+      const m = metersAt(x, z);
+      if (m < minM || m > maxM) continue;
+      const y = heightAt(x, z);
+      dummy.position.set(x, y + trunkH / 2, z);
+      dummy.rotation.y = Math.random() * Math.PI;
+      dummy.scale.setScalar(1);
+      dummy.updateMatrix();
+      trunksM.setMatrixAt(k, dummy.matrix);
+      dummy.position.y = y + canopyH;
+      dummy.scale.setScalar(canopyS * (0.75 + Math.random() * 0.45));
+      dummy.updateMatrix();
+      cans.setMatrixAt(k, dummy.matrix);
+      k++;
+    }
+    trunksM.instanceMatrix.needsUpdate = true;
+    cans.instanceMatrix.needsUpdate = true;
+    scene.add(trunksM, cans);
+  };
+  placeBelt(nLec, 180, 720, lecTrunks, lecCans, 2.4, 2.6, 1);
+  placeBelt(nNoc, 380, 920, nocTrunks, nocCans, 1.4, 1.7, 0.9);
 
   let yaw = 0;
   let pitch = 0.12;
@@ -165,6 +220,14 @@ export function startFaggeta(
     canopyGeo.dispose();
     trunkMat.dispose();
     canopyMat.dispose();
+    lecTrunkGeo.dispose();
+    lecCanopyGeo.dispose();
+    nocTrunkGeo.dispose();
+    nocCanopyGeo.dispose();
+    lecT.dispose();
+    lecC.dispose();
+    nocT.dispose();
+    nocC.dispose();
     renderer.dispose();
   };
 }

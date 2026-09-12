@@ -4,10 +4,12 @@ import {
   buildTerrain,
   copperDust,
   duskSky,
+  heightAt,
   makeNodes,
   makeRenderer,
   resizeRenderer,
 } from "./geo";
+import { makeAlbero } from "./alberi";
 
 export function startHero(canvas: HTMLCanvasElement, reduced: boolean) {
   const renderer = makeRenderer(canvas);
@@ -23,6 +25,15 @@ export function startHero(canvas: HTMLCanvasElement, reduced: boolean) {
   scene.add(nodes.group);
   const dust = copperDust(56);
   scene.add(dust);
+
+  const grove = new THREE.Group();
+  const t1 = makeAlbero("leccio", 1.35);
+  t1.position.set(6, heightAt(6, 10), 10);
+  grove.add(t1);
+  const t2 = makeAlbero("olivo", 1.2);
+  t2.position.set(-8, heightAt(-8, 12), 12);
+  grove.add(t2);
+  scene.add(grove);
 
   const parent = canvas.parentElement ?? canvas;
   const resize = () => resizeRenderer(renderer, camera, parent);
@@ -63,6 +74,8 @@ export function startHero(canvas: HTMLCanvasElement, reduced: boolean) {
     nodes.lg.dispose();
     (dust.geometry as THREE.BufferGeometry).dispose();
     (dust.material as THREE.Material).dispose();
+    for (const child of grove.children) child.userData.dispose?.();
+    grove.clear();
     sky.geometry.dispose();
     (sky.material as THREE.Material).dispose();
     renderer.dispose();

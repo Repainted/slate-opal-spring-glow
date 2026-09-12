@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Leccio (Quercus ilex) — 3D</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  three-d-stage { width: 100vw; height: 100vh; display: block; }
+</style>
+</head>
+<body>
+<three-d-stage name="leccio-quercus-ilex" background="#e9e6df"></three-d-stage>
+<script src="./three-d-stage.js"></script>
+<script type="module">
+import * as THREE from 'three';
+
+function seededRandom(seed) {
+  let s = seed;
+  return () => {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+const rnd = seededRandom(1337);
+
+const stage = document.querySelector('three-d-stage');
+const { THREE: T } = await stage.ready;
+
+const tree = new THREE.Group();
+tree.name = 'leccio';
+
+// ---- Materials ----
+const barkMat = new THREE.MeshStandardMaterial({ name: 'corteccia', color: 0x4a3b2c, roughness: 1, metalness: 0 });
+const leafDark = new THREE.MeshStandardMaterial({ name: 'foglia_scura', color: 0x39421f, roughness: 0.85, metalness: 0 });
+const leafMid = new THREE.MeshStandardMaterial({ name: 'foglia_media', color: 0x54622c, roughness: 0.85, metalness: 0 });
+const leafLight = new THREE.MeshStandardMaterial({ name: 'foglia_chiara', color: 0x6f7f3a, roughness: 0.8, metalness: 0 });
+const groundBaseMat = new THREE.MeshStandardMaterial({ name: 'terra', color: 0x3f3730, roughness: 1 });
+
+// ---- Trunk (short, thick, gnarled — typical open-grown holm oak) ----
+const trunkGroup = new THREE.Group();
+trunkGroup.name = 'tronco';
+
+function buildTrunkGeometry() {
+  const segH = 18, segR = 16;
+  const geo = new THREE.CylinderGeometry(0.30, 0.42, 1.9, segR, segH, false);
+  const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const ang = Math.atan2(z, x);
+    const bump = 0.035 * Math.sin(ang * 5 + y * 3) + 0.02 * Math.sin(ang * 11 - y * 2);
+    const r = Math.sqrt(x * x + z * z);
+    const scale = 1 + bump / Math.max(r, 0.001) * 0.5;
+    pos.setX(i, x * (1 + bump));
+    pos.setZ(i, z * (1 + bump));
+  }
+  geo.computeVertexNormals();
+  return geo;
+}
+const trunkMesh = new THREE.Mesh(buildTrunkGeometry(), barkMat);
+trunkMesh.name = 'tronco_mesh';
+trunkMesh.position.y = 0.95;
+trunkMesh.castShadow = true;
+trunkGroup.add(trunkMesh);
+
+// root flare
+const flareGeo = new THREE.CylinderGeometry(0.42, 0.55, 0.35, 16);
+const flare = new THREE.Mesh(flareGeo, barkMat);
+flare.name = 'base_radici';
+flare.position.y = 0.17;
+trunkGroup.add(flare);
+tree.add(trunkGroup);
+
+// ---- Main scaffold branches (open, low-branching crown typical of a free-standing leccio) ----
+const branchGroup = new THREE.Group();
+branchGroup.name = 'rami_principali';
+
+function addBranch(startPos, dir, length, radius0, radius1, depth, maxDepth, parentGroup) {
+  const segs = 6;
+  const points = [];
+  let p = startPos.clone();
+  let d = dir.clone().normalize();
+  for (let i = 0; i <= segs; i++) {
+    points.push(p.clone());
+    const bendX = (rnd() - 0.5) * 0.25;
+    const bendZ = (rnd() - 0.5) * 0.25;
+    d.x += bendX * 0.15;
+    d.z += bendZ * 0.15;
+    d.y += 0.08;
+    d.normalize();
+    p = p.clone().add(d.clone().multiplyScalar(length / segs));
+  }
+  const curve = new THREE.CatmullRomCurve3(points);
+  const tubeGeo = new THREE.TubeGeometry(curve, segs * 2, radius0, 8, false);
+  // taper radius along tube manually via vertex scale
+  const posAttr = tubeGeo.attributes.position;
+  const tubeMesh = new THREE.Mesh(tubeGeo, barkMat);
+  tubeMesh.name = `ramo_${depth}_${startPos.x.toFixed(1)}_${startPos.z.toFixed(1)}`;
+  tubeMesh.castShadow = true;
+  parentGroup.add(tubeMesh);
+
+  const endPos = points[points.length - 1];
+  const endDir = d.clone();
+
+  if (depth < maxDepth) {
+    const nBranches = depth === 0 ? 3 : 2;
+    for (let i = 0; i < nBranches; i++) {
+      const spread = new THREE.Vector3((rnd() - 0.5) * 1.4, 0.3 + rnd() * 0.5, (rnd() - 0.5) * 1.4);
+      const newDir = endDir.clone().add(spread).normalize();
+      addBranch(endPos, newDir, length * (0.68 + rnd() * 0.12), radius1, radius1 * 0.62, depth + 1, maxDepth, parentGroup);
+    }
+  } else {
+    canopyAnchors.push({ pos: endPos.clone(), radius: radius1 * 3 + 0.3 });
+  }
+}
+
+const canopyAnchors = [];
+const trunkTop = new THREE.Vector3(0, 1.85, 0);
+const mainDirs = [
+  new THREE.Vector3(0.9, 0.55, 0.2),
+  new THREE.Vector3(-0.7, 0.6, 0.55),
+  new THREE.Vector3(0.15, 0.65, -0.9),
+  new THREE.Vector3(-0.5, 0.5, -0.6),
+];
+mainDirs.forEach((d) => addBranch(trunkTop, d, 2.1, 0.16, 0.1, 0, 3, branchGroup));
+tree.add(branchGroup);
+
+// ---- Canopy: dense rounded crown built from clustered foliage clumps ----
+const canopyCenter = new THREE.Vector3(0, 4.6, 0);
+const canopyRadiusXZ = 3.5;
+const canopyRadiusY = 2.7;
+
+function jaggedIco(radius, detail, jitter) {
+  const geo = new THREE.IcosahedronGeometry(radius, detail);
+  const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const n = 1 + (rnd() - 0.5) * jitter;
+    pos.setXYZ(i, x * n, y * n, z * n);
+  }
+  geo.computeVertexNormals();
+  return geo;
+}
+
+const clumpGeoLarge = jaggedIco(0.42, 1, 0.5);
+const clumpGeoMid = jaggedIco(0.26, 1, 0.55);
+const clumpGeoSmall = jaggedIco(0.14, 0, 0.6);
+const leafMats = [leafDark, leafMid, leafLight];
+
+function scatterInEllipsoid(count, geo, matPool, scaleRange, shellMin, shellSpread) {
+  const group = new THREE.Group();
+  for (let i = 0; i < count; i++) {
+    const u = rnd(), v = rnd(), w = rnd();
+    const theta = u * Math.PI * 2;
+    const phi = Math.acos(2 * v - 1);
+    const shell = shellMin + w * shellSpread;
+    const x = Math.sin(phi) * Math.cos(theta) * canopyRadiusXZ * shell;
+    const y = Math.cos(phi) * canopyRadiusY * shell;
+    const z = Math.sin(phi) * Math.sin(theta) * canopyRadiusXZ * shell;
+    if (y < -canopyRadiusY * 0.55) continue;
+    const mat = matPool[Math.floor(rnd() * matPool.length)];
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(
+      canopyCenter.x + x + (rnd() - 0.5) * 0.15,
+      canopyCenter.y + y + (rnd() - 0.5) * 0.15,
+      canopyCenter.z + z + (rnd() - 0.5) * 0.15
+    );
+    const s = scaleRange[0] + rnd() * (scaleRange[1] - scaleRange[0]);
+    mesh.scale.set(s, s * (0.85 + rnd() * 0.3), s);
+    mesh.rotation.set(rnd() * Math.PI, rnd() * Math.PI, rnd() * Math.PI);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    group.add(mesh);
+  }
+  return group;
+}
+
+const canopyOuter = scatterInEllipsoid(420, clumpGeoLarge, leafMats, [0.45, 0.7], 0.72, 0.28);
+canopyOuter.name = 'chioma_ciuffi_grandi';
+const canopyMid = scatterInEllipsoid(700, clumpGeoMid, leafMats, [0.4, 0.65], 0.55, 0.45);
+canopyMid.name = 'chioma_ciuffi_medi';
+const canopyInner = scatterInEllipsoid(900, clumpGeoSmall, leafMats, [0.5, 0.85], 0.35, 0.65);
+canopyInner.name = 'chioma_ciuffi_piccoli';
+tree.add(canopyOuter);
+tree.add(canopyMid);
+tree.add(canopyInner);
+
+// small filler clumps around branch tips to hide seams
+canopyAnchors.forEach((a, idx) => {
+  const n = 4 + Math.floor(rnd() * 3);
+  for (let i = 0; i < n; i++) {
+    const mesh = new THREE.Mesh(clumpGeoMid, leafMats[Math.floor(rnd() * leafMats.length)]);
+    mesh.name = `ciuffo_estremita_${idx}_${i}`;
+    const off = new THREE.Vector3((rnd() - 0.5) * a.radius, (rnd() - 0.2) * a.radius, (rnd() - 0.5) * a.radius);
+    mesh.position.copy(a.pos).add(off);
+    const s = 0.5 + rnd() * 0.4;
+    mesh.scale.set(s, s, s);
+    mesh.rotation.set(rnd() * Math.PI, rnd() * Math.PI, rnd() * Math.PI);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    tree.add(mesh);
+  }
+});
+
+tree.updateMatrixWorld(true);
+stage.setObject(tree);
+</script>
+</body>
+</html>
