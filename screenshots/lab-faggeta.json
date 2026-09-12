@@ -1,0 +1,39 @@
+{
+  "url": "http://127.0.0.1:8080/lab/faggeta",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lab · Faggeta | Portale Monti Lepini",
+      "hasCanvas": true,
+      "bodyTextLen": 133,
+      "bodyTextHash": "71411546f42ea0d6e3d419b9cb0b3bd1fabdc2f4ee310790872d8aee419767a9",
+      "bodyTextPrefix": "Lab 02 · FAGGETA ESPERIMENTO 02 Entra nella faggeta Trascina per",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/lab-faggeta.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lab · Faggeta | Portale Monti Lepini",
+      "hasCanvas": true,
+      "bodyTextLen": 133,
+      "bodyTextHash": "71411546f42ea0d6e3d419b9cb0b3bd1fabdc2f4ee310790872d8aee419767a9",
+      "bodyTextPrefix": "Lab 02 · FAGGETA ESPERIMENTO 02 Entra nella faggeta Trascina per",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/lab-faggeta-mobile.png"
+    }
+  },
+  "brandWarnings": [
+    "BRAND WARNING: this looks like a game/canvas app but src/lib/og/site.json is missing \"type\": \"x:game\". X uses og:type=x:game to present the unfurl as a game card — set it in /workspace/src/lib/og/site.json per /workspace/.grok/skills/og/SKILL.md. Do not invent x:type or overload twitter:card as the game signal.",
+    "BRAND WARNING: this looks like a game/canvas app but /workspace/public/x-banner.jpg is missing. Games need a 50:11 X feed card (1200×264 JPEG) at public/x-banner.jpg — open /workspace/.grok/skills/og/SKILL.md and finish the brand-asset pass."
+  ],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/lab-faggeta.json"
+}

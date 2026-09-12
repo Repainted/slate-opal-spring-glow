@@ -1,0 +1,3449 @@
+{
+  "amaseno": {
+    "slug": "amaseno",
+    "festaPatronale": "10 agosto",
+    "cap": "03021",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Amaseno sorge nella valle omonima che segna il confine meridionale dei Lepini. Il borgo medievale è dominato dal campanile della chiesa madre.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "Santa Maria Goretti",
+          "nota": "La santa della purezza (1890-1902) nacque a Corinaldo ma la sua storia è legata al Pontino e alla zone limitrofa"
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Amaseno comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Collegiata di Santa Maria Assunta",
+          "secolo": "",
+          "stile": "Gotico-cistercense, tra i primi esempi in Italia di arco a sesto acuto",
+          "testo": "Stile: Gotico-cistercense, tra i primi esempi in Italia di arco a sesto acuto",
+          "opere": [
+            "Pulpito di Pietro e Giacomo Gullimari da Piperno",
+            "Reliquia del \"Sangue di San Lorenzo\""
+          ]
+        },
+        {
+          "nome": "Chiesa di San Pietro Apostolo",
+          "secolo": "XIV secolo",
+          "stile": "Tre navate, abside settecentesca",
+          "testo": "Stile: Tre navate, abside settecentesca",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Rocca Castri",
+          "tipo": "",
+          "secolo": "XIII secolo circa",
+          "testo": "XIII secolo circa"
+        },
+        {
+          "nome": "Cinta muraria medievale",
+          "tipo": "Mura",
+          "secolo": "",
+          "testo": "Medioevo"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "La Valle dell'Amaseno, più ricca di elementi termofili rispetto al resto dei Lepini, alterna boschi cedui a coltivazioni di olivo (Parco degli Ulivi) e un'intensa zootecnia bufalina.",
+      "sentieri": [
+        {
+          "nome": "Cammino della Regina Camilla, tappe Vallecorsa-Amaseno-Pisterzo",
+          "difficolta": "Tappe 9-10 del cammin",
+          "testo": "Tappe 9-10 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Miracolo di San Lorenzo",
+          "tipo": "Religiosa",
+          "quando": "10 agosto",
+          "testo": "Liquefazione del sangue del santo conservato in un'ampolla presso la Chiesa di Santa Maria (1165), tra l'8 e il 9 agosto, celebrata il 10."
+        },
+        {
+          "nome": "I Love Bufala — Festa dell'Agricoltura",
+          "tipo": "Gastronomica",
+          "quando": "estate",
+          "testo": "Nata nel 1996 dagli allevatori locali per promuovere mozzarella e carne di bufala; oltre 14.000 bufale allevate sul territorio."
+        }
+      ],
+      "prodotti": "mozzarella di bufala, trecce e nodini di bufala, ricotta fresca e salata, caciotta, primosale",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Ristorante Da Giotto",
+        "categoria": "Ristorante/Pizzeria",
+        "descrizione": "Ristorante-pizzeria con cucina casalinga ciociara: ricotta, salsicce, gnocchi e carne di bufala.",
+        "prodotti": "",
+        "indirizzo": "",
+        "sito": "https://www.dagiottoamaseno.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "artena": {
+    "slug": "artena",
+    "festaPatronale": "24 giugno",
+    "cap": "00031",
+    "comunitaMontana": "Monti Lepini — versante romano",
+    "storia": {
+      "intro": "Artena sorge sull'antica Ecetra volsca (V-IV sec. a.C.) e conserva straordinarie mura poligonali. Il centro storico medievale è quasi integralmente conservato.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1807-1882",
+          "nome": "Giuseppe Garibaldi",
+          "nota": "Nel luglio 1849, in fuga da Roma dopo la caduta della Repubblica Romana, soggiornò una notte a Montefortino (odierna Artena) con 4.000 uomini prima di dirigersi verso Venezia."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Artena comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Santa Croce",
+          "secolo": "",
+          "stile": "",
+          "testo": "Fondata dai Conti di Segni, ricostruita su commissione del principe Giovan Battista Borghese (architetto Domenico Terzago, capomastro Franco Buratti).",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Palazzo Borghese",
+          "tipo": "",
+          "secolo": "",
+          "testo": "XVII secolo (ristrutturato 1615-1618)"
+        },
+        {
+          "nome": "Arco Borghese",
+          "tipo": "",
+          "secolo": "XVII secolo",
+          "testo": "XVII secolo"
+        },
+        {
+          "nome": "Mura pre-romane di Piano della Civita",
+          "tipo": "",
+          "secolo": "",
+          "testo": "Italico-romano (datazione incerta)"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Territorio collinare e pianeggiante vocato ai cereali (grano duro, tenero, mais), con attività pastorale ancora fiorente.",
+      "sentieri": []
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Festa Maria SS. delle Grazie",
+          "tipo": "Religiosa",
+          "quando": "3ª/4ª domenica di maggio",
+          "testo": ""
+        },
+        {
+          "nome": "Palio delle Contrade",
+          "tipo": "Civile",
+          "quando": "agosto",
+          "testo": ""
+        }
+      ],
+      "prodotti": "giuncata, formaggio locale, ricotta",
+      "piatti": "carbonara, penne al mascarpone, trippa alla romana, polenta con spuntature di maiale, crostini alla ponticiana, pane artenese"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo La Rocca dei Briganti",
+        "categoria": "Agriturismo",
+        "descrizione": "Azienda agricola biologica di oltre 40 ettari nei Monti Lepini: olio EVO biologico, formaggi di pecora e capra, Suino Nero, bovini e pollame da cortile.",
+        "prodotti": "olio EVO biologico, formaggi, salumi",
+        "indirizzo": "",
+        "sito": "https://www.roccadeibriganti.com/",
+        "nota": ""
+      },
+      {
+        "nome": "Fattoria Colle San Nicola",
+        "categoria": "Azienda agricola / Caseificio",
+        "descrizione": "Azienda a filiera chiusa su 50 ettari: allevamento bovino, fior di latte e formaggi artigianali premiati, macelleria propria.",
+        "prodotti": "fior di latte, formaggi, carne, verdure km0",
+        "indirizzo": "",
+        "sito": "https://www.fattoriacollesannicola.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "bassiano": {
+    "slug": "bassiano",
+    "festaPatronale": "2 giugno",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Di origine medievale, Bassiano fu feudo dei Caetani. Il borgo conserva intatta la sua struttura urbanistica trecentesca con vicoli e archi.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "Albino Lucarelli",
+          "nota": "Pittore locale del XIX sec."
+        },
+        {
+          "anni": "1449 ca. - 1515",
+          "nome": "Aldo Manuzio",
+          "nota": "Umanista, tipografo ed editore, fondatore della Aldine Press a Venezia; introdusse il carattere corsivo (1501). Nato a Bassiano (anno di nascita incerto tra il 1449 e il 1452 secondo le fonti)."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Bassiano comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Sant'Erasmo",
+          "secolo": "",
+          "stile": "Tre navate, restauro neoclassico ottocentesco",
+          "testo": "Stile: Tre navate, restauro neoclassico ottocentesco",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di San Nicola",
+          "secolo": "",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Dipinto attribuito a Girolamo Siciolante da Sermoneta",
+            "Fonte battesimale marmoreo romanico (XII sec.)"
+          ]
+        },
+        {
+          "nome": "Santuario del Crocifisso (Selva Scura)",
+          "secolo": "XVII secolo",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Crocifisso ligneo di Fra' Vincenzo Pietrosanti (1673)",
+            "Affreschi quattrocenteschi nella grotta"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Mura castellane e borgo a spirale",
+          "tipo": "",
+          "secolo": "XIII secolo, epoca Caetani",
+          "testo": "XIII secolo, epoca Caetani"
+        },
+        {
+          "nome": "Torre Civica",
+          "tipo": "Torre",
+          "secolo": "",
+          "testo": "Medioevo"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Bassiano è il comune di riferimento per le ascensioni al Monte Semprevisa (1536 m): lecceta presso la sorgente di Sant'Angelo, faggeta nella parte alta.",
+      "sentieri": [
+        {
+          "nome": "Sentiero per il Monte Semprevisa da Bassiano",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Ascesa alla vetta più alta dei Lepini (1536 m), diversi percorsi documentati incluso il \"Sentiero Daniele Nardi\"."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra del Prosciutto di Bassiano",
+          "tipo": "Gastronomica",
+          "quando": "25-27 luglio",
+          "testo": "Degustazioni dai produttori, passeggiate naturalistiche, giochi popolari tradizionali (\"Palio del Cavallo\")."
+        }
+      ],
+      "prodotti": "Prosciutto di Bassiano",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Prosciuttificio di Bassiano — F.lli Martena",
+        "categoria": "Salumificio",
+        "descrizione": "Produttore del Prosciutto di Bassiano, prodotto agroalimentare tradizionale laziale, salato e leggermente affumicato, stagionato sfruttando il microclima locale.",
+        "prodotti": "Prosciutto di Bassiano",
+        "indirizzo": "",
+        "sito": "https://www.prosciuttificiodibassiano.com/",
+        "nota": ""
+      },
+      {
+        "nome": "Prosciutto di Bassiano Reggiani",
+        "categoria": "Salumificio",
+        "descrizione": "Azienda storica nei boschi di faggio di Bassiano (~650 m), produce il Prosciutto di Bassiano con stagionatura di 17-18 mesi e affumicatura a legna di faggio.",
+        "prodotti": "Prosciutto di Bassiano",
+        "indirizzo": "",
+        "sito": "https://www.prosciuttodibassiano.it/",
+        "nota": ""
+      },
+      {
+        "nome": "Terre dei Principi",
+        "categoria": "Ristorante",
+        "descrizione": "Ristorante nel centro storico di Bassiano, cucina italiana tradizionale.",
+        "prodotti": "",
+        "indirizzo": "Salita della Croce, 1, Bassiano LT",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "carpineto-romano": {
+    "slug": "carpineto-romano",
+    "festaPatronale": "29 giugno",
+    "cap": "00032",
+    "comunitaMontana": "XVIII Monti Lepini",
+    "storia": {
+      "intro": "Carpineto Romano è uno dei borghi storicamente più significativi dell'area lepina. Le prime testimonianze scritte risalgono al 1077, quando il territorio era dominato dai Canonici Lateranensi, affittato alla famiglia De Ceccano. Nel 1299 passò ai Caetani, restando nelle loro mani fino al XIV secolo. Il borgo conobbe il suo massimo splendore culturale tra il XVI e il XVII secolo, grazie alle committenze delle grandi famiglie nobili — tra cui gli Aldobrandini — e alla presenza di artisti di primo piano. Ma il momento più celebre nella storia di Carpineto Romano rimane il 2 marzo 1810, quando nacque Gioacchino Vincenzo Pecci, che nel 1878 sarebbe diventato Papa Leone XIII. Uno dei pontificati più lunghi della storia moderna (fino al 1903), durante il quale Carpineto fu abbellita con chiese, fontane, ospedali e scuole per volontà del pontefice.",
+      "epoche": [
+        {
+          "periodo": "Medioevo",
+          "titolo": "Dai Canonici Lateranensi ai Caetani",
+          "testo": "Il primo documento che cita Carpineto è del 1077. Il borgo fu feudo dei De Ceccano fino al 1299, poi dei Caetani. Nel XIV-XV secolo conobbe un periodo di prosperità con la costruzione delle principali chiese e il rafforzamento del centro storico."
+        },
+        {
+          "periodo": "Rinascimento",
+          "titolo": "Le committenze nobiliari e gli artisti",
+          "testo": "Nel XVI-XVII secolo Carpineto diventa un centro culturale e artistico. Il Cardinale Pietro Aldobrandini commissiona la chiesa di San Pietro (1610). Il Palazzo Pecci viene ampliato. Artisti legati alla scuola romana operano nel borgo."
+        },
+        {
+          "periodo": "Età moderna",
+          "titolo": "Papa Leone XIII e il periodo aureo",
+          "testo": "Gioacchino Vincenzo Pecci nasce a Carpineto Romano il 2 marzo 1810 nel Palazzo Pecci. Diventato Papa Leone XIII nel 1878, il pontefice volle abbellire la sua città natale. Durante il suo pontificato Carpineto ricevette nuove chiese, la fontana monumentale, un ospedale e scuole. Leone XIII è noto per la sua apertura al dialogo con la modernità e per l'enciclica Rerum Novarum (1891), pietra miliare della dottrina sociale della Chiesa."
+        }
+      ],
+      "personaggi": [
+        {
+          "anni": "1810-1903",
+          "nome": "Papa Leone XIII (Gioacchino Vincenzo Pecci)",
+          "nota": "Papa dal 1878 al 1903, uno dei pontificati più lunghi della storia. Autore della Rerum Novarum."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Carpineto Romano possiede un patrimonio artistico di qualità superiore rispetto alla sua dimensione: chiese con opere di scuola romana, il Palazzo Pecci con i suoi saloni storici, il museo civico e una tradizione artistica secolare.",
+      "chiese": [
+        {
+          "nome": "Collegiata del Sacro Cuore",
+          "secolo": "XIX secolo",
+          "stile": "Neoclassico",
+          "testo": "Stile: Neoclassico",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di San Pietro Apostolo con convento",
+          "secolo": "",
+          "stile": "Tardo-rinascimentale",
+          "testo": "Stile: Tardo-rinascimentale",
+          "opere": [
+            "Tele di scuola romana del XVII sec.",
+            "Altare ligneo barocco"
+          ]
+        },
+        {
+          "nome": "Chiesa di Sant'Agostino con convento",
+          "secolo": "XIV-XV secolo",
+          "stile": "Gotico-rinascimentale",
+          "testo": "Stile: Gotico-rinascimentale",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di San Leone Magno",
+          "secolo": "XIX secolo",
+          "stile": "",
+          "testo": "Dedicata a Papa Leone Magno, richiama il legame del borgo con la tradizione papale.",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di Santa Maria del Popolo",
+          "secolo": "XVI-XVII secolo",
+          "stile": "",
+          "testo": "Con affreschi e opere pittoriche di notevole interesse.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Palazzo Pecci",
+          "tipo": "",
+          "secolo": "XII-XVIII secolo",
+          "testo": "XII-XVIII secolo"
+        },
+        {
+          "nome": "Fontana monumentale",
+          "tipo": "Fontana",
+          "secolo": "Fine XIX secolo",
+          "testo": "Fine XIX secolo"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Carpineto Romano è immerso nella foresta dei Lepini, con il Monte Capreo (1236 m) e il Monte Semprevisa (1536 m) — la vetta più alta dei Lepini — a breve distanza. L'ambiente naturale è tra i più integri dell'intera area lepina.",
+      "sentieri": [
+        {
+          "nome": "Sentiero per il Monte Semprevisa",
+          "difficolta": "Media",
+          "testo": "Il percorso principale che sale da Carpineto Romano (550 m) fino alla vetta del Semprevisa (1536 m), il punto più alto dei Monti Lepini. Attraversa la faggeta e offre panorami straordinari."
+        },
+        {
+          "nome": "Anello del Monte Capreo",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Giro ad anello che raggiunge la cima del Monte Capreo (1236 m) con la grande croce in ferro visibile da tutta la valle."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "Le tradizioni di Carpineto Romano sono legate alla figura di Leone XIII, alle antiche pratiche contadine e montanare e alla vivace cultura rurale dei Lepini romani.",
+      "feste": [
+        {
+          "nome": "Festa di San Pietro Apostolo",
+          "tipo": "Religiosa",
+          "quando": "29 giugno",
+          "testo": "Celebrazione patronale con messa solenne, processione e festeggiamenti."
+        },
+        {
+          "nome": "Commemorazione di Leone XIII",
+          "tipo": "Civile",
+          "quando": "2 marzo (dies natalis del papa)",
+          "testo": "Ogni anno il paese ricorda la nascita del suo illustre cittadino con cerimonie culturali e religiose."
+        },
+        {
+          "nome": "Sagra della farinata e dei prodotti del bosco",
+          "tipo": "Gastronomica",
+          "quando": "Autunno",
+          "testo": "Celebrazione dei prodotti tipici locali: funghi porcini, castagne, miele di montagna e farinata."
+        }
+      ],
+      "prodotti": "funghi porcini del Semprevisa, castagne, miele di montagna, olio extravergine DOP",
+      "piatti": "pasta con i funghi porcini, agnello arrosto alla brace, polenta con spuntature, zuppa di castagne"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "Palazzo Pecci e Museo Civico",
+          "tipo": "Storico",
+          "testo": "Casa natale di Leone XIII con museo. Centro storico."
+        },
+        {
+          "nome": "Monte Semprevisa (1536 m)",
+          "tipo": "Naturale",
+          "testo": "La vetta più alta dei Lepini. Escursione impegnativa con viste eccezionali."
+        },
+        {
+          "nome": "Faggeta di Carpineto",
+          "tipo": "Naturale",
+          "testo": "Una delle faggete più belle del Lazio, percorribile su sentieri segnalati del CAI."
+        },
+        {
+          "nome": "Centro storico con le 5 chiese",
+          "tipo": "Storico",
+          "testo": "Il centro storico conserva cinque chiese storiche, tutte visitabili."
+        }
+      ],
+      "arrivo": {
+        "auto": "Da Roma: via Casilina (SS6) fino a Valmontone, poi SP per Carpineto (circa 65 km). Da Latina: SS7 poi SP.",
+        "treno": "Stazione di Valmontone (25 km)",
+        "bus": "Linee COTRAL da Roma (Anagnina)"
+      },
+      "contatti": {
+        "sito": "https://www.comune.carpinetoromano.rm.it",
+        "proloco": "",
+        "email": "info@comune.carpinetoromano.rm.it"
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agrifoglio del Ciroletto",
+        "categoria": "Agriturismo/Agricampeggio",
+        "descrizione": "Azienda agricola familiare (~7 ettari, 850 m) nei Monti Lepini: coltiva olivi e castagni, alleva asini, galline e tacchini; agricampeggio e cucina tipica.",
+        "prodotti": "olio, castagne",
+        "indirizzo": "",
+        "sito": "http://www.agrifogliodelciroletto.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "castro-dei-volsci": {
+    "slug": "castro-dei-volsci",
+    "festaPatronale": "3 giugno",
+    "cap": "03020",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Castro dei Volsci conserva il nome delle sue origini preromane. Borgo medievale nella Valle del Sacco, al confine tra Lazio e Campania.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1921-2004",
+          "nome": "Nino Manfredi",
+          "nota": "Nato a Castro dei Volsci il 22 marzo 1921, attore, doppiatore e regista, tra i protagonisti della commedia all'italiana. Il paese gli ha dedicato un museo."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Castro dei Volsci comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Nicola",
+          "secolo": "",
+          "stile": "Architettura paleocristiana altomedievale",
+          "testo": "Stile: Architettura paleocristiana altomedievale",
+          "opere": [
+            "Affreschi medievali con scene dell'Antico e Nuovo Testamento"
+          ]
+        },
+        {
+          "nome": "Chiesa di Sant'Oliva",
+          "secolo": "prima menzione 1125, struttura attuale del 1537",
+          "stile": "Elementi barocchi",
+          "testo": "Stile: Elementi barocchi",
+          "opere": [
+            "Portale bronzeo",
+            "Dipinto \"Madonna col Bambino\"",
+            "\"Crocifissione\" di Odoardo Righi",
+            "Reliquia di San Giustino"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Rocca dei Colonna",
+          "tipo": "",
+          "secolo": "dal XIV secolo",
+          "testo": "dal XIV secolo"
+        },
+        {
+          "nome": "Torre dell'Orologio",
+          "tipo": "Torre",
+          "secolo": "",
+          "testo": "Medioevo"
+        },
+        {
+          "nome": "Monumento alla Mamma Ciociara",
+          "tipo": "",
+          "secolo": "1964",
+          "testo": "1964"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Boschi di querce e carpini nelle zone montuose, oliveti e vigneti nelle zone collinari.",
+      "sentieri": [
+        {
+          "nome": "La Via dell'Acqua",
+          "difficolta": "Media",
+          "testo": "Percorso locale escursionistico nel territorio di Castro dei Volsci."
+        },
+        {
+          "nome": "Cammino della Regina Camilla, tappe Villa Santo Stefano-Castro-Vallecorsa",
+          "difficolta": "Tappe 7-8 del cammino",
+          "testo": "Tappe 7-8 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Festa di Sant'Oliva",
+          "tipo": "Religiosa",
+          "quando": "3 giugno",
+          "testo": "Festa della patrona."
+        },
+        {
+          "nome": "Il paese diventa presepe",
+          "tipo": "Civile e religiosa",
+          "quando": "24 dicembre - 6 gennaio",
+          "testo": "Il borgo si trasforma in presepe vivente ottocentesco, botteghe storiche riaperte, abitanti in costume ciociaro."
+        }
+      ],
+      "prodotti": "Salsiccia di Castro dei Volsci (sapore sapido, retrogusto d'arancia, leggermente affumicata), olio d'oliva (comune aderente a Città dell'Olio)",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo La Locanda del Ruspante",
+        "categoria": "Agriturismo",
+        "descrizione": "Casale di campagna ristrutturato con camere in stile rustico, ristorante con specialità stagionali locali, corsi di cucina, degustazioni.",
+        "prodotti": "",
+        "indirizzo": "Via Collenuovo 1, Castro dei Volsci FR",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "cori": {
+    "slug": "cori",
+    "festaPatronale": "Penultima domenica di giugno",
+    "cap": "04010",
+    "comunitaMontana": "XIII Monti Lepini Ausoni",
+    "storia": {
+      "intro": "Cori è tra i centri abitati più antichi del Lazio, con una frequentazione umana documentata da circa 3300 anni. In epoca arcaica era conosciuta come Còra e fu uno dei centri principali del popolo dei Volsci, la tribù italica che per secoli si oppose all'espansione di Roma. Dopo la definitiva romanizzazione nel IV sec. a.C., Còra divenne municipio romano e conobbe un lungo periodo di prosperità testimoniato dai templi e dalle opere pubbliche ancora visibili. Nel Medioevo il borgo si sviluppò attorno all'acropoli, con chiese e conventi che si sovrapposero alle strutture romane. La famiglia Colonna e successivamente i Cenci dominarono il territorio. In epoca moderna Cori mantenne il suo carattere di centro agricolo lepino, con una forte identità comunitaria legata alla patrona Sant'Oliva.",
+      "epoche": [
+        {
+          "periodo": "Antichità",
+          "titolo": "Còra, città dei Volsci",
+          "testo": "Cori fu un importante centro volsco. Dopo le guerre sannitiche e la definitiva romanizzazione nel IV sec. a.C., divenne municipio romano. A questo periodo risalgono i due templi ancora visibili: il Tempio di Ercole (II-I sec. a.C.) e il Tempio dei Dioscuri (I sec. a.C.), tra i meglio conservati del Lazio."
+        },
+        {
+          "periodo": "Medioevo",
+          "titolo": "Chiese e conventi sull'acropoli",
+          "testo": "In epoca medievale sull'area del tempio romano venne edificata la chiesa di Sant'Oliva (XII sec.), con annesso convento agostiniano. Il centro storico conserva ancora molti edifici medievali. Cori fu feudo dei Colonna e successivamente di altre famiglie nobili romane."
+        },
+        {
+          "periodo": "Rinascimento",
+          "titolo": "Il chiostro degli Agostiniani",
+          "testo": "Nel XV secolo, su commissione del Cardinale Guillaume d'Estouteville e di Ambrogio Massari, generale degli Agostiniani originario di Cori, viene realizzato il magnifico chiostro con 27 capitelli marmorei diversi, uno dei capolavori della scultura rinascimentale laziale."
+        }
+      ],
+      "personaggi": [
+        {
+          "anni": "1430-1485",
+          "nome": "Ambrogio Massari",
+          "nota": "Generale dell'Ordine Agostiniano, committente del chiostro di Sant'Oliva"
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio artistico di Cori è eccezionale per un centro di queste dimensioni: templi romani intatti, un complesso conventuale rinascimentale di primo piano, chiese medievali affrescate e un museo civico che raccoglie i reperti dell'antica Còra.",
+      "chiese": [
+        {
+          "nome": "Complesso di Sant'Oliva",
+          "secolo": "XII-XV secolo",
+          "stile": "Romanico-gotico con chiostro rinascimentale",
+          "testo": "Stile: Romanico-gotico con chiostro rinascimentale",
+          "opere": [
+            "Chiostro con 27 capitelli marmorei diversi (XV sec.)",
+            "Affreschi medievali nelle cappelle",
+            "Resti del tempio romano inglobati nella struttura",
+            "Cappella del Santissimo Crocifisso con ciclo di affreschi"
+          ]
+        },
+        {
+          "nome": "Chiesa di San Pietro",
+          "secolo": "XII-XIV secolo",
+          "stile": "Romanico",
+          "testo": "Stile: Romanico",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di Santa Maria della Pietà",
+          "secolo": "XIV-XVI secolo",
+          "stile": "",
+          "testo": "Ospita opere pittoriche del periodo tardo-gotico e rinascimentale.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Tempio di Ercole",
+          "tipo": "",
+          "secolo": "",
+          "testo": "II-I sec. a.C."
+        },
+        {
+          "nome": "Tempio dei Dioscuri",
+          "tipo": "",
+          "secolo": "",
+          "testo": "I sec. a.C."
+        },
+        {
+          "nome": "Mura poligonali",
+          "tipo": "",
+          "secolo": "",
+          "testo": "IV-III sec. a.C."
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Il territorio di Cori è vario: dalle colline olivetate ai piedi dei Lepini fino ai boschi di cerro e querce che salgono verso i 1000 metri. La zona di Giulianello, nella pianura, è caratterizzata da ambienti umidi e laghi artificiali frequentati dall'avifauna.",
+      "sentieri": [
+        {
+          "nome": "CAI 701 — Spillo di Cori",
+          "difficolta": "Erdigheta/Monte Lupon",
+          "testo": "Da Cori (Selva di Cori) verso le Plate di Cori e Monte Erdigheta/Monte Lupone."
+        },
+        {
+          "nome": "CAI 705 (da Cori)",
+          "difficolta": "Tirinsani) verso le F",
+          "testo": "Da Cori (loc. Tirinsani) verso le Fosse di Cori e Monte Lupone."
+        },
+        {
+          "nome": "CAI 706 — Valle delle Vacche",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Valle delle Vacche - Valle dell'Inferno, confluenza con il CAI 701 a Monte Lupone."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "Le tradizioni di Cori sono profondamente legate alla patrona Sant'Oliva e alle antiche rivalità tra i rioni del borgo. Il Carosello dei Rioni è la manifestazione civile più importante, mentre la festa patronale è il momento di maggiore coesione della comunità.",
+      "feste": [
+        {
+          "nome": "Carosello Storico dei Rioni di Cori",
+          "tipo": "Storica",
+          "quando": "Penultima domenica di giugno (coincide con la festa patronale)",
+          "testo": "Corteo in costume rinascimentale con i rappresentanti dei tre rioni storici (le 'porte' del borgo). Include giochi storici, il Palio e la cerimonia del giuramento dei Priori al cospetto della patrona. Rievoca il giuramento dei magistrati medievali allo statuto comunale."
+        },
+        {
+          "nome": "Festa di Sant'Oliva",
+          "tipo": "Religiosa",
+          "quando": "Penultima domenica di giugno",
+          "testo": "Solennità patronale con processione, messa solenne e festeggiamenti. La statua della patrona percorre le vie del borgo tra due ali di folla."
+        },
+        {
+          "nome": "Sagra dell'olio e del vino",
+          "tipo": "Gastronomica",
+          "quando": "Novembre",
+          "testo": "Celebrazione dei principali prodotti agricoli del territorio: l'olio extravergine d'oliva (cultivar Itrana) e i vini locali."
+        }
+      ],
+      "prodotti": "olio extravergine DOP Colline Pontine (cultivar Itrana), vino bianco Cori DOC, vino rosso Cori DOC, fagioli borlotti locali, castagne",
+      "piatti": "fagioli con le cotiche, agnello alla cacciatora, minestra di farro"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "Tempio di Ercole e Tempio dei Dioscuri",
+          "tipo": "Storico",
+          "testo": "I due templi romani nel centro storico, tra i meglio conservati del Lazio."
+        },
+        {
+          "nome": "Complesso di Sant'Oliva",
+          "tipo": "Religioso",
+          "testo": "Chiesa, convento e chiostro rinascimentale con 27 capitelli diversi."
+        },
+        {
+          "nome": "Panorama dell'acropoli",
+          "tipo": "Panoramico",
+          "testo": "Vista sulla pianura pontina e sul mare fino alle isole ponziane nelle giornate limpide."
+        },
+        {
+          "nome": "Lago di Giulianello",
+          "tipo": "Naturale",
+          "testo": "Lago artificiale nella pianura sottostante Cori, meta di birdwatching e pesca."
+        }
+      ],
+      "arrivo": {
+        "auto": "Da Roma: via Pontina (SS148) uscita Cori-Cisterna, poi SP26. Da Latina: circa 25 km via SS7.",
+        "treno": "Stazione di Cisterna di Latina (12 km)",
+        "bus": "Linee COTRAL da Roma (Anagnina) e Latina"
+      },
+      "contatti": {
+        "sito": "https://www.comune.cori.lt.it",
+        "proloco": "https://www.scoprirecori.it",
+        "email": "info@comune.cori.lt.it"
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Cooperativa Agricola Cincinnato",
+        "categoria": "Cantina",
+        "descrizione": "Fondata nel 1947, Cincinnato è la principale realtà vitivinicola del comprensorio Lepino. Con 130 soci e 650 ettari di vigneto (di cui 110 biologici), produce vini da vitigni autoctoni recuperati: Nero Buono di Cori, Bellone, Cesanese, Greco. I vini hanno denominazione Cori DOC e Lazio IGT. Offre anche olio EVO da cultivar Itrana. Dispone di agriturismo con ristorante e ospitalità.",
+        "prodotti": "Vino Cori DOC Rosso, Vino Cori DOC Bianco, Bellone IGT, Nero Buono IGT, Cesanese IGT, Olio EVO DOP Colline Pontine",
+        "indirizzo": "Via Cori Valle, 00, 04010 Cori LT",
+        "sito": "https://www.cincinnato.it",
+        "nota": ""
+      }
+    ]
+  },
+  "giuliano-di-roma": {
+    "slug": "giuliano-di-roma",
+    "festaPatronale": "3 febbraio",
+    "cap": "03020",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Giuliano di Roma conserva una chiesa romanica d'interesse storico-artistico. Il territorio è parte della Ciociaria lepina.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1813-1887",
+          "nome": "Beata Maria Caterina Troiani",
+          "nota": "Nata Costanza Troiani a Giuliano di Roma il 19 gennaio 1813, religiosa, fondatrice delle Suore Francescane Missionarie del Cuore Immacolato di Maria, attiva in Egitto dal 1859. Beatificata da Giovanni Paolo II nel 1985."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Giuliano di Roma comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa parrocchiale di Santa Maria Maggiore",
+          "secolo": "fine XVIII secolo",
+          "stile": "Barocco-neoclassico",
+          "testo": "Stile: Barocco-neoclassico",
+          "opere": [
+            "Mastio del castello originale riusato come campanile",
+            "Tre portoni bronzei con scene dell'Annunciazione",
+            "Coro ligneo intarsiato con 22 stalli"
+          ]
+        },
+        {
+          "nome": "Chiesetta di San Biagio",
+          "secolo": "",
+          "stile": "",
+          "testo": "Sede delle celebrazioni del santo patrono.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Mastio del castello medievale",
+          "tipo": "Torre",
+          "secolo": "",
+          "testo": "Medioevo, riuso settecentesco"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Vegetazione di transizione tra bioclima mediterraneo e appenninico: boschi di leccio, quercia, faggio, castagno e tasso, tra Monte Siserno e Colle Calvello.",
+      "sentieri": [
+        {
+          "nome": "Cammino della Regina Camilla, tappe Prossedi-Giuliano-Villa Santo Stefano",
+          "difficolta": "Tappe 5-6 del cammino",
+          "testo": "Tappe 5-6 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "San Biagio",
+          "tipo": "Religiosa",
+          "quando": "ultima domenica di agosto",
+          "testo": "Festa del patrono: processione con statua lignea e distribuzione del pane benedetto (\"panuncegli\")."
+        },
+        {
+          "nome": "San Rocco",
+          "tipo": "Religiosa",
+          "quando": "16 agosto",
+          "testo": "Processione con statua lignea antica per le vie del paese."
+        }
+      ],
+      "prodotti": "",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo Podere Cervini",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo a conduzione familiare sulla SS156 dei Monti Lepini, cucina con materie prime di produzione propria a km zero.",
+        "prodotti": "",
+        "indirizzo": "Via Cervini, 31, Giuliano di Roma FR",
+        "sito": "",
+        "nota": ""
+      },
+      {
+        "nome": "Agriturismo Varcodoro",
+        "categoria": "Agriturismo",
+        "descrizione": "Piccola azienda agricola familiare attiva dal 2006: camere in stile rustico, ristorante nei weekend, produzione propria di olio, verdure e castagne.",
+        "prodotti": "",
+        "indirizzo": "",
+        "sito": "http://www.varcodoro.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "gorga": {
+    "slug": "gorga",
+    "festaPatronale": "prima domenica di agosto",
+    "cap": "00030",
+    "comunitaMontana": "Monti Lepini — versante romano",
+    "storia": {
+      "intro": "Gorga è uno dei borghi più isolati e autentici dei Lepini, con una comunità montana di antica tradizione. I boschi di faggio circostanti sono tra i più belli del Lazio.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1796-1861",
+          "nome": "Vincenzo Santucci",
+          "nota": "Cardinale, nato a Gorga; mediatore tra Stato Pontificio e Regno di Sardegna durante il Risorgimento."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Gorga comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Michele Arcangelo",
+          "secolo": "",
+          "stile": "Romanico",
+          "testo": "Stile: Romanico",
+          "opere": [
+            "Croce bizantina"
+          ]
+        },
+        {
+          "nome": "Chiesa di Santa Maria Assunta",
+          "secolo": "circa 1772",
+          "stile": "Pianta circolare con cupola ottagonale",
+          "testo": "Stile: Pianta circolare con cupola ottagonale",
+          "opere": [
+            "Volta affrescata con cielo stellato e Apostoli",
+            "Due pale settecentesche"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Fontana monumentale \"La Pastorella\"",
+          "tipo": "Fontana",
+          "secolo": "1889",
+          "testo": "1889"
+        },
+        {
+          "nome": "Palazzo/Castello Doria Pamphili",
+          "tipo": "Castello",
+          "secolo": "medievale, ricostruito tardo XVI secolo",
+          "testo": "medievale, ricostruito tardo XVI secolo"
+        },
+        {
+          "nome": "Grotta di Campo di Caccia",
+          "tipo": "Sito naturalistico/speleologico",
+          "secolo": "",
+          "testo": "Cavità carsica di circa 610 metri di profondità, tra le più importanti dell'area."
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Altopiano carsico (Piani del Lontro) con paesaggio pastorale di capanne e muretti a secco; boschi misti e faggete verso il Semprevisa.",
+      "sentieri": [
+        {
+          "nome": "CAI 8 — Monte Semprevisa da Pian della Faggeta",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Da Pian della Faggeta (865 m, bivio per Gorga) alla vetta del Semprevisa (1536 m), andata e ritorno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Festa della Montagna",
+          "tipo": "Civile",
+          "quando": "30 luglio",
+          "testo": "Mercatini di artigianato e prodotti tipici locali."
+        },
+        {
+          "nome": "Festeggiamenti di San Domenico di Guzman",
+          "tipo": "Religiosa",
+          "quando": "3-6 agosto",
+          "testo": "Triduo solenne, processione, concerti bandistici, spettacolo pirotecnico per il patrono."
+        },
+        {
+          "nome": "Sagra del Cinghiale",
+          "tipo": "Gastronomica",
+          "quando": "12 agosto",
+          "testo": "Organizzata dall'Azienda Faunistica Venatoria \"La Pastorella\"."
+        },
+        {
+          "nome": "Sagra degli Gnocchitti e delle Fregnacce",
+          "tipo": "Gastronomica",
+          "quando": "agosto",
+          "testo": "Gnocchetti di pasta all'uovo e fregnacce (fettuccine irregolari) preparati a mano secondo la tradizione gorgana."
+        }
+      ],
+      "prodotti": "olio extravergine locale",
+      "piatti": "gnocchitti, fregnacce, cinghiale"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Il Cavallino Restaurant & Lounge",
+        "categoria": "Ristorante",
+        "descrizione": "Ristorante con cucina italiana e focus su prodotti locali, antipasti e carne.",
+        "prodotti": "",
+        "indirizzo": "Via Filippo Turati, 89, Gorga RM",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "maenza": {
+    "slug": "maenza",
+    "festaPatronale": "29 maggio",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Maenza è citata nei documenti medievali come \"castrum Maentiae\". Appartenne ai Caetani e poi agli Acquaviva.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1225 ca.-1274",
+          "nome": "San Tommaso d'Aquino",
+          "nota": "Soggiornò al Castello Baronale nel 1274 prima di recarsi a Fossanova, dove morì."
+        },
+        {
+          "anni": "1810-1903 (pontefice 1878-1903)",
+          "nome": "Papa Leone XIII (Gioacchino Pecci)",
+          "nota": "Legato a Maenza per la residenza familiare a Palazzo Pecci."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Maenza comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Santa Maria Assunta in Cielo (Duomo)",
+          "secolo": "impianto del 1400, restaurata fine XIX secolo",
+          "stile": "Neoclassico, tre navate",
+          "testo": "Stile: Neoclassico, tre navate",
+          "opere": [
+            "\"Assunzione di Maria\" di Vincenzo Pasqualoni (1874)",
+            "Dipinti di Giovanni Cingolani"
+          ]
+        },
+        {
+          "nome": "Chiesa di Santa Reparata",
+          "secolo": "XV secolo",
+          "stile": "",
+          "testo": "Annesso antico convento francescano, oggi biblioteca comunale.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Castello Baronale",
+          "tipo": "Castello",
+          "secolo": "",
+          "testo": "torre XII secolo, forma attuale dal 1500"
+        },
+        {
+          "nome": "Palazzo Pecci",
+          "tipo": "",
+          "secolo": "",
+          "testo": "Residenza della famiglia Pecci; vi soggiornò da giovane Gioacchino Pecci, futuro Papa Leone XIII. Oggi sede municipale/biblioteca."
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Nel corridoio Maenza-Carpineto Romano-Montelanico, leccete submontane con fitti arbusteti di erica arborea; boschi di cerro sulle pendici verso il Monte Lupone.",
+      "sentieri": [
+        {
+          "nome": "San Luca — Alta Via della Fenice — Monte Gemma",
+          "difficolta": "Media",
+          "testo": "Anello da Maenza al Santuario di San Luca, Monte Sentinella e Monte Gemma."
+        },
+        {
+          "nome": "Cammino della Regina Camilla, tappe Roccagorga-Maenza-Prossedi",
+          "difficolta": "Tappe 3-4 del cammino",
+          "testo": "Tappe 3-4 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra delle Ciliegie",
+          "tipo": "Gastronomica",
+          "quando": "inizio giugno",
+          "testo": "Stand gastronomici, distribuzione ciliegie, carri allegorici, musica dal vivo, visite al Castello Baronale."
+        },
+        {
+          "nome": "Festa di Sant'Eleuterio",
+          "tipo": "Religiosa",
+          "quando": "29 maggio",
+          "testo": "Festa del patrono con processione serale a torce fino a una cappella rurale."
+        },
+        {
+          "nome": "Assunzione e San Rocco",
+          "tipo": "Religiosa",
+          "quando": "15-16 agosto",
+          "testo": "Processione con serate musicali."
+        }
+      ],
+      "prodotti": "ciliegie",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Frantoio Tomei",
+        "categoria": "Frantoio",
+        "descrizione": "Frantoio attivo dal 1930, giunto alla quarta generazione: olio extravergine DOP Colline Pontine, olive da tavola, patè di olive.",
+        "prodotti": "olio EVO DOP Colline Pontine, olive da tavola, patè di olive",
+        "indirizzo": "",
+        "sito": "https://www.frantoiotomei.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "montelanico": {
+    "slug": "montelanico",
+    "festaPatronale": "8 maggio e 29 settembre",
+    "cap": "00030",
+    "comunitaMontana": "Monti Lepini — versante romano",
+    "storia": {
+      "intro": "Montelanico sorge in posizione strategica sullo spartiacque dei Lepini. Feudo dei Colonna nel Medioevo.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "Cesare Baronio",
+          "nota": "Cardinale e storico della Chiesa (1538-1607), originario di Sora ma vissuto nel territorio"
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Montelanico comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Pietro Apostolo",
+          "secolo": "primi anni del XVIII secolo",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Ciborio quattrocentesco"
+          ]
+        },
+        {
+          "nome": "Chiesa di Santa Maria del Soccorso",
+          "secolo": "",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Affresco quattrocentesco con Madonna con Bambino"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Castello di Collemezzo",
+          "tipo": "",
+          "secolo": "",
+          "testo": "prima menzione 1182"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Vegetazione a transizione da macchia mediterranea in bassa quota a estese faggete in quota, in particolare attorno a Pian della Faggeta e sul Monte Lupone (1378 m).",
+      "sentieri": [
+        {
+          "nome": "Monte Lupone dal Campo di Segni",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Vetta a 1378 m con panorama a 300° dal Golfo di Napoli all'Abruzzo."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra della Castagna",
+          "tipo": "Gastronomica",
+          "quando": "autunno",
+          "testo": "Nata nel 1962: stand con piatti a base di castagne, dolci artigianali, vino, olio, formaggi locali, musica popolare e danze tradizionali."
+        },
+        {
+          "nome": "Festa patronale Madonna del Soccorso",
+          "tipo": "Religiosa",
+          "quando": "terza domenica di settembre",
+          "testo": ""
+        }
+      ],
+      "prodotti": "castagna, vino, olio, formaggi locali",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Caseificio La Forma",
+        "categoria": "Caseificio",
+        "descrizione": "Caseificio artigianale, produzione di formaggi freschi e stagionati da latte vaccino proprio.",
+        "prodotti": "",
+        "indirizzo": "Via Forma, 8, Montelanico RM",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "morolo": {
+    "slug": "morolo",
+    "festaPatronale": "8 maggio",
+    "cap": "03017",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Morolo è un comune agricolo della Ciociaria lepina, con tradizione agricola plurisecolare.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1854-1917",
+          "nome": "Ernesto Biondi",
+          "nota": "Scultore nato a Morolo il 30 gennaio 1854; vinse il Grand Prix all'Esposizione di Parigi 1900 con \"Saturnalia\" (oggi Galleria Nazionale d'Arte Moderna di Roma)."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Morolo comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa Collegiata di Santa Maria Assunta",
+          "secolo": "Portale bronzeo (1973)",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Dipinto dell'Assunzione di Sebastiano Conca (1750)",
+            "Portale bronzeo (1973)"
+          ]
+        },
+        {
+          "nome": "Chiesa di San Pietro",
+          "secolo": "origini XI secolo, ampliata nel XVIII secolo",
+          "stile": "",
+          "testo": "",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Castello dei Colonna",
+          "tipo": "",
+          "secolo": "feudo Colonna 1422-XVII secolo",
+          "testo": "feudo Colonna 1422-XVII secolo"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "La Valle Sant'Angelo, censita tra i Monumenti Naturali del territorio lepino, ospita pascoli di cavalli e bovini podolici, faggi giganti, aceri di monte, roverelle, tigli e carpini neri secolari.",
+      "sentieri": [
+        {
+          "nome": "Sprone Maraoni (1338 m) da Morolo",
+          "difficolta": "Tornanti tra faggete",
+          "testo": "Tornanti tra faggete fino al panorama a 360° su Ernici, Aurunci e Ausoni."
+        },
+        {
+          "nome": "Monte Malaina da Morolo",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Via Valle Civita, Valle Crestatina, Il Lontro e Fonte del Pisciarello."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra dei Frascategli",
+          "tipo": "Gastronomica",
+          "quando": "aprile",
+          "testo": "Pasta fatta a mano con acqua, farina e sale, sbriciolata in acqua bollente, condita con sugo di pomodoro e aglio."
+        },
+        {
+          "nome": "Sagra della ciambella",
+          "tipo": "Gastronomica",
+          "quando": "5-8 luglio",
+          "testo": "Dedicata alla ciambella dolce e al vino locale."
+        }
+      ],
+      "prodotti": "vino locale",
+      "piatti": "frascategli, ciambella dolce"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo Le Sodine",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo con ristorante, alloggi e frantoio proprio: olio, salumi e formaggi consumati in cucina.",
+        "prodotti": "",
+        "indirizzo": "Via del Farneto, 51, Morolo FR",
+        "sito": "https://lesodine.it/",
+        "nota": ""
+      },
+      {
+        "nome": "Caseificio Scarchilli",
+        "categoria": "Caseificio",
+        "descrizione": "Produttore storico del Gran Cacio di Morolo (formaggio vaccino semicotto a pasta filata, stagionatura oltre 18 mesi), con ristorante e cantina di stagionatura visitabile.",
+        "prodotti": "Gran Cacio di Morolo",
+        "indirizzo": "Contrada Madonna del Piano, 12, Morolo FR",
+        "sito": "https://www.scarchilli.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "norma": {
+    "slug": "norma",
+    "festaPatronale": "24 giugno",
+    "cap": "04010",
+    "comunitaMontana": "XIII Monti Lepini Ausoni",
+    "storia": {
+      "intro": "Norma sorge a pochi passi dall'antica Norba, una delle città più misteriose dell'Antiappennino laziale. Le origini di Norba risalgono al V sec. a.C.: era una colonia latina fondata come avamposto contro i Volsci. Secondo la leggenda, fu fondata da Ercole stesso. Il significato del nome, proposto dal linguista Giacomo Devoto, sarebbe '(città) forte', perfettamente adatto alla posizione strategica su uno sperone roccioso a picco sulla pianura pontina. Norba fu distrutta nell'89 a.C. durante le guerre sociali (o secondo altre fonti nell'80 a.C. dai soldati di Silla) e mai più ricostruita: i suoi abitanti abbandonarono il sito, fondando il medievale borgo di Norma poco più a est. Le rovine dell'antica città — mura poligonali, templi, porte — sono oggi visitabili nel Parco Archeologico dell'Antica Norba.",
+      "epoche": [
+        {
+          "periodo": "Antichità",
+          "titolo": "Norba, la città forte sul precipizio",
+          "testo": "Fondata come colonia latina intorno al 492 a.C. per controllare il territorio pontino. Le mura in opera poligonale (ciclopica) che la circondano sono tra le più impressionanti dell'Italia antica. La città disponeva di due acropoli: sull'Acropoli Maggiore un tempio dedicato a Diana; sull'Acropoli Minore due templi, probabilmente dedicati a Giunone Lucina (protettrice delle nascite) secondo le iscrizioni votive ritrovate. Norba fu distrutta durante le guerre civili romane e mai ricostruita."
+        },
+        {
+          "periodo": "Medioevo",
+          "titolo": "Norma nasce dalle ceneri di Norba",
+          "testo": "Dopo la distruzione di Norba, i sopravvissuti fondarono il nuovo insediamento di Norma sullo stesso pianoro ma in posizione leggermente diversa. Il borgo medievale si sviluppò attorno alla chiesa parrocchiale e al castello. Nel Medioevo Norma fu feudo di varie famiglie nobiliari, tra cui i Caetani."
+        }
+      ],
+      "personaggi": [
+        {
+          "anni": "1877-1934",
+          "nome": "Gelasio Caetani",
+          "nota": "Ingegnere, diplomatico e politico; dal 1921 creò il Giardino di Ninfa (territorio storicamente legato a Norma), poi diresse la bonifica dell'Agro Pontino (1926-1934)."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio principale di Norma è il Parco Archeologico dell'Antica Norba, uno dei siti archeologici più imponenti del Lazio. Il borgo medievale conserva la chiesa parrocchiale e alcuni palazzi storici.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Giovanni Battista",
+          "secolo": "",
+          "stile": "Romanico-barocco",
+          "testo": "Stile: Romanico-barocco",
+          "opere": []
+        },
+        {
+          "nome": "Santuario della Madonna del Soccorso",
+          "secolo": "XVI-XVII secolo",
+          "stile": "",
+          "testo": "Luogo di devozione mariana con una tradizione secolare.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Parco Archeologico dell'Antica Norba",
+          "tipo": "",
+          "secolo": "",
+          "testo": "V-I sec. a.C."
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Il Parco Archeologico dell'Antica Norba è circondato da boschi di lecci e roverelle che crescono tra le rovine, creando un'atmosfera unica. Il pianoro su cui sorge l'antico sito offre una vista a 360° sulla pianura pontina, sul Circeo e, nelle giornate limpide, sul mare.",
+      "sentieri": [
+        {
+          "nome": "Sentiero per Monte Lupone (1378 m)",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Da Norma, circa 6 ore di cammino, con panorama sulla pianura pontina."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "Le tradizioni di Norma ruotano attorno alle celebrazioni religiose del patrono e alla memoria dell'antica Norba. La valorizzazione dell'identità storica è oggi al centro della vita culturale del paese.",
+      "feste": [
+        {
+          "nome": "Festa di San Giovanni Battista",
+          "tipo": "Religiosa",
+          "quando": "24 giugno",
+          "testo": "Celebrazione patronale con processione, fuochi d'artificio e festeggiamenti nel centro storico."
+        },
+        {
+          "nome": "Notte di Norba",
+          "tipo": "Culturale",
+          "quando": "Estate (data variabile)",
+          "testo": "Evento culturale con apertura serale del parco archeologico, visite guidate in notturna e spettacoli nel sito di Norba. Tra le iniziative più suggestive dei Lepini."
+        }
+      ],
+      "prodotti": "olio extravergine DOP Colline Pontine, vino Cori DOC, aglio di Norma, fichi secchi",
+      "piatti": "spaghetti con aglio e olio e peperoncino, pollo alla norma, zuppa di legumi"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "Parco Archeologico dell'Antica Norba",
+          "tipo": "Storico",
+          "testo": "Il sito principale. Percorso ad anello di circa 3 km tra mura ciclopiche, porte monumentali e templi. Accesso gratuito, aperto tutto l'anno."
+        },
+        {
+          "nome": "Belvedere di Norma",
+          "tipo": "Panoramico",
+          "testo": "Il promontorio su cui sorge Norma offre una delle viste più belle sui Lepini: la pianura pontina, l'Agro Pontino, il Circeo, le isole ponziane."
+        },
+        {
+          "nome": "Centro storico medievale",
+          "tipo": "Storico",
+          "testo": "Il borgo medievale con vicoli e palazzi storici in pietra calcarea."
+        }
+      ],
+      "arrivo": {
+        "auto": "Da Latina: SS148 poi SP50 verso Norma (circa 20 km). Da Roma: A1 uscita Frosinone poi SS156.",
+        "treno": "Stazione di Latina Scalo (18 km)",
+        "bus": "Linee COTRAL da Latina"
+      },
+      "contatti": {
+        "sito": "https://comune.norma.lt.it",
+        "proloco": "",
+        "email": "comune@comune.norma.lt.it"
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Ristorante Il Seminario — Villa del Cardinale",
+        "categoria": "Ristorante",
+        "descrizione": "Ristorante ricavato da un antico seminario: piatti della tradizione lepina come ramiccia con porcini e pappardelle al cinghiale. Hotel con 68 camere.",
+        "prodotti": "",
+        "indirizzo": "Via dei Colli, Norma LT",
+        "sito": "https://www.villadelcardinale.com/ristorante/",
+        "nota": ""
+      }
+    ]
+  },
+  "patrica": {
+    "slug": "patrica",
+    "festaPatronale": "16 agosto",
+    "cap": "03010",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Patrica sorge su uno sperone calcareo con viste panoramiche eccezionali. Centro agricolo della Ciociaria.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1886-1961",
+          "nome": "Riccardo Moretti",
+          "nota": "Nativo di Patrica, tecnico radiofonico pioniere e medico, tra i fondatori dell'ospedale Regina Elena di Roma."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Patrica comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Giovanni Battista",
+          "secolo": "",
+          "stile": "Barocco",
+          "testo": "Stile: Barocco",
+          "opere": [
+            "\"Il Battesimo di Cristo\" di Nicola La Piccola"
+          ]
+        },
+        {
+          "nome": "Chiesa della Madonna della Pace",
+          "secolo": "fine XIX secolo",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Affreschi religiosi del pittore Lucari (1889)"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Palazzo della famiglia Spezza",
+          "tipo": "Palazzo",
+          "secolo": "1700",
+          "testo": "1700"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Il versante nord-est dei Lepini rivolto alla Valle del Sacco ospita castagneti tra 200 e 700 m, con la varietà locale di castagna Camisella.",
+      "sentieri": [
+        {
+          "nome": "Monte Cacume (1095 m) da Patrica",
+          "difficolta": "Media",
+          "testo": "Via Colle Lo Zompo e Fontana della Rava, versante sud-est del Cacume."
+        },
+        {
+          "nome": "Sentiero di Dante",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Percorso a tema dantesco da Patrica verso la vetta del Monte Cacume, con installazioni artistiche."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra dell'Acquata e della Caldarrosta",
+          "tipo": "Gastronomica",
+          "quando": "autunno",
+          "testo": "Distribuzione di castagne arrostite e acquata in Piazza Vittorio Emanuele II, organizzata dalla Pro Loco."
+        }
+      ],
+      "prodotti": "castagne Camisella, acquata (bevanda dolce e frizzante da macerazione delle vinacce)",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Antica Macelleria Pellegrini",
+        "categoria": "Norcineria/Macelleria",
+        "descrizione": "Macelleria-norcineria dal 1912, quarta generazione: produce con ricetta di famiglia la zazzicchia di Patrica, oltre a porchetta e salumi.",
+        "prodotti": "zazzicchia di Patrica, porchetta, salumi",
+        "indirizzo": "Via Quattro Strade, 146, Patrica FR",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "priverno": {
+    "slug": "priverno",
+    "festaPatronale": "28 gennaio",
+    "cap": "04015",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Priverno è l'erede dell'antica Privernum volsca, poi municipio romano. Il centro medievale conserva la Cattedrale e il Palazzo del Comune. A pochi km sorge l'Abbazia di Fossanova (1208), prima abbazia cistercense d'Italia e luogo di morte di San Tommaso d'Aquino (1274).",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "San Tommaso d'Aquino",
+          "nota": "Filosofo e teologo, morì a Fossanova nel 1274"
+        },
+        {
+          "anni": "",
+          "nome": "Nicomaco di Gerasa",
+          "nota": "Matematico del I sec. d.C., originario di Privernum"
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Priverno comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Abbazia di Santa Maria di Fossanova",
+          "secolo": "",
+          "stile": "Primo esempio in Italia di gotico cistercense",
+          "testo": "Stile: Primo esempio in Italia di gotico cistercense",
+          "opere": [
+            "Torre ottagonale sul transetto",
+            "Vetrate monocrome non figurative"
+          ]
+        },
+        {
+          "nome": "Concattedrale di Santa Maria Annunziata",
+          "secolo": "consacrata nel 1183 da Papa Lucio III",
+          "stile": "Barocco",
+          "testo": "Stile: Barocco",
+          "opere": [
+            "\"Madonna d'Agosto\" (rinvenuta nel 1143)"
+          ]
+        },
+        {
+          "nome": "Chiesa di San Benedetto",
+          "secolo": "metà VII secolo",
+          "stile": "",
+          "testo": "Prima chiesa della \"nuova\" Priverno, costruita dai Benedettini.",
+          "opere": [
+            "Affreschi del XIII secolo",
+            "Opere di Pietro Coleberti (XV sec.)"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Antica Privernum",
+          "tipo": "",
+          "secolo": "",
+          "testo": "epoca romana"
+        },
+        {
+          "nome": "Palazzo Comunale",
+          "tipo": "",
+          "secolo": "",
+          "testo": "origine XIII secolo, rifacimento metà '800"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Territorio tra la pianura pontina e le prime pendici dei Lepini. Oasi naturalistica lungo il fiume Amaseno. Vigneti DOC Cori.",
+      "sentieri": [
+        {
+          "nome": "Fossanova — Parco di San Martino",
+          "difficolta": "Facile",
+          "testo": "Anello lungo il fiume Amaseno tra sugherete e leccete, fino al castello del XVI secolo."
+        },
+        {
+          "nome": "Cammino della Regina Camilla, tappa 1",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Da Fossanova a Priverno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "San Tommaso d'Aquino",
+          "tipo": "Religiosa",
+          "quando": "7 marzo",
+          "testo": "Patrono di Priverno e compatrono della Diocesi (morto a Fossanova il 7 marzo 1274): mostra dal 1 al 7 marzo, cammini guidati da Maenza a Fossanova, Messa solenne il 6 in Cattedrale, Messa il 7 all'Abbazia."
+        }
+      ],
+      "prodotti": "carciofo di Priverno, Falia (pane/pizza tipica), Chiacchietegli (varietà locale di broccolo, presidio Slow Food)",
+      "piatti": "Bazzoffia (zuppa di carciofi, fave, bietole, piselli, cipolla, uova e pecorino)"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "ASPOL — Associazione Produttori Olivicoli DOP Colline Pontine",
+        "categoria": "Consorzio / Associazione produttori",
+        "descrizione": "Consorzio che riunisce i produttori di olio extravergine DOP Colline Pontine nella provincia di Latina. La DOP tutela l'olio prodotto dalla cultivar Itrana (o Gaeta), varietà autoctona dei Lepini e dell'Antiappennino laziale. L'area di produzione comprende oltre 20 comuni della provincia di Latina, con circa 9.000 produttori e 56 frantoi attivi.",
+        "prodotti": "Olio EVO DOP Colline Pontine (cultivar Itrana/Gaeta)",
+        "indirizzo": "",
+        "sito": "https://allfoodonline.com/azienda2/aspol-dop-colline-pontine/",
+        "nota": ""
+      }
+    ]
+  },
+  "prossedi": {
+    "slug": "prossedi",
+    "festaPatronale": "ultima domenica di maggio",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Prossedi è un antico castrum medievale che conserva la sua impostazione urbanistica originale. Il borgo domina visivamente tutta la pianura pontina fino al mare.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "XIX secolo",
+          "nome": "Augusta Bonaparte Gabrielli",
+          "nota": "Cugina dell'ultimo principe di Prossedi, figlia di Luciano Bonaparte (fratello di Napoleone); sepolta nella Chiesa di Santa Maria Extra-Moenia a Prossedi."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Prossedi comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Sant'Agata",
+          "secolo": "",
+          "stile": "",
+          "testo": "Chiesa parrocchiale sulla collina più alta, ampliamento di una chiesa precedente del 1655.",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di San Nicola",
+          "secolo": "XIII secolo",
+          "stile": "Romanico",
+          "testo": "Stile: Romanico",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Palazzo Gabrielli (Palazzo Baronale)",
+          "tipo": "Palazzo",
+          "secolo": "XVIII secolo",
+          "testo": "XVIII secolo"
+        },
+        {
+          "nome": "Fontana dei Papi",
+          "tipo": "Fontana",
+          "secolo": "1727",
+          "testo": "1727"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Boschi misti e oliveti. Ambiente tipicamente mediterraneo con ginepri e lecci sui versanti calcarei.",
+      "sentieri": [
+        {
+          "nome": "Cammino della Regina Camilla, tappe Maenza-Prossedi-Giuliano di Roma",
+          "difficolta": "Tappe 4-5 del cammino",
+          "testo": "Tappe 4-5 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra del Vendio",
+          "tipo": "Gastronomica e culturale",
+          "quando": "",
+          "testo": "Degustazioni del Vendio (pizza bianca tipica di Prossedi) e momenti culturali sulla storia del nome e delle tradizioni locali."
+        },
+        {
+          "nome": "Sagra della Zazzicchia",
+          "tipo": "Gastronomica",
+          "quando": "dicembre",
+          "testo": "Il maiale e la salsiccia locale (zazzicchia) come protagonisti, cucina tipica di montagna."
+        },
+        {
+          "nome": "Sagra dei Fichi",
+          "tipo": "Gastronomica",
+          "quando": "estate",
+          "testo": "Nella frazione di Pisterzo."
+        }
+      ],
+      "prodotti": "Vendio (pizza bianca), zazzicchia (salsiccia locale), fichi di Pisterzo",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Palazzo Prossedi",
+        "categoria": "Cantina",
+        "descrizione": "Azienda vinicola attiva dal '700, sede nel Palazzo Baronale cinquecentesco, cantina ricavata nell'antico frantoio.",
+        "prodotti": "Altaica (Canaiolo Bianco), Sterparo, Colle della Corte, Nero della Corte",
+        "indirizzo": "Piazza Umberto I, 14, Prossedi LT",
+        "sito": "https://www.palazzoprossedi.it/",
+        "nota": ""
+      },
+      {
+        "nome": "Mater Olea",
+        "categoria": "Frantoio",
+        "descrizione": "Azienda agricola fondata nel 2018, oliveti su terreno calcareo (150-500 m): varietà Itrana, Frantoio, Sivigliana. Pluripremiata (Ercole Olivario 2020).",
+        "prodotti": "olio EVO",
+        "indirizzo": "",
+        "sito": "https://www.materolea.it/",
+        "nota": ""
+      }
+    ]
+  },
+  "rocca-massima": {
+    "slug": "rocca-massima",
+    "festaPatronale": "29 settembre",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Rocca Massima domina l'intera pianura romana e pontina dalla sua quota di 750 m. Il castello medievale è il simbolo del paese.",
+      "epoche": [],
+      "personaggi": []
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Rocca Massima comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Michele Arcangelo",
+          "secolo": "XIII secolo, ampliata XV secolo e circa 1700",
+          "stile": "",
+          "testo": "L'abside era una delle torri difensive dell'epoca degli Annibaldi.",
+          "opere": [
+            "Copia del San Michele di Guido Reni",
+            "Affreschi del pittore Mariani di Velletri"
+          ]
+        },
+        {
+          "nome": "Chiesa di San Rocco con Convento",
+          "secolo": "XVI secolo",
+          "stile": "",
+          "testo": "Convento costruito nel 1588 da Massima Conti.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Palazzo del Principe (Palazzo Baronale)",
+          "tipo": "",
+          "secolo": "1202 circa",
+          "testo": "1202 circa"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Boschi di castagno estesi nelle elevazioni settentrionali (produzione dei Marroni) con funghi porcini, faggete verso il Monte Lupone, macchia mediterranea nelle zone basse.",
+      "sentieri": [
+        {
+          "nome": "CAI 705 — Monte Lupone da Rocca Massima",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Anello lungo la cresta di Monte Grugliano, Punta della Melazza (1054 m) e Monte Mascolo (1059 m)."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra dei Marroni",
+          "tipo": "Gastronomica e civile",
+          "quando": "ottobre, due weekend",
+          "testo": "Organizzata dall'Associazione \"Castagna di Rocca Massima\": sfilate, musica, caldarroste, stand gastronomici, gruppi folk."
+        }
+      ],
+      "prodotti": "Marroni di Rocca Massima, formaggi ovini (pecorino, caciotta, ricotta, caprino), olio EVO, tartufi, funghi porcini, prosciutto",
+      "piatti": "fettuccine al sugo di cinghiale, misto arrosto con patate al forno"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Casale dei Priori",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo di famiglia da oltre 50 anni, 14 ettari con circa 3.000 piante di olivo Itrana centenarie; sei camere, vendita diretta.",
+        "prodotti": "olio EVO Itrana DOP, patè di olive, olive in salamoia",
+        "indirizzo": "",
+        "sito": "https://casaledeipriori.it/",
+        "nota": ""
+      },
+      {
+        "nome": "Oscar Frantoio",
+        "categoria": "Frantoio",
+        "descrizione": "Frantoio con vendita diretta di olio extravergine.",
+        "prodotti": "",
+        "indirizzo": "Basso Le Case, 2, Rocca Massima LT",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "roccagorga": {
+    "slug": "roccagorga",
+    "festaPatronale": "2 giugno",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Roccagorga si sviluppò intorno all'omonimo castello medievale. La sua economia è tradizionalmente legata all'olivo e all'agricoltura pontina.",
+      "epoche": [],
+      "personaggi": []
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Roccagorga comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa Collegiata dei Santi Erasmo e Leonardo",
+          "secolo": "",
+          "stile": "Barocco, facciata convessa",
+          "testo": "Stile: Barocco, facciata convessa",
+          "opere": []
+        },
+        {
+          "nome": "Eremo di Sant'Erasmo",
+          "secolo": "",
+          "stile": "",
+          "testo": "A circa 800 m s.l.m., con affresco raffigurante Sant'Erasmo in vesti episcopali.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Torre quadrangolare",
+          "tipo": "Torre",
+          "secolo": "XIII secolo",
+          "testo": "XIII secolo"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Boschi di castagno in ceduo nella bassa collina, boschi di leccio e ginepro su roccia calcarea, oliveti (varietà Itrana e Leccino) sul territorio comunale.",
+      "sentieri": [
+        {
+          "nome": "Anello Eremo di Sant'Erasmo — Monte Erdigheta",
+          "difficolta": "Eremo di Sant'Era",
+          "testo": "Da Eremo di Sant'Erasmo (sec. XI-XII) per Monte Perentile, Monte Pizzone (1313 m), Monte Erdigheta (1336 m), Monte La Croce (1431 m), Fonte del Sambuco."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra dell'Uva Fragola",
+          "tipo": "Gastronomica e civile",
+          "quando": "inizio ottobre",
+          "testo": "Organizzata dalla Pro Loco, celebra l'uva fragola bianca e nera con mercatini artigianali, musica, auto d'epoca."
+        },
+        {
+          "nome": "Fiera dei Prati — Sagra della Capra",
+          "tipo": "Civile e gastronomica",
+          "quando": "17-19 agosto",
+          "testo": "Dal 1947, fiera del bestiame e degustazioni di carne di capra."
+        },
+        {
+          "nome": "Focaracci del Venerdì Santo",
+          "tipo": "Religiosa",
+          "quando": "Venerdì Santo",
+          "testo": "Falò tradizionali, usanza radicata a Roccagorga."
+        }
+      ],
+      "prodotti": "olio DOP Colline Pontine (varietà Itrana e Leccino, cultivar locale \"schiacciatelle\"), vino bianco da uva Ottonese, vino rosso da uva Fragola (Fragolino)",
+      "piatti": "Ciammotte, Sanguinaccio, carne di capra"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Frantoiana Casacotta",
+        "categoria": "Frantoio",
+        "descrizione": "Frantoio per la produzione di olio extravergine d'oliva.",
+        "prodotti": "",
+        "indirizzo": "Via Cristoforo Colombo, 160, Roccagorga LT",
+        "sito": "",
+        "nota": ""
+      },
+      {
+        "nome": "La Contadina di Elisa Coia & C.",
+        "categoria": "Frantoio",
+        "descrizione": "Frantoio per molitura olive e produzione di olio.",
+        "prodotti": "",
+        "indirizzo": "Via Variante, 2, Roccagorga LT",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "roccasecca-dei-volsci": {
+    "slug": "roccasecca-dei-volsci",
+    "festaPatronale": "terza domenica di agosto",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Il nome ricorda le origini volsche del territorio. Il borgo medievale conserva la torre e i resti delle mura.",
+      "epoche": [],
+      "personaggi": []
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Roccasecca dei Volsci comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Santa Maria Assunta",
+          "secolo": "Trittico del XV secolo",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Tela dell'Annunciazione di Domenico Fiasella (1613)",
+            "Trittico del XV secolo"
+          ]
+        },
+        {
+          "nome": "Chiesa di San Sebastiano",
+          "secolo": "XII-XIII secolo",
+          "stile": "",
+          "testo": "",
+          "opere": [
+            "Affreschi di San Giovanni Battista, San Nicola di Bari e San Tommaso d'Aquino"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Palazzo Massimo",
+          "tipo": "Palazzo",
+          "secolo": "",
+          "testo": "metà Seicento"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Boschi misti di leccio, castagno e olmo; oliveti e alberi da frutto nei pressi della cappella della Madonna della Pace.",
+      "sentieri": [
+        {
+          "nome": "Cammino della Regina Camilla, tappe Pisterzo-Roccasecca-Sonnino",
+          "difficolta": "Tappe 11-12 del cammi",
+          "testo": "Tappe 11-12 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Festa dell'Arrivederci e Sagra della Capra",
+          "tipo": "Gastronomica",
+          "quando": "ultima domenica di agosto",
+          "testo": "Degustazioni di carne di capra in umido."
+        },
+        {
+          "nome": "Sagra delle Caciottelle",
+          "tipo": "Gastronomica",
+          "quando": "seconda domenica di settembre",
+          "testo": "Mercato-manifestazione dedicato ai formaggi locali."
+        }
+      ],
+      "prodotti": "olio d'oliva, formaggi (caciottelle)",
+      "piatti": "minestra di fagioli con le cotiche, polenta con carne di maiale, cecapreti (pasta tipica), minestra marinata"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Frantoio Vin.Pia. — Olii di Eccellenza",
+        "categoria": "Frantoio",
+        "descrizione": "Frantoio per la produzione di olio extravergine d'oliva a impronta ecosostenibile.",
+        "prodotti": "",
+        "indirizzo": "Contrada Collenero, 1, Roccasecca dei Volsci LT",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "segni": {
+    "slug": "segni",
+    "festaPatronale": "6 ottobre",
+    "cap": "00037",
+    "comunitaMontana": "Monti Lepini — versante romano",
+    "storia": {
+      "intro": "Segni (l'antica Signia latina) fu fondata come colonia romana nel 495 a.C. Le sue mura poligonali (VI-IV sec. a.C.) sono tra le meglio conservate nel Lazio. Sede vescovile dal IV sec. Patria di papa Innocenzo III.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "Papa Innocenzo III",
+          "nota": "Nato a Segni nel 1160, uno dei papi più influenti del Medioevo (pontif. 1198-1216)"
+        },
+        {
+          "anni": "",
+          "nome": "San Bruno",
+          "nota": "Santo patrono, vescovo di Segni nel XII sec., teologo e scrittore"
+        },
+        {
+          "anni": "papa dal 657 al 672, morto nel 672",
+          "nome": "Papa Vitaliano",
+          "nota": "Nato a Segni secondo il Liber Pontificalis; venerato come santo."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Segni comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Concattedrale di Santa Maria Assunta",
+          "secolo": "XVII secolo su struttura del IX secolo",
+          "stile": "Facciata neoclassica, campanile romanico dell'XI secolo (24 m)",
+          "testo": "Stile: Facciata neoclassica, campanile romanico dell'XI secolo (24 m)",
+          "opere": []
+        },
+        {
+          "nome": "Chiesa di San Pietro",
+          "secolo": "",
+          "stile": "",
+          "testo": "Sull'acropoli, costruita sul podio dell'antico tempio dedicato a Giunone Moneta.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Porta Saracena",
+          "tipo": "",
+          "secolo": "",
+          "testo": "epoca preromana"
+        },
+        {
+          "nome": "Acropoli antica",
+          "tipo": "",
+          "secolo": "",
+          "testo": "epoca romana"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Faggete con tasso e agrifoglio tra i 750 e i 1530 m (Monte Semprevisa), boschi di leccio nelle pendici più ripide, estesi castagneti alla base del Marrone Segnino. Il territorio comunale ha la percentuale di area protetta più alta tra i comuni lepini (9,46%).",
+      "sentieri": [
+        {
+          "nome": "Campo di Segni — Monte Lupone",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Sentiero 702 (\"Direttissima\", più ripido) o sentiero 731 (più ampio); variante ad anello di 17 km."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra del Marrone Segnino",
+          "tipo": "Gastronomica e civile",
+          "quando": "penultima domenica di ottobre",
+          "testo": "Nata negli anni '50 come festa contadina: stand gastronomici, dolci e piatti a base di marrone, vino locale, Marrone Pizza Festival, concerti."
+        }
+      ],
+      "prodotti": "Marrone Segnino (varietà locale tradizionale, Prodotto Agroalimentare Tradizionale — non è una IGP registrata), tartufo nero dei Lepini, olio EVO",
+      "piatti": "Fregnaquanti (pasta all'uovo con sugo di cinghiale, funghi o tartufo), ciambella \"scottolata\", biscotti cresciuti"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo Casale del Marrone",
+        "categoria": "Agriturismo",
+        "descrizione": "Azienda agricola biologica che produce castagne (varietà Marrone Segnino) e olio d'oliva; ristorazione aperta al pubblico.",
+        "prodotti": "Marrone Segnino, olio d'oliva",
+        "indirizzo": "Località Castellone, 8, Segni RM",
+        "sito": "https://www.casaledelmarrone.com/",
+        "nota": ""
+      },
+      {
+        "nome": "Trattoria La Saracena",
+        "categoria": "Trattoria",
+        "descrizione": "Trattoria tipica nel centro storico di Segni.",
+        "prodotti": "",
+        "indirizzo": "Via Porta Saracena, 7, Segni RM",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "sermoneta": {
+    "slug": "sermoneta",
+    "festaPatronale": "29 settembre",
+    "cap": "04013",
+    "comunitaMontana": "XIII Monti Lepini Ausoni",
+    "storia": {
+      "intro": "Sermoneta è uno dei borghi medievali meglio conservati del Lazio. Le sue origini risalgono ai Volsci, che abitarono il territorio prima dell'espansione romana. Nel XIII secolo il borgo divenne proprietà della famiglia Annibaldi, che costruì il primo nucleo del castello. Nel 1297 Pietro Caetani, nipote di Papa Bonifacio VIII, acquisì il feudo dando inizio all'era dei Caetani, signori di Sermoneta per secoli. Il Castello Caetani fu ampliato e trasformato in una delle fortezze più imponenti del Lazio. Nel 1499 Cesare Borgia conquistò il borgo, ma i Caetani recuperarono i loro beni pochi anni dopo. La famiglia detenne il possesso del castello fino al 1972, quando Leila Caetani istituì la Fondazione Roffredo Caetani per la tutela del patrimonio. Negli anni Quaranta del Novecento, il castello fu usato come prigione dai nazisti durante l'occupazione.",
+      "epoche": [
+        {
+          "periodo": "Antichità",
+          "titolo": "Origini volsche e romane",
+          "testo": "Il territorio di Sermoneta era abitato dai Volsci prima della romanizzazione. Reperti di età preromana attestano la presenza umana nell'area già dal IX-VIII sec. a.C. Con la conquista romana il territorio fu incluso nel latifondo pontino."
+        },
+        {
+          "periodo": "Medioevo",
+          "titolo": "Gli Annibaldi e i Caetani",
+          "testo": "Agli inizi del XIII secolo la famiglia Annibaldi costruisce il primo castello. Nel 1297 Pietro Caetani acquista il feudo. I Caetani trasformano il castello in una residenza signorile di primo piano, con affreschi e decorazioni di pregio. La famiglia domina il borgo per quasi settecento anni."
+        },
+        {
+          "periodo": "Rinascimento",
+          "titolo": "Cesare Borgia e le guerre di potere",
+          "testo": "Nel 1499 Cesare Borgia conquista Sermoneta scacciando i Caetani. Pochi anni dopo, con la morte di Alessandro VI, i Caetani recuperano i loro possedimenti. Il XVI secolo vede il borgo fiorire come centro artistico e culturale."
+        },
+        {
+          "periodo": "Contemporanea",
+          "titolo": "La Fondazione Caetani e la valorizzazione",
+          "testo": "Nel 1972 Leila Caetani, ultima erede, istituisce la Fondazione Roffredo Caetani che gestisce il castello e i Giardini di Ninfa. Il borgo è oggi uno dei mete turistiche più apprezzate del Lazio."
+        }
+      ],
+      "personaggi": [
+        {
+          "anni": "1742-1797",
+          "nome": "Onorato III Caetani",
+          "nota": "Duca di Sermoneta, fondatore della biblioteca di famiglia"
+        },
+        {
+          "anni": "1913-1977",
+          "nome": "Leila Caetani",
+          "nota": "Ultima erede dei Caetani, fondatrice della Fondazione Roffredo Caetani"
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Sermoneta conserva un patrimonio artistico di primo livello, dominato dal Castello Caetani con i suoi affreschi rinascimentali e le sale storiche. Il centro storico medievale è percorribile a piedi attraverso vicoli e scalinate che conservano l'aspetto del '400.",
+      "chiese": [
+        {
+          "nome": "Cattedrale di Santa Maria Assunta",
+          "secolo": "XII-XIII secolo",
+          "stile": "Romanico-gotico",
+          "testo": "Stile: Romanico-gotico",
+          "opere": [
+            "Affresco dell'Annunciazione (scuola del Benozzo Gozzoli, XV sec.)",
+            "Polittico di Benozzo Gozzoli",
+            "Fonte battesimale medievale in marmo"
+          ]
+        },
+        {
+          "nome": "Chiesa di San Giuseppe",
+          "secolo": "",
+          "stile": "Rinascimentale",
+          "testo": "Stile: Rinascimentale",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Castello Caetani",
+          "tipo": "Castello",
+          "secolo": "XIII-XV secolo",
+          "testo": "XIII-XV secolo"
+        },
+        {
+          "nome": "Giardini di Ninfa",
+          "tipo": "Giardino storico",
+          "secolo": "Fondato nel 1921 da Gelasio Caetani",
+          "testo": "Fondato nel 1921 da Gelasio Caetani"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Il territorio di Sermoneta è caratterizzato dai dolci pendii dei Monti Lepini ricoperti da oliveti e vigneti, con il Giardino di Ninfa quale eccezionalità botanica. La pianura pontina circostante è stata bonificata nel XX secolo.",
+      "sentieri": [
+        {
+          "nome": "Sentiero Sermoneta – Monte Semprevisa",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Percorso ad anello che sale dai 257m di Sermoneta alla vetta del Monte Semprevisa (1536m), punto più alto dei Lepini."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "Le tradizioni di Sermoneta si intrecciano con la storia dei Caetani e con le antiche celebrazioni religiose del borgo medievale. La rievocazione della Battaglia di Lepanto è la manifestazione più caratteristica.",
+      "feste": [
+        {
+          "nome": "Rievocazione della Battaglia di Lepanto",
+          "tipo": "Storica",
+          "quando": "Seconda domenica di ottobre",
+          "testo": "Rievocazione storica in costume d'epoca della vittoria cristiana a Lepanto (1571), con corteo, sbandieratori e spettacoli nel centro storico. Una delle sagre storiche più suggestive dei Lepini."
+        },
+        {
+          "nome": "Festa di San Michele Arcangelo",
+          "tipo": "Religiosa",
+          "quando": "29 settembre",
+          "testo": "Festa patronale con processione religiosa, mercato e festeggiamenti nel borgo."
+        },
+        {
+          "nome": "Aperture primaverili dei Giardini di Ninfa",
+          "tipo": "Naturale/Culturale",
+          "quando": "Aprile-ottobre (date specifiche ogni anno)",
+          "testo": "Le aperture contingentate dei Giardini di Ninfa sono tra gli eventi più attesi del Lazio. I biglietti si esauriscono in pochi minuti dall'apertura delle prenotazioni."
+        }
+      ],
+      "prodotti": "olio extravergine DOP Colline Pontine, vino Cesanese, pane casareccio, formaggi pecorini",
+      "piatti": "pasta con broccoli e guanciale, coniglio alla cacciatore, minestra di fagioli con le cotiche"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "Castello Caetani",
+          "tipo": "Storico",
+          "testo": "Il simbolo di Sermoneta. Visita guidata obbligatoria, circa 1h30. Prenotazione consigliata."
+        },
+        {
+          "nome": "Giardini di Ninfa",
+          "tipo": "Naturale",
+          "testo": "Ad appena 5 km da Sermoneta. Aperture contingentate su prenotazione. Uno dei giardini più belli del mondo."
+        },
+        {
+          "nome": "Centro storico medievale",
+          "tipo": "Storico",
+          "testo": "Vicoli, archi e scalinate in pietra calcarea. Passeggiata gratuita sempre accessibile."
+        },
+        {
+          "nome": "Cattedrale di Santa Maria Assunta",
+          "tipo": "Religioso",
+          "testo": "Con il polittico di Benozzo Gozzoli."
+        }
+      ],
+      "arrivo": {
+        "auto": "Da Roma: A1 uscita Frosinone, poi SS156. Da Latina: SS7 poi SP50. Parcheggio gratuito a valle del borgo.",
+        "treno": "Stazione di Latina Scalo (15 km), poi taxi o bus",
+        "bus": "Linee COTRAL da Latina e da Roma"
+      },
+      "contatti": {
+        "sito": "https://www.comunedisermoneta.it",
+        "proloco": "https://www.prolocosermoneta.it",
+        "email": "info@comunedisermoneta.it"
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Fondazione Roffredo Caetani — Castello e Giardini",
+        "categoria": "Fondazione culturale / Attrazione",
+        "descrizione": "La Fondazione Roffredo Caetani gestisce il Castello Caetani di Sermoneta e i celeberrimi Giardini di Ninfa, considerati tra i giardini più belli del mondo. Istituita nel 1972 da Leila Caetani, ultima erede della famiglia, la Fondazione tutela e valorizza questo patrimonio unico. I Giardini di Ninfa aprono in date contingentate da aprile a ottobre. Il Castello è visitabile tutto l'anno con visita guidata.",
+        "prodotti": "Visite guidate Castello Caetani, Aperture Giardini di Ninfa, Pubblicazioni e merchandising",
+        "indirizzo": "Castello Caetani, 04013 Sermoneta LT",
+        "sito": "https://www.fondazionecaetani.org",
+        "nota": "I Giardini di Ninfa hanno accesso contingentato. Prenotazione obbligatoria e biglietti esauriti rapidamente. Verificare calendario aperture sul sito."
+      },
+      {
+        "nome": "Agriturismo La Valle dell'Usignolo",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo nel territorio di Sermoneta, con produzione propria di olio extravergine DOP Colline Pontine dalla cultivar Itrana. Offre ospitalità e ristorazione con prodotti del territorio lepino.",
+        "prodotti": "Olio EVO DOP Colline Pontine",
+        "indirizzo": "",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "sezze": {
+    "slug": "sezze",
+    "festaPatronale": "2 luglio",
+    "cap": "04018",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Sezze (l'antica Setia latina) è uno dei centri più importanti dei Lepini. Le sue mura poligonali di età preromana (IV sec. a.C.) sono tra le meglio conservate d'Italia. La città domina dalla sua quota di 319 m tutta la pianura bonificata.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "San Lidano",
+          "nota": "Santo patrono, abate del XI sec., bonificatore delle paludi pontine"
+        },
+        {
+          "anni": "",
+          "nome": "Papa Onorio III",
+          "nota": "Soggiornò a Sezze durante il papato (1216-1227)"
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Sezze comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Cattedrale di Santa Maria",
+          "secolo": "",
+          "stile": "",
+          "testo": "Custodisce le spoglie di San Lidano nell'altare maggiore (ricostruito nel 1606).",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Archi di San Lidano",
+          "tipo": "",
+          "secolo": "",
+          "testo": "medievale"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "In località \"La Foresta\" si trova una delle due uniche sugherete dei Monti Lepini (con Fossanova/Priverno), con leccio, cerro e farnetto.",
+      "sentieri": [
+        {
+          "nome": "Giro delle Tre Sorgenti (CAI 712)",
+          "difficolta": "Media",
+          "testo": "Da Sezze Suso/Longara."
+        },
+        {
+          "nome": "Acqua della Chiesa (CAI 712)",
+          "difficolta": "Tassi - Querciai - Va",
+          "testo": "Da 447 a 905 m, attraversa la Valle Naforte con tassi secolari; variante Valle dei Tassi - Querciai - Valle Tre Pozzi."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra del Carciofo",
+          "tipo": "Gastronomica e civile",
+          "quando": "18-19 aprile",
+          "testo": "Corteo folkloristico con majorettes, stand enogastronomici, mercatino artigianale nel centro storico."
+        },
+        {
+          "nome": "Estate Setina",
+          "tipo": "Civile",
+          "quando": "agosto",
+          "testo": "Rassegna estiva con oltre 40 appuntamenti tra musica, teatro, cultura ed eventi gastronomici."
+        }
+      ],
+      "prodotti": "Carciofo Romanesco IGP, olio DOP Colline Pontine, broccoletti setini, visciole",
+      "piatti": "carciofi alla giudia, lacchene e fagioli, bazzoffia, pagnotta di Sezze"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo Il Capannaccio",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo in località Sezze Scalo.",
+        "prodotti": "",
+        "indirizzo": "Via Campania, 19, loc. Sezze Scalo, Sezze LT",
+        "sito": "",
+        "nota": ""
+      },
+      {
+        "nome": "Agriturismo Tenuta Le Pantanelle",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo in località Sezze Scalo.",
+        "prodotti": "",
+        "indirizzo": "Via del Pesce, 5, loc. Sezze Scalo, Sezze LT",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "sgurgola": {
+    "slug": "sgurgola",
+    "festaPatronale": "6 novembre",
+    "cap": "03010",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Sgurgola è un centro rurale della Valle del Sacco con origine medievale.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1240 ca.-1311",
+          "nome": "Arnaldo da Villanova",
+          "nota": "Medico e profeta; Papa Bonifacio VIII gli impose di risiedere a Sgurgola, dove compose opere apocalittiche."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Sgurgola comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Santa Maria Assunta",
+          "secolo": "fine XVII secolo",
+          "stile": "Barocco",
+          "testo": "Stile: Barocco",
+          "opere": [
+            "Tre portali bronzei di Pietro Gismondi (1906-2003)"
+          ]
+        },
+        {
+          "nome": "Eremo/Chiesa di San Leonardo",
+          "secolo": "XIII secolo",
+          "stile": "",
+          "testo": "Eretto sui resti di un monastero; custodisce la statua di San Leonardo di Noblat, patrono dal 1200.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Ruderi della Rocca/Castello",
+          "tipo": "Castello",
+          "secolo": "",
+          "testo": "prima menzione 1088 (bolla di Urbano II)"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Boschi di querce (farnia) sopravvissuti in poche zone collinari, oggi ridotti a circa il 30% del territorio dopo la diffusione di oliveti, vigneti e castagneti. Parco dei Monti Lepini con percorsi natura e museo della fauna.",
+      "sentieri": [
+        {
+          "nome": "CAI 734 — Badia di Santa Maria in Viano",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Dal cimitero, salita da 385 a 935 m fino al Rifugio Santa Maria, tocca Fonte dell'Acero e Valle Forana."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra degli Gnocchi",
+          "tipo": "Gastronomica",
+          "quando": "31 agosto - 3 settembre",
+          "testo": "In onore di Sant'Antonino Martire: musica, balli, fiera, raduno moto/auto d'epoca."
+        },
+        {
+          "nome": "Festa dell'Uva",
+          "tipo": "Civile e folkloristica",
+          "quando": "settembre-ottobre",
+          "testo": "Abiti tradizionali ciociari, saltarello, degustazioni; le uve di Sgurgola nel primo '900 arrivavano in tutta Europa via ferrovia."
+        }
+      ],
+      "prodotti": "",
+      "piatti": "le Sagne, polenta, frascatelli"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Locanda La Torre",
+        "categoria": "Ristorante",
+        "descrizione": "Ristorante tipico ciociaro con cantina/enoteca, in un edificio medievale del 1100 (Torre Mola Colonna); prodotti a km0 da fornitori locali.",
+        "prodotti": "",
+        "indirizzo": "",
+        "sito": "https://www.hotellocandalatorre.com/",
+        "nota": ""
+      }
+    ]
+  },
+  "sonnino": {
+    "slug": "sonnino",
+    "festaPatronale": "25 aprile e 21 ottobre",
+    "cap": "04010",
+    "comunitaMontana": "Monti Lepini",
+    "storia": {
+      "intro": "Sonnino è legato indissolubilmente alla storia del brigantaggio: qui trovò rifugio Michele Pezza, detto Fra' Diavolo (1771-1806), celebre capobanda filoborbonico. Il borgo domina la Valle del Sacco.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "",
+          "nome": "Fra' Diavolo (Michele Pezza)",
+          "nota": "Brigante e guerrigliero filoborbonico (1771-1806), leggenda popolare dei Lepini"
+        },
+        {
+          "anni": "1786-1837",
+          "nome": "San Gaspare del Bufalo",
+          "nota": "Impedì l'esecuzione dell'editto del 1819 di Pio VII che ordinava la distruzione di Sonnino; fondò i Missionari del Preziosissimo Sangue."
+        },
+        {
+          "anni": "1793-1882",
+          "nome": "Antonio Gasbarrone",
+          "nota": "Nato a Sonnino il 12 dicembre 1793, celebre capobrigante attivo 1814-1825 nei Monti Lepini/Ausoni."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Sonnino comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Santuario di San Michele Arcangelo",
+          "secolo": "",
+          "stile": "Gotico-cistercense (restauro 1954)",
+          "testo": "Stile: Gotico-cistercense (restauro 1954)",
+          "opere": []
+        },
+        {
+          "nome": "Collegiata di San Giovanni Battista",
+          "secolo": "circa 1200, riconsacrata 1604",
+          "stile": "",
+          "testo": "Custodisce reliquie attribuite agli Apostoli, a San Giovanni Evangelista e a San Giuseppe.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Castello di Sonnino",
+          "tipo": "Castello",
+          "secolo": "IX secolo",
+          "testo": "IX secolo"
+        },
+        {
+          "nome": "Ponte del Diavolo",
+          "tipo": "",
+          "secolo": "II secolo d.C.",
+          "testo": "II secolo d.C."
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Sonnino è uno dei 6 comuni del Parco Naturale Regionale Monti Ausoni e Lago di Fondi: oleastro e lentisco nelle zone più aspre, prati fioriti con crochi, anemoni e orchidee, leccete e querceti.",
+      "sentieri": [
+        {
+          "nome": "CAI 533 Sonnino — Monte Romano",
+          "difficolta": "",
+          "testo": ""
+        },
+        {
+          "nome": "Sonnino — Terracina via Campo Soriano",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Circa 8 ore, ambiente solitario, richiede GPS."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra della Zazzicchia",
+          "tipo": "Gastronomica",
+          "quando": "",
+          "testo": "Percorso enogastronomico nel centro storico con ristoratori e massaie del posto."
+        }
+      ],
+      "prodotti": "zazzicchia (salsiccia locale), caciotta di pecora",
+      "piatti": "minestra di pane con fagioli e salsiccia, strozzapreti con ragù di selvaggina, frascateglie"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo Casale Ré",
+        "categoria": "Agriturismo",
+        "descrizione": "Struttura in pietra con colazioni a km0 e cosmetici naturali a base di olio d'oliva locale.",
+        "prodotti": "",
+        "indirizzo": "Via Cascano, loc. Capocroce, Sonnino LT",
+        "sito": "https://beb.it/casalere/it/",
+        "nota": ""
+      },
+      {
+        "nome": "Ristorante Il Colle del Brigante",
+        "categoria": "Ristorante",
+        "descrizione": "Ristorante tipico locale.",
+        "prodotti": "",
+        "indirizzo": "Via Monte Pero, Sonnino LT",
+        "sito": "https://www.compagniadeilepini.it",
+        "nota": ""
+      }
+    ]
+  },
+  "supino": {
+    "slug": "supino",
+    "festaPatronale": "10 agosto",
+    "cap": "03017",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Supino è un centro della Ciociaria con lungo rapporto con la pietra calcarea lepina, usata nella costruzione di chiese e abitazioni.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "XIII-XIV secolo",
+          "nome": "Rinaldo da Supino",
+          "nota": "Partecipò allo Schiaffo di Anagni (1303) insieme a Guglielmo di Nogaret e Sciarra Colonna."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Supino comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di San Pietro Apostolo",
+          "secolo": "ricostruita 1750-1790",
+          "stile": "Rara pianta poligonale a dodici facce",
+          "testo": "Stile: Rara pianta poligonale a dodici facce",
+          "opere": [
+            "Cappella di San Cataldo con volte dipinte da Agostino Monacelli (1890)",
+            "Portale bronzeo di Saverio Ungheri (1978)"
+          ]
+        },
+        {
+          "nome": "Santuario di San Cataldo",
+          "secolo": "",
+          "stile": "Barocco",
+          "testo": "Stile: Barocco",
+          "opere": [
+            "Pala dell'altare maggiore di Sebastiano Conca"
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Ex Castello medievale",
+          "tipo": "Castello",
+          "secolo": "",
+          "testo": "medievale"
+        },
+        {
+          "nome": "Villa Romana di Cona del Popolo",
+          "tipo": "",
+          "secolo": "II secolo d.C.",
+          "testo": "II secolo d.C."
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Il territorio boschivo lepino di Supino include querceti di sughera, leccio, cerro e farnetto. La Grotta della Croce ospita una specie di ragno endemica.",
+      "sentieri": [
+        {
+          "nome": "Sentiero verso il Monte Semprevisa (CAI 720)",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Da Santa Serena (Supino) o da Gorga."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra degli Gnocchitti",
+          "tipo": "Gastronomica",
+          "quando": "12 luglio",
+          "testo": "Specialità locale con Denominazione Comunale (De.Co.), preparata e servita in piazza con condimenti tradizionali ciociari."
+        }
+      ],
+      "prodotti": "",
+      "piatti": "gnocchitti (De.Co. comunale)"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Agriturismo Il Castagneto",
+        "categoria": "Agriturismo",
+        "descrizione": "Agriturismo situato tra i castagneti dei Lepini meridionali, nel comune di Supino. Struttura in pietra di montagna immersa nella natura, con ristorante che propone prodotti del territorio ciociaro: funghi, castagne, carni locali, ortaggi dell'orto. Offre camere e appartamenti per soggiorni.",
+        "prodotti": "Castagne, Funghi porcini, Carni locali, Prodotti dell'orto",
+        "indirizzo": "Supino (FR)",
+        "sito": "https://www.ilcastagneto.net",
+        "nota": ""
+      }
+    ]
+  },
+  "vallecorsa": {
+    "slug": "vallecorsa",
+    "festaPatronale": "29 settembre",
+    "cap": "03020",
+    "comunitaMontana": "Monti Ausoni — confine Lepini",
+    "storia": {
+      "intro": "Vallecorsa è un borgo medievale tra i più caratteristici del confine Lepini-Ausoni. È noto per la tradizione della \"Pasquella\", canto augurale pasquale di antichissima origine.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1805-1866",
+          "nome": "Santa Maria De Mattias",
+          "nota": "Nata a Vallecorsa il 4 febbraio 1805, fondò le Suore Adoratrici del Sangue di Cristo; canonizzata nel 2003."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Vallecorsa comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Chiesa di Santa Maria delle Grazie",
+          "secolo": "",
+          "stile": "",
+          "testo": "Usata come location esterna nel film \"La ciociara\" (1960) di Vittorio De Sica.",
+          "opere": []
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Castello (Acquaviva)",
+          "tipo": "Castello",
+          "secolo": "",
+          "testo": "medievale"
+        },
+        {
+          "nome": "Porta Missoria",
+          "tipo": "",
+          "secolo": "",
+          "testo": "medievale"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Comune del Parco Naturale Regionale Monti Ausoni e Lago di Fondi, noto come \"città dell'Olio\": boschi decidui (cerro, roverella, carpino nero, acero) o castagneti; le tradizionali \"màcere\" (terrazzamenti a secco per oliveti) sono nel Catalogo Nazionale dei Paesaggi Rurali Storici (FAI, Consiglio d'Europa, UNESCO).",
+      "sentieri": [
+        {
+          "nome": "Sentiero n.11 — Varo del Colle-Monte Calvilli",
+          "difficolta": "Media",
+          "testo": "Sentiero ufficiale del Parco Regionale dei Monti Ausoni, nel territorio di Vallecorsa."
+        },
+        {
+          "nome": "Sentiero della Quercia del Monaco",
+          "difficolta": "TRADIZIONI -->",
+          "testo": "Partenza dalla SS637 Lenola-Vallecorsa, circa 4 ore di cammino."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Infiorata di Vallecorsa",
+          "tipo": "Civile e religiosa",
+          "quando": "",
+          "testo": "Documentata dal Parco Naturale Regionale Monti Ausoni e Lago di Fondi."
+        }
+      ],
+      "prodotti": "olio d'oliva (Vallecorsa è riconosciuta \"città dell'Olio\")",
+      "piatti": ""
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": [
+      {
+        "nome": "Le Tre Torri — Ristorante Trattoria Pizzeria",
+        "categoria": "Trattoria/Pizzeria",
+        "descrizione": "Trattoria familiare con cucina tipica ciociara/romana e pizza al forno a legna.",
+        "prodotti": "",
+        "indirizzo": "Via Beata Maria de Mattias, Vallecorsa FR",
+        "sito": "http://www.letretorri.eu/",
+        "nota": ""
+      }
+    ]
+  },
+  "villa-santo-stefano": {
+    "slug": "villa-santo-stefano",
+    "festaPatronale": "26 dicembre",
+    "cap": "03020",
+    "comunitaMontana": "Valle dell'Amaseno",
+    "storia": {
+      "intro": "Villa Santo Stefano è un centro rurale della Ciociaria con origine medievale e consolidata tradizione agricola.",
+      "epoche": [],
+      "personaggi": [
+        {
+          "anni": "1867-1954",
+          "nome": "Domenico Jorio",
+          "nota": "Cardinale della Chiesa Cattolica."
+        }
+      ]
+    },
+    "arte": {
+      "intro": "Il patrimonio storico-artistico di Villa Santo Stefano comprende chiese ed edifici storici di rilievo per il territorio dei Monti Lepini.",
+      "chiese": [
+        {
+          "nome": "Collegiata di Maria Assunta in Cielo",
+          "secolo": "XVIII secolo",
+          "stile": "Barocco romano, tre navate",
+          "testo": "Stile: Barocco romano, tre navate",
+          "opere": []
+        },
+        {
+          "nome": "Santuario della Madonna dello Spirito Santo",
+          "secolo": "",
+          "stile": "Barocco",
+          "testo": "Stile: Barocco",
+          "opere": [
+            "Dipinto \"Madonna dello Spirito Santo\""
+          ]
+        }
+      ],
+      "monumenti": [
+        {
+          "nome": "Torre (Porta) di Re Metabo",
+          "tipo": "Torre",
+          "secolo": "origine medievale, restaurata nel XV secolo",
+          "testo": "origine medievale, restaurata nel XV secolo"
+        }
+      ]
+    },
+    "natura": {
+      "intro": "Il paese sorge sulle pendici del Monte Siserno, ultima propaggine dei Lepini nella valle dell'Amaseno, con economia storicamente agro-pastorale di oliveti e vigneti.",
+      "sentieri": [
+        {
+          "nome": "Cammino della Regina Camilla, tappe Giuliano-Villa Santo Stefano-Castro",
+          "difficolta": "Tappe 6-7 del cammino",
+          "testo": "Tappe 6-7 del cammino a lunga percorrenza della Valle dell'Amaseno."
+        }
+      ]
+    },
+    "tradizioni": {
+      "intro": "",
+      "feste": [
+        {
+          "nome": "Sagra della Polenta di San Sebastiano",
+          "tipo": "Gastronomica",
+          "quando": "20 gennaio",
+          "testo": ""
+        },
+        {
+          "nome": "Gusta Villa",
+          "tipo": "Gastronomica",
+          "quando": "",
+          "testo": "Passeggiata enogastronomica con prodotti tipici e degustazioni di vino tra le vie del borgo."
+        }
+      ],
+      "prodotti": "fallone (pane rosso tipico), marzolina (formaggio), mozzarella di bufala locale",
+      "piatti": "frittata con cipicce"
+    },
+    "turismo": {
+      "poi": [
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        },
+        {
+          "nome": "",
+          "tipo": "",
+          "testo": ""
+        }
+      ],
+      "arrivo": {
+        "auto": "",
+        "treno": "",
+        "bus": ""
+      },
+      "contatti": {
+        "sito": "",
+        "proloco": "",
+        "email": ""
+      }
+    },
+    "attivita": []
+  }
+}

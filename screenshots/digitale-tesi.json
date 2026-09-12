@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/digitale",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lepini Digital — Servizi digitali per imprese",
+      "hasCanvas": false,
+      "bodyTextLen": 3664,
+      "bodyTextHash": "b3d9d56bf5b9607adc42aca6fa80d0ceb6e342a9c5f94a5afe88dc106163cca6",
+      "bodyTextPrefix": "Salta al contenuto Lepini Digital TECNOLOGIA UTILE PER LE PMI · ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-tesi.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lepini Digital — Servizi digitali per imprese",
+      "hasCanvas": false,
+      "bodyTextLen": 3631,
+      "bodyTextHash": "05ad822a3e7509847a3f6d2498929ecaf0db52b677a1b893dc6c409c3338d239",
+      "bodyTextPrefix": "Salta al contenuto Lepini Digital TECNOLOGIA UTILE PER LE PMI · ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-tesi-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/digitale-tesi.json"
+}

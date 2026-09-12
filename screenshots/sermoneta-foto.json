@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/comuni/sermoneta",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Sermoneta | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 1681,
+      "bodyTextHash": "4be5985c2cc56c53ae5a958230e8ad2c668a7851f3753c68fde8bf6fe34a5b0d",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Comuni ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sermoneta-foto.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Sermoneta | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 1631,
+      "bodyTextHash": "00be0338b4908992c01e1d57e8d2736bfc26d522770e57f1aee65fd8af855df3",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Menu LA",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sermoneta-foto-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/sermoneta-foto.json"
+}

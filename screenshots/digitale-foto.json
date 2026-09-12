@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/digitale",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lepini Digital — Servizi digitali per imprese",
+      "hasCanvas": false,
+      "bodyTextLen": 3734,
+      "bodyTextHash": "0be98246bab4f57654c090341f21d982dffb30a841d516b825f4f0c4ccc9f791",
+      "bodyTextPrefix": "Salta al contenuto Lepini Digital TECNOLOGIA UTILE PER LE PMI · ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-foto.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lepini Digital — Servizi digitali per imprese",
+      "hasCanvas": false,
+      "bodyTextLen": 3701,
+      "bodyTextHash": "e3b7de789cebb996472699791d9ae5ce100388ed69d751ea4a6c5808fdb7dc1a",
+      "bodyTextPrefix": "Salta al contenuto Lepini Digital TECNOLOGIA UTILE PER LE PMI · ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-foto-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/digitale-foto.json"
+}

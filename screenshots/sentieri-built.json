@@ -1,0 +1,39 @@
+{
+  "url": "http://127.0.0.1:8081/lab/sentieri",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lab · Sentieri 3D | Portale Monti Lepini",
+      "hasCanvas": true,
+      "bodyTextLen": 531,
+      "bodyTextHash": "bda6166f4f7bf4e8d60254c58693aeeeda9ce43775df1c73469c6810d40a0d3c",
+      "bodyTextPrefix": "Lab 04 · SENTIERI TRACCIA SCHEMATICA SUL MODELLO · NON È UN GPX ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sentieri-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lab · Sentieri 3D | Portale Monti Lepini",
+      "hasCanvas": true,
+      "bodyTextLen": 531,
+      "bodyTextHash": "bda6166f4f7bf4e8d60254c58693aeeeda9ce43775df1c73469c6810d40a0d3c",
+      "bodyTextPrefix": "Lab 04 · SENTIERI TRACCIA SCHEMATICA SUL MODELLO · NON È UN GPX ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sentieri-built-mobile.png"
+    }
+  },
+  "brandWarnings": [
+    "BRAND WARNING: this looks like a game/canvas app but src/lib/og/site.json is missing \"type\": \"x:game\". X uses og:type=x:game to present the unfurl as a game card — set it in /workspace/src/lib/og/site.json per /workspace/.grok/skills/og/SKILL.md. Do not invent x:type or overload twitter:card as the game signal.",
+    "BRAND WARNING: this looks like a game/canvas app but /workspace/public/x-banner.jpg is missing. Games need a 50:11 X feed card (1200×264 JPEG) at public/x-banner.jpg — open /workspace/.grok/skills/og/SKILL.md and finish the brand-asset pass."
+  ],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/sentieri-built.json"
+}

@@ -1,0 +1,51 @@
+export const ERE = [
+  {
+    da: -1000,
+    a: -350,
+    titolo: "Volsci e città di pietra",
+    testo: "Prima di Roma il crinale è volsco. Signia (Segni), Cora (Cori), Setia (Sezze), Norba. Mura poligonali che sono ancora il fatto visibile più antico del Portale.",
+    luoghi: ["segni", "cori", "sezze", "norma"],
+  },
+  {
+    da: -350,
+    a: 400,
+    titolo: "Roma, colonie, templi",
+    testo: "Le città lepini entrano nell'orbita romana. Templi a Cori, colonia a Norba, Setia sul vino. La piana sotto è palude: i borghi restano alti per secoli.",
+    luoghi: ["cori", "norma", "sezze"],
+  },
+  {
+    da: 400,
+    a: 1300,
+    titolo: "Incastellamento e abbazie",
+    testo: "Il medioevo ricuce il crinale a feudi e monasteri. Caetani a Sermoneta, cistercensi a Fossanova e Valvisciolo. Nel 1274 Tommaso d'Aquino muore a Fossanova.",
+    luoghi: ["sermoneta", "priverno", "bassiano"],
+  },
+  {
+    da: 1300,
+    a: 1800,
+    titolo: "Feudi, ulivi, distanze",
+    testo: "I borghi restano comunità agricole. La piana è ancora malarica. Il digitale di oggi arriva in un territorio che per secoli ha lavorato in isolamenti voluti dalla geografia.",
+    luoghi: ["maenza", "montelanico", "gorga"],
+  },
+  {
+    da: 1800,
+    a: 1870,
+    titolo: "Briganti e confine",
+    testo: "Sonnino e il mito di Fra' Diavolo. Il crinale è frontiera, non panorama. Questa memoria va tenuta accanto ai castelli, non nascosta.",
+    luoghi: ["sonnino"],
+  },
+  {
+    da: 1870,
+    a: 1950,
+    titolo: "Leone XIII, strage, bonifica",
+    testo: "Carpineto dà un papa (Leone XIII, 1810–1903). Roccagorga, 6 gennaio 1913: la truppa spara sulla folla. Poi la bonifica pontina cambia per sempre il rapporto tra montagna e piana.",
+    luoghi: ["carpineto-romano", "roccagorga", "sezze"],
+  },
+  {
+    da: 1950,
+    a: 2026,
+    titolo: "Spopolamento e racconto digitale",
+    testo: "Gorga e Prossedi sotto i mille abitanti. I cataloghi nazionali prendono Sermoneta e lasciano il resto. Questo Portale esiste per tenere insieme i 26, senza fingere che siano tutti Bandiere Arancioni.",
+    luoghi: ["gorga", "prossedi", "montelanico"],
+  },
+];

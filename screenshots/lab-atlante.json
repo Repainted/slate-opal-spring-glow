@@ -1,0 +1,39 @@
+{
+  "url": "http://127.0.0.1:8080/lab/atlante",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lab · Atlante | Portale Monti Lepini",
+      "hasCanvas": true,
+      "bodyTextLen": 486,
+      "bodyTextHash": "e6503566a04cf416c3ad5cbb034577744b809e1d8cbcd42eacc674dcd53e5158",
+      "bodyTextPrefix": "Lab 00 · ATLANTE LATINA · 257 M · TCI Sermoneta Il borgo del Cas",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/lab-atlante.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lab · Atlante | Portale Monti Lepini",
+      "hasCanvas": true,
+      "bodyTextLen": 550,
+      "bodyTextHash": "0a40b00aa687bf687e786c22eafb1d40ac60ee5dd9dfb8568b4983bd2f97195d",
+      "bodyTextPrefix": "Lab 00 · ATLANTE Sermoneta · Norma Bassiano · Sezze Carpineto Ro",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/lab-atlante-mobile.png"
+    }
+  },
+  "brandWarnings": [
+    "BRAND WARNING: this looks like a game/canvas app but src/lib/og/site.json is missing \"type\": \"x:game\". X uses og:type=x:game to present the unfurl as a game card — set it in /workspace/src/lib/og/site.json per /workspace/.grok/skills/og/SKILL.md. Do not invent x:type or overload twitter:card as the game signal.",
+    "BRAND WARNING: this looks like a game/canvas app but /workspace/public/x-banner.jpg is missing. Games need a 50:11 X feed card (1200×264 JPEG) at public/x-banner.jpg — open /workspace/.grok/skills/og/SKILL.md and finish the brand-asset pass."
+  ],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/lab-atlante.json"
+}

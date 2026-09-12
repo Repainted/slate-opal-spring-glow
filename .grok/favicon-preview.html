@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><style>
+  html,body{margin:0;padding:0;background:#888;}
+  .row{display:flex;gap:16px;padding:16px;align-items:flex-end;}
+  .box{display:flex;flex-direction:column;align-items:center;gap:6px;font:12px sans-serif;color:#111;}
+  img.i16{width:16px;height:16px;image-rendering:auto;background:#fff;}
+  img.i32{width:32px;height:32px;background:#fff;}
+  img.i64{width:64px;height:64px;background:#fff;}
+  img.i128{width:128px;height:128px;background:#fff;}
+  .dark img{background:#111;}
+</style></head>
+<body>
+  <div class="row">
+    <div class="box"><img class="i16" src="file:///workspace/public/favicon.svg"><span>16</span></div>
+    <div class="box"><img class="i32" src="file:///workspace/public/favicon.svg"><span>32</span></div>
+    <div class="box"><img class="i64" src="file:///workspace/public/favicon.svg"><span>64</span></div>
+    <div class="box"><img class="i128" src="file:///workspace/public/favicon.svg"><span>128</span></div>
+  </div>
+  <div class="row dark" style="background:#222;">
+    <div class="box" style="color:#eee;"><img class="i16" src="file:///workspace/public/favicon.svg"><span>16 dark</span></div>
+    <div class="box" style="color:#eee;"><img class="i32" src="file:///workspace/public/favicon.svg"><span>32 dark</span></div>
+    <div class="box" style="color:#eee;"><img class="i64" src="file:///workspace/public/favicon.svg"><span>64 dark</span></div>
+  </div>
+</body></html>

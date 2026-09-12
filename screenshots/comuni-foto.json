@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/comuni",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "I 26 comuni | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 2953,
+      "bodyTextHash": "ee984ec8f7263cf79c2489be112f2ed59fde4b9b4a7b594ec1bd587862a27757",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Comuni ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/comuni-foto.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "I 26 comuni | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 2903,
+      "bodyTextHash": "92b29dd06274aca3b72bd0c0dae9bcb017af8f01a97bcf4f566af8f5e94bd39d",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Menu CO",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/comuni-foto-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/comuni-foto.json"
+}

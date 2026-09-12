@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/comuni/gorga",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Gorga | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 1040,
+      "bodyTextHash": "be70edc03a818b2bd34d439e9c46d04eb63a4a9bfcb03c7ea4bfb05717d7e692",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Comuni ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/scheda-gorga.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Gorga | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 990,
+      "bodyTextHash": "d926ec92edc0db90ac895d07ba1a1dfe4e96061877bc9f7b1dff6c74c13a2cc4",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Menu RO",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/scheda-gorga-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/scheda-gorga.json"
+}

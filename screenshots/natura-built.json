@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8081/natura",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Natura | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 11234,
+      "bodyTextHash": "34e397267ef8c33eba8ea1222da6f1229bdefd26c9966c8e9306ce62db7fed3d",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Comuni ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/natura-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Natura | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 11184,
+      "bodyTextHash": "197ebaabd4e60a7ba9c1fc6cc6216a772ca428552615edfd16764891e220fe0f",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Menu NA",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/natura-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/natura-built.json"
+}

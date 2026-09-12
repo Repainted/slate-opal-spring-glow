@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8081/digitale",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lepini Digital | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 2974,
+      "bodyTextHash": "bf8a925041a5748ce572e7d4ee872123581962dfc157655ba02ff739872fdd51",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Comuni ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lepini Digital | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 2924,
+      "bodyTextHash": "aecc0ff19bd0877c4a6ca5aa8f818595b1a33f3b508246c0fbf949a340d471ae",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Menu LE",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/digitale-built.json"
+}

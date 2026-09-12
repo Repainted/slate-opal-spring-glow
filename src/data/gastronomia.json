@@ -1,0 +1,126 @@
+{
+  "ricette": [
+    {
+      "slug": "sermoneta",
+      "nome": "Pappa al Pomodoro",
+      "ingredienti": [
+        "500g pane toscano raffermo",
+        "1kg pomodori maturi",
+        "Basilico fresco",
+        "Olio EVO lepino (60ml)",
+        "Aglio (3 spicchi)",
+        "Sale e pepe q.b."
+      ],
+      "passi": [
+        "Trita il pane raffermo in pezzi grandi",
+        "Scotta i pomodori, pelali e frulla",
+        "Rosolа l'aglio nell'olio d'oliva",
+        "Aggiungi il sugo di pomodoro e il pane",
+        "Cuoci a fuoco lento per 30 minuti",
+        "Finisci con basilico fresco e olio a crudo"
+      ],
+      "nota": "Ricetta nata dall'esigenza di non sprecare il pane duro, è diventata un piatto tradizionale simbolo della cucina povera locale."
+    },
+    {
+      "slug": "cori",
+      "nome": "Fusilli al Ragù Lepino",
+      "ingredienti": [
+        "400g fusilli artigianali",
+        "500g carne di maiale macinata (locale)",
+        "300g pomodori pelati",
+        "100g soffritto (sedano, carota, prezzemolo)",
+        "Olio EVO (80ml)",
+        "Vino bianco (150ml)",
+        "Parmigiano reggiano grattugiato"
+      ],
+      "passi": [
+        "Soffrigi le verdure nell'olio",
+        "Aggiungi la carne e fai rosolare",
+        "Sfuma con il vino bianco",
+        "Aggiungi i pomodori e cuoci lentamente 2 ore",
+        "Cuoci la pasta e mantecala nel ragù",
+        "Servi con Parmigiano grattugiato"
+      ],
+      "nota": "Carne da allevamenti locali a km 0, pomodori della zona, olio d'oliva prodotto nei frantoi lepini."
+    },
+    {
+      "slug": "norma",
+      "nome": "Cacio e Pepe",
+      "ingredienti": [
+        "400g spaghetti o tonnarelli",
+        "250g Pecorino Romano DOP",
+        "Pepe nero appena macinato (20g)",
+        "Sale marino fino (per l'acqua)"
+      ],
+      "passi": [
+        "Tosta il pepe a fuoco medio per 1 minuto",
+        "Grattugia il Pecorino finemente",
+        "Cuoci la pasta in acqua salata",
+        "Mescola il Pecorino con mezzo bicchiere di acqua di pasta",
+        "Condisci la pasta calda con il pepe",
+        "Manteca rapidamente aggiungendo il formaggio cremoso"
+      ],
+      "nota": "Piatto semplice ma tecnico che richiede precisione. La cremosità nasce dall'emulsione, non dalla panna!"
+    },
+    {
+      "slug": "priverno",
+      "nome": "Pane Lepino Tradizionale",
+      "ingredienti": [
+        "500g farina di grano tenero locale",
+        "350ml acqua",
+        "10g sale marino",
+        "5g lievito di birra fresco",
+        "Farina di semola (per spolverare)"
+      ],
+      "passi": [
+        "Impasta farina, acqua e lievito 10 minuti",
+        "Aggiungi il sale e continua a impastare",
+        "Lievitazione bulk 4-5 ore a temperatura ambiente",
+        "Forma il pane e seconda lievitazione 2 ore",
+        "Forno a 250°C per 40 minuti con vapore",
+        "Raffreddamento su griglia"
+      ],
+      "nota": "Varietà antiche coltivate nei campi lepini, ricche di nutrienti e sapore."
+    }
+  ],
+  "laboratori": [
+    {
+      "nome": "Caseificio Tradizionale",
+      "testo": "Produci il Pecorino Romano seguendo ricette centenarie. Visita il caseificio di famiglia, scopri il processo di caseificazione e assaggia i formaggi a diversi gradi di stagionatura.",
+      "dove": "Sermoneta — Aperto tut'anno su prenotazione"
+    },
+    {
+      "nome": "Frantoio Oleario",
+      "testo": "Scopri come si produce l'olio EVO lepino. Dal raccoglimento delle olive alla spremitura a freddo, dalla fermentazione al confezionamento. Degustazione guidata.",
+      "dove": "Cori — Novembre-Dicembre (raccolta olive)"
+    },
+    {
+      "nome": "Panificio Antico Forno",
+      "testo": "Pane cotto a legna in forni risalenti al 1800. Partecipa alla preparazione dell'impasto e al confezionamento. Workshop su ricette tradizionali.",
+      "dove": "Norma — Aperto martedì-domenica"
+    },
+    {
+      "nome": "Cantina Storica",
+      "testo": "Vini biologici della tradizione laziale. Visita le cantine sotterranee scavate nella roccia, conosci il vignaiolo e assaggia vini storici invecchiati.",
+      "dove": "Priverno — Visite guidate su prenotazione"
+    }
+  ],
+  "sagre": [
+    {
+      "nome": "Festa del Pomodoro (Luglio)",
+      "testo": "Sermoneta celebra il pomodoro con piatti tipici, competizioni culinarie e mercatini locali."
+    },
+    {
+      "nome": "Festa dell'Olio Nuovo (Novembre)",
+      "testo": "Degustazioni di olio appena prodotto nei frantoi, cibo tipico e cultura enogastronomica."
+    },
+    {
+      "nome": "Festa del Vino Lepino (Settembre)",
+      "testo": "Cantine aperte, assaggi di vini storici, cibo tradizionale e musica live."
+    },
+    {
+      "nome": "Sagra del Pecorino (Maggio)",
+      "testo": "Mostra didattica dei caseifici, degustazioni guidate e workshop di caseificazione."
+    }
+  ]
+}

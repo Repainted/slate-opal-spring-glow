@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/digitale",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lepini Digital — Servizi digitali per imprese",
+      "hasCanvas": false,
+      "bodyTextLen": 2936,
+      "bodyTextHash": "b2a6ce856199629b6eb778270ef4385a0c4b80e5f86014b4b7c16eeebee90db4",
+      "bodyTextPrefix": "Salta al contenuto Lepini Digital STUDIO PER IMPRESE · MONTELANI",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-studio.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lepini Digital — Servizi digitali per imprese",
+      "hasCanvas": false,
+      "bodyTextLen": 2903,
+      "bodyTextHash": "46e847e6778c752ad2d3242a379636928c9ee634165d1e0e25728103b5332d39",
+      "bodyTextPrefix": "Salta al contenuto Lepini Digital STUDIO PER IMPRESE · MONTELANI",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-studio-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/digitale-studio.json"
+}

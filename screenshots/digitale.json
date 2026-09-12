@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8080/digitale",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Lepini Digital | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 2974,
+      "bodyTextHash": "bf8a925041a5748ce572e7d4ee872123581962dfc157655ba02ff739872fdd51",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Comuni ",
+      "horizontalOverflow": false,
+      "consoleErrors": [
+        "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <MatchView router={{...}} match={{id:\"/digit...\", ...}}>\n      <SafeFragment>\n        <SafeFragment fallback={null}>\n          <CatchBoundary getResetKey={function getResetKey} errorComponent={function AppErrorComponent} ...>\n            <SafeFragment fallback={function fallback}>\n              <MatchInnerImpl match={{id:\"/digit...\", ...}}>\n                <Lazy>\n                  <DigitalePage>\n                    <SiteShell overlayHeader={true}>\n                      <div className=\"min-h-scre...\">\n                        <a>\n                        <SiteHeader>\n                        <div id=\"contenuto\">\n                          <JsonLd>\n                          <section>\n                          <section>\n                          <section>\n                          <section>\n                          <Contatti>\n                            <section id=\"contatti\" className=\"border-t b...\">\n                              <div className=\"mx-auto ma...\">\n                                <p>\n                                <h2>\n                                <p>\n                                <label>\n                                <textarea\n                                  id=\"msg\"\n                                  value=\"\"\n                                  onChange={function onChange}\n                                  rows={5}\n                                  className=\"mt-2 w-full rounded-xl border border-cream/15 bg-navy p-4 text-cream plac...\"\n                                  placeholder=\"Magazzino, preventivi, sito, documenti che si copiano a mano…\"\n-                                 style={{caret-color:\"transparent\"}}\n                                >\n                                ...\n                        ...\n"
+      ],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Lepini Digital | Portale Monti Lepini",
+      "hasCanvas": false,
+      "bodyTextLen": 2924,
+      "bodyTextHash": "aecc0ff19bd0877c4a6ca5aa8f818595b1a33f3b508246c0fbf949a340d471ae",
+      "bodyTextPrefix": "Salta al contenuto Monti Lepini PORTALE DEL COMPRENSORIO Menu LE",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/digitale-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/digitale.json"
+}

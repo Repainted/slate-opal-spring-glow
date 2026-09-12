@@ -1,0 +1,1 @@
+import{l as e}from"./BrandMark-Tfrby9Uj.js";var t=e();function n({data:e}){return(0,t.jsx)(`script`,{type:`application/ld+json`,dangerouslySetInnerHTML:{__html:JSON.stringify({"@context":`https://schema.org`,...e})}})}export{n as t};
