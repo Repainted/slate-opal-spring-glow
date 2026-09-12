@@ -73,13 +73,13 @@ function LabHome() {
       <WebGLHost start={start} />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/25 to-navy-deep/40" />
 
-      <header className="pointer-events-auto absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 py-5 md:px-10">
-        <Link to="/lab" className="flex items-center text-cream" aria-label="Lepini Lab">
+      <header className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 py-5 md:px-10">
+        <Link to="/lab" className="pointer-events-auto flex items-center text-cream" aria-label="Lepini Lab">
           <BrandMark variant="lab" className="h-16 w-auto md:h-[4.5rem]" />
         </Link>
-        <div className="flex gap-2">
+        <div className="pointer-events-auto flex gap-2">
           <Link
-            to="/"
+            to="/comuni"
             className="rounded-full border border-cream/20 px-4 py-2 text-sm text-cream-soft hover:border-copper-light"
           >
             Portale
@@ -93,7 +93,7 @@ function LabHome() {
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto flex min-h-dvh max-w-6xl flex-col justify-end px-5 pb-10 pt-28 md:px-12 md:pb-14">
+      <div className="pointer-events-none relative z-10 mx-auto flex min-h-dvh max-w-6xl flex-col justify-end px-5 pb-10 pt-28 md:px-12 md:pb-14">
         <Eyebrow>Laboratorio scientifico · Lepini Digital</Eyebrow>
         <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.6rem,7vw,5rem)] font-semibold leading-[0.92] text-cream">
           Vedere il crinale
@@ -104,7 +104,7 @@ function LabHome() {
           può fare con gli stessi strumenti.
         </p>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="pointer-events-auto mt-12 grid gap-px overflow-hidden rounded-xl bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
           {EXPERIMENTS.map((e, i) => (
             <Link
               key={e.code}
@@ -117,7 +117,7 @@ function LabHome() {
             </Link>
           ))}
         </div>
-        <p className="mt-6 text-sm text-muted">
+        <p className="pointer-events-auto mt-6 text-sm text-muted">
           Le schede sono sul Portale:{" "}
           <Link to="/comuni" className="text-olive-light">
             26 comuni
