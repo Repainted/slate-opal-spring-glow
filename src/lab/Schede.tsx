@@ -5,15 +5,15 @@ import type { Comune, Sentiero, Specie } from "@/data/types";
 export function SchedaComune({
   c,
 }: {
-  c: Pick<
-    Comune,
-    "slug" | "nome" | "provincia" | "altitudine" | "headline" | "daVedere" | "bandieraArancione"
-  >;
+  c: Pick<Comune, "slug" | "nome" | "provincia" | "altitudine" | "headline" | "daVedere" | "bandieraArancione"> & {
+    abitanti?: number;
+  };
 }) {
   return (
     <aside className="pointer-events-auto max-w-sm rounded-xl border border-cream/15 bg-navy-deep/90 p-5 shadow-[var(--shadow-border)]">
       <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-copper-light">
         {c.provincia} · {c.altitudine} m
+        {c.abitanti != null ? ` · ${c.abitanti.toLocaleString("it-IT")} ab.` : ""}
         {c.bandieraArancione ? " · TCI" : ""}
       </p>
       <h2 className="mt-1 font-display text-2xl text-cream">{c.nome}</h2>

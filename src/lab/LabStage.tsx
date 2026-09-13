@@ -37,7 +37,7 @@ export function WebGLHost({ start }: { start: (canvas: HTMLCanvasElement) => () 
     if (!el) return;
     return start(el);
   }, [start]);
-  return <canvas ref={ref} className="absolute inset-0 h-full w-full touch-none" />;
+  return <canvas ref={ref} className="absolute inset-0 z-[1] h-full w-full bg-transparent touch-none" />;
 }
 
 export function LabTop({ code, title }: { code: string; title: string }) {
@@ -168,9 +168,9 @@ export function LabNav({
         </div>
       ) : null}
       <p className="max-w-48 text-left font-mono text-[0.62rem] leading-relaxed text-muted">
-        {carta && maps ? CARTA_NOTE[carta] : "Trascina · rotella · +/-"}
+        {carta && maps ? CARTA_NOTE[carta] : "Trascina · due dita spostano · rotella"}
         <span className="mt-1 hidden md:block">
-          Trascina per girare. Shift+trascina o WASD per spostarti. Rotella o +/− per lo zoom.
+          Un dito gira. Due dita spostano la scena. Rotella o +/− per lo zoom.
         </span>
       </p>
     </div>

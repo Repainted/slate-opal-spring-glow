@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Leaf, Milestone, Mountain } from "lucide-react";
+import { useCallback } from "react";
 import { ComuneMap } from "@/components/comuni/ComuneMap";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -9,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { COMUNI, STATS } from "@/data/comuni";
 import { MESI } from "@/data/natura";
 import { SENTIERI } from "@/data/sentieri";
+import { WebGLHost, useReducedMotion } from "@/lab/LabStage";
+import { startTramaBg } from "@/lab/tramaBg";
 import { SITE } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -24,6 +27,8 @@ export const Route = createFileRoute("/")({
 export function HomePage() {
   const mese = MESI[new Date().getMonth()]!;
   const tci = COMUNI.filter((c) => c.bandieraArancione).length;
+  const reduced = useReducedMotion();
+  const start = useCallback((c: HTMLCanvasElement) => startTramaBg(c, reduced.current), [reduced]);
 
   return (
     <SiteShell overlayHeader>
@@ -36,12 +41,10 @@ export function HomePage() {
         }}
       />
       <section className="relative min-h-[72vh] overflow-hidden border-b-[3px] border-copper md:min-h-[88vh]">
-        <img
-          src="/images/hero-ridge.jpg"
-          alt="Crinale calcareo dei Monti Lepini al crepuscolo, faggete e un borgo sullo sperone"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/30" />
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <WebGLHost start={start} />
+        </div>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-navy via-navy/40 to-navy/15" />
         <div className="relative z-10 mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-center px-5 pb-10 pt-24 md:min-h-[88vh] md:justify-end md:px-12 md:pb-16 md:pt-32">
           <Eyebrow>Latina · Roma · Frosinone</Eyebrow>
           <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.8rem,8vw,5.8rem)] font-semibold uppercase leading-[0.92] text-cream">
@@ -124,7 +127,7 @@ export function HomePage() {
           {[
             { icon: Mountain, title: "Sentieri con fonte", to: "/sentieri" as const, t: "CAI 701, 702, 736 dalla Compagnia. Nessun numero inventato." },
             { icon: Leaf, title: "Natura con nome", to: "/natura" as const, t: "Fagus sylvatica, non «bosco». Le ~50 orchidee restano da schedare con un botanico." },
-            { icon: Milestone, title: "Lepini Lab", to: "/lab" as const, t: "Volo 3D, faggeta in prima persona, biosfera. Il crinale come modello, non come foto." },
+            { icon: Milestone, title: "Lepini Lab", to: "/lab" as const, t: "Trama, volo, faggeta, biosfera. Il crinale come modello, non come foto." },
           ].map((b) => (
             <Link key={b.title} to={b.to} className="group border-t border-copper/40 pt-6">
               <b.icon className="size-5 text-copper" />

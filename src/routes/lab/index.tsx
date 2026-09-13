@@ -33,6 +33,12 @@ const EXPERIMENTS = [
     text: "Sopra il massiccio. Avvicinati a un borgo e compare la scheda.",
   },
   {
+    to: "/lab/drone" as const,
+    code: "07",
+    title: "Drone",
+    text: "Simulatore di volo: DEM reale, satellite, strade, fisica. Scegli zona o resta sui Lepini.",
+  },
+  {
     to: "/lab/faggeta" as const,
     code: "02",
     title: "Faggeta",
@@ -61,6 +67,12 @@ const EXPERIMENTS = [
     code: "06",
     title: "Alberi",
     text: "Leccio e nocciolo da three-d-stage. Tocca un esemplare: si apre la scheda.",
+  },
+  {
+    to: "/lab/trama" as const,
+    code: "08",
+    title: "Trama",
+    text: "26 comuni in 3D: trama del logo, srotolamento, orbite. Demografia: l’altezza è la popolazione.",
   },
 ];
 
@@ -105,17 +117,29 @@ function LabHome() {
         </p>
 
         <div className="pointer-events-auto mt-12 grid gap-px overflow-hidden rounded-xl bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
-          {EXPERIMENTS.map((e, i) => (
-            <Link
-              key={e.code}
-              to={e.to}
-              className={`bg-navy-deep/80 p-6 backdrop-blur-sm hover:bg-navy-card ${i === 0 ? "sm:col-span-2 lg:col-span-1" : ""}`}
-            >
-              <p className="font-display text-3xl leading-none text-copper-light">{e.code}</p>
-              <h2 className="mt-3 font-display text-2xl">{e.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{e.text}</p>
-            </Link>
-          ))}
+          {EXPERIMENTS.map((e, i) =>
+            e.to === "/lab/drone" ? (
+              <a
+                key={e.code}
+                href="/lab/drone.html"
+                className={`bg-navy-deep/80 p-6 backdrop-blur-sm hover:bg-navy-card ${i === 0 ? "sm:col-span-2 lg:col-span-1" : ""}`}
+              >
+                <p className="font-display text-3xl leading-none text-copper-light">{e.code}</p>
+                <h2 className="mt-3 font-display text-2xl">{e.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{e.text}</p>
+              </a>
+            ) : (
+              <Link
+                key={e.code}
+                to={e.to}
+                className={`bg-navy-deep/80 p-6 backdrop-blur-sm hover:bg-navy-card ${i === 0 ? "sm:col-span-2 lg:col-span-1" : ""}`}
+              >
+                <p className="font-display text-3xl leading-none text-copper-light">{e.code}</p>
+                <h2 className="mt-3 font-display text-2xl">{e.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{e.text}</p>
+              </Link>
+            ),
+          )}
         </div>
         <p className="pointer-events-auto mt-6 text-sm text-muted">
           Le schede sono sul Portale:{" "}
@@ -129,14 +153,6 @@ function LabHome() {
           ,{" "}
           <Link to="/sentieri" className="text-olive-light">
             sentieri
-          </Link>
-          ,{" "}
-          <Link to="/esperienze/timeline" className="text-olive-light">
-            timeline
-          </Link>
-          ,{" "}
-          <Link to="/esperienze/planner" className="text-olive-light">
-            planner
           </Link>
           .
         </p>

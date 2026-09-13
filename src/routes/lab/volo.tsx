@@ -73,6 +73,12 @@ function VoloPage() {
     <div className="relative h-dvh overflow-hidden bg-navy-deep text-cream">
       <WebGLHost start={start} />
       <LabTop code="01" title="Volo" />
+      <a
+        href="/lab/drone.html"
+        className="absolute right-4 top-20 z-20 inline-flex min-h-11 items-center rounded-full border border-cream/20 bg-navy-deep/80 px-4 text-sm text-cream-soft hover:border-copper-light md:right-8"
+      >
+        Simulatore drone
+      </a>
       <LabNav zoomIn={zoomIn} zoomOut={zoomOut} carta={carta} setCarta={setCarta} onMap2d={() => setMap2d(true)} />
       <PlayGate
         open={open}

@@ -57,6 +57,8 @@ export class OrbitCam {
     let lastX = 0;
     let lastY = 0;
     let pinch0 = 0;
+    let midX = 0;
+    let midY = 0;
     const zoom = (f: number) => {
       this.auto = false;
       if (opts?.onZoom) opts.onZoom(f);
@@ -80,14 +82,36 @@ export class OrbitCam {
       lastY = e.clientY;
       pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
       pinch0 = pinchDist();
+      if (pts.size === 2) {
+        const a = [...pts.values()];
+        midX = (a[0]!.x + a[1]!.x) * 0.5;
+        midY = (a[0]!.y + a[1]!.y) * 0.5;
+      }
       canvas.setPointerCapture(e.pointerId);
     };
     const onMove = (e: PointerEvent) => {
       if (!pts.has(e.pointerId)) return;
       pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (pts.size === 2) {
+        const a = [...pts.values()];
+        const mx = (a[0]!.x + a[1]!.x) * 0.5;
+        const my = (a[0]!.y + a[1]!.y) * 0.5;
         const d = pinchDist();
-        if (pinch0 > 8) zoom(pinch0 / Math.max(d, 8));
+        const dx = mx - midX;
+        const dy = my - midY;
+        this.moved += Math.abs(dx) + Math.abs(dy);
+        const s = this.radius * 0.0028;
+        fwd.set(-Math.sin(this.rotY), 0, -Math.cos(this.rotY));
+        right.set(Math.cos(this.rotY), 0, -Math.sin(this.rotY));
+        this.look.addScaledVector(right, -dx * s);
+        this.look.addScaledVector(fwd, dy * s);
+        this.look.y += dy * s * 0.35;
+        if (pinch0 > 12) {
+          const ratio = pinch0 / Math.max(d, 8);
+          if (Math.abs(ratio - 1) > 0.012) zoom(ratio);
+        }
+        midX = mx;
+        midY = my;
         pinch0 = d;
         return;
       }

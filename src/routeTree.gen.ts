@@ -17,6 +17,8 @@ import { Route as ImpreseRouteImport } from './routes/imprese'
 import { Route as IndiceRouteImport } from './routes/indice'
 import { Route as NaturaRouteImport } from './routes/natura'
 import { Route as ParcoRouteImport } from './routes/parco'
+import { Route as PortaleRouteImport } from './routes/portale'
+import { Route as StorieRouteImport } from './routes/storie'
 import { Route as ComuniIndexRouteImport } from './routes/comuni/index'
 import { Route as ComuniSlugRouteImport } from './routes/comuni/$slug'
 import { Route as DigitaleIndexRouteImport } from './routes/digitale.index'
@@ -29,9 +31,11 @@ import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as LabAlberiRouteImport } from './routes/lab/alberi'
 import { Route as LabAtlanteRouteImport } from './routes/lab/atlante'
 import { Route as LabBiosferaRouteImport } from './routes/lab/biosfera'
+import { Route as LabDroneRouteImport } from './routes/lab/drone'
 import { Route as LabFaggetaRouteImport } from './routes/lab/faggeta'
 import { Route as LabParcoRouteImport } from './routes/lab/parco'
 import { Route as LabSentieriRouteImport } from './routes/lab/sentieri'
+import { Route as LabTramaRouteImport } from './routes/lab/trama'
 import { Route as LabVoloRouteImport } from './routes/lab/volo'
 import { Route as SentieriIndexRouteImport } from './routes/sentieri/index'
 import { Route as SentieriSlugRouteImport } from './routes/sentieri/$slug'
@@ -74,6 +78,16 @@ const NaturaRoute = NaturaRouteImport.update({
 const ParcoRoute = ParcoRouteImport.update({
   id: '/parco',
   path: '/parco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortaleRoute = PortaleRouteImport.update({
+  id: '/portale',
+  path: '/portale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StorieRoute = StorieRouteImport.update({
+  id: '/storie',
+  path: '/storie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComuniIndexRoute = ComuniIndexRouteImport.update({
@@ -136,6 +150,11 @@ const LabBiosferaRoute = LabBiosferaRouteImport.update({
   path: '/lab/biosfera',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabDroneRoute = LabDroneRouteImport.update({
+  id: '/lab/drone',
+  path: '/lab/drone',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabFaggetaRoute = LabFaggetaRouteImport.update({
   id: '/lab/faggeta',
   path: '/lab/faggeta',
@@ -149,6 +168,11 @@ const LabParcoRoute = LabParcoRouteImport.update({
 const LabSentieriRoute = LabSentieriRouteImport.update({
   id: '/lab/sentieri',
   path: '/lab/sentieri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabTramaRoute = LabTramaRouteImport.update({
+  id: '/lab/trama',
+  path: '/lab/trama',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabVoloRoute = LabVoloRouteImport.update({
@@ -176,6 +200,8 @@ export interface FileRoutesByFullPath {
   '/indice': typeof IndiceRoute
   '/natura': typeof NaturaRoute
   '/parco': typeof ParcoRoute
+  '/portale': typeof PortaleRoute
+  '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
@@ -184,9 +210,11 @@ export interface FileRoutesByFullPath {
   '/lab/alberi': typeof LabAlberiRoute
   '/lab/atlante': typeof LabAtlanteRoute
   '/lab/biosfera': typeof LabBiosferaRoute
+  '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
   '/lab/parco': typeof LabParcoRoute
   '/lab/sentieri': typeof LabSentieriRoute
+  '/lab/trama': typeof LabTramaRoute
   '/lab/volo': typeof LabVoloRoute
   '/sentieri/$slug': typeof SentieriSlugRoute
   '/comuni/': typeof ComuniIndexRoute
@@ -203,6 +231,8 @@ export interface FileRoutesByTo {
   '/indice': typeof IndiceRoute
   '/natura': typeof NaturaRoute
   '/parco': typeof ParcoRoute
+  '/portale': typeof PortaleRoute
+  '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
@@ -211,9 +241,11 @@ export interface FileRoutesByTo {
   '/lab/alberi': typeof LabAlberiRoute
   '/lab/atlante': typeof LabAtlanteRoute
   '/lab/biosfera': typeof LabBiosferaRoute
+  '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
   '/lab/parco': typeof LabParcoRoute
   '/lab/sentieri': typeof LabSentieriRoute
+  '/lab/trama': typeof LabTramaRoute
   '/lab/volo': typeof LabVoloRoute
   '/sentieri/$slug': typeof SentieriSlugRoute
   '/comuni': typeof ComuniIndexRoute
@@ -232,6 +264,8 @@ export interface FileRoutesById {
   '/indice': typeof IndiceRoute
   '/natura': typeof NaturaRoute
   '/parco': typeof ParcoRoute
+  '/portale': typeof PortaleRoute
+  '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
@@ -240,9 +274,11 @@ export interface FileRoutesById {
   '/lab/alberi': typeof LabAlberiRoute
   '/lab/atlante': typeof LabAtlanteRoute
   '/lab/biosfera': typeof LabBiosferaRoute
+  '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
   '/lab/parco': typeof LabParcoRoute
   '/lab/sentieri': typeof LabSentieriRoute
+  '/lab/trama': typeof LabTramaRoute
   '/lab/volo': typeof LabVoloRoute
   '/sentieri/$slug': typeof SentieriSlugRoute
   '/comuni/': typeof ComuniIndexRoute
@@ -262,6 +298,8 @@ export interface FileRouteTypes {
     | '/indice'
     | '/natura'
     | '/parco'
+    | '/portale'
+    | '/storie'
     | '/comuni/$slug'
     | '/digitale/studio'
     | '/esperienze/calendario'
@@ -270,9 +308,11 @@ export interface FileRouteTypes {
     | '/lab/alberi'
     | '/lab/atlante'
     | '/lab/biosfera'
+    | '/lab/drone'
     | '/lab/faggeta'
     | '/lab/parco'
     | '/lab/sentieri'
+    | '/lab/trama'
     | '/lab/volo'
     | '/sentieri/$slug'
     | '/comuni/'
@@ -289,6 +329,8 @@ export interface FileRouteTypes {
     | '/indice'
     | '/natura'
     | '/parco'
+    | '/portale'
+    | '/storie'
     | '/comuni/$slug'
     | '/digitale/studio'
     | '/esperienze/calendario'
@@ -297,9 +339,11 @@ export interface FileRouteTypes {
     | '/lab/alberi'
     | '/lab/atlante'
     | '/lab/biosfera'
+    | '/lab/drone'
     | '/lab/faggeta'
     | '/lab/parco'
     | '/lab/sentieri'
+    | '/lab/trama'
     | '/lab/volo'
     | '/sentieri/$slug'
     | '/comuni'
@@ -317,6 +361,8 @@ export interface FileRouteTypes {
     | '/indice'
     | '/natura'
     | '/parco'
+    | '/portale'
+    | '/storie'
     | '/comuni/$slug'
     | '/digitale/studio'
     | '/esperienze/calendario'
@@ -325,9 +371,11 @@ export interface FileRouteTypes {
     | '/lab/alberi'
     | '/lab/atlante'
     | '/lab/biosfera'
+    | '/lab/drone'
     | '/lab/faggeta'
     | '/lab/parco'
     | '/lab/sentieri'
+    | '/lab/trama'
     | '/lab/volo'
     | '/sentieri/$slug'
     | '/comuni/'
@@ -346,6 +394,8 @@ export interface RootRouteChildren {
   IndiceRoute: typeof IndiceRoute
   NaturaRoute: typeof NaturaRoute
   ParcoRoute: typeof ParcoRoute
+  PortaleRoute: typeof PortaleRoute
+  StorieRoute: typeof StorieRoute
   ComuniSlugRoute: typeof ComuniSlugRoute
   EsperienzeCalendarioRoute: typeof EsperienzeCalendarioRoute
   EsperienzePlannerRoute: typeof EsperienzePlannerRoute
@@ -353,9 +403,11 @@ export interface RootRouteChildren {
   LabAlberiRoute: typeof LabAlberiRoute
   LabAtlanteRoute: typeof LabAtlanteRoute
   LabBiosferaRoute: typeof LabBiosferaRoute
+  LabDroneRoute: typeof LabDroneRoute
   LabFaggetaRoute: typeof LabFaggetaRoute
   LabParcoRoute: typeof LabParcoRoute
   LabSentieriRoute: typeof LabSentieriRoute
+  LabTramaRoute: typeof LabTramaRoute
   LabVoloRoute: typeof LabVoloRoute
   SentieriSlugRoute: typeof SentieriSlugRoute
   ComuniIndexRoute: typeof ComuniIndexRoute
@@ -420,6 +472,20 @@ declare module '@tanstack/react-router' {
       path: '/parco'
       fullPath: '/parco'
       preLoaderRoute: typeof ParcoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portale': {
+      id: '/portale'
+      path: '/portale'
+      fullPath: '/portale'
+      preLoaderRoute: typeof PortaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/storie': {
+      id: '/storie'
+      path: '/storie'
+      fullPath: '/storie'
+      preLoaderRoute: typeof StorieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comuni/': {
@@ -506,6 +572,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabBiosferaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/drone': {
+      id: '/lab/drone'
+      path: '/lab/drone'
+      fullPath: '/lab/drone'
+      preLoaderRoute: typeof LabDroneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/faggeta': {
       id: '/lab/faggeta'
       path: '/lab/faggeta'
@@ -525,6 +598,13 @@ declare module '@tanstack/react-router' {
       path: '/lab/sentieri'
       fullPath: '/lab/sentieri'
       preLoaderRoute: typeof LabSentieriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/trama': {
+      id: '/lab/trama'
+      path: '/lab/trama'
+      fullPath: '/lab/trama'
+      preLoaderRoute: typeof LabTramaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/volo': {
@@ -574,6 +654,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndiceRoute: IndiceRoute,
   NaturaRoute: NaturaRoute,
   ParcoRoute: ParcoRoute,
+  PortaleRoute: PortaleRoute,
+  StorieRoute: StorieRoute,
   ComuniSlugRoute: ComuniSlugRoute,
   EsperienzeCalendarioRoute: EsperienzeCalendarioRoute,
   EsperienzePlannerRoute: EsperienzePlannerRoute,
@@ -581,9 +663,11 @@ const rootRouteChildren: RootRouteChildren = {
   LabAlberiRoute: LabAlberiRoute,
   LabAtlanteRoute: LabAtlanteRoute,
   LabBiosferaRoute: LabBiosferaRoute,
+  LabDroneRoute: LabDroneRoute,
   LabFaggetaRoute: LabFaggetaRoute,
   LabParcoRoute: LabParcoRoute,
   LabSentieriRoute: LabSentieriRoute,
+  LabTramaRoute: LabTramaRoute,
   LabVoloRoute: LabVoloRoute,
   SentieriSlugRoute: SentieriSlugRoute,
   ComuniIndexRoute: ComuniIndexRoute,
