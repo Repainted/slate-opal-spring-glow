@@ -1,5 +1,5 @@
 import { B as require_jsx_runtime, _ as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { g as specieId } from "./router-CnNVtgAG.mjs";
+import { w as specieId } from "./router-BrXJn1Al.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/Schede-ChiCXenD.js
 var import_jsx_runtime = require_jsx_runtime();
 function SchedaComune({ c }) {

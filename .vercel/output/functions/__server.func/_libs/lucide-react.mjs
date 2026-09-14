@@ -393,9 +393,32 @@ var Milestone = createLucideIcon("milestone", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Minus = createLucideIcon("minus", [["path", {
+	d: "M5 12h14",
+	key: "1ays0h"
+}]]);
+/**
+* @license lucide-react v0.510.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Mountain = createLucideIcon("mountain", [["path", {
 	d: "m8 3 4 8 5-5 5 15H2L8 3z",
 	key: "otkl63"
+}]]);
+/**
+* @license lucide-react v0.510.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Plus = createLucideIcon("plus", [["path", {
+	d: "M5 12h14",
+	key: "1ays0h"
+}], ["path", {
+	d: "M12 5v14",
+	key: "s699le"
 }]]);
 /**
 * @license lucide-react v0.510.0 - ISC
@@ -507,4 +530,4 @@ var X = createLucideIcon("x", [["path", {
 	key: "d8bk6v"
 }]]);
 //#endregion
-export { CalendarRange as _, ScrollText as a, Menu as c, Leaf as d, Landmark as f, Church as g, CloudSun as h, Store as i, MapPinned as l, Footprints as m, UtensilsCrossed as n, Mountain as o, History as p, TriangleAlert as r, Milestone as s, X as t, MapPin as u, ArrowRight as v, ArrowLeft as y };
+export { CloudSun as _, ScrollText as a, ArrowRight as b, Minus as c, MapPinned as d, MapPin as f, Footprints as g, History as h, Store as i, Milestone as l, Landmark as m, UtensilsCrossed as n, Plus as o, Leaf as p, TriangleAlert as r, Mountain as s, X as t, Menu as u, Church as v, ArrowLeft as x, CalendarRange as y };

@@ -236,6 +236,7 @@
   <button class="btn" id="btnMap" disabled>&#128506; Mappa: &hellip;</button>
   <button class="btn" id="btnSat">&#128752; Satellite: OFF</button>
   <button class="btn" id="btnOver">&#127956; 3D</button>
+  <button class="btn" id="btnRace">&#127937; GARA</button>
   <button class="btn" id="btnAuto">&#9992; TOUR</button>
   <button class="btn" id="btnTime">&#128336; reale</button>
   <button class="btn on" id="btnNames">&#127960; Nomi: ON</button>
@@ -255,7 +256,7 @@
   <div id="spdVal">0 <small>km/h</small></div>
   <div id="vspd">&#8597; 0.0 m/s verticale</div>
   <div id="spdMax">
-    <button class="chip" id="mCine">CINE</button><button class="chip on" id="mNorm">NORM</button><button class="chip" id="mSport">SPORT</button><button class="chip" id="mFpv">FPV</button><button class="chip" id="mMax">&#128640;</button><button class="chip on" id="mWind">&#128168;</button><button class="chip" id="mSlow">&#128034; &times;1</button>
+    <button class="chip" id="mCine">CINE</button><button class="chip on" id="mNorm">NORM</button><button class="chip" id="mSport">SPORT</button><button class="chip" id="mFpv">FPV SPORT</button><button class="chip" id="mMax">&#128640;</button><button class="chip on" id="mWind">&#128168;</button><button class="chip" id="mSlow">&#128034; &times;1</button>
     <div id="modeInfo" style="margin-top:4px;">MAX 58 km/h &bull; SHIFT = turbo</div>
     <div id="windInfo" style="margin-top:2px;">&#128168; &hellip;</div>
   </div>
@@ -265,6 +266,10 @@
 
 <!-- widget vento in tempo reale (tocca per modificare) -->
 <div id="windHud" class="panel"><canvas id="whC" width="72" height="72"></canvas><div><span id="whTxt">--</span><br><small id="whTxt2">tocca per regolare</small></div></div>
+<div class="panel" id="raceHud" style="display:none; top:100px; left:50%; transform:translateX(-50%); text-align:center; min-width:210px; border-color:rgba(93,255,157,.5);">
+  <div style="color:#5dff9d;font-weight:700;font-size:12px;">&#127937; <span id="raceTxt">Anello 1/10</span></div>
+  <div id="raceTime" style="font-size:22px;color:#fff;font-weight:700;">00:00.0</div>
+</div>
 
 <!-- pannello vento -->
 <div id="windPanel" class="panel setPanel" style="display:none;">
@@ -613,13 +618,15 @@ const state={
   auto:null,
   fpvP:0, fpvR:0,
   hourMode:'real', hour:20.3,
+  raceOn:false,
 };
+let raceGroup=null, raceGates=[], raceState=null;
 // Modalita di volo (stile DJI Mini): velocita orizzontale, salita, rotazione, reattivita
 const MODES={
   cine: {maxH:8,  climb:5,  yaw:0.9, damp:1.3,  tilt:0.20},
   norm: {maxH:16, climb:9,  yaw:1.7, damp:0.9,  tilt:0.38},
   sport:{maxH:28, climb:17, yaw:2.4, damp:0.65, tilt:0.52},
-  fpv:  {maxH:55, climb:25, yaw:2.9, damp:0.12, tilt:0.5, acro:true},
+  fpv:  {maxH:62, climb:28, yaw:3.4, damp:0.06, tilt:0.62, acro:true, expo:0.4, snap:6.5},
   max:  {maxH:90, climb:45, yaw:3.0, damp:0.45, tilt:0.62},   // drone "modificato" fuori norma
 };
 let orbitT=0;
@@ -996,9 +1003,9 @@ function buildScene(){
   sun.position.set(-12000,18000,8000);
   scene.add(sun);
   skyDayColor=new THREE.Color(0x9cc4e4);
-  // disco del sole
-  sunSprite=new THREE.Sprite(new THREE.SpriteMaterial({color:0xfff4d8,transparent:true,opacity:0.95,fog:false,depthWrite:false}));
-  sunSprite.scale.set(2400,2400,1);
+  // disco del sole (texture radiale: niente piu' "quadrato")
+  sunSprite=new THREE.Sprite(new THREE.SpriteMaterial({map:makeGlowTexture(),color:0xfff4d8,transparent:true,opacity:0.95,fog:false,depthWrite:false,blending:THREE.AdditiveBlending}));
+  sunSprite.scale.set(3200,3200,1);
   scene.add(sunSprite);
   // stelle
   {
@@ -1159,6 +1166,21 @@ function buildDroneProcedural(){
   ant.position.set(0,0.55,2.1); ant.rotation.x=-0.35; drone.add(ant);
   drone.scale.set(2.5,2.5,2.5);
   scene.add(drone);
+}
+
+function makeGlowTexture(){
+  const c=document.createElement('canvas'); c.width=128; c.height=128;
+  const g=c.getContext('2d');
+  const grd=g.createRadialGradient(64,64,0,64,64,64);
+  grd.addColorStop(0,   'rgba(255,255,255,1)');
+  grd.addColorStop(0.22,'rgba(255,250,235,0.95)');
+  grd.addColorStop(0.5, 'rgba(255,235,190,0.45)');
+  grd.addColorStop(0.8, 'rgba(255,220,160,0.12)');
+  grd.addColorStop(1,   'rgba(255,220,160,0)');
+  g.fillStyle=grd; g.fillRect(0,0,128,128);
+  const tex=new THREE.CanvasTexture(c);
+  tex.needsUpdate=true;
+  return tex;
 }
 
 function makeLabel(txt,kind){
@@ -1747,7 +1769,7 @@ function setMode(m){
     document.getElementById(id).classList.toggle('on',key===m);
   const M=MODES[m];
   document.getElementById('modeInfo').innerHTML= M.acro
-    ? 'ACRO ~'+Math.round(M.maxH*3.6*1.6)+' km/h &bull; W/S picchia &bull; A/D rolla &bull; Q/E gas'
+    ? '&#127942; FPV SPORTIVO ~'+Math.round(M.maxH*3.6*1.6)+' km/h &bull; rate/expo da racing &bull; W/S picchia &bull; A/D rolla &bull; Q/E gas'
     : (m==='max'
       ? '&#128640; MODIFICATO '+Math.round(M.maxH*3.6)+' km/h (turbo '+Math.round(M.maxH*3.6*1.6)+') &bull; salita '+M.climb+' m/s'
       : 'MAX '+Math.round(M.maxH*3.6)+' km/h &bull; salita '+M.climb+' m/s &bull; SHIFT = turbo');
@@ -1801,12 +1823,15 @@ function physics(dt){
   let sin=Math.sin(state.yaw),cos=Math.cos(state.yaw);
 
   if(M.acro){
-    /* --- FPV RACING (acro): assetto manuale, spinta reale e gravita --- */
+    /* --- FPV SPORTIVO/RACING (acro): assetto manuale, curva rate/expo, spinta reale e gravita --- */
     state.altTarget=null; state.auto=null;
-    state.yaw+=yawIn*M.yaw*dt;
+    const ex=M.expo||0, snap=M.snap||4.5;
+    const rateCurve=v=>{ const c=Math.max(-1,Math.min(1,v)); return c*(1-ex)+c*c*c*ex; };
+    const fwdC=rateCurve(fwd), strC=rateCurve(str), yawC=rateCurve(yawIn);
+    state.yaw+=yawC*M.yaw*dt;
     sin=Math.sin(state.yaw); cos=Math.cos(state.yaw);
-    state.fpvP+=(fwd*0.85-state.fpvP)*Math.min(1,dt*4.5);   // picchiata/cabrata
-    state.fpvR+=(str*0.85-state.fpvR)*Math.min(1,dt*4.5);   // rollio
+    state.fpvP+=(fwdC*0.85-state.fpvP)*Math.min(1,dt*snap);   // picchiata/cabrata
+    state.fpvR+=(strC*0.85-state.fpvR)*Math.min(1,dt*snap);   // rollio
     const T=Math.max(0,9.8+up*14*boost);                    // gas (Q/E o stick)
     const aF=T*Math.sin(state.fpvP), aR=T*Math.sin(state.fpvR);
     state.vel.x+=(sin*aF+cos*aR)*dt;
@@ -2430,6 +2455,91 @@ document.getElementById('btnOver').onclick=()=>setOverview(!state.overview);
 document.getElementById('overview').addEventListener('click',()=>setOverview(false));
 document.getElementById('overview').addEventListener('touchstart',()=>setOverview(false));
 
+/* ============ GARA: anelli 3D da attraversare ============ */
+function makeGateTexture(){
+  const c=document.createElement('canvas'); c.width=64; c.height=64;
+  const g=c.getContext('2d');
+  g.fillStyle='#0b1e18'; g.fillRect(0,0,64,64);
+  g.strokeStyle='rgba(93,255,157,.9)'; g.lineWidth=4;
+  for(let i=0;i<64;i+=12){ g.beginPath(); g.moveTo(i,0); g.lineTo(i,64); g.stroke(); }
+  return new THREE.CanvasTexture(c);
+}
+function buildRaceGates(centerPos){
+  if(raceGroup){ scene.remove(raceGroup); raceGroup=null; }
+  raceGroup=new THREE.Group();
+  raceGates=[];
+  const n=10, R=260;
+  const pts=[];
+  for(let i=0;i<=n;i++){
+    const a=(i/n)*Math.PI*2;
+    const x=centerPos.x+Math.cos(a)*R + Math.sin(a*3)*45;
+    const z=centerPos.z+Math.sin(a)*R + Math.cos(a*2)*45;
+    pts.push({x,z});
+  }
+  for(let i=0;i<n;i++){
+    const p=pts[i], np=pts[i+1];
+    const baseY=groundH(p.x,p.z);
+    const y=baseY+70+Math.sin(i*1.7)*35;
+    const dir=new THREE.Vector3(np.x-p.x,0,np.z-p.z).normalize();
+    const mat=new THREE.MeshStandardMaterial({color:0x5dff9d,emissive:0x1c9d5f,emissiveIntensity:0.9,metalness:0.2,roughness:0.35,transparent:true,opacity:0.92});
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(22,2.4,10,26),mat);
+    ring.position.set(p.x,y,p.z);
+    const m4=new THREE.Matrix4().lookAt(new THREE.Vector3(0,0,0),dir,new THREE.Vector3(0,1,0));
+    ring.quaternion.setFromRotationMatrix(m4);
+    ring.userData={idx:i,prevSide:null};
+    raceGroup.add(ring);
+    // numero anello
+    const lbl=makeLabel(String(i+1),'nat');
+    lbl.position.set(0,32,0);
+    ring.add(lbl);
+    raceGates.push(ring);
+  }
+  scene.add(raceGroup);
+}
+function fmtRaceTime(s){
+  const m=Math.floor(s/60), sec=(s%60).toFixed(1).padStart(4,'0');
+  return (m>0?m+':':'')+sec;
+}
+function updateRace(){
+  if(!raceGroup||!raceState) return;
+  if(!raceState.finished){
+    const elapsed=(performance.now()-raceState.startT)/1000;
+    document.getElementById('raceTxt').textContent='Anello '+(raceState.idx+1)+'/'+raceGates.length;
+    document.getElementById('raceTime').textContent=fmtRaceTime(elapsed);
+    const gate=raceGates[raceState.idx];
+    if(gate){
+      const toDrone=new THREE.Vector3().subVectors(state.pos,gate.position);
+      const axis=new THREE.Vector3(0,0,1).applyQuaternion(gate.quaternion);
+      const side=toDrone.dot(axis);
+      const radial=toDrone.clone().addScaledVector(axis,-side).length();
+      if(gate.userData.prevSide==null) gate.userData.prevSide=side;
+      if(gate.userData.prevSide<0 && side>=0 && radial<26){
+        gate.material.color.setHex(0x2a4a6a); gate.material.emissive.setHex(0x11304a); gate.material.opacity=0.4;
+        raceState.idx++;
+        if(raceState.idx>=raceGates.length){
+          raceState.finished=true;
+          const tot=(performance.now()-raceState.startT)/1000;
+          document.getElementById('raceTxt').textContent='&#127942; Percorso completato!';
+          document.getElementById('raceTime').textContent=fmtRaceTime(tot);
+        }
+      }
+      gate.userData.prevSide=side;
+    }
+  }
+}
+function setRace(on){
+  state.raceOn=on;
+  document.getElementById('btnRace').classList.toggle('on',on);
+  document.getElementById('raceHud').style.display=on?'block':'none';
+  if(on){
+    buildRaceGates(state.pos);
+    raceState={idx:0,startT:performance.now(),finished:false};
+  }else if(raceGroup){
+    scene.remove(raceGroup); raceGroup=null; raceState=null;
+  }
+}
+document.getElementById('btnRace').onclick=()=>setRace(!state.raceOn);
+
 /* ============ LOOP ============ */
 let trailT=0;
 function loop(){
@@ -2449,6 +2559,7 @@ function loop(){
     precipUpdate(dt*timeScale);
     updateGPS(dt);
     updateHUD(dt);
+    if(state.raceOn && !state.overview) updateRace();
     trailT+=dt;
     if(trailT>0.5){ trailT=0; trail.push(state.pos.clone()); if(trail.length>400)trail.shift(); }
   }

@@ -1,6 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Leaf, Milestone, Mountain } from "lucide-react";
-import { useCallback } from "react";
 import { ComuneMap } from "@/components/comuni/ComuneMap";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -10,9 +9,8 @@ import { Button } from "@/components/ui/button";
 import { COMUNI, STATS } from "@/data/comuni";
 import { MESI } from "@/data/natura";
 import { SENTIERI } from "@/data/sentieri";
-import { WebGLHost, useReducedMotion } from "@/lab/LabStage";
-import { startTramaBg } from "@/lab/tramaBg";
 import { SITE } from "@/lib/seo";
+import { useMeteo } from "@/lib/meteo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,8 +25,7 @@ export const Route = createFileRoute("/")({
 export function HomePage() {
   const mese = MESI[new Date().getMonth()]!;
   const tci = COMUNI.filter((c) => c.bandieraArancione).length;
-  const reduced = useReducedMotion();
-  const start = useCallback((c: HTMLCanvasElement) => startTramaBg(c, reduced.current), [reduced]);
+  const { src } = useMeteo();
 
   return (
     <SiteShell overlayHeader>
@@ -41,10 +38,12 @@ export function HomePage() {
         }}
       />
       <section className="relative min-h-[72vh] overflow-hidden border-b-[3px] border-copper md:min-h-[88vh]">
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <WebGLHost start={start} />
-        </div>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-navy via-navy/40 to-navy/15" />
+        <img
+          src={src ?? "/images/hero-ridge.jpg"}
+          alt="Crinale calcareo dei Monti Lepini"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/30" />
         <div className="relative z-10 mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-center px-5 pb-10 pt-24 md:min-h-[88vh] md:justify-end md:px-12 md:pb-16 md:pt-32">
           <Eyebrow>Latina · Roma · Frosinone</Eyebrow>
           <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.8rem,8vw,5.8rem)] font-semibold uppercase leading-[0.92] text-cream">
@@ -91,14 +90,20 @@ export function HomePage() {
 
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:grid-cols-3 md:px-12">
         <MeteoPanel />
-        <article>
-          <Eyebrow>Questo mese</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl">{mese.nome}</h2>
-          <p className="mt-3 text-sm leading-relaxed text-cream-soft">{mese.natura}</p>
-          <p className="mt-2 text-sm text-muted">{mese.uscita}</p>
-          <Link to="/esperienze/calendario" className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm text-olive-light">
-            Calendario stagionale <ArrowRight className="size-4" />
-          </Link>
+        <article className="overflow-hidden rounded-xl bg-navy-card shadow-[var(--shadow-border)]">
+          <div className="relative h-40 overflow-hidden">
+            <img src={mese.foto} alt="" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-card to-transparent" />
+          </div>
+          <div className="p-5">
+            <Eyebrow>Questo mese</Eyebrow>
+            <h2 className="mt-2 font-display text-3xl">{mese.nome}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-cream-soft">{mese.natura}</p>
+            <p className="mt-2 text-sm text-muted">{mese.uscita}</p>
+            <Link to="/esperienze/calendario" className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm text-olive-light">
+              Calendario stagionale <ArrowRight className="size-4" />
+            </Link>
+          </div>
         </article>
         <article className="border-t border-cream/10 pt-6 md:border-t-0 md:pt-0">
           <Eyebrow>Cosa non siamo</Eyebrow>
@@ -106,8 +111,8 @@ export function HomePage() {
             Non sostituiamo Compagnia dei Lepini, la DMO o VisitLazio. Loro hanno eventi, soci, sentieri in PDF. Qui
             stanno le schede dei 26. Il resto si linka, non si copia.
           </p>
-          <Link to="/cantiere" className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm text-olive-light">
-            Basi del cantiere <ArrowRight className="size-4" />
+          <Link to="/lab" className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm text-olive-light">
+            Lepini Lab <ArrowRight className="size-4" />
           </Link>
         </article>
       </section>

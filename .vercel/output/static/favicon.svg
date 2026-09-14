@@ -1,12 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Portale Monti Lepini">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Lepini Digital">
   <rect width="32" height="32" rx="7" fill="#23211E"/>
-  <path d="M5 23 L12 11 L16 17 L22 8 L27 21"
-        fill="none" stroke="#B5713A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="none" stroke="#B5713A" stroke-width="1.15" stroke-linecap="round">
+    <path d="M6 22 L11 14 L16 18 L22 9 L27 20"/>
+    <path d="M6 22 L16 18 L27 20"/>
+    <path d="M11 14 L16 18 L22 9"/>
+  </g>
   <g fill="#B5713A">
-    <circle cx="5" cy="23" r="3"/>
-    <circle cx="12" cy="11" r="3"/>
-    <circle cx="16" cy="17" r="3"/>
-    <circle cx="22" cy="8" r="3"/>
-    <circle cx="27" cy="21" r="3"/>
+    <circle cx="6" cy="22" r="1.35"/>
+    <circle cx="11" cy="14" r="1.35"/>
+    <circle cx="16" cy="18" r="1.35"/>
+    <circle cx="22" cy="9" r="1.35"/>
+    <circle cx="27" cy="20" r="1.35"/>
   </g>
 </svg>
