@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Menu, X } from "lucide-react";
+import { Children, useEffect, useRef, useState, type ReactNode } from "react";
+import { BrandMark } from "@/components/BrandMark";
 import { JsonLd } from "@/components/JsonLd";
-import { DigitalShell } from "@/components/layout/DigitalShell";
+import { LepiniMesh } from "@/components/LepiniMesh";
 import { ProveGallery } from "@/components/ProveGallery";
 import { Button } from "@/components/ui/button";
 import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI, digitalMeta } from "@/data/digitale";
@@ -10,12 +12,12 @@ export const Route = createFileRoute("/digitale/")({
   head: () => ({
     meta: digitalMeta(),
   }),
-  component: DigitalePage,
+  component: StudioHome,
 });
 
-function DigitalePage() {
+function StudioHome() {
   return (
-    <DigitalShell>
+    <StudioShell>
       <JsonLd
         data={{
           "@type": "ProfessionalService",
@@ -23,72 +25,88 @@ function DigitalePage() {
           description: PITCH.jsonld,
           email: DIGITAL_MAIL,
           areaServed: "Monti Lepini",
-          url: "https://lepinidigital.com/digitale",
+          url: "https://lepinidigital.com",
         }}
       />
 
-      <section className="relative overflow-hidden">
-        <Matita />
-        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-28 md:px-12 md:pb-24 md:pt-32">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.heroKicker}</p>
-          <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.6rem,6vw,4.8rem)] font-semibold leading-[0.92] text-ink">
+      <LogoParallax />
+
+      <ParallaxStack>
+        <ParallaxPanel src="/images/digitale/close-calcare.jpg" alt="Calcare dei Monti Lepini" cap="Pietra">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">{PITCH.heroKicker}</p>
+          <h1 className="mt-5 max-w-xl font-display text-[clamp(2.6rem,6.2vw,5rem)] font-semibold leading-[0.92] text-cream">
             {PITCH.heroTitle}
-            <span className="mt-3 block font-medium italic text-copper">{PITCH.heroItalic}</span>
+            <span className="mt-2 block font-medium italic text-copper-light">{PITCH.heroItalic}</span>
           </h1>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">{PITCH.heroLead}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{PITCH.heroLead}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href="#contatti">
-              <Button variant="ink">Parliamone</Button>
+              <Button variant="primary">Parliamone</Button>
             </a>
-            <a href="#servizi" className="text-sm text-ink-soft hover:text-ink">
+            <a href="#lavori" className="inline-flex min-h-11 items-center text-sm text-cream-soft hover:text-cream">
               Cosa facciamo
             </a>
           </div>
-        </div>
-      </section>
+        </ParallaxPanel>
+
+        <ParallaxPanel src="/images/digitale/close-oliva.jpg" alt="Pelle di un'oliva lucida d'olio" cap="Frutto">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">Continuità dei dati</p>
+          <p className="mt-5 max-w-2xl font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.12] text-cream">
+            {PITCH.quote}
+          </p>
+        </ParallaxPanel>
+
+        <ParallaxPanel src="/images/digitale/close-morsa.jpg" alt="Morsa e legno sul banco" cap="Banco">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">02 · Gestionali snelli</p>
+          <h2 className="mt-5 max-w-xl font-display text-[clamp(2.2rem,5vw,4rem)] text-cream">Al banco e in cantiere.</h2>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{SERVIZI[1].testo}</p>
+        </ParallaxPanel>
+
+        <ParallaxPanel src="/images/digitale/close-legno.jpg" alt="Vena del legno e chiodi di rame" cap="Mestiere">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">{PITCH.origineKicker}</p>
+          <h2 className="mt-5 max-w-xl font-display text-[clamp(2.2rem,5vw,4rem)] italic text-cream">
+            Dal banco, verso mercati che prima erano lontani.
+          </h2>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{PITCH.origineLead}</p>
+        </ParallaxPanel>
+      </ParallaxStack>
 
       <section className="border-y border-ink/10">
-        <div className="mx-auto grid max-w-6xl divide-ink/10 md:grid-cols-3 md:divide-x">
+        <div className="mx-auto grid max-w-6xl md:grid-cols-3">
           {DIGITAL_STATS.map((s) => (
-            <div key={s.l} className="px-5 py-8 md:px-12">
-              <p className="font-display text-5xl leading-none text-ink md:text-6xl">{s.k}</p>
-              <p className="mt-3 max-w-[16rem] font-mono text-xs uppercase tracking-[0.16em] text-ink-soft">{s.l}</p>
+            <div key={s.l} className="border-b border-ink/10 px-5 py-8 last:border-b-0 md:border-b-0 md:border-r md:border-ink/10 md:px-12 md:last:border-r-0">
+              <p className="font-display text-3xl leading-tight text-ink md:text-4xl">{s.k}</p>
+              <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-ink-soft">{s.l}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 md:px-12 md:py-20">
-        <blockquote className="max-w-3xl font-display text-3xl leading-snug text-ink md:text-[2.4rem] md:leading-[1.18]">
-          {PITCH.quote}
-        </blockquote>
-      </section>
-
-      <section id="servizi" className="mx-auto max-w-6xl px-5 pb-20 md:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.serviziKicker}</p>
+      <section id="lavori" className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-28">
+        <p className="font-mono text-xs uppercase tracking-kicker text-copper">{PITCH.serviziKicker}</p>
         <h2 className="mt-3 max-w-xl font-display text-4xl text-ink md:text-5xl">{PITCH.serviziTitle}</h2>
         <p className="mt-4 max-w-xl text-ink-soft">{PITCH.serviziLead}</p>
-        <ol className="mt-14 divide-y divide-ink/10 border-y border-ink/10">
+        <ol className="mt-14 border-t border-ink/10">
           {SERVIZI.map((s) => (
-            <li key={s.code} className="grid items-baseline gap-3 py-8 md:grid-cols-12">
-              <p className="font-display text-2xl text-copper md:col-span-2">{s.code}</p>
-              <h3 className="font-display text-2xl text-ink md:col-span-3">{s.titolo}</h3>
-              <p className="max-w-md text-sm leading-relaxed text-ink-soft md:col-span-7">{s.testo}</p>
+            <li key={s.code} className="grid gap-3 border-b border-ink/10 py-9 md:grid-cols-12 md:items-baseline">
+              <p className="font-display text-3xl text-copper md:col-span-2">{s.code}</p>
+              <h3 className="font-display text-2xl text-ink md:col-span-4">{s.titolo}</h3>
+              <p className="max-w-md text-sm leading-relaxed text-ink-soft md:col-span-6">{s.testo}</p>
             </li>
           ))}
         </ol>
       </section>
 
-      <section id="metodo" className="border-y border-ink/10 bg-paper-card/70">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:px-12">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.metodoKicker}</p>
+      <section id="metodo" className="bg-paper-card">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-24">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">{PITCH.metodoKicker}</p>
           <h2 className="mt-3 font-display text-4xl text-ink">{PITCH.metodoTitle}</h2>
-          <p className="mt-4 max-w-xl text-ink-soft">{PITCH.metodoLead}</p>
-          <ol className="mt-14 grid gap-10 md:grid-cols-4">
+          <p className="mt-3 max-w-xl text-ink-soft">{PITCH.metodoLead}</p>
+          <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {METODO.map((m, i) => (
-              <li key={m.titolo} className="border-t border-ink/15 pt-5">
+              <li key={m.titolo} className="border-t-2 border-copper pt-5">
                 <p className="font-mono text-xs text-copper">0{i + 1}</p>
-                <h3 className="mt-2 font-display text-xl text-ink md:text-2xl">{m.titolo}</h3>
+                <h3 className="mt-2 font-display text-xl text-ink">{m.titolo}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{m.testo}</p>
               </li>
             ))}
@@ -96,73 +114,135 @@ function DigitalePage() {
         </div>
       </section>
 
-      <section id="opere" className="mx-auto max-w-6xl px-5 py-20 md:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.opereKicker}</p>
+      <section id="opere" className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-28">
+        <p className="font-mono text-xs uppercase tracking-kicker text-copper">{PITCH.opereKicker}</p>
         <h2 className="mt-3 max-w-2xl font-display text-4xl text-ink">{PITCH.opereTitle}</h2>
         <p className="mt-4 max-w-xl text-ink-soft">{PITCH.opereLead}</p>
         <ProveGallery light />
       </section>
 
-      <section className="border-t border-ink/10">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-12 md:py-20">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">{PITCH.origineKicker}</p>
-          <h2 className="mt-3 max-w-xl font-display text-4xl text-ink">{PITCH.origineTitle}</h2>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">{PITCH.origineLead}</p>
-        </div>
-      </section>
-
-      <Contatti />
-    </DigitalShell>
+      <ContattiStudio />
+    </StudioShell>
   );
 }
 
-function Matita() {
+function StudioShell({ children }: { children: ReactNode }) {
   return (
-    <svg
-      className="pointer-events-none absolute inset-0 h-full w-full text-ink"
-      viewBox="0 0 1200 720"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      <g fill="none" stroke="currentColor" strokeWidth="0.7" opacity="0.22">
-        <path d="M-20 420 C 180 380, 280 460, 420 400 S 680 330, 860 370 S 1100 440, 1220 400" />
-        <path d="M-20 460 C 160 420, 300 500, 460 440 S 720 370, 900 410 S 1120 480, 1220 440" />
-        <path d="M-20 500 C 140 460, 320 540, 500 480 S 760 410, 940 450 S 1140 520, 1220 480" />
-        <path d="M-20 540 C 120 500, 340 580, 540 520 S 800 450, 980 490 S 1160 560, 1220 520" />
-        <path d="M-20 360 C 200 320, 260 400, 400 340 S 640 280, 820 320 S 1080 390, 1220 350" />
-        <path d="M-20 320 C 220 280, 240 360, 380 300 S 620 240, 800 280 S 1060 350, 1220 310" />
-      </g>
-    </svg>
+    <div className="studio-page relative min-h-screen">
+      <a
+        href="#contenuto"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+      >
+        Salta al contenuto
+      </a>
+      <StudioHeader />
+      <div id="contenuto">{children}</div>
+      <footer className="border-t border-ink/10 px-5 py-12 md:px-12">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <BrandMark variant="digital" className="h-16 w-auto md:h-20" />
+          </div>
+          <div className="text-sm text-ink-soft">
+            <a href={`mailto:${DIGITAL_MAIL}`} className="font-mono text-copper">
+              {DIGITAL_MAIL}
+            </a>
+            <p className="mt-2 max-w-sm">{PITCH.footer}</p>
+            <Link to="/digitale/territorio" className="mt-3 inline-block text-ink hover:text-copper">
+              Vista scura
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
 
-function Contatti() {
+function StudioHeader() {
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="fixed inset-x-0 top-0 z-20 border-b border-ink/10 bg-paper/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-12">
+        <Link to="/digitale" className="flex items-center" aria-label="Lepini Digital">
+          <BrandMark variant="digitalMark" className="h-11 w-auto md:h-12" />
+        </Link>
+        <nav className="hidden items-center gap-7 text-sm tracking-wide text-ink-soft lg:flex" aria-label="Studio">
+          <a href="#lavori" className="hover:text-ink">
+            Lavori
+          </a>
+          <a href="#metodo" className="hover:text-ink">
+            Metodo
+          </a>
+          <a href="#contatti" className="hover:text-ink">
+            Contatti
+          </a>
+          <Link to="/portale" className="hover:text-ink">
+            Portale
+          </Link>
+          <Link to="/lab" className="hover:text-ink">
+            Lab
+          </Link>
+          <a href="#contatti">
+            <Button variant="ink" size="sm">
+              Parliamone
+            </Button>
+          </a>
+        </nav>
+        <button
+          type="button"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-ink/15 text-ink lg:hidden"
+          aria-expanded={open}
+          aria-controls="studio-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          <span className="sr-only">Menu</span>
+        </button>
+      </div>
+      {open ? (
+        <div id="studio-nav" className="border-t border-ink/10 bg-paper px-5 py-6 lg:hidden">
+          <nav className="flex flex-col gap-1 text-ink" aria-label="Mobile studio">
+            <a href="#lavori" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Lavori
+            </a>
+            <a href="#metodo" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Metodo
+            </a>
+            <a href="#contatti" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Contatti
+            </a>
+            <Link to="/portale" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Portale
+            </Link>
+            <Link to="/lab" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Lab
+            </Link>
+          </nav>
+        </div>
+      ) : null}
+    </header>
+  );
+}
+
+function ContattiStudio() {
   const [nome, setNome] = useState("");
   const [azienda, setAzienda] = useState("");
   const [testo, setTesto] = useState("");
-
-  const body = [
-    nome && `Nome: ${nome}`,
-    azienda && `Azienda: ${azienda}`,
-    testo || "Ciao, vorrei ragionare su identità, mercati o passaggio generazionale.",
-  ]
+  const body = [nome && `Nome: ${nome}`, azienda && `Azienda: ${azienda}`, testo || "Ciao, vorrei ragionare su identità, mercati o passaggio generazionale."]
     .filter(Boolean)
     .join("\n\n");
   const href = `mailto:${DIGITAL_MAIL}?subject=${encodeURIComponent("Lepini Digital — un salto")}&body=${encodeURIComponent(body)}`;
-
   const field =
     "w-full border-0 border-b border-ink/20 bg-transparent py-3 text-ink placeholder:text-ink-soft/70 focus:border-copper focus:outline-none";
 
   return (
-    <section id="contatti" className="border-t-[3px] border-copper bg-paper-card/80">
+    <section id="contatti" className="border-t-[3px] border-copper bg-paper-card">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-12 md:px-12">
-        <div className="md:col-span-5 md:sticky md:top-28 md:self-start">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-copper">Contatti</p>
+        <div className="md:col-span-5">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Contatti</p>
           <h2 className="mt-4 font-display text-4xl leading-[1.08] text-ink md:text-5xl">{PITCH.contactTitle}</h2>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-ink-soft">{PITCH.contactLead}</p>
           <p className="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-ink-soft">{PITCH.contactHint}</p>
         </div>
-
         <form
           className="md:col-span-7"
           onSubmit={(e) => {
@@ -172,11 +252,11 @@ function Contatti() {
         >
           <div className="grid gap-8 sm:grid-cols-2">
             <p>
-              <label htmlFor="nome" className="block text-sm text-ink-soft">
+              <label htmlFor="s-nome" className="block text-sm text-ink-soft">
                 Nome
               </label>
               <input
-                id="nome"
+                id="s-nome"
                 name="nome"
                 autoComplete="name"
                 value={nome}
@@ -186,11 +266,11 @@ function Contatti() {
               />
             </p>
             <p>
-              <label htmlFor="azienda" className="block text-sm text-ink-soft">
+              <label htmlFor="s-az" className="block text-sm text-ink-soft">
                 Azienda
               </label>
               <input
-                id="azienda"
+                id="s-az"
                 name="azienda"
                 autoComplete="organization"
                 value={azienda}
@@ -200,16 +280,15 @@ function Contatti() {
               />
             </p>
           </div>
-
           <p className="mt-10">
-            <label htmlFor="msg" className="block font-display text-2xl text-ink">
+            <label htmlFor="s-msg" className="block font-display text-2xl text-ink">
               Il salto
             </label>
             <span className="mt-1 block text-sm text-ink-soft">Identità, mercati, passaggio, o un processo che vi frena.</span>
             <textarea
-              id="msg"
+              id="s-msg"
               name="messaggio"
-              rows={7}
+              rows={6}
               required
               value={testo}
               onChange={(e) => setTesto(e.target.value)}
@@ -217,7 +296,6 @@ function Contatti() {
               placeholder="Esempio: mio padre tiene i clienti in agenda. Vorrei un sito e un modo per vendere fuori provincia, senza perdere come lavoriamo."
             />
           </p>
-
           <div className="mt-10 flex flex-wrap items-center gap-5">
             <Button type="submit" variant="ink">
               Parliamone
@@ -228,6 +306,196 @@ function Contatti() {
           </div>
           <p className="mt-4 text-sm text-ink-soft">Si apre la tua posta. Niente iscrizione.</p>
         </form>
+      </div>
+    </section>
+  );
+}
+
+function LogoParallax() {
+  const scene = useRef<HTMLElement>(null);
+  const [t, setT] = useState(0);
+
+  useEffect(() => {
+    const el = scene.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setT(1);
+      return;
+    }
+    let raf = 0;
+    const tick = () => {
+      const vh = window.innerHeight;
+      const r = el.getBoundingClientRect();
+      const travel = Math.max(1, el.offsetHeight - vh);
+      setT(Math.max(0, Math.min(1, -r.top / travel)));
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const draw = Math.min(1, t / 0.58);
+  const lock = Math.max(0, Math.min(1, (t - 0.68) / 0.18));
+  const meshFade = 1 - lock;
+  const scale = 1.05 - t * 0.05;
+
+  return (
+    <section ref={scene} className="parallax-scene relative h-[220vh] md:h-[240vh] bg-paper">
+      <div className="parallax-pin sticky top-0 flex h-svh items-center justify-center overflow-hidden bg-paper">
+        <div className="relative w-full max-w-2xl px-6" style={{ transform: `scale(${scale})` }}>
+          <div className="relative aspect-[954/468] w-full">
+            <div className="absolute inset-x-[6%] top-[2%] h-[56%]" style={{ opacity: meshFade }}>
+              <LepiniMesh progress={draw} className="h-full w-full" />
+            </div>
+            <img
+              src="/images/brand/lepini-digital-official.png"
+              alt="Lepini Digital"
+              className="brand-mark absolute inset-0 h-full w-full object-contain"
+              style={{ opacity: lock }}
+            />
+          </div>
+        </div>
+        <p className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
+          Scorri
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function ParallaxStack({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const [rail, setRail] = useState(true);
+  const n = Children.count(children);
+
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      root.dataset.reduce = "1";
+      return;
+    }
+
+    const scenes = [...root.querySelectorAll<HTMLElement>("[data-scene]")];
+    let raf = 0;
+
+    const tick = () => {
+      const vh = window.innerHeight;
+      let best = 0;
+      let bestVis = -1;
+      scenes.forEach((scene, i) => {
+        const r = scene.getBoundingClientRect();
+        const travel = Math.max(1, scene.offsetHeight - vh);
+        const t = Math.max(0, Math.min(1, -r.top / travel));
+        const photo = scene.querySelector<HTMLElement>("[data-layer=photo]");
+        const copy = scene.querySelector<HTMLElement>("[data-layer=copy]");
+        const veil = scene.querySelector<HTMLElement>("[data-layer=veil]");
+        if (photo) {
+          const y = (t - 0.5) * 18;
+          const s = 1.18 - t * 0.12;
+          photo.style.transform = `translate3d(0, ${y}%, 0) scale(${s})`;
+        }
+        if (copy) {
+          let o = 1;
+          if (i === 0) {
+            if (t > 0.9) o = (1 - t) / 0.1;
+          } else {
+            if (t < 0.08) o = t / 0.08;
+            else if (t > 0.9) o = (1 - t) / 0.1;
+          }
+          o = Math.max(0, Math.min(1, o));
+          copy.style.opacity = String(o);
+          copy.style.transform = `translate3d(0, ${(1 - o) * 28}px, 0)`;
+        }
+        if (veil) {
+          veil.style.opacity = String(0.72 + t * 0.22);
+        }
+        const vis = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+        if (vis > bestVis) {
+          bestVis = vis;
+          best = i;
+        }
+      });
+      setActive(best);
+      const stack = root.getBoundingClientRect();
+      setRail(stack.top < vh * 0.55 && stack.bottom > vh * 0.4);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return (
+    <div ref={ref} className="parallax-stack">
+      {children}
+      <ol
+        className={`pointer-events-none fixed right-5 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-2.5 md:flex ${rail ? "opacity-100" : "opacity-0"}`}
+        aria-label="Capitoli"
+      >
+        {Array.from({ length: n }, (_, i) => (
+          <li
+            key={i}
+            className={`h-8 w-px ${i === active ? "bg-copper" : "bg-cream/35"}`}
+            aria-current={i === active ? "true" : undefined}
+          />
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function ParallaxPanel({
+  src,
+  alt,
+  cap,
+  children,
+}: {
+  src: string;
+  alt: string;
+  cap: string;
+  children: ReactNode;
+}) {
+  return (
+    <section data-scene className="parallax-scene relative h-[158vh] md:h-[178vh]">
+      <div className="parallax-pin sticky top-0 h-svh overflow-hidden">
+        <img
+          data-layer="photo"
+          src={src}
+          alt={alt}
+          className="parallax-photo pointer-events-none absolute left-0 top-0 h-full w-full object-cover"
+        />
+        <div
+          data-layer="veil"
+          className="parallax-veil pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/30"
+        />
+        <div
+          data-layer="copy"
+          className="parallax-copy relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-16 pt-28 md:px-12 md:pb-24"
+        >
+          {children}
+          <p className="mt-10 font-mono text-xs uppercase tracking-[0.16em] text-cream/55">{cap}</p>
+        </div>
       </div>
     </section>
   );

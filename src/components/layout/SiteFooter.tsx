@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="border-t border-cream/10 bg-navy-deep px-5 py-12 md:px-12">
       <div className="mx-auto flex max-w-6xl flex-col gap-10">
         <div className="flex flex-wrap items-center gap-5 border-b border-cream/10 pb-8">
-          <BrandMark variant="mark" className="h-12 w-auto" />
+          <BrandMark variant="mark" className="h-12 w-12" />
           <div>
             <p className="font-display text-2xl text-cream">Monti Lepini</p>
             <p className="mt-1 text-sm tracking-wide text-copper-light">Enciclopedia digitale del comprensorio</p>
@@ -23,11 +23,6 @@ export function SiteFooter() {
           <div>
             <p className="text-xs uppercase tracking-[0.16em] text-olive-light">Il Portale</p>
             <ul className="mt-3 space-y-2 text-sm text-cream-soft">
-              <li>
-                <Link to="/cantiere" className="hover:text-cream">
-                  Cantiere e basi
-                </Link>
-              </li>
               <li>
                 <Link to="/digitale" className="hover:text-cream">
                   Lepini Digital

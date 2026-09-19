@@ -69,24 +69,49 @@ export const SERVIZI = [
     titolo: "Continuità dei dati",
     testo:
       "Portiamo dentro file Excel, fogli cartacei e vecchi database. Nessun cliente ricomincia da zero. Lo storico resta, completo.",
+    foto: "/images/digitale/prodotto-ddt.jpg",
   },
   {
     code: "02",
     titolo: "Gestionali snelli",
     testo:
       "Giacenze, ordini fornitore, DDT, preventivi. Solo quello che serve. Sul PC del banco e sul telefono o tablet in cantiere.",
+    foto: "/images/digitale/magazzino.jpg",
   },
   {
     code: "03",
     titolo: "Automazione di processo",
     testo:
       "Margini e sconti cliente calcolati dal programma. Preventivi e documenti di trasporto in PDF, subito. Zero ricopiatura, zero errori di trascrizione.",
+    foto: "/images/digitale/prodotto-attrezzi.jpg",
   },
   {
     code: "04",
     titolo: "Sito e assistente",
     testo:
       "Sito veloce, senza cookie e senza traccianti. Assistente che risponde solo su catalogo, orari e dati vostri. Non inventa prezzi.",
+    foto: "/images/digitale/studio-hero.jpg",
+  },
+] as const;
+
+export const PRODOTTO = [
+  {
+    src: "/images/digitale/prodotto-olio.jpg",
+    alt: "Bottiglia d'olio su calcare",
+    caption: "Olio",
+    nota: "Still-life da frantoio: la materia prima, non lo stock photo.",
+  },
+  {
+    src: "/images/digitale/prodotto-attrezzi.jpg",
+    alt: "Attrezzi sul banco",
+    caption: "Banco",
+    nota: "Morsa, legno, rame. Il mestiere che deve entrare nel gestionale.",
+  },
+  {
+    src: "/images/digitale/prodotto-ddt.jpg",
+    alt: "Documento di trasporto",
+    caption: "Carta",
+    nota: "DDT e listini: lo storico che non si ricopia a mano.",
   },
 ] as const;
 

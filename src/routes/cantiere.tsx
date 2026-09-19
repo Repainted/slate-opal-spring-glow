@@ -1,19 +1,21 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { CantiereGate } from "@/components/CantiereGate";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { CANTIERE_CONTENUTI, CANTIERE_TECH, PRINCIPI, type Stato } from "@/data/cantiere";
 import { COMUNI } from "@/data/comuni";
-import { SENTIERI } from "@/data/sentieri";
-import { SPECIE } from "@/data/natura";
 import { EVENTI } from "@/data/eventi";
-import { SiteShell } from "@/components/layout/SiteShell";
+import { SPECIE } from "@/data/natura";
+import { SENTIERI } from "@/data/sentieri";
 import { titleFor } from "@/lib/seo";
 
 export const Route = createFileRoute("/cantiere")({
   head: () => ({
     meta: [
       { title: titleFor("Cantiere") },
+      { name: "robots", content: "noindex, nofollow" },
       {
         name: "description",
-        content: "Basi tecniche e editoriali per il Portale Monti Lepini: dataset, SEO, gap, principi, 90 giorni.",
+        content: "Pagina di cantiere riservata del Portale Monti Lepini.",
       },
     ],
   }),
@@ -28,6 +30,7 @@ function badge(stato: Stato) {
 
 function CantierePage() {
   return (
+    <CantiereGate>
     <SiteShell>
       <div className="mx-auto max-w-3xl px-5 py-12 md:px-12">
         <p className="text-[0.75rem] uppercase tracking-[0.2em] text-copper-light">Cantiere</p>
@@ -122,5 +125,6 @@ function CantierePage() {
         </p>
       </div>
     </SiteShell>
+    </CantiereGate>
   );
 }

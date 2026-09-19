@@ -23,6 +23,7 @@ import { Route as ComuniIndexRouteImport } from './routes/comuni/index'
 import { Route as ComuniSlugRouteImport } from './routes/comuni/$slug'
 import { Route as DigitaleIndexRouteImport } from './routes/digitale.index'
 import { Route as DigitaleStudioRouteImport } from './routes/digitale.studio'
+import { Route as DigitaleTerritorioRouteImport } from './routes/digitale.territorio'
 import { Route as EsperienzeIndexRouteImport } from './routes/esperienze/index'
 import { Route as EsperienzeCalendarioRouteImport } from './routes/esperienze/calendario'
 import { Route as EsperienzePlannerRouteImport } from './routes/esperienze/planner'
@@ -108,6 +109,11 @@ const DigitaleIndexRoute = DigitaleIndexRouteImport.update({
 const DigitaleStudioRoute = DigitaleStudioRouteImport.update({
   id: '/studio',
   path: '/studio',
+  getParentRoute: () => DigitaleRoute,
+} as any)
+const DigitaleTerritorioRoute = DigitaleTerritorioRouteImport.update({
+  id: '/territorio',
+  path: '/territorio',
   getParentRoute: () => DigitaleRoute,
 } as any)
 const EsperienzeIndexRoute = EsperienzeIndexRouteImport.update({
@@ -204,6 +210,7 @@ export interface FileRoutesByFullPath {
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/studio': typeof DigitaleStudioRoute
+  '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
   '/esperienze/planner': typeof EsperienzePlannerRoute
   '/esperienze/timeline': typeof EsperienzeTimelineRoute
@@ -235,6 +242,7 @@ export interface FileRoutesByTo {
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/studio': typeof DigitaleStudioRoute
+  '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
   '/esperienze/planner': typeof EsperienzePlannerRoute
   '/esperienze/timeline': typeof EsperienzeTimelineRoute
@@ -268,6 +276,7 @@ export interface FileRoutesById {
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/studio': typeof DigitaleStudioRoute
+  '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
   '/esperienze/planner': typeof EsperienzePlannerRoute
   '/esperienze/timeline': typeof EsperienzeTimelineRoute
@@ -302,6 +311,7 @@ export interface FileRouteTypes {
     | '/storie'
     | '/comuni/$slug'
     | '/digitale/studio'
+    | '/digitale/territorio'
     | '/esperienze/calendario'
     | '/esperienze/planner'
     | '/esperienze/timeline'
@@ -333,6 +343,7 @@ export interface FileRouteTypes {
     | '/storie'
     | '/comuni/$slug'
     | '/digitale/studio'
+    | '/digitale/territorio'
     | '/esperienze/calendario'
     | '/esperienze/planner'
     | '/esperienze/timeline'
@@ -365,6 +376,7 @@ export interface FileRouteTypes {
     | '/storie'
     | '/comuni/$slug'
     | '/digitale/studio'
+    | '/digitale/territorio'
     | '/esperienze/calendario'
     | '/esperienze/planner'
     | '/esperienze/timeline'
@@ -516,6 +528,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DigitaleStudioRouteImport
       parentRoute: typeof DigitaleRoute
     }
+    '/digitale/territorio': {
+      id: '/digitale/territorio'
+      path: '/territorio'
+      fullPath: '/digitale/territorio'
+      preLoaderRoute: typeof DigitaleTerritorioRouteImport
+      parentRoute: typeof DigitaleRoute
+    }
     '/esperienze/': {
       id: '/esperienze/'
       path: '/esperienze'
@@ -633,11 +652,13 @@ declare module '@tanstack/react-router' {
 
 interface DigitaleRouteChildren {
   DigitaleStudioRoute: typeof DigitaleStudioRoute
+  DigitaleTerritorioRoute: typeof DigitaleTerritorioRoute
   DigitaleIndexRoute: typeof DigitaleIndexRoute
 }
 
 const DigitaleRouteChildren: DigitaleRouteChildren = {
   DigitaleStudioRoute: DigitaleStudioRoute,
+  DigitaleTerritorioRoute: DigitaleTerritorioRoute,
   DigitaleIndexRoute: DigitaleIndexRoute,
 }
 

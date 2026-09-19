@@ -36,6 +36,21 @@
   --shadow-border-hover: 0 0 0 1px color-mix(in oklab, #ce8b4e 45%, transparent);
 }
 
+/* Lepini Digital B2B: antracite + rame del badge circolare */
+.digital-skin {
+  --color-navy: #16181e;
+  --color-navy-deep: #0c0e12;
+  --color-navy-card: #1c2028;
+  --color-copper: #c4a07a;
+  --color-copper-light: #d8b896;
+  --color-olive: #c4a07a;
+  --color-olive-light: #d8b896;
+  --color-background: #0c0e12;
+  --color-primary: #c4a07a;
+  --color-ring: #d8b896;
+  --color-border: color-mix(in oklab, #c4a07a 22%, transparent);
+}
+
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -101,15 +116,26 @@
     outline-offset: 3px;
   }
 
-  img:not(.brand-mark) {
+  img:not(.brand-mark):not(.meteo-bg) {
     outline: 1px solid color-mix(in oklab, var(--color-cream) 12%, transparent);
     outline-offset: -1px;
   }
 }
 
+/* Trama calcare, light: rumore da carta e pietra, sempre sotto il testo. */
+.trama-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.93  0 0 0 0 0.88  0 0 0 0 0.72  0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.11;
+  mix-blend-mode: overlay;
+}
+
 .studio-page {
-  background: var(--color-paper);
+  background-color: var(--color-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.28  0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
   color: var(--color-ink);
+  overflow-x: hidden;
 }
 
 .studio-page h1,
@@ -122,31 +148,53 @@
   outline-color: color-mix(in oklab, var(--color-ink) 10%, transparent);
 }
 
-/* Lepini Digital home: foglio da disegno, matita, lampada calda */
-.carta-page {
-  background-color: #f1eadb;
-  background-image:
-    radial-gradient(ellipse 70% 45% at 88% -10%, rgba(212, 148, 72, 0.28), transparent 58%),
-    radial-gradient(ellipse 50% 35% at 8% 108%, rgba(181, 113, 58, 0.1), transparent 55%),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 31px,
-      rgba(40, 32, 18, 0.045) 31px 32px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 31px,
-      rgba(40, 32, 18, 0.03) 31px 32px
-    );
-  color: var(--color-ink);
+.studio-page .intro-reel {
+  outline: none;
+  min-height: 100svh;
+  will-change: transform;
+  transform-origin: center center;
 }
 
-.carta-page h1,
-.carta-page h2,
-.carta-page h3 {
-  color: var(--color-ink);
+.studio-page .parallax-panel h1,
+.studio-page .parallax-panel h2,
+.studio-page .parallax-scene h1,
+.studio-page .parallax-scene h2 {
+  color: var(--color-cream);
 }
 
-.carta-page img:not(.brand-mark) {
-  outline-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+.studio-page .parallax-photo {
+  outline: none;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.studio-page .parallax-copy {
+  will-change: transform, opacity;
+}
+
+.studio-page .parallax-pin {
+  contain: paint;
+}
+
+.studio-page .parallax-stack[data-reduce="1"] .parallax-scene {
+  height: 100svh;
+}
+
+.studio-page .parallax-stack[data-reduce="1"] .parallax-photo,
+.studio-page .parallax-stack[data-reduce="1"] .parallax-copy {
+  transform: none !important;
+  opacity: 1 !important;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-page .parallax-scene {
+    height: 100svh;
+  }
+  .studio-page .parallax-photo,
+  .studio-page .parallax-copy {
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto;
+  }
 }

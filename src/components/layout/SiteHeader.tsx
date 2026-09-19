@@ -24,8 +24,8 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
         overlay ? "absolute inset-x-0 top-0" : "relative bg-navy-deep/80 border-b border-cream/10",
       )}
     >
-      <Link to="/portale" className="flex items-center gap-3 text-cream" aria-label="Home Portale Monti Lepini">
-        <BrandMark variant="mark" className="h-8 w-auto md:h-9" />
+      <Link to="/" className="flex items-center gap-3 text-cream" aria-label="Home Portale Monti Lepini">
+        <BrandMark variant="mark" className="h-9 w-9 md:h-10 md:w-10" />
         <span className="flex flex-col leading-tight font-display">
           <span className="text-xl tracking-wide">Monti Lepini</span>
           <span className="font-sans text-[0.62rem] uppercase tracking-[0.16em] text-copper-light">
@@ -45,12 +45,6 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
             {item.label}
           </Link>
         ))}
-        <Link
-          to="/cantiere"
-          className="rounded-full border border-olive-light/50 px-4 py-2 text-sm text-olive-light hover:bg-olive/15"
-        >
-          Cantiere
-        </Link>
       </nav>
 
       <button
@@ -80,9 +74,6 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
                 {item.label}
               </Link>
             ))}
-            <Link to="/cantiere" className="min-h-11 px-2 py-2 text-olive-light" onClick={() => setOpen(false)}>
-              Cantiere
-            </Link>
           </nav>
         </div>
       ) : null}

@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { ComuneCard } from "@/components/comuni/ComuneCard";
 import { ComuneMap } from "@/components/comuni/ComuneMap";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { PortaleScheda } from "@/components/PortaleScheda";
+import { Eyebrow } from "@/components/SectionHead";
 import { COMUNI, comuniByProvincia } from "@/data/comuni";
 import { titleFor } from "@/lib/seo";
 
@@ -45,7 +47,7 @@ export function ComuniIndex() {
     <SiteShell>
       <div className="mx-auto max-w-6xl px-5 py-12 md:px-12">
         <p className="text-[0.75rem] uppercase tracking-[0.2em] text-copper-light">Comuni</p>
-        <h1 className="mt-2 font-display text-5xl text-cream">I 26, in una griglia</h1>
+        <h1 className="mt-2 font-display text-5xl text-cream">I 26, in trama</h1>
         <p className="mt-4 max-w-2xl text-cream-soft">
           Latina {byP.Latina.length}, Roma {byP.Roma.length}, Frosinone {byP.Frosinone.length}. Non tutti sono
           Bandiere Arancioni: il filtro TCI esiste perché il Touring ha già scelto, non perché gli altri non contino.
@@ -86,7 +88,32 @@ export function ComuniIndex() {
           </form>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mt-14">
+          <Eyebrow>Dal Portale al Lab</Eyebrow>
+          <h2 className="mt-2 font-display text-3xl text-cream">Due schede, lo stesso dataset</h2>
+          <p className="mt-3 max-w-2xl text-cream-soft">
+            I 26 comuni non stanno solo in elenco. In Lab la trama li tiene insieme; la biosfera tiene le specie
+            segnalate sulle schede.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <PortaleScheda
+              to="/lab/trama"
+              img="/images/lab/trama.jpg"
+              kicker="Lab · 08"
+              title="Trama"
+              text="I 26 borghi come nodi di una sola rete. Demografia, orbite, geografia: ogni punto apre la scheda del Portale."
+            />
+            <PortaleScheda
+              to="/lab/biosfera"
+              img="/images/lab/biosfera.jpg"
+              kicker="Lab · 03"
+              title="Biosfera"
+              text="Flora e fauna dello stesso schedario. Orbite o diagramma, filtri per strato: alberi, insetti, uccelli."
+            />
+          </div>
+        </section>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((c) => (
             <ComuneCard key={c.slug} comune={c} />
           ))}

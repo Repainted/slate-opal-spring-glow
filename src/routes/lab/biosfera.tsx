@@ -1,6 +1,8 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useCallback, useRef, useState } from "react";
 import { ALL_STRATI, STRATI, type Strato } from "@/data/strati";
+import { getComune } from "@/data/comuni";
+import { speciePerComune } from "@/data/natura";
 import { BiosferaDiagram } from "@/lab/BiosferaDiagram";
 import { LabNav, LabTop, Telemetry, WebGLHost, useLabView, useReducedMotion } from "@/lab/LabStage";
 import { SchedaSpecie } from "@/lab/Schede";
@@ -18,10 +20,21 @@ export const Route = createFileRoute("/lab/biosfera")({
   component: BiosferaPage,
 });
 
+function comuneFromUrl() {
+  if (typeof window === "undefined") return null;
+  const s = new URLSearchParams(window.location.search).get("comune");
+  return s && getComune(s) ? s : null;
+}
+
 function BiosferaPage() {
   const reduced = useReducedMotion();
   const { view, zoomIn, zoomOut } = useLabView();
-  const [pick, setPick] = useState<BioPick | null>(null);
+  const fromSlug = comuneFromUrl();
+  const fromComune = fromSlug ? getComune(fromSlug) : null;
+  const fromSpecie = fromSlug ? speciePerComune(fromSlug) : [];
+  const [pick, setPick] = useState<BioPick | null>(() =>
+    fromSpecie[0] ? { kind: "specie", specie: fromSpecie[0] } : null,
+  );
   const [mode, setMode] = useState<"orbite" | "diagramma">("orbite");
   const [on, setOn] = useState<Set<Strato>>(() => new Set(ALL_STRATI));
   const filter = useRef<BioFilter>({ layers: new Set(ALL_STRATI) });
@@ -80,6 +93,12 @@ function BiosferaPage() {
               </button>
             ))}
           </div>
+          {fromComune ? (
+            <p className="rounded-full border border-copper/40 bg-navy-deep/80 px-4 py-2 text-sm text-cream-soft">
+              Dal Portale · {fromComune.nome}
+              {fromSpecie.length ? ` · ${fromSpecie.length} specie` : ""}
+            </p>
+          ) : null}
           <div className="flex max-w-full flex-wrap justify-center gap-1">
             {STRATI.map((st) => (
               <button
@@ -126,7 +145,13 @@ function BiosferaPage() {
           </Link>
         </aside>
       ) : null}
-      <Telemetry items={[`${counts} strati`, mode, pick?.kind === "specie" ? pick.specie.comune : "tocca una specie"]} />
+      <Telemetry
+        items={[
+          `${counts} strati`,
+          mode,
+          mode === "orbite" ? "trascina: i puntini diventano sfere" : pick?.kind === "specie" ? pick.specie.comune : "tocca una specie",
+        ]}
+      />
     </div>
   );
 }

@@ -434,7 +434,7 @@ export function getComune(slug: string) {
   return COMUNI.find((c) => c.slug === slug);
 }
 
-/** Foto borgo recuperate dal Portale originale. Mancano Giuliano, Sgurgola, Villa Santo Stefano. */
+/** Foto borgo: 23 dal Portale originale, 3 ritratti di crinale per i comuni che ne erano senza. */
 export const FOTO_COMUNI = new Set([
   "amaseno",
   "artena",
@@ -442,6 +442,7 @@ export const FOTO_COMUNI = new Set([
   "carpineto-romano",
   "castro-dei-volsci",
   "cori",
+  "giuliano-di-roma",
   "gorga",
   "maenza",
   "montelanico",
@@ -456,9 +457,11 @@ export const FOTO_COMUNI = new Set([
   "segni",
   "sermoneta",
   "sezze",
+  "sgurgola",
   "sonnino",
   "supino",
   "vallecorsa",
+  "villa-santo-stefano",
 ]);
 
 export function fotoComune(slug: string) {

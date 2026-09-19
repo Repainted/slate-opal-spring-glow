@@ -44,6 +44,10 @@ export class OrbitCam {
     this.radius = THREE.MathUtils.clamp(this.radius * factor, this.minR, this.maxR);
   }
 
+  lift(rotX: number) {
+    this.aimX = THREE.MathUtils.clamp(rotX, 0.06, 1.15);
+  }
+
   bind(
     canvas: HTMLCanvasElement,
     opts?: {

@@ -1,0 +1,16 @@
+node_modules
+.git
+.vercel
+.output
+.nitro
+.tanstack
+dist
+artifacts
+screenshots
+attachments
+*.zip
+.env
+.env.*
+.project_id
+.github_repo
+.netlify

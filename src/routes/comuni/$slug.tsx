@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { ComuneMap } from "@/components/comuni/ComuneMap";
 import { ComuneTabs } from "@/components/comuni/ComuneTabs";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { PortaleScheda } from "@/components/PortaleScheda";
 import { getComune, fotoComune } from "@/data/comuni";
 import { EVENTI } from "@/data/eventi";
 import { speciePerComune } from "@/data/natura";
@@ -124,6 +125,26 @@ function ComunePage() {
 
         <aside className="flex flex-col gap-6">
           <ComuneMap active={comune.slug} />
+          <PortaleScheda
+            href={`/lab/trama?nodo=${comune.slug}`}
+            img="/images/lab/trama.jpg"
+            kicker="Lab · Trama"
+            title={comune.nome}
+            text={`Apri ${comune.nome} come nodo della rete dei 26. Stessa scheda, un altro modo di vederla.`}
+            compact
+          />
+          <PortaleScheda
+            href={specie.length ? `/lab/biosfera?comune=${comune.slug}` : "/lab/biosfera"}
+            img="/images/lab/biosfera.jpg"
+            kicker="Lab · Biosfera"
+            title={specie.length ? `${specie.length} specie in scheda` : "Biosfera"}
+            text={
+              specie.length
+                ? `Le specie segnalate a ${comune.nome} stanno nello stesso campo 3D del Lab.`
+                : "Flora e fauna del comprensorio, nello stesso schedario."
+            }
+            compact
+          />
           {sentieri.length > 0 ? (
             <div className="rounded-xl bg-navy-card p-5 shadow-[var(--shadow-border)]">
               <h2 className="font-display text-xl">Sentieri in dataset</h2>

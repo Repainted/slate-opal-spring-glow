@@ -45,11 +45,18 @@ function DemoLegend() {
   );
 }
 
+function nodoFromUrl() {
+  if (typeof window === "undefined") return "montelanico";
+  const n = new URLSearchParams(window.location.search).get("nodo");
+  return n && COMUNI.some((c) => c.slug === n) ? n : "montelanico";
+}
+
 function TramaPage() {
   const reduced = useReducedMotion();
   const { view, zoomIn, zoomOut } = useLabView();
-  const slugRef = useRef<string | null>("montelanico");
-  const [slug, setSlug] = useState("montelanico");
+  const startSlug = nodoFromUrl();
+  const slugRef = useRef<string | null>(startSlug);
+  const [slug, setSlug] = useState(startSlug);
   const [labels, setLabels] = useState<TramaLabel[]>([]);
   const [unfold, setUnfold] = useState(0);
   const [mode, setMode] = useState<TramaMode>("trama");

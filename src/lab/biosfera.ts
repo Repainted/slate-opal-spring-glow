@@ -3,6 +3,7 @@ import { HABITAT, SPECIE } from "@/data/natura";
 import { stratoOf, type Strato } from "@/data/strati";
 import type { Specie } from "@/data/types";
 import { makeRenderer, resizeRenderer } from "./geo";
+import { LOGO_CREAM, LOGO_GOLD, makeLabLogo3D } from "./labLogo3d";
 import { OrbitCam, type ViewCtl } from "./view";
 
 export type BioPick =
@@ -35,6 +36,16 @@ function geomFor(strato: Exclude<Strato, "habitat">) {
   return new THREE.SphereGeometry(0.26, 12, 10);
 }
 
+type Node = {
+  form: THREE.Object3D;
+  dot: THREE.Object3D;
+  line: THREE.Line;
+  lineMat: THREE.LineBasicMaterial;
+  strato: Strato;
+  rest: THREE.Vector3;
+  awakePos: THREE.Vector3;
+};
+
 export function startBiosfera(
   canvas: HTMLCanvasElement,
   opts: {
@@ -54,22 +65,20 @@ export function startBiosfera(
   const key = new THREE.DirectionalLight(0xede0c8, 1.4);
   key.position.set(-4, 8, 6);
   scene.add(key);
-  const fill = new THREE.PointLight(0xb5713a, 2.2, 40);
-  fill.position.set(3, 2, -4);
-  scene.add(fill);
 
-  const coreGeo = new THREE.IcosahedronGeometry(1.35, 1);
-  const core = new THREE.Mesh(coreGeo, new THREE.MeshBasicMaterial({ color: 0x6c7a4b, wireframe: true }));
-  scene.add(core);
-  const inner = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.9, 0),
-    new THREE.MeshBasicMaterial({ color: 0xb5713a, transparent: true, opacity: 0.45 }),
-  );
-  scene.add(inner);
+  const logo = makeLabLogo3D();
+  scene.add(logo.group);
 
   const pickables: THREE.Object3D[] = [];
-  const nodes: { mesh: THREE.Object3D; strato: Strato; line: THREE.Line }[] = [];
-  const geoms: THREE.BufferGeometry[] = [coreGeo];
+  const nodes: Node[] = [];
+  const geoms: THREE.BufferGeometry[] = [];
+  const mats: THREE.Material[] = [];
+
+  const goldMat = new THREE.MeshBasicMaterial({ color: LOGO_GOLD });
+  const creamMat = new THREE.MeshBasicMaterial({ color: LOGO_CREAM });
+  mats.push(goldMat, creamMat);
+  const dotGeo = new THREE.SphereGeometry(0.07, 10, 8);
+  geoms.push(dotGeo);
 
   const byStrato = new Map<Exclude<Strato, "habitat">, Specie[]>();
   for (const s of SPECIE) {
@@ -79,71 +88,65 @@ export function startBiosfera(
     byStrato.set(st, list);
   }
 
+  let di = 0;
+  const place = (
+    strato: Strato,
+    r: number,
+    color: number,
+    formGeo: THREE.BufferGeometry,
+    pick: BioPick,
+    i: number,
+    n: number,
+    yAmp: number,
+  ) => {
+    const t = (i / n) * Math.PI * 2 - Math.PI / 2;
+    const y = Math.sin(i * 1.37 + r) * yAmp;
+    const rest = new THREE.Vector3(Math.cos(t) * r, 0, Math.sin(t) * r);
+    const awakePos = new THREE.Vector3(Math.cos(t) * r, y, Math.sin(t) * r);
+    const formMat = new THREE.MeshBasicMaterial({ color });
+    mats.push(formMat);
+    const form = new THREE.Mesh(formGeo, formMat);
+    form.position.copy(rest);
+    form.scale.setScalar(0.001);
+    form.userData.pick = pick;
+    const dot = new THREE.Mesh(dotGeo, di++ % 2 === 0 ? goldMat : creamMat);
+    dot.position.copy(rest);
+    dot.userData.pick = pick;
+    pickables.push(form, dot);
+    scene.add(form, dot);
+    const lg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), rest.clone()]);
+    geoms.push(lg);
+    const lineMat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0 });
+    mats.push(lineMat);
+    const line = new THREE.Line(lg, lineMat);
+    line.visible = false;
+    scene.add(line);
+    nodes.push({ form, dot, line, lineMat, strato, rest, awakePos });
+  };
+
   for (const [st, list] of byStrato) {
     const ring = RING[st];
     const geo = geomFor(st);
     geoms.push(geo);
     list.forEach((s, i) => {
-      const t = (i / list.length) * Math.PI * 2 - Math.PI / 2;
-      const y = Math.sin(i * 1.37 + ring.r) * 0.55;
-      const mat = new THREE.MeshBasicMaterial({ color: ring.color });
-      const m = new THREE.Mesh(geo, mat);
-      m.position.set(Math.cos(t) * ring.r, y, Math.sin(t) * ring.r);
-      m.userData.pick = { kind: "specie", specie: s } satisfies BioPick;
-      m.userData.strato = st;
-      pickables.push(m);
-      scene.add(m);
-      const lg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), m.position.clone()]);
-      const line = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: ring.color, transparent: true, opacity: 0.22 }));
-      scene.add(line);
-      nodes.push({ mesh: m, strato: st, line });
+      place(st, ring.r, ring.color, geo, { kind: "specie", specie: s }, i, list.length, 1.15);
     });
   }
 
   const habGeo = new THREE.OctahedronGeometry(0.34, 0);
   geoms.push(habGeo);
   HABITAT.forEach((h, i) => {
-    const t = (i / HABITAT.length) * Math.PI * 2;
-    const m = new THREE.Mesh(
+    place(
+      "habitat",
+      2.15,
+      0xede0c8,
       habGeo,
-      new THREE.MeshBasicMaterial({ color: 0xede0c8 }),
+      { kind: "habitat", titolo: h.titolo, testo: h.testo },
+      i,
+      HABITAT.length,
+      0.55,
     );
-    m.position.set(Math.cos(t) * 2.15, Math.sin(t * 0.5) * 0.35, Math.sin(t) * 2.15);
-    m.userData.pick = { kind: "habitat", titolo: h.titolo, testo: h.testo } satisfies BioPick;
-    m.userData.strato = "habitat" satisfies Strato;
-    pickables.push(m);
-    scene.add(m);
-    const lg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), m.position.clone()]);
-    const line = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: 0xede0c8, transparent: true, opacity: 0.2 }));
-    scene.add(line);
-    nodes.push({ mesh: m, strato: "habitat", line });
   });
-
-  const dustGeo = new THREE.BufferGeometry();
-  const dp = new Float32Array(240);
-  for (let i = 0; i < 80; i++) {
-    const u = Math.random() * Math.PI * 2;
-    const v = Math.acos(2 * Math.random() - 1);
-    const rr = 2.2 + Math.random() * 5.5;
-    dp[i * 3] = rr * Math.sin(v) * Math.cos(u);
-    dp[i * 3 + 1] = rr * Math.cos(v);
-    dp[i * 3 + 2] = rr * Math.sin(v) * Math.sin(u);
-  }
-  dustGeo.setAttribute("position", new THREE.BufferAttribute(dp, 3));
-  geoms.push(dustGeo);
-  scene.add(
-    new THREE.Points(
-      dustGeo,
-      new THREE.PointsMaterial({
-        color: 0xede0c8,
-        size: 0.06,
-        transparent: true,
-        opacity: 0.45,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      }),
-    ),
-  );
 
   const parent = canvas.parentElement ?? canvas;
   const resize = () => resizeRenderer(renderer, camera, parent);
@@ -151,28 +154,46 @@ export function startBiosfera(
   const ro = new ResizeObserver(resize);
   ro.observe(parent);
 
-  const orbit = new OrbitCam({ radius: 15, minR: 5, maxR: 36, rotY: 0.4, rotX: 0.35, auto: !opts.reduced });
-  orbit.look.set(0, 0.4, 0);
+  const orbit = new OrbitCam({
+    radius: 13,
+    minR: 5,
+    maxR: 36,
+    rotY: 0.12,
+    rotX: 0.16,
+    auto: !opts.reduced,
+  });
+  orbit.look.set(0, 0.15, 0);
+
   const ray = new THREE.Raycaster();
   const ndc = new THREE.Vector2();
   let picked: THREE.Object3D | null = null;
+  let targetAwake = opts.reduced ? 1 : 0;
+  let awake = targetAwake;
+  let interact = false;
+
+  const wake = () => {
+    if (!interact) orbit.lift(0.48);
+    interact = true;
+    targetAwake = 1;
+  };
 
   const bound = orbit.bind(canvas, {
     pan: false,
     onZoom: (f) => {
+      wake();
       opts.view.zoom = THREE.MathUtils.clamp(opts.view.zoom * f, 0.35, 2.4);
     },
     onTap: (e) => {
+      wake();
       const r = canvas.getBoundingClientRect();
       ndc.x = ((e.clientX - r.left) / r.width) * 2 - 1;
       ndc.y = -((e.clientY - r.top) / r.height) * 2 + 1;
       ray.setFromCamera(ndc, camera);
       const visible = pickables.filter((o) => o.visible);
       const hits = ray.intersectObjects(visible);
-      if (picked) picked.scale.setScalar(1);
+      if (picked) picked.scale.setScalar(picked.userData.baseScale ?? 1);
       picked = hits[0]?.object ?? null;
       if (picked) {
-        picked.scale.setScalar(1.7);
         opts.onPick(picked.userData.pick as BioPick);
       } else opts.onPick(null);
     },
@@ -181,26 +202,45 @@ export function startBiosfera(
   let last = performance.now();
   let alive = true;
   let raf = 0;
+  const tmp = new THREE.Vector3();
 
   const loop = (now: number) => {
     if (!alive) return;
     const dt = Math.min((now - last) / 1000, 0.1);
     last = now;
+    if (orbit.dragging) wake();
+    awake = THREE.MathUtils.damp(awake, targetAwake, interact ? 3.2 : 2.2, dt);
+
     const layers = opts.filter.layers;
     for (const n of nodes) {
       const on = layers.has(n.strato);
-      n.mesh.visible = on;
-      n.line.visible = on;
+      tmp.lerpVectors(n.rest, n.awakePos, awake);
+      n.form.position.copy(tmp);
+      n.dot.position.copy(tmp);
+      const formS = THREE.MathUtils.lerp(0.001, 1, awake);
+      const dotS = THREE.MathUtils.lerp(1, 0.001, awake);
+      n.form.userData.baseScale = formS;
+      n.dot.userData.baseScale = dotS;
+      const hi = picked === n.form || picked === n.dot ? 1.7 : 1;
+      n.form.scale.setScalar(formS * (picked === n.form ? hi : 1));
+      n.dot.scale.setScalar(dotS * (picked === n.dot ? hi : 1));
+      n.form.visible = on && awake > 0.03;
+      n.dot.visible = on && awake < 0.97;
+      n.lineMat.opacity = 0.22 * awake;
+      n.line.visible = on && awake > 0.06;
+      const pos = n.line.geometry.getAttribute("position");
+      pos.setXYZ(1, tmp.x, tmp.y, tmp.z);
+      pos.needsUpdate = true;
     }
+
+    logo.step(awake, camera);
     orbit.radius = THREE.MathUtils.damp(
       orbit.radius,
-      THREE.MathUtils.clamp(15 * opts.view.zoom, orbit.minR, orbit.maxR),
+      THREE.MathUtils.clamp(13 * opts.view.zoom, orbit.minR, orbit.maxR),
       5,
       dt,
     );
-    orbit.step(dt, camera, 0.4);
-    core.rotation.y += dt * 0.15;
-    inner.rotation.y -= dt * 0.22;
+    orbit.step(dt, camera, 0.15);
     renderer.render(scene, camera);
     raf = requestAnimationFrame(loop);
   };
@@ -211,7 +251,9 @@ export function startBiosfera(
     cancelAnimationFrame(raf);
     ro.disconnect();
     bound.dispose();
+    logo.dispose();
     for (const g of geoms) g.dispose();
+    for (const m of mats) m.dispose();
     renderer.dispose();
   };
 }
