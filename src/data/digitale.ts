@@ -115,6 +115,47 @@ export const PRODOTTO = [
   },
 ] as const;
 
+export const CONTENUTI = {
+  kicker: "Contenuti",
+  title: "Foto, video e marchio, pronti da pubblicare",
+  lead: "Per olio, ferramenta, legno, bottega. Si parte dalle vostre foto e dal vostro nome. L'intelligenza artificiale accelera. Una persona controlla prima che qualcosa esca.",
+} as const;
+
+export const CONTENUTI_INCLUSI = [
+  {
+    code: "01",
+    titolo: "Ideazione",
+    testo:
+      "Concept del marchio e delle immagini, prima di stampare o mettere online. Si parte da cosa fate voi, non da un modello uguale per tutti.",
+  },
+  {
+    code: "02",
+    titolo: "Valorizzazione",
+    testo:
+      "Le foto che avete già — prodotto, banco, bottega — si sistemano e si mettono in una scena pulita. Meno giorni di set. Il pezzo resta quello vero.",
+  },
+  {
+    code: "03",
+    titolo: "Video",
+    testo: "Clip brevi per Instagram, scheda prodotto e vetrina. Niente spot. Qualcosa che si pubblica questa settimana.",
+  },
+] as const;
+
+export const CONTENUTI_AMBITI = [
+  { titolo: "Schede prodotto", testo: "Negozio online e listino: la foto giusta accanto al nome giusto." },
+  { titolo: "Volantini e campagne", testo: "Un'immagine che sta su un foglio A4 e su un annuncio." },
+  { titolo: "Social", testo: "Storie e post con lo stesso segno, senza rifare tutto ogni volta." },
+  { titolo: "Marchio", testo: "Un artigiano riconoscibile, anche fuori dalla valle." },
+  { titolo: "Catalogo", testo: "Pagine per la stampa, non solo per lo schermo." },
+] as const;
+
+export const CONTENUTI_PROCESSO = [
+  { titolo: "Il mestiere", testo: "Chi compra e cosa deve vedersi. Si guarda il banco, non una cartella di esempi generici." },
+  { titolo: "Le prove", testo: "Bozze di immagini e video. Voi dite sì o no, prima di andare avanti." },
+  { titolo: "I formati", testo: "Sito, storia, volantino, catalogo. Lo stesso pezzo, le misure giuste." },
+  { titolo: "I file", testo: "Consegnati e pronti. Li usate voi, senza un altro passaggio." },
+] as const;
+
 export const METODO = [
   {
     titolo: "I fogli",

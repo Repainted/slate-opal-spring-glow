@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LepiniMesh } from "@/components/LepiniMesh";
 import { ProveGallery } from "@/components/ProveGallery";
 import { Button } from "@/components/ui/button";
-import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI, digitalMeta } from "@/data/digitale";
+import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI, CONTENUTI, CONTENUTI_INCLUSI, CONTENUTI_AMBITI, CONTENUTI_PROCESSO, digitalMeta } from "@/data/digitale";
 
 export const Route = createFileRoute("/digitale/")({
   head: () => ({
@@ -83,6 +83,53 @@ function StudioHome() {
       </section>
 
       <section id="lavori" className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-28">
+        <p className="font-mono text-xs uppercase tracking-kicker text-copper">{CONTENUTI.kicker}</p>
+        <h2 className="mt-3 max-w-xl font-display text-4xl text-ink md:text-5xl">{CONTENUTI.title}</h2>
+        <p className="mt-4 max-w-xl text-ink-soft">{CONTENUTI.lead}</p>
+        <ol className="mt-14 border-t border-ink/10">
+          {CONTENUTI_INCLUSI.map((s) => (
+            <li key={s.code} className="grid gap-3 border-b border-ink/10 py-9 md:grid-cols-12 md:items-baseline">
+              <p className="font-display text-3xl text-copper md:col-span-2">{s.code}</p>
+              <h3 className="font-display text-2xl text-ink md:col-span-4">{s.titolo}</h3>
+              <p className="max-w-md text-sm leading-relaxed text-ink-soft md:col-span-6">{s.testo}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-6 max-w-xl text-sm text-ink-soft">
+          Non inventiamo il prodotto. Se deve vedersi com'è, resta la foto vera.
+        </p>
+
+        <h3 className="mt-16 font-display text-2xl text-ink">Dove finiscono</h3>
+        <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {CONTENUTI_AMBITI.map((a) => (
+            <li key={a.titolo} className="border-t border-ink/15 pt-4">
+              <h4 className="font-display text-xl text-ink">{a.titolo}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{a.testo}</p>
+            </li>
+          ))}
+        </ul>
+        <a href="#contatti" className="mt-10 inline-flex min-h-11 items-center text-sm text-copper hover:text-ink">
+          Parliamone
+        </a>
+      </section>
+
+      <section className="bg-paper-card">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-24">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Come si fa</p>
+          <h2 className="mt-3 font-display text-4xl text-ink">Quattro passaggi, poi i file</h2>
+          <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {CONTENUTI_PROCESSO.map((m, i) => (
+              <li key={m.titolo} className="border-t-2 border-copper pt-5">
+                <p className="font-mono text-xs text-copper">0{i + 1}</p>
+                <h3 className="mt-2 font-display text-xl text-ink">{m.titolo}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{m.testo}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="strumenti" className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-28">
         <p className="font-mono text-xs uppercase tracking-kicker text-copper">{PITCH.serviziKicker}</p>
         <h2 className="mt-3 max-w-xl font-display text-4xl text-ink md:text-5xl">{PITCH.serviziTitle}</h2>
         <p className="mt-4 max-w-xl text-ink-soft">{PITCH.serviziLead}</p>
@@ -167,7 +214,7 @@ function StudioHeader() {
         </Link>
         <nav className="hidden items-center gap-7 text-sm tracking-wide text-ink-soft lg:flex" aria-label="Studio">
           <a href="#lavori" className="hover:text-ink">
-            Lavori
+            Contenuti
           </a>
           <a href="#metodo" className="hover:text-ink">
             Metodo
@@ -202,7 +249,7 @@ function StudioHeader() {
         <div id="studio-nav" className="border-t border-ink/10 bg-paper px-5 py-6 lg:hidden">
           <nav className="flex flex-col gap-1 text-ink" aria-label="Mobile studio">
             <a href="#lavori" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
-              Lavori
+              Contenuti
             </a>
             <a href="#metodo" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
               Metodo
