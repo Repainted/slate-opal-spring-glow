@@ -98,7 +98,7 @@ const EXPERIMENTS = [
     href: "/lab/legno.html",
     code: "09",
     title: "Legno",
-    text: "Progetto in 3D: travi, pannelli, coperture sandwich. Il computo metrico esce da solo.",
+    text: "Travi, pannelli e coperture. Sezione, essenza e distinta d'acquisto con prezzi.",
     img: "/images/lab/legno.jpg",
   },
 ];

@@ -251,11 +251,11 @@
     opacity: 0; pointer-events: none; transition: opacity 0.2s;
   }
   .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal { background: var(--panel); border-radius: 12px; width: 750px; max-width: 95vw; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow); }
+  .modal { background: var(--panel); border-radius: 12px; width: min(1080px, 96vw); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow); }
   .modal-header { background: var(--wood-dark); color: var(--wood-pale); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
   .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
   .bom-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
-  .bom-table th, .bom-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: left; }
+  .bom-table th, .bom-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: left; white-space: nowrap; }
   .bom-table th { background: var(--bg2); font-family: 'IBM Plex Mono'; font-size: 0.7rem; }
 
   .project-title-input {
@@ -356,8 +356,19 @@
     <div class="cart-section">
       <div class="cart-header">📋 Elementi in Scena (<span id="cartCount">0</span>)</div>
       <div class="cart-list" id="cartList"></div>
-      <button class="bom-btn" onclick="showBOM()">📋 Computo Metrico PRO</button>
+      <button class="bom-btn" onclick="showBOM()">Distinta d'acquisto</button>
     </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeBOM()">
+  <div class="modal" role="dialog" aria-labelledby="bomTitle">
+    <div class="modal-header">
+      <h2 id="bomTitle" style="font-size:1rem;font-weight:600;">Distinta d'acquisto</h2>
+      <button type="button" onclick="closeBOM()" style="background:transparent;border:1px solid var(--wood-pale);color:var(--wood-pale);border-radius:6px;padding:6px 10px;cursor:pointer;">Chiudi</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
@@ -398,6 +409,45 @@ let sceneObjects = [];
 let selectedObj = null;
 let currentFingerMode = 'cam';
 let activeFlatting = { id: 0, name: 'Abete Naturale', hex: 0xC4956A };
+
+const LISTINO = {
+  trave: { sku: 'AB-10x10', nome: 'Trave', unita: 'ml', prezzo: 8.4 },
+  asse: { sku: 'AB-3x15', nome: 'Asse', unita: 'ml', prezzo: 4.2 },
+  moraletto: { sku: 'AB-6x6', nome: 'Moraletto', unita: 'ml', prezzo: 3.1 },
+  pannello: { sku: 'PN-PARETE', nome: 'Pannello', unita: 'mq', prezzo: 22 },
+  colonna: { sku: 'AB-15x15', nome: 'Pilastro', unita: 'ml', prezzo: 14.8 },
+  copertura_isolante: { sku: 'SW-60', nome: 'Pannello sandwich', unita: 'mq', prezzo: 32 },
+};
+const ESSENZE = [
+  { id: 'abete', nome: 'Abete', k: 1 },
+  { id: 'larice', nome: 'Larice', k: 1.35 },
+  { id: 'castagno', nome: 'Castagno', k: 1.55 },
+  { id: 'rovere', nome: 'Rovere', k: 1.8 },
+];
+function essenzaOf(id) { return ESSENZE.find((e) => e.id === id) || ESSENZE[0]; }
+function sezioneDi(d) {
+  if (d.type === 'pannello' || d.type === 'copertura_isolante') return 'sp. ' + d.h + ' cm';
+  return d.h + ' × ' + d.d + ' cm';
+}
+function ensureCommerce(d) {
+  const cat = LISTINO[d.type] || LISTINO.trave;
+  if (!d.sku) d.sku = cat.sku;
+  if (!d.essenceId) d.essenceId = 'abete';
+  if (!d.unita) d.unita = cat.unita;
+  if (d.prezzoBase == null) d.prezzoBase = cat.prezzo;
+  return d;
+}
+function misuraRiga(d) {
+  ensureCommerce(d);
+  return d.unita === 'mq' ? (d.w * d.d) / 10000 : d.w / 100;
+}
+function prezzoUnitario(d) {
+  ensureCommerce(d);
+  return d.prezzoBase * essenzaOf(d.essenceId).k;
+}
+function importoRiga(d) { return misuraRiga(d) * prezzoUnitario(d); }
+function euro(n) { return n.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }); }
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -758,30 +808,54 @@ function deselectAll() {
 
 function renderInspector(obj) {
   const body = document.getElementById('ppBody');
-  const isIsolante = obj.data.type === 'copertura_isolante';
-  
+  const d = ensureCommerce(obj.data);
+  const isIsolante = d.type === 'copertura_isolante';
+  const essOpts = ESSENZE.map((e) => `<option value="${e.id}" ${e.id === d.essenceId ? 'selected' : ''}>${e.nome}</option>`).join('');
   body.innerHTML = `
     <div style="font-size:0.85rem; margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:8px;">
-      <b>Pezzo:</b> ${isIsolante ? 'Pannello Sandwich Isolante' : capitalize(obj.data.type)}<br>
-      <b>Finitura:</b> ${isIsolante ? 'Precoibentato Tecnico' : obj.data.colorName}<br>
+      <b>${isIsolante ? 'Pannello sandwich' : capitalize(d.type)}</b><br>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;">${d.sku} · ${sezioneDi(d)}</span><br>
+      <b>Finitura:</b> ${isIsolante ? 'Precoibentato' : d.colorName}
     </div>
     <div class="pp-field">
-      <label class="pp-label">✏️ Lunghezza (cm)</label>
-      <input type="range" id="paramW" min="10" max="400" step="2" value="${obj.data.w}" style="width:100%" oninput="resizeSelectedPieceParametric()">
-      <div id="lblW" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${obj.data.w} cm</div>
+      <label class="pp-label">Essenza</label>
+      <select id="paramEssenza" style="width:100%;padding:6px;border:1px solid var(--border);border-radius:4px;" onchange="setSelectedEssence(this.value)">${essOpts}</select>
     </div>
     <div class="pp-field">
-      <label class="pp-label">✏️ Spessore (cm)</label>
-      <input type="range" id="paramH" min="1" max="40" step="0.5" value="${obj.data.h}" style="width:100%" oninput="resizeSelectedPieceParametric()">
-      <div id="lblH" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${obj.data.h} cm</div>
+      <label class="pp-label">Lunghezza (cm)</label>
+      <input type="range" id="paramW" min="10" max="400" step="2" value="${d.w}" style="width:100%" oninput="resizeSelectedPieceParametric()">
+      <div id="lblW" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${d.w} cm</div>
     </div>
     <div class="pp-field">
-      <label class="pp-label">✏️ Larghezza (cm)</label>
-      <input type="range" id="paramD" min="1" max="40" step="0.5" value="${obj.data.d}" style="width:100%" oninput="resizeSelectedPieceParametric()">
-      <div id="lblD" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${obj.data.d} cm</div>
+      <label class="pp-label">Spessore (cm)</label>
+      <input type="range" id="paramH" min="1" max="40" step="0.5" value="${d.h}" style="width:100%" oninput="resizeSelectedPieceParametric()">
+      <div id="lblH" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${d.h} cm</div>
     </div>
-    <button class="ctrl-btn" style="width:100%; background:var(--bg2); color:var(--wood-dark); margin-top:12px;" onclick="duplicateSelectedPiece()">👥 Duplica Pezzo</button>
+    <div class="pp-field">
+      <label class="pp-label">Larghezza (cm)</label>
+      <input type="range" id="paramD" min="1" max="40" step="0.5" value="${d.d}" style="width:100%" oninput="resizeSelectedPieceParametric()">
+      <div id="lblD" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${d.d} cm</div>
+    </div>
+    <div id="lblPrezzo" style="font-size:0.8rem;line-height:1.45;background:var(--bg2);padding:8px;border-radius:6px;"></div>
+    <button class="ctrl-btn" style="width:100%; background:var(--bg2); color:var(--wood-dark); margin-top:12px;" onclick="duplicateSelectedPiece()">Duplica pezzo</button>
   `;
+  paintPriceLabel(obj);
+}
+
+function paintPriceLabel(obj) {
+  const el = document.getElementById('lblPrezzo');
+  if (!el || !obj) return;
+  const d = ensureCommerce(obj.data);
+  const q = misuraRiga(d);
+  el.innerHTML = `<b>Sezione</b> ${sezioneDi(d)}<br><b>Prezzo</b> ${euro(prezzoUnitario(d))} / ${d.unita}<br><b>Questa riga</b> ${q.toFixed(2)} ${d.unita} · ${euro(importoRiga(d))}`;
+}
+
+function setSelectedEssence(id) {
+  if (!selectedObj) return;
+  saveCurrentStateToHistory();
+  selectedObj.data.essenceId = id;
+  paintPriceLabel(selectedObj);
+  rebuildCart();
 }
 
 function updateInspectorLabels(obj) {
@@ -807,7 +881,7 @@ function resizeSelectedPieceParametric() {
   const altezzaAppoggioSuolo = newH / 2;
   if(selectedObj.mesh.position.y < altezzaAppoggioSuolo) selectedObj.mesh.position.y = altezzaAppoggioSuolo;
 
-  updateInspectorLabels(selectedObj); updateFloatingMenuAndLabels(); rebuildCart();
+  updateInspectorLabels(selectedObj); paintPriceLabel(selectedObj); updateFloatingMenuAndLabels(); rebuildCart();
 }
 
 function duplicateSelectedPiece() {
@@ -828,7 +902,7 @@ function duplicateSelectedPiece() {
   mesh.castShadow = true; mesh.receiveShadow = true;
   scene.add(mesh);
 
-  const cloneObj = { mesh, data: { type: source.type, w: source.w, h: source.h, d: source.d, note: `${source.note} (Copia)`, colorName: source.colorName, colorHex: source.colorHex, baseW: source.w, baseH: source.h, baseD: source.d } };
+  const cloneObj = { mesh, data: ensureCommerce(Object.assign({}, source, { note: `${source.note} (Copia)` })) };
   sceneObjects.push(cloneObj); rebuildCart(); selectSceneObject(cloneObj);
 }
 
@@ -853,7 +927,7 @@ function addNewLegoPiece(type, w, h, d, note) {
   mesh.castShadow = true; mesh.receiveShadow = true;
   mesh.position.set(0, h/2, 0); scene.add(mesh);
 
-  const newObj = { mesh, data: { type, w, h, d, note, colorName: type === 'copertura_isolante' ? 'Isolante Tecnico' : activeFlatting.name, colorHex: type === 'copertura_isolante' ? 0xB0C4DE : activeFlatting.hex, baseW: w, baseH: h, baseD: d } };
+  const newObj = { mesh, data: ensureCommerce({ type, w, h, d, note, colorName: type === 'copertura_isolante' ? 'Isolante Tecnico' : activeFlatting.name, colorHex: type === 'copertura_isolante' ? 0xB0C4DE : activeFlatting.hex, baseW: w, baseH: h, baseD: d }) };
   sceneObjects.push(newObj); rebuildCart(); selectSceneObject(newObj);
 }
 
@@ -866,7 +940,7 @@ function rebuildCart() {
   }
   list.innerHTML = sceneObjects.map((o, idx) => `
     <div class="cart-row" onclick="focusOnPieceByIndex(${idx})">
-      <span><b>${o.data.type === 'copertura_isolante' ? 'Pannello Sandwich' : capitalize(o.data.type)}</b> (${o.data.w}×${o.data.h}cm)</span>
+      <span><b>${ensureCommerce(o.data).sku}</b> ${sezioneDi(o.data)}<br><span style="color:var(--text2)">${euro(importoRiga(o.data))}</span></span>
       <div class="color-indicator" style="background:#${(o.data.colorHex || 0xC4956A).toString(16).padStart(6, '0')}"></div>
     </div>
   `).join('');
@@ -897,7 +971,7 @@ function addDirectWoodPiece(type, w, h, d, x, y, z, colorName, colorHex, note, r
   mesh.position.set(x, y, z); mesh.rotation.y = rotY;
   mesh.castShadow = true; mesh.receiveShadow = true;
   scene.add(mesh);
-  sceneObjects.push({ mesh, data: { type, w, h, d, note, colorName, colorHex, baseW: w, baseH: h, baseD: d } });
+  sceneObjects.push({ mesh, data: ensureCommerce({ type, w, h, d, note, colorName, colorHex, baseW: w, baseH: h, baseD: d }) });
 }
 
 function clearCurrentScene() { deselectAll(); sceneObjects.forEach(o => { if(o.mesh) scene.remove(o.mesh); }); sceneObjects = []; }
@@ -956,62 +1030,40 @@ function loadProjectJSON(event) {
 
 // ================== BACKOFFICE COMPUTO METRICO PRO CON PANNELLI SANDWICH ==================
 function showBOM() {
-  if (sceneObjects.length === 0) { alert('Scena vuota!'); return; }
-  const colorGroups = {}; const woodSections = {}; const sandwichPanels = [];
-
-  sceneObjects.forEach(obj => {
-    const d = obj.data;
-    // Calcolo mq della faccia superiore/inferiore per i pannelli sandwich isolanti
-    const areaFacciaM2 = (d.w * d.d) / 10000;
-    // Calcolo sviluppo metrico integrale 6 facce per il legno
-    const sM2 = (2 * ((d.w * d.h) + (d.w * d.d) + (d.h * d.d))) / 10000;
-
-    if (d.type === 'copertura_isolante') {
-      sandwichPanels.push({ w: d.w, h: d.h, d: d.d, area: areaFacciaM2, note: d.note });
-    } else {
-      if (!colorGroups[d.colorName]) colorGroups[d.colorName] = { surface: 0, hex: d.colorHex || 0xC4956A };
-      colorGroups[d.colorName].surface += sM2;
-
-      const sectKey = `${d.h} × ${d.d} cm`;
-      if (!woodSections[sectKey]) woodSections[sectKey] = [];
-      woodSections[sectKey].push(d);
+  if (sceneObjects.length === 0) { alert('Scena vuota.'); return; }
+  const groups = {};
+  let totale = 0;
+  const colorGroups = {};
+  sceneObjects.forEach((obj) => {
+    const d = ensureCommerce(obj.data);
+    const q = misuraRiga(d);
+    const pu = prezzoUnitario(d);
+    const imp = q * pu;
+    totale += imp;
+    const key = [d.sku, d.essenceId, sezioneDi(d), d.w, d.unita].join('|');
+    if (!groups[key]) {
+      groups[key] = { sku: d.sku, nome: (LISTINO[d.type] || {}).nome || capitalize(d.type), essenza: essenzaOf(d.essenceId).nome, sezione: sezioneDi(d), lung: d.w, unita: d.unita, q: 0, pu, imp: 0, n: 0 };
+    }
+    groups[key].q += q;
+    groups[key].imp += imp;
+    groups[key].n += 1;
+    if (d.type !== 'copertura_isolante') {
+      const sM2 = (2 * ((d.w * d.h) + (d.w * d.d) + (d.h * d.d))) / 10000;
+      colorGroups[d.colorName] = (colorGroups[d.colorName] || 0) + sM2;
     }
   });
-
-  let html = "";
-
-  if(Object.keys(colorGroups).length > 0) {
-    html += `<table class="bom-table"><thead><tr><th>Finitura Colore Legno</th><th>Superficie Totale</th><th>Litri Calcolati (2 Mani)</th></tr></thead><tbody>`;
-    for (const [name, info] of Object.entries(colorGroups)) {
-      html += `<tr><td><b>${name}</b></td><td>${info.surface.toFixed(2)} m²</td><td><b>${((info.surface / 10) * 2).toFixed(2)} L</b></td></tr>`;
-    }
+  let html = `<p style="font-size:0.8rem;color:var(--text2);margin-bottom:10px;">Listino di esempio. Non è un prezzario e non sostituisce il calcolo strutturale.</p>`;
+  html += `<table class="bom-table"><thead><tr><th>Codice</th><th>Articolo</th><th>Essenza</th><th>Sezione</th><th>Lungh.</th><th>Qtà</th><th>Prezzo</th><th>Importo</th></tr></thead><tbody>`;
+  Object.values(groups).forEach((g) => {
+    html += `<tr><td>${g.sku}</td><td>${g.nome} <span style="color:var(--text2)">×${g.n}</span></td><td>${g.essenza}</td><td>${g.sezione}</td><td>${g.lung} cm</td><td>${g.q.toFixed(2)} ${g.unita}</td><td>${euro(g.pu)}</td><td><b>${euro(g.imp)}</b></td></tr>`;
+  });
+  html += `<tr style="background:var(--bg2)"><td colspan="7"><b>Totale distinta</b></td><td><b style="color:var(--accent)">${euro(totale)}</b></td></tr></tbody></table>`;
+  const paints = Object.entries(colorGroups);
+  if (paints.length) {
+    html += `<h3 style="margin-top:18px;font-size:0.95rem;">Finitura, a parte</h3><table class="bom-table"><thead><tr><th>Colore</th><th>Superficie</th><th>Litri, 2 mani</th></tr></thead><tbody>`;
+    paints.forEach(([name, surface]) => { html += `<tr><td>${name}</td><td>${surface.toFixed(2)} m²</td><td>${((surface / 10) * 2).toFixed(2)} L</td></tr>`; });
     html += `</tbody></table>`;
   }
-
-  // Sezione Computo dei pannelli Sandwich di isolamento termico
-  if(sandwichPanels.length > 0) {
-    html += `<h3 style="margin-top:20px; color:var(--wood-dark); border-bottom:2px solid var(--border);">💿 Computo Tecnico Pannelli Sandwich Coibentati</h3>`;
-    html += `<table class="bom-table"><thead><tr><th>Modulo</th><th>Dimensioni (L × Lar)</th><th>Spessore Anima</th><th>Superficie Copertura</th></tr></thead><tbody>`;
-    let mqTotIsolamento = 0;
-    sandwichPanels.forEach(p => {
-      mqTotIsolamento += p.area;
-      html += `<tr><td>Pannello Coibentato</td><td>${p.w} × ${p.d} cm</td><td>${p.h} cm</td><td><b>${p.area.toFixed(2)} m²</b></td></tr>`;
-    });
-    html += `<tr style="background:var(--bg2)"><td colspan="3"><b>Superficie Totale Fornitura Isolamento</b></td><td><b style="color:var(--accent); font-size:0.95rem;">${mqTotIsolamento.toFixed(2)} m²</b></td></tr>`;
-    html += `</tbody></table>`;
-  }
-
-  if(Object.keys(woodSections).length > 0) {
-    html += `<h3 style="margin-top:20px;">🪵 Ottimizzazione Tagli Carpenteria per Ufficio Acquisti</h3>`;
-    for (const [section, items] of Object.entries(woodSections)) {
-      html += `<div style="margin-top:10px; font-weight:600;">Sezione Lineare: ${section}</div>`;
-      html += `<table class="bom-table"><thead><tr><th>Articolo</th><th>Lunghezza (w)</th><th>Quantità</th></tr></thead><tbody>`;
-      const sub = {}; items.forEach(i => { const k = `${i.type}|${i.w}`; if(!sub[k]) sub[k]={type:i.type, w:i.w, q:0}; sub[k].q++; });
-      for (const g of Object.values(sub)) { html += `<tr><td>${capitalize(g.type)}</td><td>${g.w} cm</td><td><b>${g.q} pz</b></td></tr>`; }
-      html += `</tbody></table>`;
-    }
-  }
-
   document.getElementById('modalBody').innerHTML = html;
   document.getElementById('modalOverlay').classList.add('open');
 }
