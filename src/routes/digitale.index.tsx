@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LepiniMesh } from "@/components/LepiniMesh";
 import { ProveGallery } from "@/components/ProveGallery";
 import { Button } from "@/components/ui/button";
-import { DIGITAL_MAIL, DIGITAL_STATS, METODO, PITCH, SERVIZI, CONTENUTI, CONTENUTI_INCLUSI, CONTENUTI_AMBITI, CONTENUTI_PROCESSO, digitalMeta } from "@/data/digitale";
+import { DIGITAL_MAIL, METODO, PITCH, SERVIZI, CONTENUTI, CONTENUTI_INCLUSI, CONTENUTI_AMBITI, CONTENUTI_PROCESSO, digitalMeta } from "@/data/digitale";
 
 export const Route = createFileRoute("/digitale/")({
   head: () => ({
@@ -29,51 +29,51 @@ function StudioHome() {
         }}
       />
 
-      <LogoParallax />
-
-      <ParallaxStack>
-        <ParallaxPanel src="/images/digitale/close-calcare.jpg" alt="Calcare dei Monti Lepini" cap="Pietra">
-          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">{PITCH.heroKicker}</p>
-          <h1 className="mt-5 max-w-xl font-display text-[clamp(2.6rem,6.2vw,5rem)] font-semibold leading-[0.92] text-cream">
-            {PITCH.heroTitle}
-            <span className="mt-2 block font-medium italic text-copper-light">{PITCH.heroItalic}</span>
+      <section className="bg-paper px-5 pb-8 pt-28 md:px-12 md:pt-36">
+        <div className="mx-auto max-w-6xl">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">{PITCH.heroKicker}</p>
+          <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.8rem,6.4vw,5.2rem)] font-semibold leading-[0.92] text-ink">
+            Lo studio per chi vende.
+            <span className="mt-3 block font-medium italic text-copper">Immagini, video, strumenti.</span>
           </h1>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{PITCH.heroLead}</p>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+            Foto del prodotto, marchio, clip brevi. File pronti per sito, social e catalogo. Il gestionale, se vi serve, viene dopo: al banco, con i vostri numeri.
+          </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href="#contatti">
               <Button variant="primary">Parliamone</Button>
             </a>
-            <a href="#lavori" className="inline-flex min-h-11 items-center text-sm text-cream-soft hover:text-cream">
+            <a href="#lavori" className="inline-flex min-h-11 items-center text-sm text-ink-soft hover:text-ink">
               Cosa facciamo
             </a>
           </div>
-        </ParallaxPanel>
+        </div>
+      </section>
 
-        <ParallaxPanel src="/images/digitale/close-oliva.jpg" alt="Pelle di un'oliva lucida d'olio" cap="Frutto">
-          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">Continuità dei dati</p>
-          <p className="mt-5 max-w-2xl font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.12] text-cream">
-            {PITCH.quote}
-          </p>
-        </ParallaxPanel>
+      <section className="bg-paper px-5 pb-16 md:px-12 md:pb-24">
+        <ul className="mx-auto grid max-w-6xl gap-3 md:grid-cols-3">
+          {[
+            { src: "/images/digitale/studio-set.jpg", alt: "Set fotografico chiaro, luce di studio", cap: "Set" },
+            { src: "/images/digitale/studio-prodotto.jpg", alt: "Prodotto su fondo neutro", cap: "Prodotto" },
+            { src: "/images/digitale/studio-schermo.jpg", alt: "Bozza di catalogo su un tavolo chiaro", cap: "Catalogo" },
+          ].map((f) => (
+            <li key={f.cap} className="overflow-hidden bg-paper-card">
+              <img src={f.src} alt={f.alt} className="aspect-[3/2] w-full object-cover" />
+              <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <ParallaxPanel src="/images/digitale/close-morsa.jpg" alt="Morsa e legno sul banco" cap="Banco">
-          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">02 · Gestionali snelli</p>
-          <h2 className="mt-5 max-w-xl font-display text-[clamp(2.2rem,5vw,4rem)] text-cream">Al banco e in cantiere.</h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{SERVIZI[1].testo}</p>
-        </ParallaxPanel>
-
-        <ParallaxPanel src="/images/digitale/close-legno.jpg" alt="Vena del legno e chiodi di rame" cap="Mestiere">
-          <p className="font-mono text-xs uppercase tracking-kicker text-copper-light">{PITCH.origineKicker}</p>
-          <h2 className="mt-5 max-w-xl font-display text-[clamp(2.2rem,5vw,4rem)] italic text-cream">
-            Dal banco, verso mercati che prima erano lontani.
-          </h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-cream-soft">{PITCH.origineLead}</p>
-        </ParallaxPanel>
-      </ParallaxStack>
+      <LogoParallax />
 
       <section className="border-y border-ink/10">
         <div className="mx-auto grid max-w-6xl md:grid-cols-3">
-          {DIGITAL_STATS.map((s) => (
+          {[
+            { k: "Immagini", l: "Prodotto, marchio, catalogo. File pronti." },
+            { k: "Video", l: "Clip brevi per scheda, social e vetrina." },
+            { k: "Strumenti", l: "Gestionale solo se serve al banco." },
+          ].map((s) => (
             <div key={s.l} className="border-b border-ink/10 px-5 py-8 last:border-b-0 md:border-b-0 md:border-r md:border-ink/10 md:px-12 md:last:border-r-0">
               <p className="font-display text-3xl leading-tight text-ink md:text-4xl">{s.k}</p>
               <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-ink-soft">{s.l}</p>
