@@ -34,6 +34,7 @@ import { Route as LabAtlanteRouteImport } from './routes/lab/atlante'
 import { Route as LabBiosferaRouteImport } from './routes/lab/biosfera'
 import { Route as LabDroneRouteImport } from './routes/lab/drone'
 import { Route as LabFaggetaRouteImport } from './routes/lab/faggeta'
+import { Route as LabLegnoRouteImport } from './routes/lab/legno'
 import { Route as LabParcoRouteImport } from './routes/lab/parco'
 import { Route as LabSentieriRouteImport } from './routes/lab/sentieri'
 import { Route as LabTramaRouteImport } from './routes/lab/trama'
@@ -166,6 +167,11 @@ const LabFaggetaRoute = LabFaggetaRouteImport.update({
   path: '/lab/faggeta',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabLegnoRoute = LabLegnoRouteImport.update({
+  id: '/lab/legno',
+  path: '/lab/legno',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabParcoRoute = LabParcoRouteImport.update({
   id: '/lab/parco',
   path: '/lab/parco',
@@ -219,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/lab/biosfera': typeof LabBiosferaRoute
   '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
+  '/lab/legno': typeof LabLegnoRoute
   '/lab/parco': typeof LabParcoRoute
   '/lab/sentieri': typeof LabSentieriRoute
   '/lab/trama': typeof LabTramaRoute
@@ -251,6 +258,7 @@ export interface FileRoutesByTo {
   '/lab/biosfera': typeof LabBiosferaRoute
   '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
+  '/lab/legno': typeof LabLegnoRoute
   '/lab/parco': typeof LabParcoRoute
   '/lab/sentieri': typeof LabSentieriRoute
   '/lab/trama': typeof LabTramaRoute
@@ -285,6 +293,7 @@ export interface FileRoutesById {
   '/lab/biosfera': typeof LabBiosferaRoute
   '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
+  '/lab/legno': typeof LabLegnoRoute
   '/lab/parco': typeof LabParcoRoute
   '/lab/sentieri': typeof LabSentieriRoute
   '/lab/trama': typeof LabTramaRoute
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
     | '/lab/biosfera'
     | '/lab/drone'
     | '/lab/faggeta'
+    | '/lab/legno'
     | '/lab/parco'
     | '/lab/sentieri'
     | '/lab/trama'
@@ -352,6 +362,7 @@ export interface FileRouteTypes {
     | '/lab/biosfera'
     | '/lab/drone'
     | '/lab/faggeta'
+    | '/lab/legno'
     | '/lab/parco'
     | '/lab/sentieri'
     | '/lab/trama'
@@ -385,6 +396,7 @@ export interface FileRouteTypes {
     | '/lab/biosfera'
     | '/lab/drone'
     | '/lab/faggeta'
+    | '/lab/legno'
     | '/lab/parco'
     | '/lab/sentieri'
     | '/lab/trama'
@@ -417,6 +429,7 @@ export interface RootRouteChildren {
   LabBiosferaRoute: typeof LabBiosferaRoute
   LabDroneRoute: typeof LabDroneRoute
   LabFaggetaRoute: typeof LabFaggetaRoute
+  LabLegnoRoute: typeof LabLegnoRoute
   LabParcoRoute: typeof LabParcoRoute
   LabSentieriRoute: typeof LabSentieriRoute
   LabTramaRoute: typeof LabTramaRoute
@@ -605,6 +618,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabFaggetaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/legno': {
+      id: '/lab/legno'
+      path: '/lab/legno'
+      fullPath: '/lab/legno'
+      preLoaderRoute: typeof LabLegnoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/parco': {
       id: '/lab/parco'
       path: '/lab/parco'
@@ -686,6 +706,7 @@ const rootRouteChildren: RootRouteChildren = {
   LabBiosferaRoute: LabBiosferaRoute,
   LabDroneRoute: LabDroneRoute,
   LabFaggetaRoute: LabFaggetaRoute,
+  LabLegnoRoute: LabLegnoRoute,
   LabParcoRoute: LabParcoRoute,
   LabSentieriRoute: LabSentieriRoute,
   LabTramaRoute: LabTramaRoute,

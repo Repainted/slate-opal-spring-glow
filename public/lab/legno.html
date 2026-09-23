@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Lepini Lab · LegnoBuilder</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/WebGLUtils.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --wood-dark: #3B2A1A;
+    --wood-mid: #6B4C2A;
+    --wood-light: #C4956A;
+    --wood-pale: #E8D5B0;
+    --bg: #F5F0E8;
+    --bg2: #EDE6D6;
+    --panel: #FDFAF4;
+    --border: #C8B890;
+    --text: #2A1F0F;
+    --text2: #6B5A3E;
+    --accent: #D4600A;
+    --green: #3A7D44;
+    --red: #C0392B;
+    --shadow: 0 4px 12px rgba(59,42,26,0.15);
+  }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  header {
+    background: var(--wood-dark);
+    color: var(--wood-pale);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 600; }
+
+  .file-bar {
+    background: var(--bg2);
+    border-bottom: 1.5px solid var(--border);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9;
+    flex-wrap: wrap;
+  }
+  
+  .mode-selector {
+    display: flex;
+    background: #fff;
+    border: 2px solid var(--wood-mid);
+    border-radius: 25px;
+    padding: 2px;
+    box-shadow: var(--shadow);
+  }
+  .mode-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--wood-dark);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .mode-btn.active {
+    background: var(--wood-mid);
+    color: white;
+  }
+
+  .color-palette {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+  }
+  .color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .color-dot.selected {
+    border-color: var(--accent);
+    transform: scale(1.15);
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .toolbar {
+    width: 180px;
+    background: var(--panel);
+    border-right: 1.5px solid var(--border);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .tb-title {
+    background: var(--bg2);
+    padding: 8px 14px;
+    font-size: 0.65rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+  }
+  .tb-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #EDE6D6;
+  }
+  .tb-item:active { background: var(--wood-pale); }
+
+  .canvas-area {
+    flex: 1;
+    position: relative;
+    background: #D8CFC0;
+  }
+  #canvas3d { width: 100%; height: 100%; display: block; }
+
+  .canvas-controls {
+    position: absolute;
+    top: 12px; left: 12px;
+    display: flex; flex-direction: column; gap: 8px;
+    z-index: 5;
+  }
+  .ctrl-btn {
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .ctrl-btn.danger { border-color: var(--red); color: var(--red); }
+  .ctrl-btn.ar-active { background: var(--accent); color: white; border-color: var(--wood-dark); }
+
+  .mesh-dimension-label {
+    position: absolute;
+    background: rgba(42, 31, 15, 0.95);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    pointer-events: none;
+    z-index: 45;
+    display: none;
+    box-shadow: var(--shadow);
+    border: 1.5px solid var(--wood-light);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .object-context-menu {
+    position: absolute;
+    background: var(--panel);
+    border: 2px solid var(--wood-dark);
+    border-radius: 8px;
+    padding: 4px;
+    display: none;
+    gap: 4px;
+    z-index: 50;
+    box-shadow: var(--shadow);
+  }
+  .menu-action-btn {
+    padding: 6px 10px;
+    border: none;
+    background: var(--bg2);
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .menu-action-btn.active {
+    background: var(--accent);
+    color: white;
+  }
+
+  .props-panel {
+    width: 240px;
+    background: var(--panel);
+    border-left: 1.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+  .pp-title {
+    background: var(--bg2);
+    padding: 10px 14px;
+    font-size: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .pp-body { padding: 14px; flex: 1; overflow-y: auto; }
+  .pp-field { margin-bottom: 14px; }
+  .pp-label { display: block; font-size: 0.65rem; font-family: 'IBM Plex Mono'; color: var(--text2); margin-bottom: 4px; text-transform: uppercase;}
+
+  .cart-section { border-top: 1.5px solid var(--border); background: #fff; }
+  .cart-header { background: var(--wood-mid); color: white; padding: 10px 14px; font-size: 0.8rem; font-weight: 600; }
+  .cart-list { max-height: 150px; overflow-y: auto; font-size: 0.8rem; }
+  .cart-row { display: flex; padding: 8px 14px; border-bottom: 1px solid #eee; align-items: center; }
+  .cart-row .color-indicator { width: 12px; height: 12px; border-radius: 50%; margin-left: auto; }
+
+  .bom-btn {
+    margin: 10px 14px; padding: 9px; background: var(--green); color: white; border: none; border-radius: 5px; font-size: 0.82rem; font-weight: 600; cursor: pointer; width: calc(100% - 28px); display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .bom-btn:hover { background: #2D6335; }
+
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 100; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: var(--panel); border-radius: 12px; width: 750px; max-width: 95vw; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow); }
+  .modal-header { background: var(--wood-dark); color: var(--wood-pale); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+  .bom-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+  .bom-table th, .bom-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: left; }
+  .bom-table th { background: var(--bg2); font-family: 'IBM Plex Mono'; font-size: 0.7rem; }
+
+  .project-title-input {
+    background: transparent; border: none; border-bottom: 2px dashed var(--wood-mid);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 600; width: 140px;
+  }
+  .project-title-input:focus { outline: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="font-size:1.4rem">🧱</div>
+  <div>
+    <h1>LegnoBuilder · Lepini Lab</h1>
+    <span>Progetto in legno, pannelli sandwich e computo metrico</span>
+  </div>
+  <a href="/lab" style="margin-left:auto;color:#E8D5B0;text-decoration:none;font-size:.85rem;border:1px solid #C4956A;border-radius:999px;padding:6px 12px;">← Lab</a>
+</header>
+
+<div class="file-bar">
+  <div class="mode-selector">
+    <button class="mode-btn active" id="mode-cam" onclick="setFingerMode('cam')">👁️ Cam</button>
+    <button class="mode-btn" id="mode-translate" onclick="setFingerMode('translate')">🫳 Sposta</button>
+    <button class="mode-btn" id="mode-rotate" onclick="setFingerMode('rotate')">🔄 Ruota</button>
+    <button class="mode-btn" id="mode-scale" onclick="setFingerMode('scale')">📐 Modifica</button>
+    <button class="mode-btn" id="mode-paint" onclick="setFingerMode('paint')">🖌️ Colora</button>
+  </div>
+
+  <button class="ctrl-btn" onclick="undoLastOperation()" style="background:#fff; border-color:var(--wood-dark); padding:6px 12px;">↩️ Annulla</button>
+
+  <div class="color-palette">
+    <div class="color-dot selected" id="col-0" style="background:#C4956A;" onclick="selectFlattingColor(0, 'Abete Naturale', 0xC4956A)"></div>
+    <div class="color-dot" id="col-1" style="background:#5C4033;" onclick="selectFlattingColor(1, 'Noce Scuro', 0x5C4033)"></div>
+    <div class="color-dot" id="col-2" style="background:#8B5A2B;" onclick="selectFlattingColor(2, 'Castagno', 0x8B5A2B)"></div>
+    <div class="color-dot" id="col-3" style="background:#E5D3B3;" onclick="selectFlattingColor(3, 'Rovere Chiaro', 0xE5D3B3)"></div>
+    <div class="color-dot" id="col-4" style="background:#F2EFE9;" onclick="selectFlattingColor(4, 'Bianco Decapato', 0xF2EFE9)"></div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:6px; background:#fff; padding:2px 8px; border-radius:20px; border:1.5px solid var(--border);">
+    <select id="angleSnapSelect" class="pp-input" style="width:90px; padding:2px; font-size:0.75rem; border:none;" onchange="updateInternalAngleSnap()">
+      <option value="5">5° Libero</option>
+      <option value="30" selected>30° Standard</option>
+      <option value="45">45° Diagonale</option>
+      <option value="90">90° Squadra</option>
+    </select>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:6px;">
+    <input type="text" id="projectTitle" class="project-title-input" value="mio_progetto_lego">
+    <button class="ctrl-btn" onclick="saveProjectJSON()">💾 Salva</button>
+    <button class="ctrl-btn" onclick="triggerLoadFile()">📂 Apri</button>
+    <input type="file" id="fileLoader" accept=".json" style="display:none" onchange="loadProjectJSON(event)">
+  </div>
+</div>
+
+<div class="main">
+  <div class="toolbar">
+    <div class="tb-title">🧱 Mattoncini Legno</div>
+    <div class="tb-item" onclick="addNewLegoPiece('trave', 120, 10, 10, 'Trave Base')">🪵 Trave (120cm)</div>
+    <div class="tb-item" onclick="addNewLegoPiece('asse', 200, 3, 15, 'Asse Larga')">📏 Asse (200cm)</div>
+    <div class="tb-item" onclick="addNewLegoPiece('moraletto', 80, 6, 6, 'Moraletto')">🟫 Travetto (80cm)</div>
+    <div class="tb-item" onclick="addNewLegoPiece('pannello', 100, 2, 100, 'Pannello Parete')">⬜ Pannello (100x100)</div>
+    <div class="tb-item" onclick="addNewLegoPiece('colonna', 15, 210, 15, 'Pilastro Portante')">🏛️ Pilastro (210cm)</div>
+    
+    <div class="tb-title">🏠 Coperture Coibentate</div>
+    <div class="tb-item" style="background:#E2ECF7; border-bottom:1px solid var(--border);" onclick="addNewLegoPiece('copertura_isolante', 150, 6, 100, 'Pannello Sandwich Isolante')">💿 Isolante "Biscotto"</div>
+
+    <div class="tb-title" style="margin-top:auto;">📐 Preset Complessi</div>
+    <div class="tb-item" style="background:var(--wood-pale); font-weight:600;" onclick="loadModelPreset('lagomisurina')">🏡 LagoMisurina</div>
+  </div>
+
+  <div class="canvas-area">
+    <canvas id="canvas3d"></canvas>
+    <div class="canvas-controls">
+      <button class="ctrl-btn" onclick="resetView()">⟳ Centra Vista</button>
+      <button class="ctrl-btn ar-active" id="arButtonBtn" onclick="toggleWebXRARSession()">📱 VEDI IN GIARDINO (AR)</button>
+      <button class="ctrl-btn danger" onclick="deleteSelected()" id="btnDelete" style="display:none">🗑️ Elimina Pezzo</button>
+    </div>
+    
+    <div class="mesh-dimension-label" id="meshLiveLabel">Misure</div>
+
+    <div class="object-context-menu" id="objContextMenu">
+      <button class="menu-action-btn active" id="ctx-btn-translate" onclick="changeSelectedTransformMode('translate')">🫳 Sposta</button>
+      <button class="menu-action-btn" id="ctx-btn-rotate" onclick="changeSelectedTransformMode('rotate')">🔄 Ruota</button>
+      <button class="menu-action-btn" id="ctx-btn-scale" onclick="changeSelectedTransformMode('scale')">📐 Modifica</button>
+    </div>
+  </div>
+
+  <div class="props-panel">
+    <div class="pp-title">⚙️ Ispezione Pezzo</div>
+    <div class="pp-body" id="ppBody">
+      <div style="color:var(--text2); font-size:0.8rem; line-height:1.4;">
+        Seleziona un elemento. Puoi configurare spessore e sezioni del pannello sandwich isolante ("biscotto") sia da maniglia che da slider.
+      </div>
+    </div>
+
+    <div class="cart-section">
+      <div class="cart-header">📋 Elementi in Scena (<span id="cartCount">0</span>)</div>
+      <div class="cart-list" id="cartList"></div>
+      <button class="bom-btn" onclick="showBOM()">📋 Computo Metrico PRO</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ================== ENVIRONMENT SETUP ==================
+const canvas = document.getElementById('canvas3d');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.shadowMap.enabled = true;
+renderer.xr.enabled = true;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xD8CFC0);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
+camera.position.set(200, 200, 300);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambient);
+const sun = new THREE.DirectionalLight(0xfff8e1, 0.9);
+sun.position.set(150, 300, 200);
+sun.castShadow = true;
+scene.add(sun);
+
+const gridHelper = new THREE.GridHelper(500, 50, 0xA89070, 0xC8B890);
+scene.add(gridHelper);
+
+const floorGeo = new THREE.PlaneGeometry(500, 500);
+const floorMat = new THREE.MeshLambertMaterial({ color: 0xCEC0A0 });
+const floor = new THREE.Mesh(floorGeo, floorMat);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -0.1;
+floor.receiveShadow = true;
+scene.add(floor);
+
+// ================== STATE & UNDO SYSTEM HISTORIAN ==================
+let sceneObjects = [];
+let selectedObj = null;
+let currentFingerMode = 'cam';
+let activeFlatting = { id: 0, name: 'Abete Naturale', hex: 0xC4956A };
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+let isDragging = false, prevX = 0, prevY = 0;
+let spherical = { theta: Math.PI / 4, phi: Math.PI / 3.2, r: 400 };
+let initialPinchDist = 0;
+const undoStack = [];
+
+function saveCurrentStateToHistory() {
+  const stateSnapshot = sceneObjects.map(obj => ({
+    data: Object.assign({}, obj.data),
+    transform: {
+      position: { x: obj.mesh.position.x, y: obj.mesh.position.y, z: obj.mesh.position.z },
+      rotation: { x: obj.mesh.rotation.x, y: obj.mesh.rotation.y, z: obj.mesh.rotation.z }
+    }
+  }));
+  undoStack.push(JSON.stringify(stateSnapshot));
+  if (undoStack.length > 30) undoStack.shift();
+}
+
+function undoLastOperation() {
+  if (undoStack.length === 0) return;
+  deselectAll();
+  sceneObjects.forEach(obj => { if(obj.mesh) scene.remove(obj.mesh); });
+  sceneObjects = [];
+
+  const rawState = undoStack.pop();
+  const restoredObjects = JSON.parse(rawState);
+
+  restoredObjects.forEach(objData => {
+    const d = objData.data;
+    const geo = new THREE.BoxGeometry(d.w, d.h, d.d);
+    
+    let mat;
+    if (d.type === 'copertura_isolante') {
+      mat = new THREE.MeshLambertMaterial({ color: 0xB0C4DE });
+    } else {
+      mat = new THREE.MeshLambertMaterial({ color: d.colorHex || 0xC4956A });
+    }
+
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.castShadow = true; mesh.receiveShadow = true;
+    mesh.position.set(objData.transform.position.x, objData.transform.position.y, objData.transform.position.z);
+    mesh.rotation.set(objData.transform.rotation.x, objData.transform.rotation.y, objData.transform.rotation.z);
+    scene.add(mesh);
+    sceneObjects.push({ mesh, data: d });
+  });
+  rebuildCart();
+}
+
+function updateCamera() {
+  camera.position.x = spherical.r * Math.sin(spherical.phi) * Math.sin(spherical.theta);
+  camera.position.y = spherical.r * Math.cos(spherical.phi);
+  camera.position.z = spherical.r * Math.sin(spherical.phi) * Math.cos(spherical.theta);
+  camera.lookAt(0, 30, 0);
+}
+updateCamera();
+
+const transformControls = new THREE.TransformControls(camera, renderer.domElement);
+scene.add(transformControls);
+
+// ================== LOGICA REALTÀ AUMENTATA (WEBXR) ==================
+let xrSession = null;
+
+async function toggleWebXRARSession() {
+  if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+    alert("ERRORE DI SICUREZZA BROWSER:\nLa Realtà Aumentata richiede HTTPS o localhost per accedere alla fotocamera.");
+    return;
+  }
+
+  if (xrSession === null) {
+    if (navigator.xr) {
+      try {
+        const sessionInit = { requiredFeatures: ['local-floor'] };
+        const session = await navigator.xr.requestSession('immersive-ar', sessionInit);
+        
+        xrSession = session;
+        document.getElementById('arButtonBtn').textContent = "❌ ESCI DA AR";
+        
+        scene.background = null; 
+        gridHelper.visible = false;
+        floor.visible = false;
+        deselectAll();
+
+        renderer.xr.setReferenceSpaceType('local-floor');
+        await renderer.xr.setSession(session);
+        
+        session.addEventListener('end', () => {
+          xrSession = null;
+          document.getElementById('arButtonBtn').textContent = "📱 VEDI IN GIARDINO (AR)";
+          scene.background = new THREE.Color(0xD8CFC0);
+          gridHelper.visible = true;
+          floor.visible = true;
+        });
+      } catch (err) {
+        alert("Sessione AR non avviata.");
+      }
+    } else {
+      alert("WebXR non supportato.");
+    }
+  } else {
+    xrSession.end();
+  }
+}
+
+// ================== INTERACTION LOGIC & LIVE LABELS ==================
+transformControls.addEventListener('start', () => { saveCurrentStateToHistory(); });
+
+transformControls.addEventListener('change', () => {
+  const t = transformControls.object;
+  if (!t) return;
+
+  const obj = sceneObjects.find(o => o.mesh === t);
+  if (!obj) return;
+
+  const mode = transformControls.getMode();
+  let textLabelContent = "";
+
+  if (mode === 'translate') {
+    const altezzaAppoggioSuolo = obj.data.h / 2;
+    if (t.position.y <= altezzaAppoggioSuolo + 5) t.position.y = altezzaAppoggioSuolo;
+
+    t.position.x = Math.round(t.position.x / 2) * 2;
+    t.position.y = Math.round(t.position.y / 2) * 2;
+    t.position.z = Math.round(t.position.z / 2) * 2;
+    textLabelContent = `Posizione — X: ${Math.round(t.position.x)} cm | Y: ${Math.round(t.position.y)} cm | Z: ${Math.round(t.position.z)} cm`;
+
+  } else if (mode === 'rotate') {
+    const selectedStepDeg = parseFloat(document.getElementById('angleSnapSelect').value);
+    const angleSnapRad = THREE.MathUtils.degToRad(selectedStepDeg);
+
+    t.rotation.x = Math.round(t.rotation.x / angleSnapRad) * angleSnapRad;
+    t.rotation.y = Math.round(t.rotation.y / angleSnapRad) * angleSnapRad;
+    t.rotation.z = Math.round(t.rotation.z / angleSnapRad) * angleSnapRad;
+
+    const gradiPrevalenti = Math.round(THREE.MathUtils.radToDeg(Math.max(Math.abs(t.rotation.x), Math.abs(t.rotation.y), Math.abs(t.rotation.z)))) % 360;
+    textLabelContent = `Rotazione — Angolo: ${gradiPrevalenti}°`;
+
+  } else if (mode === 'scale') {
+    let liveW = Math.round(obj.data.baseW * t.scale.x);
+    let liveH = Math.round(obj.data.baseH * t.scale.y);
+    let liveD = Math.round(obj.data.baseD * t.scale.z);
+
+    if(liveW < 4) liveW = 4;
+    if(liveH < 1) liveH = 1;
+    if(liveD < 1) liveD = 1;
+
+    obj.data.w = liveW; obj.data.h = liveH; obj.data.d = liveD;
+
+    const altezzaAppoggioSuolo = liveH / 2;
+    if (t.position.y < altezzaAppoggioSuolo) t.position.y = altezzaAppoggioSuolo;
+    textLabelContent = `Misure — L: ${liveW} cm | Spessore: ${liveH} cm | Lar: ${liveD} cm`;
+  }
+  
+  updateInspectorLabels(obj);
+  updateFloatingMenuAndLabels(textLabelContent);
+});
+
+transformControls.addEventListener('dragging-changed', (e) => {
+  if (!e.value) {
+    document.getElementById('meshLiveLabel').style.display = 'none';
+    const t = transformControls.object;
+    if(t && transformControls.getMode() === 'scale') {
+      const obj = sceneObjects.find(o => o.mesh === t);
+      if(obj) {
+        t.scale.set(1, 1, 1);
+        t.geometry.dispose();
+        t.geometry = new THREE.BoxGeometry(obj.data.w, obj.data.h, obj.data.d);
+        obj.data.baseW = obj.data.w; obj.data.baseH = obj.data.h; obj.data.baseD = obj.data.d;
+      }
+    }
+    rebuildCart();
+  }
+});
+
+function updateFloatingMenuAndLabels(text) {
+  if (!selectedObj || currentFingerMode === 'cam' || currentFingerMode === 'paint' || xrSession !== null) return;
+
+  const wp = new THREE.Vector3();
+  selectedObj.mesh.getWorldPosition(wp);
+  
+  const wpMenu = wp.clone();
+  wpMenu.y += selectedObj.data.h / 2 + 12;
+  wpMenu.project(camera);
+  const menuX = (wpMenu.x * .5 + .5) * canvas.clientWidth;
+  const menuY = (-(wpMenu.y * .5) + .5) * canvas.clientHeight;
+
+  const menu = document.getElementById('objContextMenu');
+  menu.style.display = 'flex';
+  menu.style.left = `${menuX - menu.clientWidth / 2}px`;
+  menu.style.top = `${menuY - menu.clientHeight - 10}px`;
+
+  const label = document.getElementById('meshLiveLabel');
+  if (text) {
+    const wpLabel = wp.clone();
+    wpLabel.y -= (selectedObj.data.h / 2 + 6);
+    wpLabel.project(camera);
+    
+    const labelX = (wpLabel.x * .5 + .5) * canvas.clientWidth;
+    const labelY = (-(wpLabel.y * .5) + .5) * canvas.clientHeight;
+    
+    label.style.display = 'block';
+    label.innerHTML = text;
+    label.style.left = `${labelX - label.clientWidth / 2}px`;
+    label.style.top = `${labelY + 10}px`;
+  } else {
+    label.style.display = 'none';
+  }
+}
+
+function setFingerMode(mode) {
+  currentFingerMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  const targetBtn = document.getElementById(`mode-${mode}`);
+  if(targetBtn) targetBtn.classList.add('active');
+  
+  if ((mode === 'translate' || mode === 'rotate' || mode === 'scale') && selectedObj) {
+    transformControls.attach(selectedObj.mesh);
+    transformControls.setMode(mode);
+  } else {
+    transformControls.detach();
+    document.getElementById('objContextMenu').style.display = 'none';
+    document.getElementById('meshLiveLabel').style.display = 'none';
+  }
+}
+
+function changeSelectedTransformMode(mode) {
+  if (!selectedObj) return;
+  document.querySelectorAll('.menu-action-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`ctx-btn-${mode}`).classList.add('active');
+  
+  currentFingerMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  const targetBtn = document.getElementById(`mode-${mode}`);
+  if(targetBtn) targetBtn.classList.add('active');
+  
+  transformControls.attach(selectedObj.mesh);
+  transformControls.setMode(mode);
+}
+
+// ================== INPUT SYSTEM HANDLERS CON ZOOM GESTURE DISPOSITIVI TOUCH ==================
+function getDistanceOfDita(t) {
+  const dx = t[0].clientX - t[1].clientX;
+  const dy = t[0].clientY - t[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function handleStart(x, y) { isDragging = true; prevX = x; prevY = y; }
+
+function handleMove(x, y, rawTouchEv = null) {
+  if (!isDragging) return;
+
+  if (rawTouchEv && rawTouchEv.touches && rawTouchEv.touches.length === 2 && currentFingerMode === 'cam' && !transformControls.dragging) {
+    const currentDist = getDistanceOfDita(rawTouchEv.touches);
+    if (initialPinchDist > 0) {
+      const diff = currentDist - initialPinchDist;
+      spherical.r = Math.max(50, Math.min(1000, spherical.r - diff * 0.4));
+      updateCamera();
+      updateFloatingMenuAndLabels();
+    }
+    initialPinchDist = currentDist;
+    return;
+  }
+
+  if (currentFingerMode === 'cam' && !transformControls.dragging) {
+    const dx = x - prevX, dy = y - prevY;
+    spherical.theta -= dx * 0.007;
+    spherical.phi = Math.max(0.1, Math.min(Math.PI / 2 - 0.05, spherical.phi + dy * 0.007));
+    updateCamera();
+    updateFloatingMenuAndLabels();
+  }
+  prevX = x; prevY = y;
+}
+
+function handleEnd(x, y, isClick) {
+  isDragging = false;
+  initialPinchDist = 0;
+  if (!isClick || transformControls.dragging || xrSession !== null) return;
+
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = ((x - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((y - rect.top) / rect.height) * 2 + 1;
+  
+  raycaster.setFromCamera(mouse, camera);
+  const meshes = sceneObjects.filter(o => o.mesh !== null).map(o => o.mesh);
+  const intersectsWood = raycaster.intersectObjects(meshes);
+
+  if (intersectsWood.length > 0) {
+    const clickedMesh = intersectsWood[0].object;
+    const obj = sceneObjects.find(o => o.mesh === clickedMesh);
+    
+    if (currentFingerMode === 'paint') {
+      if (obj.data.type === 'copertura_isolante') {
+        alert("I pannelli isolanti tecnici sandwich non accettano le tinte flatting legno standard.");
+        return;
+      }
+      saveCurrentStateToHistory();
+      obj.mesh.material.color.setHex(activeFlatting.hex);
+      obj.data.colorName = activeFlatting.name;
+      obj.data.colorHex = activeFlatting.hex;
+      rebuildCart();
+    } else {
+      selectSceneObject(obj);
+    }
+  } else {
+    const intersectsFloor = raycaster.intersectObject(floor);
+    if (intersectsFloor.length > 0 || intersectsWood.length === 0) {
+      if (!transformControls.dragging) {
+        deselectAll();
+        setFingerMode('cam');
+      }
+    }
+  }
+}
+
+canvas.addEventListener('mousedown', e => { clickCheck = true; handleStart(e.clientX, e.clientY); });
+canvas.addEventListener('mousemove', e => { clickCheck = false; handleMove(e.clientX, e.clientY); });
+canvas.addEventListener('mouseup', e => { handleEnd(e.clientX, e.clientY, clickCheck); });
+canvas.addEventListener('wheel', e => {
+  spherical.r = Math.max(50, Math.min(1000, spherical.r + e.deltaY * 0.3));
+  updateCamera();
+  if(selectedObj) updateFloatingMenuAndLabels();
+  e.preventDefault();
+}, { passive: false });
+
+canvas.addEventListener('touchstart', e => {
+  clickCheck = true; 
+  if(e.touches.length === 2) {
+    initialPinchDist = getDistanceOfDita(e.touches);
+  } else {
+    handleStart(e.touches[0].clientX, e.touches[0].clientY);
+  }
+});
+canvas.addEventListener('touchmove', e => { clickCheck = false; handleMove(e.touches[0].clientX, e.touches[0].clientY, e); });
+canvas.addEventListener('touchend', e => { handleEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY, clickCheck); });
+
+// ================== SELEZIONE & ISPEZIONE PARAMETRICA COMPLETA ==================
+function selectSceneObject(obj) {
+  if (xrSession !== null) return;
+  deselectAll();
+  selectedObj = obj;
+  obj.mesh.material.emissive.setHex(0x111111);
+  changeSelectedTransformMode('translate');
+  document.getElementById('btnDelete').style.display = 'block';
+  renderInspector(obj);
+  setTimeout(() => updateFloatingMenuAndLabels(), 30);
+}
+
+function deselectAll() {
+  if (selectedObj && selectedObj.mesh) selectedObj.mesh.material.emissive.setHex(0x000000);
+  selectedObj = null;
+  transformControls.detach();
+  document.getElementById('objContextMenu').style.display = 'none';
+  document.getElementById('meshLiveLabel').style.display = 'none';
+  document.getElementById('btnDelete').style.display = 'none';
+  document.getElementById('ppBody').innerHTML = `<div style="color:var(--text2); font-size:0.8rem;">Seleziona un pezzo. Usa due dita allargandole per gestire lo zoom. Clicca sullo stage vuoto per navigare la cam.</div>`;
+}
+
+function renderInspector(obj) {
+  const body = document.getElementById('ppBody');
+  const isIsolante = obj.data.type === 'copertura_isolante';
+  
+  body.innerHTML = `
+    <div style="font-size:0.85rem; margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:8px;">
+      <b>Pezzo:</b> ${isIsolante ? 'Pannello Sandwich Isolante' : capitalize(obj.data.type)}<br>
+      <b>Finitura:</b> ${isIsolante ? 'Precoibentato Tecnico' : obj.data.colorName}<br>
+    </div>
+    <div class="pp-field">
+      <label class="pp-label">✏️ Lunghezza (cm)</label>
+      <input type="range" id="paramW" min="10" max="400" step="2" value="${obj.data.w}" style="width:100%" oninput="resizeSelectedPieceParametric()">
+      <div id="lblW" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${obj.data.w} cm</div>
+    </div>
+    <div class="pp-field">
+      <label class="pp-label">✏️ Spessore (cm)</label>
+      <input type="range" id="paramH" min="1" max="40" step="0.5" value="${obj.data.h}" style="width:100%" oninput="resizeSelectedPieceParametric()">
+      <div id="lblH" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${obj.data.h} cm</div>
+    </div>
+    <div class="pp-field">
+      <label class="pp-label">✏️ Larghezza (cm)</label>
+      <input type="range" id="paramD" min="1" max="40" step="0.5" value="${obj.data.d}" style="width:100%" oninput="resizeSelectedPieceParametric()">
+      <div id="lblD" style="font-size:0.75rem; font-family:'IBM Plex Mono'; text-align:right;">${obj.data.d} cm</div>
+    </div>
+    <button class="ctrl-btn" style="width:100%; background:var(--bg2); color:var(--wood-dark); margin-top:12px;" onclick="duplicateSelectedPiece()">👥 Duplica Pezzo</button>
+  `;
+}
+
+function updateInspectorLabels(obj) {
+  const lblW = document.getElementById('lblW'); const lblH = document.getElementById('lblH'); const lblD = document.getElementById('lblD');
+  if(lblW) lblW.textContent = `${obj.data.w} cm`;
+  if(lblH) lblH.textContent = `${obj.data.h} cm`;
+  if(lblD) lblD.textContent = `${obj.data.d} cm`;
+}
+
+function resizeSelectedPieceParametric() {
+  if(!selectedObj) return;
+  saveCurrentStateToHistory();
+  const newW = parseFloat(document.getElementById('paramW').value);
+  const newH = parseFloat(document.getElementById('paramH').value);
+  const newD = parseFloat(document.getElementById('paramD').value);
+  
+  selectedObj.data.w = newW; selectedObj.data.h = newH; selectedObj.data.d = newD;
+  selectedObj.data.baseW = newW; selectedObj.data.baseH = newH; selectedObj.data.baseD = newD;
+  
+  selectedObj.mesh.geometry.dispose();
+  selectedObj.mesh.geometry = new THREE.BoxGeometry(newW, newH, newD);
+  
+  const altezzaAppoggioSuolo = newH / 2;
+  if(selectedObj.mesh.position.y < altezzaAppoggioSuolo) selectedObj.mesh.position.y = altezzaAppoggioSuolo;
+
+  updateInspectorLabels(selectedObj); updateFloatingMenuAndLabels(); rebuildCart();
+}
+
+function duplicateSelectedPiece() {
+  if (!selectedObj) return;
+  saveCurrentStateToHistory();
+  const source = selectedObj.data;
+  const geo = new THREE.BoxGeometry(source.w, source.h, source.d);
+  
+  let mat;
+  if (source.type === 'copertura_isolante') {
+    mat = new THREE.MeshLambertMaterial({ color: 0xB0C4DE });
+  } else {
+    mat = new THREE.MeshLambertMaterial({ color: source.colorHex || 0xC4956A });
+  }
+
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(selectedObj.mesh.position.x + 15, selectedObj.mesh.position.y, selectedObj.mesh.position.z + 15);
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  scene.add(mesh);
+
+  const cloneObj = { mesh, data: { type: source.type, w: source.w, h: source.h, d: source.d, note: `${source.note} (Copia)`, colorName: source.colorName, colorHex: source.colorHex, baseW: source.w, baseH: source.h, baseD: source.d } };
+  sceneObjects.push(cloneObj); rebuildCart(); selectSceneObject(cloneObj);
+}
+
+function deleteSelected() {
+  if (!selectedObj) return;
+  saveCurrentStateToHistory(); scene.remove(selectedObj.mesh);
+  sceneObjects = sceneObjects.filter(o => o !== selectedObj); deselectAll(); rebuildCart();
+}
+
+function addNewLegoPiece(type, w, h, d, note) {
+  saveCurrentStateToHistory(); deselectAll();
+  const geo = new THREE.BoxGeometry(w, h, d);
+  
+  let mat;
+  if (type === 'copertura_isolante') {
+    mat = new THREE.MeshLambertMaterial({ color: 0xB0C4DE }); // Colore tecnico azzurrato per il sandwich
+  } else {
+    mat = new THREE.MeshLambertMaterial({ color: activeFlatting.hex });
+  }
+
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  mesh.position.set(0, h/2, 0); scene.add(mesh);
+
+  const newObj = { mesh, data: { type, w, h, d, note, colorName: type === 'copertura_isolante' ? 'Isolante Tecnico' : activeFlatting.name, colorHex: type === 'copertura_isolante' ? 0xB0C4DE : activeFlatting.hex, baseW: w, baseH: h, baseD: d } };
+  sceneObjects.push(newObj); rebuildCart(); selectSceneObject(newObj);
+}
+
+function rebuildCart() {
+  const list = document.getElementById('cartList');
+  document.getElementById('cartCount').textContent = sceneObjects.length;
+  if(sceneObjects.length === 0) {
+    list.innerHTML = `<div style="padding:10px; color:var(--text2);">Nessun pezzo inserito</div>`;
+    return;
+  }
+  list.innerHTML = sceneObjects.map((o, idx) => `
+    <div class="cart-row" onclick="focusOnPieceByIndex(${idx})">
+      <span><b>${o.data.type === 'copertura_isolante' ? 'Pannello Sandwich' : capitalize(o.data.type)}</b> (${o.data.w}×${o.data.h}cm)</span>
+      <div class="color-indicator" style="background:#${(o.data.colorHex || 0xC4956A).toString(16).padStart(6, '0')}"></div>
+    </div>
+  `).join('');
+}
+
+// focus helper
+function focusOnPieceByIndex(idx) { if(sceneObjects[idx]) selectSceneObject(sceneObjects[idx]); }
+
+function loadModelPreset(presetName) {
+  saveCurrentStateToHistory(); clearCurrentScene();
+  if (presetName === 'lagomisurina') {
+    document.getElementById('projectTitle').value = "casetta_lagomisurina_pro";
+    const sp = 3.4; const hMin = 216;
+    addDirectWoodPiece('pannello', 350, 2, 200, 0, 1, 0, 'Abete Naturale', 0xC4956A, 'Basamento');
+    addDirectWoodPiece('pannello', 350, hMin, sp, 0, hMin/2 + 2, -98, 'Noce Scuro', 0x5C4033, 'Parete Posteriore');
+    addDirectWoodPiece('pannello', 200, hMin, sp, -173, hMin/2 + 2, 0, 'Noce Scuro', 0x5C4033, 'Parete Laterale SX', Math.PI/2);
+    addDirectWoodPiece('pannello', 200, hMin, sp, 173, hMin/2 + 2, 0, 'Noce Scuro', 0x5C4033, 'Parete Laterale DX', Math.PI/2);
+    addDirectWoodPiece('pannello', 120, hMin, sp, -110, hMin/2 + 2, 98, 'Noce Scuro', 0x5C4033, 'Facciata SX');
+    addDirectWoodPiece('pannello', 120, hMin, sp, 110, hMin/2 + 2, 98, 'Noce Scuro', 0x5C4033, 'Facciata DX');
+  }
+  rebuildCart();
+}
+
+function addDirectWoodPiece(type, w, h, d, x, y, z, colorName, colorHex, note, rotY = 0) {
+  const geo = new THREE.BoxGeometry(w, h, d);
+  const mat = new THREE.MeshLambertMaterial({ color: colorHex });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(x, y, z); mesh.rotation.y = rotY;
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  scene.add(mesh);
+  sceneObjects.push({ mesh, data: { type, w, h, d, note, colorName, colorHex, baseW: w, baseH: h, baseD: d } });
+}
+
+function clearCurrentScene() { deselectAll(); sceneObjects.forEach(o => { if(o.mesh) scene.remove(o.mesh); }); sceneObjects = []; }
+
+// ================== APERTURA E SALVATAGGIO FILE JSON ==================
+function saveProjectJSON() {
+  const title = document.getElementById('projectTitle').value.trim() || 'struttura_legno';
+  const dataToSave = {
+    projectName: title,
+    objects: sceneObjects.map(obj => ({
+      data: obj.data,
+      transform: { position: { x: obj.mesh.position.x, y: obj.mesh.position.y, z: obj.mesh.position.z }, rotation: { x: obj.mesh.rotation.x, y: obj.mesh.rotation.y, z: obj.mesh.rotation.z } }
+    }))
+  };
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToSave));
+  const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", `${title}.json`);
+  document.body.appendChild(dl); dl.click(); dl.remove();
+}
+
+function triggerLoadFile() { document.getElementById('fileLoader').click(); }
+function loadProjectJSON(event) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (imported.projectName) document.getElementById('projectTitle').value = imported.projectName;
+      saveCurrentStateToHistory(); clearCurrentScene();
+      if (imported.objects) {
+        imported.objects.forEach(objData => {
+          const d = objData.data;
+          const geo = new THREE.BoxGeometry(d.w, d.h, d.d);
+          
+          let mat;
+          if (d.type === 'copertura_isolante') {
+            mat = new THREE.MeshLambertMaterial({ color: 0xB0C4DE });
+          } else {
+            mat = new THREE.MeshLambertMaterial({ color: d.colorHex || 0xC4956A });
+          }
+
+          const mesh = new THREE.Mesh(geo, mat);
+          mesh.castShadow = true; mesh.receiveShadow = true;
+          if (objData.transform) {
+            mesh.position.set(objData.transform.position.x, objData.transform.position.y, objData.transform.position.z);
+            mesh.rotation.set(objData.transform.rotation.x, objData.transform.rotation.y, objData.transform.rotation.z);
+          }
+          scene.add(mesh);
+          sceneObjects.push({ mesh, data: d });
+        });
+      }
+      rebuildCart(); deselectAll();
+    } catch(err) { alert("Errore lettura file."); }
+  };
+  reader.readAsText(file);
+}
+
+// ================== BACKOFFICE COMPUTO METRICO PRO CON PANNELLI SANDWICH ==================
+function showBOM() {
+  if (sceneObjects.length === 0) { alert('Scena vuota!'); return; }
+  const colorGroups = {}; const woodSections = {}; const sandwichPanels = [];
+
+  sceneObjects.forEach(obj => {
+    const d = obj.data;
+    // Calcolo mq della faccia superiore/inferiore per i pannelli sandwich isolanti
+    const areaFacciaM2 = (d.w * d.d) / 10000;
+    // Calcolo sviluppo metrico integrale 6 facce per il legno
+    const sM2 = (2 * ((d.w * d.h) + (d.w * d.d) + (d.h * d.d))) / 10000;
+
+    if (d.type === 'copertura_isolante') {
+      sandwichPanels.push({ w: d.w, h: d.h, d: d.d, area: areaFacciaM2, note: d.note });
+    } else {
+      if (!colorGroups[d.colorName]) colorGroups[d.colorName] = { surface: 0, hex: d.colorHex || 0xC4956A };
+      colorGroups[d.colorName].surface += sM2;
+
+      const sectKey = `${d.h} × ${d.d} cm`;
+      if (!woodSections[sectKey]) woodSections[sectKey] = [];
+      woodSections[sectKey].push(d);
+    }
+  });
+
+  let html = "";
+
+  if(Object.keys(colorGroups).length > 0) {
+    html += `<table class="bom-table"><thead><tr><th>Finitura Colore Legno</th><th>Superficie Totale</th><th>Litri Calcolati (2 Mani)</th></tr></thead><tbody>`;
+    for (const [name, info] of Object.entries(colorGroups)) {
+      html += `<tr><td><b>${name}</b></td><td>${info.surface.toFixed(2)} m²</td><td><b>${((info.surface / 10) * 2).toFixed(2)} L</b></td></tr>`;
+    }
+    html += `</tbody></table>`;
+  }
+
+  // Sezione Computo dei pannelli Sandwich di isolamento termico
+  if(sandwichPanels.length > 0) {
+    html += `<h3 style="margin-top:20px; color:var(--wood-dark); border-bottom:2px solid var(--border);">💿 Computo Tecnico Pannelli Sandwich Coibentati</h3>`;
+    html += `<table class="bom-table"><thead><tr><th>Modulo</th><th>Dimensioni (L × Lar)</th><th>Spessore Anima</th><th>Superficie Copertura</th></tr></thead><tbody>`;
+    let mqTotIsolamento = 0;
+    sandwichPanels.forEach(p => {
+      mqTotIsolamento += p.area;
+      html += `<tr><td>Pannello Coibentato</td><td>${p.w} × ${p.d} cm</td><td>${p.h} cm</td><td><b>${p.area.toFixed(2)} m²</b></td></tr>`;
+    });
+    html += `<tr style="background:var(--bg2)"><td colspan="3"><b>Superficie Totale Fornitura Isolamento</b></td><td><b style="color:var(--accent); font-size:0.95rem;">${mqTotIsolamento.toFixed(2)} m²</b></td></tr>`;
+    html += `</tbody></table>`;
+  }
+
+  if(Object.keys(woodSections).length > 0) {
+    html += `<h3 style="margin-top:20px;">🪵 Ottimizzazione Tagli Carpenteria per Ufficio Acquisti</h3>`;
+    for (const [section, items] of Object.entries(woodSections)) {
+      html += `<div style="margin-top:10px; font-weight:600;">Sezione Lineare: ${section}</div>`;
+      html += `<table class="bom-table"><thead><tr><th>Articolo</th><th>Lunghezza (w)</th><th>Quantità</th></tr></thead><tbody>`;
+      const sub = {}; items.forEach(i => { const k = `${i.type}|${i.w}`; if(!sub[k]) sub[k]={type:i.type, w:i.w, q:0}; sub[k].q++; });
+      for (const g of Object.values(sub)) { html += `<tr><td>${capitalize(g.type)}</td><td>${g.w} cm</td><td><b>${g.q} pz</b></td></tr>`; }
+      html += `</tbody></table>`;
+    }
+  }
+
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeBOM() { document.getElementById('modalOverlay').classList.remove('open'); }
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function resetView() { spherical = { theta: Math.PI / 4, phi: Math.PI / 3.2, r: 400 }; updateCamera(); if(selectedObj) updateFloatingMenuAndLabels(); }
+
+function resizeRenderer() {
+  const p = canvas.parentElement; renderer.setSize(p.clientWidth, p.clientHeight);
+  camera.aspect = p.clientWidth / p.clientHeight; camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resizeRenderer); resizeRenderer();
+
+// Loop di rendering WebXR XRAnimationLoop obbligatorio
+renderer.setAnimationLoop(() => {
+  renderer.render(scene, camera);
+  if (selectedObj && transformControls.dragging) {
+    transformControls.dispatchEvent({type: 'change'});
+  } else if (selectedObj) {
+    updateFloatingMenuAndLabels();
+  }
+});
+</script>
+</body>
+</html>

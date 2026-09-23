@@ -93,6 +93,14 @@ const EXPERIMENTS = [
     text: "26 comuni in 3D: trama del logo, srotolamento, orbite. Demografia: l’altezza è la popolazione.",
     img: "/images/lab/trama.jpg",
   },
+  {
+    to: "/lab/legno" as const,
+    href: "/lab/legno.html",
+    code: "09",
+    title: "Legno",
+    text: "Progetto in 3D: travi, pannelli, coperture sandwich. Il computo metrico esce da solo.",
+    img: "/images/lab/legno.jpg",
+  },
 ];
 
 function Cover({
