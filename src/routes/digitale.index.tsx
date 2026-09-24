@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LepiniMesh } from "@/components/LepiniMesh";
 import { ProveGallery } from "@/components/ProveGallery";
 import { Button } from "@/components/ui/button";
-import { DIGITAL_MAIL, METODO, PITCH, SERVIZI, CONTENUTI, CONTENUTI_INCLUSI, CONTENUTI_AMBITI, CONTENUTI_PROCESSO, digitalMeta } from "@/data/digitale";
+import { DIGITAL_MAIL, METODO, PITCH, SERVIZI, CONTENUTI, CONTENUTI_INCLUSI, CONTENUTI_AMBITI, CONTENUTI_PROCESSO, VETRINA, digitalMeta } from "@/data/digitale";
 
 export const Route = createFileRoute("/digitale/")({
   head: () => ({
@@ -50,19 +50,22 @@ function StudioHome() {
         </div>
       </section>
 
-      <section className="bg-paper px-5 pb-16 md:px-12 md:pb-24">
-        <ul className="mx-auto grid max-w-6xl gap-3 md:grid-cols-3">
-          {[
-            { src: "/images/digitale/studio-set.jpg", alt: "Set fotografico chiaro, luce di studio", cap: "Set" },
-            { src: "/images/digitale/studio-prodotto.jpg", alt: "Prodotto su fondo neutro", cap: "Prodotto" },
-            { src: "/images/digitale/studio-schermo.jpg", alt: "Bozza di catalogo su un tavolo chiaro", cap: "Catalogo" },
-          ].map((f) => (
-            <li key={f.cap} className="overflow-hidden bg-paper-card">
-              <img src={f.src} alt={f.alt} className="aspect-[3/2] w-full object-cover" />
-              <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
-            </li>
-          ))}
-        </ul>
+      <section id="vetrina" className="bg-paper px-5 pb-16 md:px-12 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Cosa si consegna</p>
+          <h2 className="mt-3 max-w-xl font-display text-4xl text-ink">Dal furgone alla mail.</h2>
+          <p className="mt-3 max-w-xl text-sm text-ink-soft">
+            Oggetti e schermate che l'azienda usa. Il marchio sopra è il vostro: qui i pezzi sono ancora vuoti.
+          </p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {VETRINA.map((f) => (
+              <li key={f.cap} className="overflow-hidden bg-paper-card">
+                <img src={f.src} alt={f.alt} className="aspect-[3/2] w-full object-cover" />
+                <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <LogoParallax />

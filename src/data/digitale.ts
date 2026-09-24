@@ -115,6 +115,18 @@ export const PRODOTTO = [
   },
 ] as const;
 
+export const VETRINA = [
+  { src: "/images/digitale/vetrina/furgone.jpg", alt: "Furgone bianco, pronto per la grafica", cap: "Furgone" },
+  { src: "/images/digitale/vetrina/sito.jpg", alt: "Sito su un portatile, impaginazione pulita", cap: "Sito" },
+  { src: "/images/digitale/vetrina/biglietti.jpg", alt: "Biglietti da visita su un tavolo chiaro", cap: "Biglietti" },
+  { src: "/images/digitale/vetrina/carta.jpg", alt: "Foglio di carta intestata", cap: "Carta intestata" },
+  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Schermata di un gestionale su monitor", cap: "Gestionale" },
+  { src: "/images/digitale/vetrina/campagna.jpg", alt: "Manifesto pubblicitario su una parete chiara", cap: "Campagna" },
+  { src: "/images/digitale/vetrina/vela.jpg", alt: "Vela pubblicitaria su un marciapiede", cap: "Vela" },
+  { src: "/images/digitale/vetrina/instagram.jpg", alt: "Telefono con una griglia di post", cap: "Instagram" },
+  { src: "/images/digitale/vetrina/clienti.jpg", alt: "Programma clienti e posta su portatile e telefono", cap: "Clienti e mail" },
+] as const;
+
 export const CONTENUTI = {
   kicker: "Contenuti",
   title: "Foto, video e marchio, pronti da pubblicare",
