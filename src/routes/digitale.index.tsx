@@ -229,13 +229,13 @@ function StudioHome() {
           <p className="font-mono text-xs uppercase tracking-kicker text-copper">Cosa si consegna</p>
           <h2 className="mt-3 max-w-xl font-display text-4xl text-ink">Dal furgone alla mail.</h2>
           <p className="mt-3 max-w-xl text-sm text-ink-soft">
-            Oggetti e schermate che l'azienda usa. Il marchio sopra è il vostro: qui i pezzi sono ancora vuoti.
+            Esempi di quello che esce: furgone, carta, gestionale, vela, menu, mail. I marchi sono di prova.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {VETRINA.map((f) => {
               const card = (
                 <>
-                  <img src={f.src} alt={f.alt} className="aspect-[3/2] w-full object-cover" />
+                  <img src={f.src} alt={f.alt} className="aspect-[6/5] w-full object-cover" />
                   <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
                 </>
               );

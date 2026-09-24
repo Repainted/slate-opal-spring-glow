@@ -116,15 +116,18 @@ export const PRODOTTO = [
 ] as const;
 
 export const VETRINA = [
-  { src: "/images/digitale/vetrina/furgone.jpg", alt: "Furgone bianco, pronto per la grafica", cap: "Furgone" },
-  { src: "/images/digitale/vetrina/sito.jpg", alt: "Sito su un portatile, impaginazione pulita", cap: "Sito" },
-  { src: "/images/digitale/vetrina/biglietti.jpg", alt: "Biglietti da visita su un tavolo chiaro", cap: "Biglietti" },
-  { src: "/images/digitale/vetrina/carta.jpg", alt: "Foglio di carta intestata", cap: "Carta intestata" },
-  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Schermata di un gestionale su monitor", cap: "Gestionale", href: "#gestionale" },
-  { src: "/images/digitale/vetrina/campagna.jpg", alt: "Manifesto pubblicitario su una parete chiara", cap: "Campagna" },
-  { src: "/images/digitale/vetrina/vela.jpg", alt: "Vela pubblicitaria su un marciapiede", cap: "Vela" },
-  { src: "/images/digitale/vetrina/instagram.jpg", alt: "Telefono con una griglia di post", cap: "Instagram" },
-  { src: "/images/digitale/vetrina/clienti.jpg", alt: "Programma clienti e posta su portatile e telefono", cap: "Clienti e mail" },
+  { src: "/images/digitale/vetrina/furgone.jpg", alt: "Furgone bianco con grafica da ferramenta", cap: "Furgone" },
+  { src: "/images/digitale/vetrina/biglietti.jpg", alt: "Biglietto da visita verde con marchio", cap: "Biglietti" },
+  { src: "/images/digitale/vetrina/carta.jpg", alt: "Carta intestata e busta", cap: "Carta intestata" },
+  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Gestionale clienti su un monitor", cap: "Gestionale", href: "#gestionale" },
+  { src: "/images/digitale/vetrina/campagna.jpg", alt: "Menu e locandina sul banco di un bar", cap: "Menu e banco" },
+  { src: "/images/digitale/vetrina/vela.jpg", alt: "Vela pubblicitaria e telefono con i post", cap: "Vela e Instagram" },
+  { src: "/images/digitale/vetrina/marchio.jpg", alt: "Quaderno con il marchio di un circolo", cap: "Marchio" },
+  { src: "/images/digitale/vetrina/menu.jpg", alt: "Menu e copertina di un ristorante", cap: "Menu" },
+  { src: "/images/digitale/vetrina/mail.jpg", alt: "Biglietto di un programma per la posta", cap: "Clienti e mail" },
+  { src: "/images/digitale/vetrina/preventivi.jpg", alt: "Modulo carta per i preventivi", cap: "Preventivi" },
+  { src: "/images/digitale/vetrina/gadget.jpg", alt: "Borsa e borraccia con il marchio", cap: "Oggetti" },
+  { src: "/images/digitale/vetrina/banco.jpg", alt: "Banco e insegna di una bottega", cap: "Insegna" },
 ] as const;
 
 export const CONTENUTI = {
