@@ -120,7 +120,7 @@ export const VETRINA = [
   { src: "/images/digitale/vetrina/sito.jpg", alt: "Sito su un portatile, impaginazione pulita", cap: "Sito" },
   { src: "/images/digitale/vetrina/biglietti.jpg", alt: "Biglietti da visita su un tavolo chiaro", cap: "Biglietti" },
   { src: "/images/digitale/vetrina/carta.jpg", alt: "Foglio di carta intestata", cap: "Carta intestata" },
-  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Schermata di un gestionale su monitor", cap: "Gestionale" },
+  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Schermata di un gestionale su monitor", cap: "Gestionale", href: "#gestionale" },
   { src: "/images/digitale/vetrina/campagna.jpg", alt: "Manifesto pubblicitario su una parete chiara", cap: "Campagna" },
   { src: "/images/digitale/vetrina/vela.jpg", alt: "Vela pubblicitaria su un marciapiede", cap: "Vela" },
   { src: "/images/digitale/vetrina/instagram.jpg", alt: "Telefono con una griglia di post", cap: "Instagram" },

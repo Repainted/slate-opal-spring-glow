@@ -15,6 +15,180 @@ export const Route = createFileRoute("/digitale/")({
   component: StudioHome,
 });
 
+const ESEMPIO_ARTICOLI = [
+  { cod: "VT-840", nome: "Vite T.E. 8×40", giac: 240, min: 80, prezzo: 0.12, q: 200 },
+  { cod: "DF-115", nome: "Disco flex 115", giac: 18, min: 12, prezzo: 4.8, q: 10 },
+  { cod: "TN-10", nome: "Tassello nylon 10", giac: 4, min: 40, prezzo: 0.08, q: 100 },
+  { cod: "SM-25", nome: "Smalto ferromicaceo 2,5 L", giac: 6, min: 4, prezzo: 28.4, q: 2 },
+] as const;
+
+function euro(n: number) {
+  return n.toLocaleString("it-IT", { style: "currency", currency: "EUR" });
+}
+
+function GestionaleEsempio() {
+  const [vista, setVista] = useState<"giacenze" | "preventivo" | "ddt">("giacenze");
+  const [qty, setQty] = useState<Record<string, number>>(() =>
+    Object.fromEntries(ESEMPIO_ARTICOLI.map((a) => [a.cod, a.q])),
+  );
+  const sconto = 0.1;
+  const imponibile = ESEMPIO_ARTICOLI.reduce((s, a) => s + a.prezzo * (qty[a.cod] ?? 0), 0);
+  const netto = imponibile * (1 - sconto);
+  const iva = netto * 0.22;
+  const totale = netto + iva;
+
+  return (
+    <section id="gestionale" className="bg-paper px-5 pb-20 md:px-12">
+      <div className="mx-auto max-w-6xl">
+        <p className="font-mono text-xs uppercase tracking-kicker text-copper">Esempio</p>
+        <h2 className="mt-3 max-w-xl font-display text-4xl text-ink">Il gestionale, al banco.</h2>
+        <p className="mt-3 max-w-xl text-sm text-ink-soft">
+          Dati di prova, non di un cliente. Giacenze, preventivo e DDT escono dagli stessi articoli. Lo sconto e l'IVA li calcola il programma.
+        </p>
+
+        <div className="mt-8 overflow-x-auto border border-ink/15 bg-paper-card">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/10 px-4 py-3">
+            <p className="font-mono text-xs text-ink-soft">Ferramenta esempio · banco</p>
+            <div className="flex gap-1" role="tablist">
+              {(
+                [
+                  ["giacenze", "Giacenze"],
+                  ["preventivo", "Preventivo"],
+                  ["ddt", "DDT"],
+                ] as const
+              ).map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  aria-selected={vista === id}
+                  onClick={() => setVista(id)}
+                  className={`min-h-11 px-3 text-sm ${vista === id ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {vista === "giacenze" ? (
+            <table className="w-full text-left text-sm">
+              <thead className="font-mono text-xs uppercase tracking-wide text-ink-soft">
+                <tr>
+                  <th className="px-4 py-3 font-normal">Codice</th>
+                  <th className="px-4 py-3 font-normal">Articolo</th>
+                  <th className="px-4 py-3 text-right font-normal">Giacenza</th>
+                  <th className="px-4 py-3 text-right font-normal">Prezzo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ESEMPIO_ARTICOLI.map((a) => (
+                  <tr key={a.cod} className="border-t border-ink/10">
+                    <td className="px-4 py-3 font-mono text-xs text-copper">{a.cod}</td>
+                    <td className="px-4 py-3 text-ink">{a.nome}</td>
+                    <td className={`px-4 py-3 text-right ${a.giac < a.min ? "text-copper" : "text-ink"}`}>
+                      {a.giac}
+                      {a.giac < a.min ? " · sotto scorta" : ""}
+                    </td>
+                    <td className="px-4 py-3 text-right text-ink">{euro(a.prezzo)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
+
+          {vista === "preventivo" ? (
+            <div>
+              <p className="border-b border-ink/10 px-4 py-3 text-sm text-ink-soft">
+                Preventivo 42 · Impresa Rossi · sconto cliente 10%
+              </p>
+              <table className="w-full text-left text-sm">
+                <thead className="font-mono text-xs uppercase tracking-wide text-ink-soft">
+                  <tr>
+                    <th className="px-4 py-3 font-normal">Articolo</th>
+                    <th className="px-4 py-3 text-right font-normal">Qtà</th>
+                    <th className="px-4 py-3 text-right font-normal">Riga</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ESEMPIO_ARTICOLI.map((a) => (
+                    <tr key={a.cod} className="border-t border-ink/10">
+                      <td className="px-4 py-3 text-ink">{a.nome}</td>
+                      <td className="px-4 py-3 text-right">
+                        <input
+                          type="number"
+                          min={0}
+                          inputMode="numeric"
+                          aria-label={`Quantità ${a.nome}`}
+                          value={qty[a.cod] ?? 0}
+                          onChange={(e) =>
+                            setQty((q) => ({ ...q, [a.cod]: Math.max(0, Number(e.target.value) || 0) }))
+                          }
+                          className="w-20 border border-ink/15 bg-paper px-2 py-2 text-right text-ink"
+                        />
+                      </td>
+                      <td className="px-4 py-3 text-right text-ink">{euro(a.prezzo * (qty[a.cod] ?? 0))}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <dl className="grid gap-1 border-t border-ink/10 px-4 py-4 text-sm sm:ml-auto sm:w-72">
+                <div className="flex justify-between text-ink-soft">
+                  <dt>Imponibile</dt>
+                  <dd>{euro(imponibile)}</dd>
+                </div>
+                <div className="flex justify-between text-ink-soft">
+                  <dt>Sconto 10%</dt>
+                  <dd>− {euro(imponibile - netto)}</dd>
+                </div>
+                <div className="flex justify-between text-ink-soft">
+                  <dt>IVA 22%</dt>
+                  <dd>{euro(iva)}</dd>
+                </div>
+                <div className="mt-1 flex justify-between font-display text-xl text-ink">
+                  <dt>Totale</dt>
+                  <dd>{euro(totale)}</dd>
+                </div>
+              </dl>
+            </div>
+          ) : null}
+
+          {vista === "ddt" ? (
+            <div className="px-4 py-5 text-sm">
+              <div className="flex flex-wrap justify-between gap-4">
+                <div>
+                  <p className="font-mono text-xs text-copper">DDT 184</p>
+                  <p className="mt-1 text-ink">Causale: vendita</p>
+                  <p className="text-ink-soft">Destinatario: Impresa Rossi, cantiere Sermoneta</p>
+                </div>
+                <p className="text-ink-soft">Stessi articoli del preventivo. Nessuna ricopiatura.</p>
+              </div>
+              <table className="mt-4 w-full text-left">
+                <thead className="font-mono text-xs uppercase tracking-wide text-ink-soft">
+                  <tr>
+                    <th className="py-2 font-normal">Codice</th>
+                    <th className="py-2 font-normal">Articolo</th>
+                    <th className="py-2 text-right font-normal">Qtà</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ESEMPIO_ARTICOLI.map((a) => (
+                    <tr key={a.cod} className="border-t border-ink/10">
+                      <td className="py-2 font-mono text-xs text-copper">{a.cod}</td>
+                      <td className="py-2 text-ink">{a.nome}</td>
+                      <td className="py-2 text-right text-ink">{qty[a.cod] ?? 0}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StudioHome() {
   return (
     <StudioShell>
@@ -58,15 +232,30 @@ function StudioHome() {
             Oggetti e schermate che l'azienda usa. Il marchio sopra è il vostro: qui i pezzi sono ancora vuoti.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {VETRINA.map((f) => (
-              <li key={f.cap} className="overflow-hidden bg-paper-card">
-                <img src={f.src} alt={f.alt} className="aspect-[3/2] w-full object-cover" />
-                <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
-              </li>
-            ))}
+            {VETRINA.map((f) => {
+              const card = (
+                <>
+                  <img src={f.src} alt={f.alt} className="aspect-[3/2] w-full object-cover" />
+                  <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
+                </>
+              );
+              return (
+                <li key={f.cap} className="overflow-hidden bg-paper-card">
+                  {"href" in f && f.href ? (
+                    <a href={f.href} className="block hover:opacity-90">
+                      {card}
+                    </a>
+                  ) : (
+                    card
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
+
+      <GestionaleEsempio />
 
       <LogoParallax />
 
