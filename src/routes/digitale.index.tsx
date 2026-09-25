@@ -189,6 +189,131 @@ function GestionaleEsempio() {
   );
 }
 
+function VetrinaRuota() {
+  const rootRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const capRef = useRef<HTMLParagraphElement>(null);
+  const countRef = useRef<HTMLParagraphElement>(null);
+  const barRef = useRef<HTMLSpanElement>(null);
+  const pos = useRef(0);
+  const n = VETRINA.length;
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const root = rootRef.current;
+    if (!root) return;
+    let raf = 0;
+
+    const paint = () => {
+      if (!reduce) {
+        const travel = root.offsetHeight - window.innerHeight;
+        const top = root.getBoundingClientRect().top;
+        const raw = travel <= 0 ? 0 : Math.min(1, Math.max(0, -top / travel));
+        const t = Math.min(1, raw / 0.9);
+        pos.current = t * (n - 1);
+        if (barRef.current) barRef.current.style.transform = `scaleX(${t})`;
+      }
+      const p = pos.current;
+      let nearest = 0;
+      let best = Infinity;
+      cardRefs.current.forEach((el, i) => {
+        if (!el) return;
+        let o = i - p;
+        o = ((o % n) + n) % n;
+        if (o > n / 2) o -= n;
+        if (Math.abs(o) < best) {
+          best = Math.abs(o);
+          nearest = i;
+        }
+        const rot = Math.max(-68, Math.min(68, -o * 36));
+        const tx = o * 250;
+        const tz = -Math.abs(o) * 150;
+        const sc = Math.max(0.72, 1 - Math.abs(o) * 0.1);
+        el.style.transform = `translate(-50%, -50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${rot}deg) scale(${sc})`;
+        el.style.zIndex = String(80 - Math.round(Math.abs(o) * 8));
+        el.style.opacity = Math.abs(o) > 3.4 ? "0" : "1";
+      });
+      if (capRef.current) capRef.current.textContent = VETRINA[nearest].cap;
+      if (countRef.current) countRef.current.textContent = `${String(nearest + 1).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
+    };
+
+    const loop = () => {
+      paint();
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, [n]);
+
+  const scrollToIndex = (index: number) => {
+    const root = rootRef.current;
+    if (!root) return;
+    const i = Math.min(n - 1, Math.max(0, index));
+    const travel = root.offsetHeight - window.innerHeight;
+    const y = root.getBoundingClientRect().top + window.scrollY + (i / (n - 1)) * 0.9 * travel;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
+  return (
+    <section id="vetrina" ref={rootRef} className="relative h-[360vh] bg-paper">
+      <div className="sticky top-0 z-10 flex h-svh flex-col justify-center overflow-hidden bg-paper px-5 pt-20 md:px-12">
+        <div className="mx-auto w-full max-w-6xl">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Cosa si consegna</p>
+          <h2 className="mt-2 max-w-xl font-display text-4xl text-ink">Dal furgone alla mail.</h2>
+          <p className="mt-2 max-w-xl text-sm text-ink-soft">La pagina va avanti solo quando le schede sono finite.</p>
+          <div className="relative mt-4 h-[min(46vh,420px)] overflow-hidden" style={{ perspective: "1400px" }}>
+            <div className="absolute inset-0" style={{ transform: "rotateX(10deg)", transformStyle: "preserve-3d" }}>
+              {VETRINA.map((f, i) => (
+                <button
+                  key={f.cap}
+                  type="button"
+                  ref={(el) => {
+                    cardRefs.current[i] = el;
+                  }}
+                  className="absolute left-1/2 top-1/2 w-[280px] overflow-hidden border border-ink/10 bg-paper-card text-left shadow-[0_24px_50px_rgba(40,28,16,0.18)]"
+                  style={{ transformStyle: "preserve-3d" }}
+                  onClick={() => {
+                    const cur = Math.round(pos.current);
+                    if (cur === i && "href" in f && f.href) {
+                      window.location.hash = f.href;
+                      return;
+                    }
+                    scrollToIndex(i);
+                  }}
+                >
+                  <img src={f.src} alt={f.alt} draggable={false} className="aspect-[6/5] w-full object-cover" />
+                  <span className="block px-3 py-2 font-mono text-[10px] uppercase tracking-kicker text-copper">{f.cap}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="mt-2 flex items-end justify-between gap-4">
+            <div>
+              <p ref={countRef} className="font-mono text-xs text-copper">
+                01 / {String(n).padStart(2, "0")}
+              </p>
+              <p ref={capRef} className="font-display text-2xl text-ink">
+                {VETRINA[0].cap}
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button type="button" className="min-h-11 border border-ink/15 px-4 text-sm text-ink" onClick={() => scrollToIndex(Math.round(pos.current) - 1)}>
+                Indietro
+              </button>
+              <button type="button" className="min-h-11 border border-ink/15 px-4 text-sm text-ink" onClick={() => scrollToIndex(Math.round(pos.current) + 1)}>
+                Avanti
+              </button>
+            </div>
+          </div>
+          <div className="mt-4 h-px bg-ink/10">
+            <span ref={barRef} className="block h-px origin-left bg-copper" style={{ transform: "scaleX(0)" }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StudioHome() {
   return (
     <StudioShell>
@@ -224,36 +349,7 @@ function StudioHome() {
         </div>
       </section>
 
-      <section id="vetrina" className="bg-paper px-5 pb-16 md:px-12 md:pb-24">
-        <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Cosa si consegna</p>
-          <h2 className="mt-3 max-w-xl font-display text-4xl text-ink">Dal furgone alla mail.</h2>
-          <p className="mt-3 max-w-xl text-sm text-ink-soft">
-            Esempi di quello che esce: furgone, carta, gestionale, vela, menu, mail. I marchi sono di prova.
-          </p>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {VETRINA.map((f) => {
-              const card = (
-                <>
-                  <img src={f.src} alt={f.alt} className="aspect-[6/5] w-full object-cover" />
-                  <p className="px-4 py-3 font-mono text-xs uppercase tracking-kicker text-copper">{f.cap}</p>
-                </>
-              );
-              return (
-                <li key={f.cap} className="overflow-hidden bg-paper-card">
-                  {"href" in f && f.href ? (
-                    <a href={f.href} className="block hover:opacity-90">
-                      {card}
-                    </a>
-                  ) : (
-                    card
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
+      <VetrinaRuota />
 
       <GestionaleEsempio />
 
