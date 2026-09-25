@@ -22,14 +22,17 @@ import { Route as StorieRouteImport } from './routes/storie'
 import { Route as ComuniIndexRouteImport } from './routes/comuni/index'
 import { Route as ComuniSlugRouteImport } from './routes/comuni/$slug'
 import { Route as DigitaleIndexRouteImport } from './routes/digitale.index'
+import { Route as DigitaleAreaRouteImport } from './routes/digitale.area'
 import { Route as DigitaleStudioRouteImport } from './routes/digitale.studio'
 import { Route as DigitaleTerritorioRouteImport } from './routes/digitale.territorio'
 import { Route as EsperienzeIndexRouteImport } from './routes/esperienze/index'
 import { Route as EsperienzeCalendarioRouteImport } from './routes/esperienze/calendario'
 import { Route as EsperienzePlannerRouteImport } from './routes/esperienze/planner'
 import { Route as EsperienzeTimelineRouteImport } from './routes/esperienze/timeline'
+import { Route as LCodeRouteImport } from './routes/l.$code'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as LabAlberiRouteImport } from './routes/lab/alberi'
+import { Route as LabAreaRouteImport } from './routes/lab.area'
 import { Route as LabAtlanteRouteImport } from './routes/lab/atlante'
 import { Route as LabBiosferaRouteImport } from './routes/lab/biosfera'
 import { Route as LabDroneRouteImport } from './routes/lab/drone'
@@ -107,6 +110,11 @@ const DigitaleIndexRoute = DigitaleIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DigitaleRoute,
 } as any)
+const DigitaleAreaRoute = DigitaleAreaRouteImport.update({
+  id: '/area',
+  path: '/area',
+  getParentRoute: () => DigitaleRoute,
+} as any)
 const DigitaleStudioRoute = DigitaleStudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -137,6 +145,11 @@ const EsperienzeTimelineRoute = EsperienzeTimelineRouteImport.update({
   path: '/esperienze/timeline',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LCodeRoute = LCodeRouteImport.update({
+  id: '/l/$code',
+  path: '/l/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabIndexRoute = LabIndexRouteImport.update({
   id: '/lab/',
   path: '/lab/',
@@ -145,6 +158,11 @@ const LabIndexRoute = LabIndexRouteImport.update({
 const LabAlberiRoute = LabAlberiRouteImport.update({
   id: '/lab/alberi',
   path: '/lab/alberi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabAreaRoute = LabAreaRouteImport.update({
+  id: '/lab/area',
+  path: '/lab/area',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabAtlanteRoute = LabAtlanteRouteImport.update({
@@ -215,12 +233,15 @@ export interface FileRoutesByFullPath {
   '/portale': typeof PortaleRoute
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
+  '/digitale/area': typeof DigitaleAreaRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
   '/esperienze/planner': typeof EsperienzePlannerRoute
   '/esperienze/timeline': typeof EsperienzeTimelineRoute
+  '/l/$code': typeof LCodeRoute
   '/lab/alberi': typeof LabAlberiRoute
+  '/lab/area': typeof LabAreaRoute
   '/lab/atlante': typeof LabAtlanteRoute
   '/lab/biosfera': typeof LabBiosferaRoute
   '/lab/drone': typeof LabDroneRoute
@@ -248,12 +269,15 @@ export interface FileRoutesByTo {
   '/portale': typeof PortaleRoute
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
+  '/digitale/area': typeof DigitaleAreaRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
   '/esperienze/planner': typeof EsperienzePlannerRoute
   '/esperienze/timeline': typeof EsperienzeTimelineRoute
+  '/l/$code': typeof LCodeRoute
   '/lab/alberi': typeof LabAlberiRoute
+  '/lab/area': typeof LabAreaRoute
   '/lab/atlante': typeof LabAtlanteRoute
   '/lab/biosfera': typeof LabBiosferaRoute
   '/lab/drone': typeof LabDroneRoute
@@ -283,12 +307,15 @@ export interface FileRoutesById {
   '/portale': typeof PortaleRoute
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
+  '/digitale/area': typeof DigitaleAreaRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
   '/esperienze/planner': typeof EsperienzePlannerRoute
   '/esperienze/timeline': typeof EsperienzeTimelineRoute
+  '/l/$code': typeof LCodeRoute
   '/lab/alberi': typeof LabAlberiRoute
+  '/lab/area': typeof LabAreaRoute
   '/lab/atlante': typeof LabAtlanteRoute
   '/lab/biosfera': typeof LabBiosferaRoute
   '/lab/drone': typeof LabDroneRoute
@@ -319,12 +346,15 @@ export interface FileRouteTypes {
     | '/portale'
     | '/storie'
     | '/comuni/$slug'
+    | '/digitale/area'
     | '/digitale/studio'
     | '/digitale/territorio'
     | '/esperienze/calendario'
     | '/esperienze/planner'
     | '/esperienze/timeline'
+    | '/l/$code'
     | '/lab/alberi'
+    | '/lab/area'
     | '/lab/atlante'
     | '/lab/biosfera'
     | '/lab/drone'
@@ -352,12 +382,15 @@ export interface FileRouteTypes {
     | '/portale'
     | '/storie'
     | '/comuni/$slug'
+    | '/digitale/area'
     | '/digitale/studio'
     | '/digitale/territorio'
     | '/esperienze/calendario'
     | '/esperienze/planner'
     | '/esperienze/timeline'
+    | '/l/$code'
     | '/lab/alberi'
+    | '/lab/area'
     | '/lab/atlante'
     | '/lab/biosfera'
     | '/lab/drone'
@@ -386,12 +419,15 @@ export interface FileRouteTypes {
     | '/portale'
     | '/storie'
     | '/comuni/$slug'
+    | '/digitale/area'
     | '/digitale/studio'
     | '/digitale/territorio'
     | '/esperienze/calendario'
     | '/esperienze/planner'
     | '/esperienze/timeline'
+    | '/l/$code'
     | '/lab/alberi'
+    | '/lab/area'
     | '/lab/atlante'
     | '/lab/biosfera'
     | '/lab/drone'
@@ -424,7 +460,9 @@ export interface RootRouteChildren {
   EsperienzeCalendarioRoute: typeof EsperienzeCalendarioRoute
   EsperienzePlannerRoute: typeof EsperienzePlannerRoute
   EsperienzeTimelineRoute: typeof EsperienzeTimelineRoute
+  LCodeRoute: typeof LCodeRoute
   LabAlberiRoute: typeof LabAlberiRoute
+  LabAreaRoute: typeof LabAreaRoute
   LabAtlanteRoute: typeof LabAtlanteRoute
   LabBiosferaRoute: typeof LabBiosferaRoute
   LabDroneRoute: typeof LabDroneRoute
@@ -534,6 +572,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DigitaleIndexRouteImport
       parentRoute: typeof DigitaleRoute
     }
+    '/digitale/area': {
+      id: '/digitale/area'
+      path: '/area'
+      fullPath: '/digitale/area'
+      preLoaderRoute: typeof DigitaleAreaRouteImport
+      parentRoute: typeof DigitaleRoute
+    }
     '/digitale/studio': {
       id: '/digitale/studio'
       path: '/studio'
@@ -576,6 +621,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsperienzeTimelineRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/l/$code': {
+      id: '/l/$code'
+      path: '/l/$code'
+      fullPath: '/l/$code'
+      preLoaderRoute: typeof LCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/': {
       id: '/lab/'
       path: '/lab'
@@ -588,6 +640,13 @@ declare module '@tanstack/react-router' {
       path: '/lab/alberi'
       fullPath: '/lab/alberi'
       preLoaderRoute: typeof LabAlberiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/area': {
+      id: '/lab/area'
+      path: '/lab/area'
+      fullPath: '/lab/area'
+      preLoaderRoute: typeof LabAreaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/atlante': {
@@ -671,12 +730,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface DigitaleRouteChildren {
+  DigitaleAreaRoute: typeof DigitaleAreaRoute
   DigitaleStudioRoute: typeof DigitaleStudioRoute
   DigitaleTerritorioRoute: typeof DigitaleTerritorioRoute
   DigitaleIndexRoute: typeof DigitaleIndexRoute
 }
 
 const DigitaleRouteChildren: DigitaleRouteChildren = {
+  DigitaleAreaRoute: DigitaleAreaRoute,
   DigitaleStudioRoute: DigitaleStudioRoute,
   DigitaleTerritorioRoute: DigitaleTerritorioRoute,
   DigitaleIndexRoute: DigitaleIndexRoute,
@@ -701,7 +762,9 @@ const rootRouteChildren: RootRouteChildren = {
   EsperienzeCalendarioRoute: EsperienzeCalendarioRoute,
   EsperienzePlannerRoute: EsperienzePlannerRoute,
   EsperienzeTimelineRoute: EsperienzeTimelineRoute,
+  LCodeRoute: LCodeRoute,
   LabAlberiRoute: LabAlberiRoute,
+  LabAreaRoute: LabAreaRoute,
   LabAtlanteRoute: LabAtlanteRoute,
   LabBiosferaRoute: LabBiosferaRoute,
   LabDroneRoute: LabDroneRoute,

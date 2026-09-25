@@ -1,7 +1,9 @@
-import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Outlet, Scripts, createRootRoute, useRouterState } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SITE } from "@/lib/seo";
+import { applyGrafica } from "@/lib/studio-store";
 import appCss from "../styles.css?url";
 
 const FONT =
@@ -34,6 +36,7 @@ export const Route = createRootRoute({
       </head>
       <body className="bg-navy text-cream">
         <PreviewHostBridge />
+        <GraficaBridge />
         <AuthProvider>
           <Outlet />
         </AuthProvider>
@@ -42,3 +45,12 @@ export const Route = createRootRoute({
     </html>
   ),
 });
+
+function GraficaBridge() {
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    if (path.startsWith("/digitale")) applyGrafica("digital");
+    else if (path.startsWith("/lab")) applyGrafica("lab");
+  }, [path]);
+  return null;
+}

@@ -197,6 +197,10 @@ function LabHome() {
           <Link to="/sentieri" className="text-olive-light">
             sentieri
           </Link>
+          .{" "}
+          <Link to="/lab/area" className="text-olive-light">
+            Area
+          </Link>
           .
         </p>
       </div>

@@ -485,6 +485,9 @@ function StudioShell({ children }: { children: ReactNode }) {
             <Link to="/digitale/territorio" className="mt-3 inline-block text-ink hover:text-copper">
               Vista scura
             </Link>
+            <Link to="/digitale/area" className="mt-2 block text-ink hover:text-copper">
+              Area
+            </Link>
           </div>
         </div>
       </footer>
