@@ -1,11 +1,8 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useCallback } from "react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
-import { WebGLHost, useReducedMotion } from "@/lab/LabStage";
-import { startHero } from "@/lab/hero";
-import { Eyebrow } from "@/components/SectionHead";
 import { titleFor } from "@/lib/seo";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/lab/")({
   head: () => ({
@@ -13,197 +10,168 @@ export const Route = createFileRoute("/lab/")({
       { title: titleFor("Lepini Lab") },
       {
         name: "description",
-        content: "Lepini Lab: i 26 comuni, i sentieri e le specie dei Monti Lepini in 3D. Costruito da Lepini Digital.",
+        content:
+          "Lepini Lab: i progetti del laboratorio. Il Portale dei Monti Lepini è uno. Legno e drone stanno per conto loro.",
       },
     ],
   }),
   component: LabHome,
 });
 
-const EXPERIMENTS = [
-  {
-    to: "/lab/atlante" as const,
-    href: null as string | null,
-    code: "00",
-    title: "Atlante",
-    text: "I 26 comuni sul rilievo. Tocca un nodo: si apre la scheda del Portale.",
-    img: "/images/lab/atlante.jpg",
-  },
-  {
-    to: "/lab/volo" as const,
-    href: null,
-    code: "01",
-    title: "Volo",
-    text: "Sopra il massiccio. Avvicinati a un borgo e compare la scheda.",
-    img: "/images/lab/volo.jpg",
-  },
-  {
-    to: "/lab/drone" as const,
-    href: "/lab/drone.html",
-    code: "07",
-    title: "Drone",
-    text: "Simulatore di volo: DEM reale, satellite, strade, fisica. Scegli zona o resta sui Lepini.",
-    img: "/images/lab/drone.jpg",
-  },
-  {
-    to: "/lab/faggeta" as const,
-    href: null,
-    code: "02",
-    title: "Faggeta",
-    text: "Cammini tra i faggi. Picchio nero e faggete: le stesse schede natura.",
-    img: "/images/lab/faggeta.jpg",
-  },
-  {
-    to: "/lab/biosfera" as const,
-    href: null,
-    code: "03",
-    title: "Biosfera",
-    text: "Flora e fauna su due anelli. Tocca aquila, lupo, istrice: scheda e Portale.",
-    img: "/images/lab/biosfera.jpg",
-  },
-  {
-    to: "/lab/sentieri" as const,
-    href: null,
-    code: "04",
-    title: "Sentieri",
-    text: "I sentieri sul rilievo vero. 701, 702, 736: gli stessi numeri del Portale.",
-    img: "/images/lab/sentieri.jpg",
-  },
-  {
-    to: "/lab/parco" as const,
-    href: null,
-    code: "05",
-    title: "Parco",
-    text: "ZPS e siti Natura 2000 sul crinale. Non è un parco regionale: è ciò che esiste.",
-    img: "/images/lab/parco.jpg",
-  },
-  {
-    to: "/lab/alberi" as const,
-    href: null,
-    code: "06",
-    title: "Alberi",
-    text: "Leccio e nocciolo da three-d-stage. Tocca un esemplare: si apre la scheda.",
-    img: "/images/lab/alberi.jpg",
-  },
-  {
-    to: "/lab/trama" as const,
-    href: null,
-    code: "08",
-    title: "Trama",
-    text: "26 comuni in 3D: trama del logo, srotolamento, orbite. Demografia: l’altezza è la popolazione.",
-    img: "/images/lab/trama.jpg",
-  },
-  {
-    to: "/lab/legno" as const,
-    href: "/lab/legno.html",
-    code: "09",
-    title: "Legno",
-    text: "Travi, pannelli e coperture. Sezione, essenza e distinta d'acquisto con prezzi.",
-    img: "/images/lab/legno.jpg",
-  },
-];
+const PORTALE_APPS = [
+  { to: "/lab/atlante", title: "Atlante", text: "I 26 comuni sul rilievo.", img: "/images/lab/atlante.jpg" },
+  { to: "/lab/volo", title: "Volo", text: "Sopra il massiccio, verso un borgo.", img: "/images/lab/volo.jpg" },
+  { to: "/lab/sentieri", title: "Sentieri", text: "701, 702, 736 sul rilievo vero.", img: "/images/lab/sentieri.jpg" },
+  { to: "/lab/biosfera", title: "Biosfera", text: "Flora e fauna, le schede natura.", img: "/images/lab/biosfera.jpg" },
+  { to: "/lab/faggeta", title: "Faggeta", text: "Tra i faggi, fino al picchio nero.", img: "/images/lab/faggeta.jpg" },
+  { to: "/lab/parco", title: "Parco", text: "ZPS e siti Natura 2000.", img: "/images/lab/parco.jpg" },
+  { to: "/lab/alberi", title: "Alberi", text: "Leccio e nocciolo, poi la scheda.", img: "/images/lab/alberi.jpg" },
+  { to: "/lab/trama", title: "Trama", text: "I 26 nodi, orbite e popolazione.", img: "/images/lab/trama.jpg" },
+] as const;
 
-function Cover({
-  img,
-  code,
-  title,
-  text,
-}: {
-  img: string;
-  code: string;
-  title: string;
-  text: string;
-}) {
+function LabHome() {
   return (
-    <>
-      <img src={img} alt="" className="meteo-bg absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/55 to-navy-deep/15" />
-      <div className="relative z-10 flex h-full min-h-[15.5rem] flex-col justify-end p-5 md:p-6">
-        <p className="font-display text-2xl leading-none text-copper-light md:text-3xl">{code}</p>
-        <h2 className="mt-2 font-display text-2xl text-cream">{title}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-cream-soft">{text}</p>
-      </div>
-    </>
+    <div className="lab-page relative min-h-screen">
+      <a
+        href="#contenuto"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+      >
+        Salta al contenuto
+      </a>
+      <LabHeader />
+      <main id="contenuto" className="pt-20">
+        <section className="mx-auto max-w-6xl px-5 pb-8 pt-16 md:px-12 md:pt-24">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Lepini Lab · Lepini Digital</p>
+          <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.8rem,7vw,5.2rem)] font-medium leading-[0.95]">
+            I progetti del laboratorio.
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+            Il Portale è uno. Accanto ci sono lavori che non gli appartengono: si aprono da soli, con una scheda propria.
+          </p>
+        </section>
+
+        <section id="progetti" className="mx-auto max-w-6xl px-5 py-12 md:px-12 md:py-16">
+          <p className="font-mono text-xs uppercase tracking-kicker text-copper">Progetti</p>
+          <h2 className="mt-3 font-display text-4xl">Tre lavori, non un solo sito.</h2>
+
+          <article className="mt-10 border border-ink/10 bg-paper-card">
+            <div className="border-b border-ink/10 px-5 py-6 md:px-8">
+              <p className="font-mono text-xs uppercase tracking-kicker text-copper">01 · Portale</p>
+              <h3 className="mt-2 font-display text-3xl">Portale dei Monti Lepini</h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
+                Comuni, specie e sentieri. Queste app stanno dentro il Portale: leggono le stesse schede.
+              </p>
+              <Link to="/" className="mt-4 inline-block text-sm text-copper">
+                Apri il Portale
+              </Link>
+            </div>
+            <ul className="grid gap-px bg-ink/10 p-px sm:grid-cols-2 lg:grid-cols-4">
+              {PORTALE_APPS.map((app) => (
+                <li key={app.to} className="bg-paper-card">
+                  <Link to={app.to} className="group block h-full p-4 hover:bg-paper">
+                    <img src={app.img} alt="" className="aspect-[6/5] w-full object-cover" />
+                    <h4 className="mt-3 font-display text-xl">{app.title}</h4>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-soft">{app.text}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <Link to="/lab/legno" className="group border border-ink/10 bg-paper-card hover:border-copper">
+              <img src="/images/lab/legno.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
+              <div className="p-5 md:p-6">
+                <p className="font-mono text-xs uppercase tracking-kicker text-copper">02 · A parte</p>
+                <h3 className="mt-2 font-display text-3xl">Legno</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                  Travi, pannelli e distinta d’acquisto. Non è un’app del Portale: è un progetto suo, per chi lavora il legno.
+                </p>
+              </div>
+            </Link>
+            <Link to="/lab/drone" className="group border border-ink/10 bg-paper-card hover:border-copper">
+              <img src="/images/lab/drone.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
+              <div className="p-5 md:p-6">
+                <p className="font-mono text-xs uppercase tracking-kicker text-copper">03 · A parte</p>
+                <h3 className="mt-2 font-display text-3xl">Drone</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                  Volo sul rilievo reale, satellite e strade. Si può restare sui Lepini o cambiare zona.
+                </p>
+              </div>
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-ink/10 px-5 py-12 md:px-12">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <BrandMark variant="lab" className="h-16 w-auto md:h-20" />
+          <div className="text-sm text-ink-soft">
+            <p>Costruito da Lepini Digital.</p>
+            <Link to="/digitale" className="mt-2 inline-block text-ink hover:text-copper">
+              Digital
+            </Link>
+            <Link to="/lab/area" className="mt-2 block text-ink hover:text-copper">
+              Area
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
 
-function LabHome() {
-  const reduced = useReducedMotion();
-  const start = useCallback((c: HTMLCanvasElement) => startHero(c, reduced.current), [reduced]);
-
+function LabHeader() {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-navy-deep text-cream">
-      <WebGLHost start={start} />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/25 to-navy-deep/40" />
-
-      <header className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 py-5 md:px-10">
-        <Link to="/lab" className="pointer-events-auto flex items-center text-cream" aria-label="Lepini Lab">
-          <BrandMark variant="lab" className="h-16 w-auto md:h-[4.5rem]" />
+    <header className="fixed inset-x-0 top-0 z-20 border-b border-ink/10 bg-paper/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-12">
+        <Link to="/lab" className="flex items-center" aria-label="Lepini Lab">
+          <BrandMark variant="labMark" className="h-11 w-auto md:h-12" />
         </Link>
-        <div className="pointer-events-auto flex gap-2">
-          <Link
-            to="/comuni"
-            className="rounded-full border border-cream/20 px-4 py-2 text-sm text-cream-soft hover:border-copper-light"
-          >
+        <nav className="hidden items-center gap-7 text-sm tracking-wide text-ink-soft lg:flex" aria-label="Lab">
+          <a href="#progetti" className="hover:text-ink">
+            Progetti
+          </a>
+          <Link to="/" className="hover:text-ink">
             Portale
           </Link>
-          <Link
-            to="/digitale"
-            className="rounded-full border border-cream/20 px-4 py-2 text-sm text-cream-soft hover:border-copper-light"
-          >
+          <Link to="/digitale" className="hover:text-ink">
             Digital
           </Link>
-        </div>
-      </header>
-
-      <div className="pointer-events-none relative z-10 mx-auto flex min-h-dvh max-w-6xl flex-col justify-end px-5 pb-10 pt-28 md:px-12 md:pb-14">
-        <Eyebrow>Laboratorio scientifico · Lepini Digital</Eyebrow>
-        <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.6rem,7vw,5rem)] font-semibold leading-[0.92] text-cream">
-          Vedere il crinale
-          <span className="mt-3 block font-medium italic text-olive-light">come un modello vivo.</span>
-        </h1>
-        <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream-soft">
-          Le schede del Portale — comuni, flora, fauna, sentieri — in tre dimensioni. Per mostrare alle imprese cosa si
-          può fare con gli stessi strumenti.
-        </p>
-
-        <div className="pointer-events-auto mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {EXPERIMENTS.map((e) => {
-            const cls = cn(
-              "group relative overflow-hidden rounded-xl shadow-[var(--shadow-border)] transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)]",
-            );
-            const inner = <Cover img={e.img} code={e.code} title={e.title} text={e.text} />;
-            return e.href ? (
-              <a key={e.code} href={e.href} className={cls}>
-                {inner}
-              </a>
-            ) : (
-              <Link key={e.code} to={e.to} className={cls}>
-                {inner}
-              </Link>
-            );
-          })}
-        </div>
-        <p className="pointer-events-auto mt-6 text-sm text-muted">
-          Le schede sono sul Portale:{" "}
-          <Link to="/comuni" className="text-olive-light">
-            26 comuni
-          </Link>
-          ,{" "}
-          <Link to="/natura" className="text-olive-light">
-            natura
-          </Link>
-          ,{" "}
-          <Link to="/sentieri" className="text-olive-light">
-            sentieri
-          </Link>
-          .{" "}
-          <Link to="/lab/area" className="text-olive-light">
+          <Link to="/lab/area" className="hover:text-ink">
             Area
           </Link>
-          .
-        </p>
+        </nav>
+        <button
+          type="button"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-ink/15 text-ink lg:hidden"
+          aria-expanded={open}
+          aria-controls="lab-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          <span className="sr-only">Menu</span>
+        </button>
       </div>
-    </div>
+      {open ? (
+        <div id="lab-nav" className="border-t border-ink/10 bg-paper px-5 py-6 lg:hidden">
+          <nav className="flex flex-col gap-1 text-ink" aria-label="Lab mobile">
+            <a href="#progetti" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Progetti
+            </a>
+            <Link to="/" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Portale
+            </Link>
+            <Link to="/digitale" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Digital
+            </Link>
+            <Link to="/lab/area" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              Area
+            </Link>
+          </nav>
+        </div>
+      ) : null}
+    </header>
   );
 }
