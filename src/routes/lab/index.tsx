@@ -52,7 +52,7 @@ function LabHome() {
 
         <section id="progetti" className="mx-auto max-w-6xl px-5 py-12 md:px-12 md:py-16">
           <p className="font-mono text-xs uppercase tracking-kicker text-copper">Progetti</p>
-          <h2 className="mt-3 font-display text-4xl">Tre lavori, non un solo sito.</h2>
+          <h2 className="mt-3 font-display text-4xl">Quattro lavori, non un solo sito.</h2>
 
           <article className="mt-10 border border-ink/10 bg-paper-card">
             <div className="border-b border-ink/10 px-5 py-6 md:px-8">
@@ -78,7 +78,7 @@ function LabHome() {
             </ul>
           </article>
 
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
             <Link to="/lab/legno" className="group border border-ink/10 bg-paper-card hover:border-copper">
               <img src="/images/lab/legno.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
               <div className="p-5 md:p-6">
@@ -96,6 +96,18 @@ function LabHome() {
                 <h3 className="mt-2 font-display text-3xl">Drone</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                   Volo sul rilievo reale, satellite e strade. Si può restare sui Lepini o cambiare zona.
+                </p>
+              </div>
+            </Link>
+            <Link to="/lab/preventivi" className="group border border-ink/10 bg-paper-card hover:border-copper">
+              <div className="flex aspect-[16/9] w-full items-end bg-ink p-5 text-paper">
+                <p className="font-display text-4xl">Cantiere</p>
+              </div>
+              <div className="p-5 md:p-6">
+                <p className="font-mono text-xs uppercase tracking-kicker text-copper">04 · A parte</p>
+                <h3 className="mt-2 font-display text-3xl">Preventivi</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                  Tetto, muri, materiali, listino e PDF. Per chi fa i conti in cantiere.
                 </p>
               </div>
             </Link>

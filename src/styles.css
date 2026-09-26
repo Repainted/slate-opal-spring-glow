@@ -34,6 +34,20 @@
   --radius-xl: 24px;
   --shadow-border: 0 0 0 1px color-mix(in oklab, #ede0c8 10%, transparent);
   --shadow-border-hover: 0 0 0 1px color-mix(in oklab, #ce8b4e 45%, transparent);
+  --color-brick: #6e3224;
+  --color-brick-foreground: #f4efe4;
+  --color-muted-foreground: #a29a8c;
+  --color-primary-foreground: #f4efe4;
+  --color-card-foreground: #ede0c8;
+  --color-secondary: #262420;
+  --color-secondary-foreground: #ede0c8;
+  --color-destructive: #8a2b22;
+  --color-destructive-foreground: #f4efe4;
+  --color-popover: #262420;
+  --color-popover-foreground: #ede0c8;
+  --color-accent: #262420;
+  --color-accent-foreground: #ede0c8;
+  --color-input: #3a3834;
 }
 
 /* Lepini Digital B2B: antracite + rame del badge circolare */
@@ -206,6 +220,75 @@
   transform: none !important;
   opacity: 1 !important;
   will-change: auto;
+}
+
+.pv {
+  --color-background: #e7e2d6;
+  --color-foreground: #161410;
+  --color-card: #f4efe4;
+  --color-card-foreground: #161410;
+  --color-popover: #f7f3ea;
+  --color-popover-foreground: #161410;
+  --color-primary: #1c1915;
+  --color-primary-foreground: #f4efe4;
+  --color-secondary: #dcd6c8;
+  --color-secondary-foreground: #161410;
+  --color-muted: #dcd6c8;
+  --color-muted-foreground: #5c564c;
+  --color-accent: #dcd6c8;
+  --color-accent-foreground: #161410;
+  --color-destructive: #8a2b22;
+  --color-destructive-foreground: #f4efe4;
+  --color-border: #cfc7b6;
+  --color-input: #cfc7b6;
+  --color-ring: #1c1915;
+  --color-brick: #6e3224;
+  --color-brick-foreground: #f4efe4;
+  --shadow-border:
+    0px 0px 0px 1px rgb(22 20 16 / 0.08),
+    0px 1px 2px -1px rgb(22 20 16 / 0.08);
+  --shadow-border-hover:
+    0px 0px 0px 1px rgb(22 20 16 / 0.12),
+    0px 2px 4px -1px rgb(22 20 16 / 0.1);
+  color: var(--color-foreground);
+  background: var(--color-background);
+  font-family: var(--font-sans);
+  line-height: 1.45;
+}
+
+.pv h1,
+.pv h2,
+.pv h3 {
+  font-family: var(--font-sans);
+  color: var(--color-foreground);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.pv .print-only {
+  display: none;
+}
+
+@media print {
+  .pv {
+    background: white;
+    color: black;
+  }
+  .pv .no-print {
+    display: none !important;
+  }
+  .pv .print-only {
+    display: block !important;
+  }
+  .pv header,
+  .pv nav {
+    display: none !important;
+  }
+  .pv a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

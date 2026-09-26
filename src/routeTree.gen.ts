@@ -44,6 +44,18 @@ import { Route as LabTramaRouteImport } from './routes/lab/trama'
 import { Route as LabVoloRouteImport } from './routes/lab/volo'
 import { Route as SentieriIndexRouteImport } from './routes/sentieri/index'
 import { Route as SentieriSlugRouteImport } from './routes/sentieri/$slug'
+import { Route as LabPreventiviIndexRouteImport } from './routes/lab/preventivi/index'
+import { Route as LabPreventiviAziendeRouteImport } from './routes/lab/preventivi/aziende'
+import { Route as LabPreventiviExtraRouteImport } from './routes/lab/preventivi/extra'
+import { Route as LabPreventiviImpostazioniRouteImport } from './routes/lab/preventivi/impostazioni'
+import { Route as LabPreventiviListaRouteImport } from './routes/lab/preventivi/lista'
+import { Route as LabPreventiviPlanimetriaRouteImport } from './routes/lab/preventivi/planimetria'
+import { Route as LabPreventiviPrezziRouteImport } from './routes/lab/preventivi/prezzi'
+import { Route as LabPreventiviCantiereIdRouteImport } from './routes/lab/preventivi/cantiere/$id'
+import { Route as LabPreventiviCategoriaIdRouteImport } from './routes/lab/preventivi/categoria/$id'
+import { Route as LabPreventiviMisuraKindRouteImport } from './routes/lab/preventivi/misura/$kind'
+import { Route as LabPreventiviProdottoIdRouteImport } from './routes/lab/preventivi/prodotto/$id'
+import { Route as LabPreventiviVoceIdRouteImport } from './routes/lab/preventivi/voce/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -220,6 +232,69 @@ const SentieriSlugRoute = SentieriSlugRouteImport.update({
   path: '/sentieri/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabPreventiviIndexRoute = LabPreventiviIndexRouteImport.update({
+  id: '/lab/preventivi/',
+  path: '/lab/preventivi/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviAziendeRoute = LabPreventiviAziendeRouteImport.update({
+  id: '/lab/preventivi/aziende',
+  path: '/lab/preventivi/aziende',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviExtraRoute = LabPreventiviExtraRouteImport.update({
+  id: '/lab/preventivi/extra',
+  path: '/lab/preventivi/extra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviImpostazioniRoute =
+  LabPreventiviImpostazioniRouteImport.update({
+    id: '/lab/preventivi/impostazioni',
+    path: '/lab/preventivi/impostazioni',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LabPreventiviListaRoute = LabPreventiviListaRouteImport.update({
+  id: '/lab/preventivi/lista',
+  path: '/lab/preventivi/lista',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviPlanimetriaRoute =
+  LabPreventiviPlanimetriaRouteImport.update({
+    id: '/lab/preventivi/planimetria',
+    path: '/lab/preventivi/planimetria',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LabPreventiviPrezziRoute = LabPreventiviPrezziRouteImport.update({
+  id: '/lab/preventivi/prezzi',
+  path: '/lab/preventivi/prezzi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviCantiereIdRoute = LabPreventiviCantiereIdRouteImport.update({
+  id: '/lab/preventivi/cantiere/$id',
+  path: '/lab/preventivi/cantiere/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviCategoriaIdRoute =
+  LabPreventiviCategoriaIdRouteImport.update({
+    id: '/lab/preventivi/categoria/$id',
+    path: '/lab/preventivi/categoria/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LabPreventiviMisuraKindRoute = LabPreventiviMisuraKindRouteImport.update({
+  id: '/lab/preventivi/misura/$kind',
+  path: '/lab/preventivi/misura/$kind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviProdottoIdRoute = LabPreventiviProdottoIdRouteImport.update({
+  id: '/lab/preventivi/prodotto/$id',
+  path: '/lab/preventivi/prodotto/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPreventiviVoceIdRoute = LabPreventiviVoceIdRouteImport.update({
+  id: '/lab/preventivi/voce/$id',
+  path: '/lab/preventivi/voce/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -257,6 +332,18 @@ export interface FileRoutesByFullPath {
   '/esperienze/': typeof EsperienzeIndexRoute
   '/lab/': typeof LabIndexRoute
   '/sentieri/': typeof SentieriIndexRoute
+  '/lab/preventivi/aziende': typeof LabPreventiviAziendeRoute
+  '/lab/preventivi/extra': typeof LabPreventiviExtraRoute
+  '/lab/preventivi/impostazioni': typeof LabPreventiviImpostazioniRoute
+  '/lab/preventivi/lista': typeof LabPreventiviListaRoute
+  '/lab/preventivi/planimetria': typeof LabPreventiviPlanimetriaRoute
+  '/lab/preventivi/prezzi': typeof LabPreventiviPrezziRoute
+  '/lab/preventivi/': typeof LabPreventiviIndexRoute
+  '/lab/preventivi/cantiere/$id': typeof LabPreventiviCantiereIdRoute
+  '/lab/preventivi/categoria/$id': typeof LabPreventiviCategoriaIdRoute
+  '/lab/preventivi/misura/$kind': typeof LabPreventiviMisuraKindRoute
+  '/lab/preventivi/prodotto/$id': typeof LabPreventiviProdottoIdRoute
+  '/lab/preventivi/voce/$id': typeof LabPreventiviVoceIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -293,6 +380,18 @@ export interface FileRoutesByTo {
   '/esperienze': typeof EsperienzeIndexRoute
   '/lab': typeof LabIndexRoute
   '/sentieri': typeof SentieriIndexRoute
+  '/lab/preventivi/aziende': typeof LabPreventiviAziendeRoute
+  '/lab/preventivi/extra': typeof LabPreventiviExtraRoute
+  '/lab/preventivi/impostazioni': typeof LabPreventiviImpostazioniRoute
+  '/lab/preventivi/lista': typeof LabPreventiviListaRoute
+  '/lab/preventivi/planimetria': typeof LabPreventiviPlanimetriaRoute
+  '/lab/preventivi/prezzi': typeof LabPreventiviPrezziRoute
+  '/lab/preventivi': typeof LabPreventiviIndexRoute
+  '/lab/preventivi/cantiere/$id': typeof LabPreventiviCantiereIdRoute
+  '/lab/preventivi/categoria/$id': typeof LabPreventiviCategoriaIdRoute
+  '/lab/preventivi/misura/$kind': typeof LabPreventiviMisuraKindRoute
+  '/lab/preventivi/prodotto/$id': typeof LabPreventiviProdottoIdRoute
+  '/lab/preventivi/voce/$id': typeof LabPreventiviVoceIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -331,6 +430,18 @@ export interface FileRoutesById {
   '/esperienze/': typeof EsperienzeIndexRoute
   '/lab/': typeof LabIndexRoute
   '/sentieri/': typeof SentieriIndexRoute
+  '/lab/preventivi/aziende': typeof LabPreventiviAziendeRoute
+  '/lab/preventivi/extra': typeof LabPreventiviExtraRoute
+  '/lab/preventivi/impostazioni': typeof LabPreventiviImpostazioniRoute
+  '/lab/preventivi/lista': typeof LabPreventiviListaRoute
+  '/lab/preventivi/planimetria': typeof LabPreventiviPlanimetriaRoute
+  '/lab/preventivi/prezzi': typeof LabPreventiviPrezziRoute
+  '/lab/preventivi/': typeof LabPreventiviIndexRoute
+  '/lab/preventivi/cantiere/$id': typeof LabPreventiviCantiereIdRoute
+  '/lab/preventivi/categoria/$id': typeof LabPreventiviCategoriaIdRoute
+  '/lab/preventivi/misura/$kind': typeof LabPreventiviMisuraKindRoute
+  '/lab/preventivi/prodotto/$id': typeof LabPreventiviProdottoIdRoute
+  '/lab/preventivi/voce/$id': typeof LabPreventiviVoceIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -370,6 +481,18 @@ export interface FileRouteTypes {
     | '/esperienze/'
     | '/lab/'
     | '/sentieri/'
+    | '/lab/preventivi/aziende'
+    | '/lab/preventivi/extra'
+    | '/lab/preventivi/impostazioni'
+    | '/lab/preventivi/lista'
+    | '/lab/preventivi/planimetria'
+    | '/lab/preventivi/prezzi'
+    | '/lab/preventivi/'
+    | '/lab/preventivi/cantiere/$id'
+    | '/lab/preventivi/categoria/$id'
+    | '/lab/preventivi/misura/$kind'
+    | '/lab/preventivi/prodotto/$id'
+    | '/lab/preventivi/voce/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -406,6 +529,18 @@ export interface FileRouteTypes {
     | '/esperienze'
     | '/lab'
     | '/sentieri'
+    | '/lab/preventivi/aziende'
+    | '/lab/preventivi/extra'
+    | '/lab/preventivi/impostazioni'
+    | '/lab/preventivi/lista'
+    | '/lab/preventivi/planimetria'
+    | '/lab/preventivi/prezzi'
+    | '/lab/preventivi'
+    | '/lab/preventivi/cantiere/$id'
+    | '/lab/preventivi/categoria/$id'
+    | '/lab/preventivi/misura/$kind'
+    | '/lab/preventivi/prodotto/$id'
+    | '/lab/preventivi/voce/$id'
   id:
     | '__root__'
     | '/'
@@ -443,6 +578,18 @@ export interface FileRouteTypes {
     | '/esperienze/'
     | '/lab/'
     | '/sentieri/'
+    | '/lab/preventivi/aziende'
+    | '/lab/preventivi/extra'
+    | '/lab/preventivi/impostazioni'
+    | '/lab/preventivi/lista'
+    | '/lab/preventivi/planimetria'
+    | '/lab/preventivi/prezzi'
+    | '/lab/preventivi/'
+    | '/lab/preventivi/cantiere/$id'
+    | '/lab/preventivi/categoria/$id'
+    | '/lab/preventivi/misura/$kind'
+    | '/lab/preventivi/prodotto/$id'
+    | '/lab/preventivi/voce/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -477,6 +624,18 @@ export interface RootRouteChildren {
   EsperienzeIndexRoute: typeof EsperienzeIndexRoute
   LabIndexRoute: typeof LabIndexRoute
   SentieriIndexRoute: typeof SentieriIndexRoute
+  LabPreventiviAziendeRoute: typeof LabPreventiviAziendeRoute
+  LabPreventiviExtraRoute: typeof LabPreventiviExtraRoute
+  LabPreventiviImpostazioniRoute: typeof LabPreventiviImpostazioniRoute
+  LabPreventiviListaRoute: typeof LabPreventiviListaRoute
+  LabPreventiviPlanimetriaRoute: typeof LabPreventiviPlanimetriaRoute
+  LabPreventiviPrezziRoute: typeof LabPreventiviPrezziRoute
+  LabPreventiviIndexRoute: typeof LabPreventiviIndexRoute
+  LabPreventiviCantiereIdRoute: typeof LabPreventiviCantiereIdRoute
+  LabPreventiviCategoriaIdRoute: typeof LabPreventiviCategoriaIdRoute
+  LabPreventiviMisuraKindRoute: typeof LabPreventiviMisuraKindRoute
+  LabPreventiviProdottoIdRoute: typeof LabPreventiviProdottoIdRoute
+  LabPreventiviVoceIdRoute: typeof LabPreventiviVoceIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -726,6 +885,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SentieriSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/preventivi/': {
+      id: '/lab/preventivi/'
+      path: '/lab/preventivi'
+      fullPath: '/lab/preventivi/'
+      preLoaderRoute: typeof LabPreventiviIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/aziende': {
+      id: '/lab/preventivi/aziende'
+      path: '/lab/preventivi/aziende'
+      fullPath: '/lab/preventivi/aziende'
+      preLoaderRoute: typeof LabPreventiviAziendeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/extra': {
+      id: '/lab/preventivi/extra'
+      path: '/lab/preventivi/extra'
+      fullPath: '/lab/preventivi/extra'
+      preLoaderRoute: typeof LabPreventiviExtraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/impostazioni': {
+      id: '/lab/preventivi/impostazioni'
+      path: '/lab/preventivi/impostazioni'
+      fullPath: '/lab/preventivi/impostazioni'
+      preLoaderRoute: typeof LabPreventiviImpostazioniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/lista': {
+      id: '/lab/preventivi/lista'
+      path: '/lab/preventivi/lista'
+      fullPath: '/lab/preventivi/lista'
+      preLoaderRoute: typeof LabPreventiviListaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/planimetria': {
+      id: '/lab/preventivi/planimetria'
+      path: '/lab/preventivi/planimetria'
+      fullPath: '/lab/preventivi/planimetria'
+      preLoaderRoute: typeof LabPreventiviPlanimetriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/prezzi': {
+      id: '/lab/preventivi/prezzi'
+      path: '/lab/preventivi/prezzi'
+      fullPath: '/lab/preventivi/prezzi'
+      preLoaderRoute: typeof LabPreventiviPrezziRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/cantiere/$id': {
+      id: '/lab/preventivi/cantiere/$id'
+      path: '/lab/preventivi/cantiere/$id'
+      fullPath: '/lab/preventivi/cantiere/$id'
+      preLoaderRoute: typeof LabPreventiviCantiereIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/categoria/$id': {
+      id: '/lab/preventivi/categoria/$id'
+      path: '/lab/preventivi/categoria/$id'
+      fullPath: '/lab/preventivi/categoria/$id'
+      preLoaderRoute: typeof LabPreventiviCategoriaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/misura/$kind': {
+      id: '/lab/preventivi/misura/$kind'
+      path: '/lab/preventivi/misura/$kind'
+      fullPath: '/lab/preventivi/misura/$kind'
+      preLoaderRoute: typeof LabPreventiviMisuraKindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/prodotto/$id': {
+      id: '/lab/preventivi/prodotto/$id'
+      path: '/lab/preventivi/prodotto/$id'
+      fullPath: '/lab/preventivi/prodotto/$id'
+      preLoaderRoute: typeof LabPreventiviProdottoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/preventivi/voce/$id': {
+      id: '/lab/preventivi/voce/$id'
+      path: '/lab/preventivi/voce/$id'
+      fullPath: '/lab/preventivi/voce/$id'
+      preLoaderRoute: typeof LabPreventiviVoceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -779,6 +1022,18 @@ const rootRouteChildren: RootRouteChildren = {
   EsperienzeIndexRoute: EsperienzeIndexRoute,
   LabIndexRoute: LabIndexRoute,
   SentieriIndexRoute: SentieriIndexRoute,
+  LabPreventiviAziendeRoute: LabPreventiviAziendeRoute,
+  LabPreventiviExtraRoute: LabPreventiviExtraRoute,
+  LabPreventiviImpostazioniRoute: LabPreventiviImpostazioniRoute,
+  LabPreventiviListaRoute: LabPreventiviListaRoute,
+  LabPreventiviPlanimetriaRoute: LabPreventiviPlanimetriaRoute,
+  LabPreventiviPrezziRoute: LabPreventiviPrezziRoute,
+  LabPreventiviIndexRoute: LabPreventiviIndexRoute,
+  LabPreventiviCantiereIdRoute: LabPreventiviCantiereIdRoute,
+  LabPreventiviCategoriaIdRoute: LabPreventiviCategoriaIdRoute,
+  LabPreventiviMisuraKindRoute: LabPreventiviMisuraKindRoute,
+  LabPreventiviProdottoIdRoute: LabPreventiviProdottoIdRoute,
+  LabPreventiviVoceIdRoute: LabPreventiviVoceIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
