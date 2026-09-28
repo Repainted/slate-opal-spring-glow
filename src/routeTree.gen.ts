@@ -47,6 +47,8 @@ import { Route as LabTramaRouteImport } from './routes/lab/trama'
 import { Route as LabVoloRouteImport } from './routes/lab/volo'
 import { Route as SentieriIndexRouteImport } from './routes/sentieri/index'
 import { Route as SentieriSlugRouteImport } from './routes/sentieri/$slug'
+import { Route as DigitaleLavoriIndexRouteImport } from './routes/digitale.lavori.index'
+import { Route as DigitaleLavoriSlugRouteImport } from './routes/digitale.lavori.$slug'
 import { Route as LabPreventiviIndexRouteImport } from './routes/lab/preventivi/index'
 import { Route as LabPreventiviAziendeRouteImport } from './routes/lab/preventivi/aziende'
 import { Route as LabPreventiviExtraRouteImport } from './routes/lab/preventivi/extra'
@@ -250,6 +252,16 @@ const SentieriSlugRoute = SentieriSlugRouteImport.update({
   path: '/sentieri/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DigitaleLavoriIndexRoute = DigitaleLavoriIndexRouteImport.update({
+  id: '/lavori/',
+  path: '/lavori/',
+  getParentRoute: () => DigitaleRoute,
+} as any)
+const DigitaleLavoriSlugRoute = DigitaleLavoriSlugRouteImport.update({
+  id: '/lavori/$slug',
+  path: '/lavori/$slug',
+  getParentRoute: () => DigitaleRoute,
+} as any)
 const LabPreventiviIndexRoute = LabPreventiviIndexRouteImport.update({
   id: '/lab/preventivi/',
   path: '/lab/preventivi/',
@@ -353,12 +365,14 @@ export interface FileRoutesByFullPath {
   '/esperienze/': typeof EsperienzeIndexRoute
   '/lab/': typeof LabIndexRoute
   '/sentieri/': typeof SentieriIndexRoute
+  '/digitale/lavori/$slug': typeof DigitaleLavoriSlugRoute
   '/lab/preventivi/aziende': typeof LabPreventiviAziendeRoute
   '/lab/preventivi/extra': typeof LabPreventiviExtraRoute
   '/lab/preventivi/impostazioni': typeof LabPreventiviImpostazioniRoute
   '/lab/preventivi/lista': typeof LabPreventiviListaRoute
   '/lab/preventivi/planimetria': typeof LabPreventiviPlanimetriaRoute
   '/lab/preventivi/prezzi': typeof LabPreventiviPrezziRoute
+  '/digitale/lavori/': typeof DigitaleLavoriIndexRoute
   '/lab/preventivi/': typeof LabPreventiviIndexRoute
   '/lab/preventivi/cantiere/$id': typeof LabPreventiviCantiereIdRoute
   '/lab/preventivi/categoria/$id': typeof LabPreventiviCategoriaIdRoute
@@ -404,12 +418,14 @@ export interface FileRoutesByTo {
   '/esperienze': typeof EsperienzeIndexRoute
   '/lab': typeof LabIndexRoute
   '/sentieri': typeof SentieriIndexRoute
+  '/digitale/lavori/$slug': typeof DigitaleLavoriSlugRoute
   '/lab/preventivi/aziende': typeof LabPreventiviAziendeRoute
   '/lab/preventivi/extra': typeof LabPreventiviExtraRoute
   '/lab/preventivi/impostazioni': typeof LabPreventiviImpostazioniRoute
   '/lab/preventivi/lista': typeof LabPreventiviListaRoute
   '/lab/preventivi/planimetria': typeof LabPreventiviPlanimetriaRoute
   '/lab/preventivi/prezzi': typeof LabPreventiviPrezziRoute
+  '/digitale/lavori': typeof DigitaleLavoriIndexRoute
   '/lab/preventivi': typeof LabPreventiviIndexRoute
   '/lab/preventivi/cantiere/$id': typeof LabPreventiviCantiereIdRoute
   '/lab/preventivi/categoria/$id': typeof LabPreventiviCategoriaIdRoute
@@ -457,12 +473,14 @@ export interface FileRoutesById {
   '/esperienze/': typeof EsperienzeIndexRoute
   '/lab/': typeof LabIndexRoute
   '/sentieri/': typeof SentieriIndexRoute
+  '/digitale/lavori/$slug': typeof DigitaleLavoriSlugRoute
   '/lab/preventivi/aziende': typeof LabPreventiviAziendeRoute
   '/lab/preventivi/extra': typeof LabPreventiviExtraRoute
   '/lab/preventivi/impostazioni': typeof LabPreventiviImpostazioniRoute
   '/lab/preventivi/lista': typeof LabPreventiviListaRoute
   '/lab/preventivi/planimetria': typeof LabPreventiviPlanimetriaRoute
   '/lab/preventivi/prezzi': typeof LabPreventiviPrezziRoute
+  '/digitale/lavori/': typeof DigitaleLavoriIndexRoute
   '/lab/preventivi/': typeof LabPreventiviIndexRoute
   '/lab/preventivi/cantiere/$id': typeof LabPreventiviCantiereIdRoute
   '/lab/preventivi/categoria/$id': typeof LabPreventiviCategoriaIdRoute
@@ -511,12 +529,14 @@ export interface FileRouteTypes {
     | '/esperienze/'
     | '/lab/'
     | '/sentieri/'
+    | '/digitale/lavori/$slug'
     | '/lab/preventivi/aziende'
     | '/lab/preventivi/extra'
     | '/lab/preventivi/impostazioni'
     | '/lab/preventivi/lista'
     | '/lab/preventivi/planimetria'
     | '/lab/preventivi/prezzi'
+    | '/digitale/lavori/'
     | '/lab/preventivi/'
     | '/lab/preventivi/cantiere/$id'
     | '/lab/preventivi/categoria/$id'
@@ -562,12 +582,14 @@ export interface FileRouteTypes {
     | '/esperienze'
     | '/lab'
     | '/sentieri'
+    | '/digitale/lavori/$slug'
     | '/lab/preventivi/aziende'
     | '/lab/preventivi/extra'
     | '/lab/preventivi/impostazioni'
     | '/lab/preventivi/lista'
     | '/lab/preventivi/planimetria'
     | '/lab/preventivi/prezzi'
+    | '/digitale/lavori'
     | '/lab/preventivi'
     | '/lab/preventivi/cantiere/$id'
     | '/lab/preventivi/categoria/$id'
@@ -614,12 +636,14 @@ export interface FileRouteTypes {
     | '/esperienze/'
     | '/lab/'
     | '/sentieri/'
+    | '/digitale/lavori/$slug'
     | '/lab/preventivi/aziende'
     | '/lab/preventivi/extra'
     | '/lab/preventivi/impostazioni'
     | '/lab/preventivi/lista'
     | '/lab/preventivi/planimetria'
     | '/lab/preventivi/prezzi'
+    | '/digitale/lavori/'
     | '/lab/preventivi/'
     | '/lab/preventivi/cantiere/$id'
     | '/lab/preventivi/categoria/$id'
@@ -944,6 +968,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SentieriSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/digitale/lavori/': {
+      id: '/digitale/lavori/'
+      path: '/lavori'
+      fullPath: '/digitale/lavori/'
+      preLoaderRoute: typeof DigitaleLavoriIndexRouteImport
+      parentRoute: typeof DigitaleRoute
+    }
+    '/digitale/lavori/$slug': {
+      id: '/digitale/lavori/$slug'
+      path: '/lavori/$slug'
+      fullPath: '/digitale/lavori/$slug'
+      preLoaderRoute: typeof DigitaleLavoriSlugRouteImport
+      parentRoute: typeof DigitaleRoute
+    }
     '/lab/preventivi/': {
       id: '/lab/preventivi/'
       path: '/lab/preventivi'
@@ -1037,6 +1075,8 @@ interface DigitaleRouteChildren {
   DigitaleStudioRoute: typeof DigitaleStudioRoute
   DigitaleTerritorioRoute: typeof DigitaleTerritorioRoute
   DigitaleIndexRoute: typeof DigitaleIndexRoute
+  DigitaleLavoriSlugRoute: typeof DigitaleLavoriSlugRoute
+  DigitaleLavoriIndexRoute: typeof DigitaleLavoriIndexRoute
 }
 
 const DigitaleRouteChildren: DigitaleRouteChildren = {
@@ -1045,6 +1085,8 @@ const DigitaleRouteChildren: DigitaleRouteChildren = {
   DigitaleStudioRoute: DigitaleStudioRoute,
   DigitaleTerritorioRoute: DigitaleTerritorioRoute,
   DigitaleIndexRoute: DigitaleIndexRoute,
+  DigitaleLavoriSlugRoute: DigitaleLavoriSlugRoute,
+  DigitaleLavoriIndexRoute: DigitaleLavoriIndexRoute,
 }
 
 const DigitaleRouteWithChildren = DigitaleRoute._addFileChildren(

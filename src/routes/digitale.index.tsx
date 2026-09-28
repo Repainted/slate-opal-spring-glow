@@ -7,6 +7,7 @@ import { LangToggle, translate, useI18n, useT } from "@/lib/i18n";
 import { ProveGallery } from "@/components/ProveGallery";
 import { Button } from "@/components/ui/button";
 import { DIGITAL_MAIL, METODO, PITCH, SERVIZI, CONTENUTI, CONTENUTI_INCLUSI, CONTENUTI_AMBITI, CONTENUTI_PROCESSO, VETRINA, digitalMeta } from "@/data/digitale";
+import { LAVORI } from "@/data/lavori";
 
 export const Route = createFileRoute("/digitale/")({
   head: () => ({
@@ -123,6 +124,35 @@ function StudioHome() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section id="portfolio" className="mx-auto max-w-6xl px-5 py-20 md:px-12 md:py-28">
+        <p className="font-mono text-xs uppercase tracking-kicker text-copper">{tr("Lavori")}</p>
+        <h2 className="mt-3 max-w-xl font-display text-4xl text-ink md:text-5xl">{tr("Consegnati, online.")}</h2>
+        <p className="mt-4 max-w-xl text-ink-soft">
+          {tr("Un elenco. Il prossimo cliente entra qui, con la sua scheda.")}
+        </p>
+        <ul className="mt-12 grid gap-8">
+          {LAVORI.map((l) => (
+            <li key={l.slug}>
+              <Link
+                to="/digitale/lavori/$slug"
+                params={{ slug: l.slug }}
+                className="grid overflow-hidden border border-ink/10 bg-paper-card md:grid-cols-2"
+              >
+                <img src={l.copertina} alt="" className="aspect-[16/10] h-full w-full object-cover object-left" />
+                <div className="flex flex-col justify-center p-6 md:p-10">
+                  <p className="font-mono text-xs uppercase tracking-kicker text-copper">
+                    {l.settore} · {l.luogo}
+                  </p>
+                  <h3 className="mt-2 font-display text-4xl text-ink">{l.cliente}</h3>
+                  <p className="mt-3 max-w-md text-ink-soft">{l.lead}</p>
+                  <p className="mt-5 text-sm text-copper">{tr("Apri la scheda")}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <VetrinaRuota />
@@ -250,6 +280,9 @@ function StudioHeader() {
           <BrandMark variant="digitalMark" className="h-11 w-auto md:h-12" />
         </Link>
         <nav className="hidden items-center gap-7 text-sm tracking-wide text-ink-soft lg:flex" aria-label="Studio">
+          <a href="#portfolio" className="hover:text-ink">
+            {tr("Lavori")}
+          </a>
           <a href="#lavori" className="hover:text-ink">
             {tr("Contenuti")}
           </a>
@@ -291,6 +324,9 @@ function StudioHeader() {
       {open ? (
         <div id="studio-nav" className="border-t border-ink/10 bg-paper px-5 py-6 lg:hidden">
           <nav className="flex flex-col gap-1 text-ink" aria-label="Mobile studio">
+            <a href="#portfolio" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
+              {tr("Lavori")}
+            </a>
             <a href="#lavori" className="min-h-11 px-2 py-2 text-lg" onClick={() => setOpen(false)}>
               {tr("Contenuti")}
             </a>

@@ -157,6 +157,11 @@ const EN: Record<string, string> = {
   "Il Portale è uno. Accanto ci sono lavori che non gli appartengono: si aprono da soli, con una scheda propria.":
     "The Portal is one of them. Beside it are jobs that don’t belong to it: they open on their own, with their own card.",
   Progetti: "Projects",
+  Lavori: "Work",
+  "Consegnati, online.": "Delivered, online.",
+  "Un elenco. Il prossimo cliente entra qui, con la sua scheda.":
+    "One list. The next client goes here, with their own page.",
+  "Apri la scheda": "Open the page",
   "Cinque lavori, non un solo sito.": "Five pieces of work, not one site.",
   "Sei lavori, non un solo sito.": "Six pieces of work, not one site.",
   "01 · Portale": "01 · Portal",
