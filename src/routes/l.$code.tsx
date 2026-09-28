@@ -5,6 +5,10 @@ export const Route = createFileRoute("/l/$code")({
   beforeLoad: ({ params }) => {
     const hit = LEPINI_LINKS.find((l) => l.code === params.code);
     if (!hit) throw notFound();
+    if (hit.external) {
+      const href = hit.hash ? `${hit.to}#${hit.hash}` : hit.to;
+      throw redirect({ href });
+    }
     throw redirect({ to: hit.to, hash: hit.hash });
   },
 });

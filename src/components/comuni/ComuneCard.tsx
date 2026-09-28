@@ -2,9 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { MapPin } from "lucide-react";
 import { fotoComune } from "@/data/comuni";
 import type { Comune } from "@/data/types";
+import { useComuneCopy, useI18n, useT } from "@/lib/i18n";
 
 export function ComuneCard({ comune }: { comune: Comune }) {
   const foto = fotoComune(comune.slug);
+  const tr = useT();
+  const { lang } = useI18n();
+  const copy = useComuneCopy(comune.slug, comune.headline, comune.sommario);
   return (
     <Link
       to="/comuni/$slug"
@@ -14,14 +18,17 @@ export function ComuneCard({ comune }: { comune: Comune }) {
       {foto ? (
         <img
           src={foto}
-          alt={`Veduta di ${comune.nome}`}
+          alt={lang === "en" ? `View of ${comune.nome}` : `Veduta di ${comune.nome}`}
           className="h-40 w-full object-cover"
           loading="lazy"
         />
       ) : (
-        <div className="flex h-24 items-end bg-navy-deep px-5 py-3">
-          <p className="text-[0.68rem] uppercase tracking-wider text-muted">Foto in arrivo</p>
-        </div>
+        <img
+          src="/images/lab/trama.jpg"
+          alt=""
+          className="h-40 w-full object-cover opacity-80"
+          loading="lazy"
+        />
       )}
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
@@ -37,10 +44,10 @@ export function ComuneCard({ comune }: { comune: Comune }) {
             </span>
           ) : null}
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-cream-soft/90">{comune.headline}</p>
+        <p className="mt-3 text-sm leading-relaxed text-cream-soft/90">{copy.headline}</p>
         <p className="mt-4 flex items-center gap-1.5 text-xs text-muted">
           <MapPin className="size-3.5" />
-          {comune.abitanti.toLocaleString("it-IT")} abitanti
+          {comune.abitanti.toLocaleString(lang === "en" ? "en-GB" : "it-IT")} {tr("abitanti")}
         </p>
       </div>
     </Link>

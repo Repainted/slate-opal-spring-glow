@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useMemo, useState } from "react";
 import { GRAFICA_DEFAULT, LEPINI_LINKS, STUDIO_PROJECTS, STUDIO_REPO, type StudioArea } from "@/data/studio";
 import {
   applyGrafica,
@@ -11,11 +11,12 @@ import {
   writeGrafica,
   type Grafica,
   type Lavoro,
+  type StudioApp,
   type StudioFile,
   type StudioLink,
 } from "@/lib/studio-store";
 
-const TABS = ["Upload", "Lavori", "Lepini Link", "Anteprime", "Grafica"] as const;
+const TABS = ["Upload", "App", "Lavori", "Lepini Link", "Anteprime", "Grafica"] as const;
 type Tab = (typeof TABS)[number];
 
 const field = "mt-1 min-h-11 w-full border border-ink/15 bg-paper px-3 text-ink";
@@ -63,6 +64,7 @@ export function StudioDesk({ area }: { area: StudioArea }) {
         </div>
         <div className="mt-8">
           {tab === "Upload" ? <UploadPane area={area} /> : null}
+          {tab === "App" ? <AppPane area={area} /> : null}
           {tab === "Lavori" ? <LavoriPane area={area} /> : null}
           {tab === "Lepini Link" ? <LinkPane area={area} /> : null}
           {tab === "Anteprime" ? <PreviewPane area={area} /> : null}
@@ -179,6 +181,104 @@ function UploadPane({ area }: { area: StudioArea }) {
       {rows.length === 0 ? <p className="mt-6 text-sm">Nessun file.</p> : null}
     </section>
   );
+}
+
+function AppPane({ area }: { area: StudioArea }) {
+  const [rows, setRows] = useState<StudioApp[]>([]);
+  const [msg, setMsg] = useState("");
+  const [openId, setOpenId] = useState<string | null>(null);
+  const open = rows.find((r) => r.id === openId) ?? null;
+  const previewUrl = useHtmlUrl(open?.html ?? null);
+
+  async function load() {
+    const all = await studioDb.apps();
+    setRows(all.filter((r) => r.area === area).sort((a, b) => b.at - a.at));
+  }
+
+  useEffect(() => {
+    void load();
+  }, [area]);
+
+  async function onPick(files: FileList | null) {
+    if (!files) return;
+    setMsg("");
+    for (const file of files) {
+      if (!file.name.toLowerCase().endsWith(".html") && file.type !== "text/html") {
+        setMsg(`${file.name} non è un HTML. L'app è un solo file .html.`);
+        continue;
+      }
+      if (file.size > 3_000_000) {
+        setMsg(`${file.name} supera i 3 MB.`);
+        continue;
+      }
+      const html = await file.text();
+      const row: StudioApp = { id: newId(), area, name: file.name.replace(/\.html?$/i, ""), html, at: Date.now() };
+      await studioDb.saveApp(row);
+      setOpenId(row.id);
+    }
+    await load();
+  }
+
+  return (
+    <section>
+      <h2 className="font-display text-3xl">App</h2>
+      <p className="mt-2 max-w-xl text-sm">
+        Carica un file HTML: il modello, una pagina, uno strumento. Resta su questo browser. L'anteprima è qui sotto; a schermo intero si apre in un'altra scheda.
+      </p>
+      <input type="file" accept=".html,text/html" multiple className="mt-4 block text-sm" onChange={(e) => void onPick(e.target.files)} />
+      {msg ? <p className="mt-2 text-sm text-copper">{msg}</p> : null}
+      <ul className="mt-6 grid gap-2">
+        {rows.map((row) => (
+          <li key={row.id} className="flex flex-wrap items-center justify-between gap-3 border border-ink/10 px-3 py-2">
+            <button type="button" className="min-h-11 text-left text-sm" onClick={() => setOpenId(row.id)}>
+              {row.name}
+            </button>
+            <span className="flex gap-3 text-sm">
+              <button type="button" className="text-copper" onClick={() => openHtml(row.html)}>
+                Schermo intero
+              </button>
+              <button
+                type="button"
+                className="text-ink-soft"
+                onClick={() =>
+                  void studioDb.deleteApp(row.id).then(() => {
+                    if (openId === row.id) setOpenId(null);
+                    return load();
+                  })
+                }
+              >
+                Elimina
+              </button>
+            </span>
+          </li>
+        ))}
+      </ul>
+      {rows.length === 0 ? <p className="mt-6 text-sm">Nessuna app.</p> : null}
+      {open && previewUrl ? (
+        <iframe title={open.name} src={previewUrl} sandbox="allow-scripts allow-forms allow-popups allow-modals" className="mt-4 h-[520px] w-full border border-ink/15 bg-white" />
+      ) : null}
+    </section>
+  );
+}
+
+function useHtmlUrl(html: string | null) {
+  const [url, setUrl] = useState<string | null>(null);
+  const key = useMemo(() => html, [html]);
+  useEffect(() => {
+    if (!key) {
+      setUrl(null);
+      return;
+    }
+    const next = URL.createObjectURL(new Blob([key], { type: "text/html" }));
+    setUrl(next);
+    return () => URL.revokeObjectURL(next);
+  }, [key]);
+  return url;
+}
+
+function openHtml(html: string) {
+  const url = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+  window.open(url, "_blank");
 }
 
 function LavoriPane({ area }: { area: StudioArea }) {
@@ -386,14 +486,22 @@ function LinkPane({ area }: { area: StudioArea }) {
 
 function PreviewPane({ area }: { area: StudioArea }) {
   const list = STUDIO_PROJECTS.filter((p) => p.area === area || p.area === "portale" || area === "digital");
+  const [apps, setApps] = useState<StudioApp[]>([]);
   const [href, setHref] = useState(list[0]?.href ?? "/digitale");
+  const [appId, setAppId] = useState<string | null>(null);
   const current = list.find((p) => p.href === href) ?? list[0];
+  const app = apps.find((a) => a.id === appId) ?? null;
+  const appUrl = useHtmlUrl(app?.html ?? null);
+
+  useEffect(() => {
+    void studioDb.apps().then((rows) => setApps(rows.filter((r) => r.area === area).sort((a, b) => b.at - a.at)));
+  }, [area]);
 
   return (
     <section>
       <h2 className="font-display text-3xl">Anteprime</h2>
       <p className="mt-2 max-w-xl text-sm">
-        I progetti del sito, e il repository su GitHub. Il codice è privato: lo vedi solo se hai accesso.
+        I progetti del sito e le app caricate qui. Il repository è privato: lo vedi solo se hai accesso.
       </p>
       <a href={STUDIO_REPO} className="mt-3 inline-block font-mono text-sm text-copper" target="_blank" rel="noreferrer">
         {STUDIO_REPO}
@@ -403,15 +511,42 @@ function PreviewPane({ area }: { area: StudioArea }) {
           <button
             key={p.href}
             type="button"
-            onClick={() => setHref(p.href)}
-            className={`min-h-11 px-3 text-sm ${href === p.href ? "bg-ink text-paper" : "border border-ink/15"}`}
+            onClick={() => {
+              setAppId(null);
+              setHref(p.href);
+            }}
+            className={`min-h-11 px-3 text-sm ${!appId && href === p.href ? "bg-ink text-paper" : "border border-ink/15"}`}
           >
             {p.titolo}
           </button>
         ))}
+        {apps.map((a) => (
+          <button
+            key={a.id}
+            type="button"
+            onClick={() => setAppId(a.id)}
+            className={`min-h-11 px-3 text-sm ${appId === a.id ? "bg-ink text-paper" : "border border-ink/15"}`}
+          >
+            {a.name}
+          </button>
+        ))}
       </div>
-      {current ? <p className="mt-4 text-sm">{current.testo}</p> : null}
-      <iframe title={current?.titolo ?? "Anteprima"} src={href} className="mt-4 h-[480px] w-full border border-ink/15 bg-paper" />
+      {app ? (
+        <>
+          <p className="mt-4 text-sm">App caricata su questo browser.</p>
+          <button type="button" className="mt-2 text-sm text-copper" onClick={() => openHtml(app.html)}>
+            Schermo intero
+          </button>
+          {appUrl ? (
+            <iframe title={app.name} src={appUrl} sandbox="allow-scripts allow-forms allow-popups allow-modals" className="mt-4 h-[480px] w-full border border-ink/15 bg-white" />
+          ) : null}
+        </>
+      ) : (
+        <>
+          {current ? <p className="mt-4 text-sm">{current.testo}</p> : null}
+          <iframe title={current?.titolo ?? "Anteprima"} src={href} className="mt-4 h-[480px] w-full border border-ink/15 bg-paper" />
+        </>
+      )}
     </section>
   );
 }

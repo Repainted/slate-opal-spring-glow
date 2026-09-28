@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useT } from "@/lib/i18n";
 import { useMeteo } from "@/lib/meteo";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
@@ -12,6 +13,7 @@ export function SiteShell({
 }) {
   const { src, data } = useMeteo();
   const night = data ? !data.day : false;
+  const tr = useT();
 
   return (
     <div className="relative min-h-screen bg-navy text-cream">
@@ -29,7 +31,7 @@ export function SiteShell({
           href="#contenuto"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-cream focus:px-4 focus:py-2 focus:text-navy-deep"
         >
-          Salta al contenuto
+          {tr("Salta al contenuto")}
         </a>
         <SiteHeader overlay={overlayHeader} />
         <div id="contenuto">{children}</div>

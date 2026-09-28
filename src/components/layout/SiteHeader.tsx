@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
+import { LangToggle, useT } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -16,6 +17,7 @@ const NAV = [
 
 export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
+  const tr = useT();
 
   return (
     <header
@@ -29,7 +31,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
         <span className="flex flex-col leading-tight font-display">
           <span className="text-xl tracking-wide">Monti Lepini</span>
           <span className="font-sans text-[0.62rem] uppercase tracking-[0.16em] text-copper-light">
-            Portale del comprensorio
+            {tr("Portale del comprensorio")}
           </span>
         </span>
       </Link>
@@ -42,21 +44,24 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
             className="text-cream/90 hover:text-cream"
             activeProps={{ className: "text-cream border-b border-copper pb-0.5" }}
           >
-            {item.label}
+            {tr(item.label)}
           </Link>
         ))}
       </nav>
 
-      <button
-        type="button"
-        className="inline-flex size-11 items-center justify-center rounded-full border border-cream/20 text-cream lg:hidden"
-        aria-expanded={open}
-        aria-controls="mobile-nav"
-        onClick={() => setOpen((v) => !v)}
-      >
-        {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        <span className="sr-only">Menu</span>
-      </button>
+      <div className="flex items-center gap-3">
+        <LangToggle />
+        <button
+          type="button"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-cream/20 text-cream lg:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          <span className="sr-only">{tr("Menu")}</span>
+        </button>
+      </div>
 
       {open ? (
         <div
@@ -71,7 +76,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
                 className="min-h-11 px-2 py-2 text-lg text-cream"
                 onClick={() => setOpen(false)}
               >
-                {item.label}
+                {tr(item.label)}
               </Link>
             ))}
           </nav>

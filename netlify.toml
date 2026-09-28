@@ -43,6 +43,18 @@
   status = 301
   force = true
 
+# Misure è un'app statica: l'URL resta /lab/misure/..., il file è la shell.
+# Senza force i file veri (assets, index.html) vincono sulla rewrite.
+[[redirects]]
+  from = "/lab/misure"
+  to = "/lab/misure/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/lab/misure/*"
+  to = "/lab/misure/index.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -50,6 +62,33 @@
 
 [[headers]]
   for = "/lab/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Dopo /lab/*: l'HTML di Misure non deve restare in cache un anno.
+# Gli asset con hash restano immutabili.
+[[headers]]
+  for = "/lab/misure"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/lab/misure/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/lab/misure/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/lab/misure/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/lab/misure/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 

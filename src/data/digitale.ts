@@ -69,28 +69,28 @@ export const SERVIZI = [
     titolo: "Continuità dei dati",
     testo:
       "Portiamo dentro file Excel, fogli cartacei e vecchi database. Nessun cliente ricomincia da zero. Lo storico resta, completo.",
-    foto: "/images/digitale/prodotto-ddt.jpg",
+    foto: "/images/digitale/magazzino.jpg",
   },
   {
     code: "02",
     titolo: "Gestionali snelli",
     testo:
       "Giacenze, ordini fornitore, DDT, preventivi. Solo quello che serve. Sul PC del banco e sul telefono o tablet in cantiere.",
-    foto: "/images/digitale/magazzino.jpg",
+    foto: "/images/digitale/bottega.jpg",
   },
   {
     code: "03",
     titolo: "Automazione di processo",
     testo:
       "Margini e sconti cliente calcolati dal programma. Preventivi e documenti di trasporto in PDF, subito. Zero ricopiatura, zero errori di trascrizione.",
-    foto: "/images/digitale/prodotto-attrezzi.jpg",
+    foto: "/images/digitale/prodotto-ddt.jpg",
   },
   {
     code: "04",
     titolo: "Sito e assistente",
     testo:
       "Sito veloce, senza cookie e senza traccianti. Assistente che risponde solo su catalogo, orari e dati vostri. Non inventa prezzi.",
-    foto: "/images/digitale/studio-hero.jpg",
+    foto: "/images/digitale/studio-schermo.jpg",
   },
 ] as const;
 
@@ -119,7 +119,7 @@ export const VETRINA = [
   { src: "/images/digitale/vetrina/furgone.jpg", alt: "Furgone bianco con grafica da ferramenta", cap: "Furgone" },
   { src: "/images/digitale/vetrina/biglietti.jpg", alt: "Biglietto da visita verde con marchio", cap: "Biglietti" },
   { src: "/images/digitale/vetrina/carta.jpg", alt: "Carta intestata e busta", cap: "Carta intestata" },
-  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Gestionale clienti su un monitor", cap: "Gestionale", href: "#gestionale" },
+  { src: "/images/digitale/vetrina/gestionale.jpg", alt: "Gestionale clienti su un monitor", cap: "Gestionale" },
   { src: "/images/digitale/vetrina/campagna.jpg", alt: "Menu e locandina sul banco di un bar", cap: "Menu e banco" },
   { src: "/images/digitale/vetrina/vela.jpg", alt: "Vela pubblicitaria e telefono con i post", cap: "Vela e Instagram" },
   { src: "/images/digitale/vetrina/marchio.jpg", alt: "Quaderno con il marchio di un circolo", cap: "Marchio" },
@@ -142,17 +142,20 @@ export const CONTENUTI_INCLUSI = [
     titolo: "Ideazione",
     testo:
       "Concept del marchio e delle immagini, prima di stampare o mettere online. Si parte da cosa fate voi, non da un modello uguale per tutti.",
+    foto: "/images/digitale/studio-set.jpg",
   },
   {
     code: "02",
     titolo: "Valorizzazione",
     testo:
       "Le foto che avete già — prodotto, banco, bottega — si sistemano e si mettono in una scena pulita. Meno giorni di set. Il pezzo resta quello vero.",
+    foto: "/images/digitale/prodotto-hero.jpg",
   },
   {
     code: "03",
     titolo: "Video",
     testo: "Clip brevi per Instagram, scheda prodotto e vetrina. Niente spot. Qualcosa che si pubblica questa settimana.",
+    foto: "/images/digitale/frantoio.jpg",
   },
 ] as const;
 

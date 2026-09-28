@@ -6,6 +6,7 @@ import { STATS } from "@/data/comuni";
 import { ALBERI, startAlbero, type AlberoId } from "@/lab/alberi";
 import { WebGLHost } from "@/lab/LabStage";
 import { titleFor } from "@/lib/seo";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/natura")({
   head: () => ({
@@ -40,26 +41,27 @@ function NaturaPage() {
   const nFoto = SPECIE.filter((s) => s.foto).length;
   const nFauna = SPECIE.filter((s) => s.gruppo === "fauna").length;
   const nFlora = SPECIE.filter((s) => s.gruppo === "flora").length;
+  const tr = useT();
 
   return (
     <SiteShell>
       <div className="mx-auto max-w-6xl px-5 py-12 md:px-12">
-        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-copper-light">Natura</p>
-        <h1 className="mt-2 font-display text-5xl text-cream">Il schedario vivo</h1>
+        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-copper-light">{tr("Natura")}</p>
+        <h1 className="mt-2 font-display text-5xl text-cream">{tr("Il schedario vivo")}</h1>
         <p className="mt-4 max-w-2xl text-cream-soft">
-          Recuperato dal Portale originale: {nFlora} schede di flora, {nFauna} di fauna, {nFoto} con fotografia.
-          Non è la lista completa delle «168 specie di uccelli» né delle «~50 orchidee»: è tutto ciò che il sito
-          aveva già nominato e illustrato. Le coltivate di Ninfa restano segnate come tali.
+          {tr("Natura") === "Nature"
+            ? `Recovered from the original Portal: ${nFlora} flora sheets, ${nFauna} fauna, ${nFoto} with a photograph. This is not the full list of “168 bird species” or of the “~50 orchids”: it is everything the site had already named and illustrated. The cultivated plants of Ninfa stay marked as such.`
+            : `Recuperato dal Portale originale: ${nFlora} schede di flora, ${nFauna} di fauna, ${nFoto} con fotografia. Non è la lista completa delle «168 specie di uccelli» né delle «~50 orchidee»: è tutto ciò che il sito aveva già nominato e illustrato. Le coltivate di Ninfa restano segnate come tali.`}
         </p>
         <p className="mt-3 text-sm text-muted">
-          Vetta {STATS.vetta} m · {STATS.vettaNome}. In Lab la biosfera usa le stesse schede.
+          {tr("Vetta")} {STATS.vetta} m · {STATS.vettaNome}. {tr("In Lab la biosfera usa le stesse schede.")}
         </p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {HABITAT.map((h) => (
             <article key={h.titolo} className="rounded-xl bg-navy-card p-6 shadow-[var(--shadow-border)]">
-              <h2 className="font-display text-2xl text-cream">{h.titolo}</h2>
-              <p className="mt-3 leading-relaxed text-cream-soft">{h.testo}</p>
+              <h2 className="font-display text-2xl text-cream">{tr(h.titolo)}</h2>
+              <p className="mt-3 leading-relaxed text-cream-soft">{tr(h.testo)}</p>
             </article>
           ))}
         </div>
@@ -83,7 +85,7 @@ function NaturaPage() {
                   : "rounded-full border border-cream/20 px-4 py-2 text-sm text-cream-soft"
               }
             >
-              {label}
+              {tr(label)}
             </button>
           ))}
         </div>

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SITE } from "@/lib/seo";
+import { I18nProvider } from "@/lib/i18n";
 import { applyGrafica } from "@/lib/studio-store";
 import appCss from "../styles.css?url";
 
@@ -37,9 +38,11 @@ export const Route = createRootRoute({
       <body className="bg-navy text-cream">
         <PreviewHostBridge />
         <GraficaBridge />
-        <AuthProvider>
-          <Outlet />
-        </AuthProvider>
+        <I18nProvider>
+          <AuthProvider>
+            <Outlet />
+          </AuthProvider>
+        </I18nProvider>
         <Scripts />
       </body>
     </html>

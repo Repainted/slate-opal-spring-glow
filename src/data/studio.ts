@@ -11,11 +11,15 @@ export type StudioProject = {
 
 export const STUDIO_PROJECTS: StudioProject[] = [
   { area: "digital", titolo: "Lepini Digital", testo: "La home dello studio.", href: "/digitale" },
+  { area: "digital", titolo: "Genitori", testo: "Come fare un gioco con l’AI.", href: "/digitale/genitori" },
   { area: "digital", titolo: "Territorio", testo: "La vista scura.", href: "/digitale/territorio" },
   { area: "lab", titolo: "Lepini Lab", testo: "Il laboratorio.", href: "/lab" },
   { area: "lab", titolo: "Biosfera", testo: "Flora e fauna.", href: "/lab/biosfera" },
   { area: "lab", titolo: "Drone", testo: "Simulatore di volo.", href: "/lab/drone" },
   { area: "lab", titolo: "Legno", testo: "Progetto e distinta.", href: "/lab/legno" },
+  { area: "lab", titolo: "Misure", testo: "Tetto, stanza, muro e preventivo.", href: "/lab/misure/" },
+  { area: "lab", titolo: "Mattoncini", testo: "Il mondo dei mattoncini.", href: "/lab/mattoncini" },
+  { area: "lab", titolo: "Scaffale", testo: "Gondole cablate, LED e distinta.", href: "/lab/scaffale" },
   { area: "lab", titolo: "Sentieri", testo: "Rilievo e tracce.", href: "/lab/sentieri" },
   { area: "lab", titolo: "Atlante", testo: "I 26 comuni.", href: "/lab/atlante" },
   { area: "portale", titolo: "Portale", testo: "La home dei Lepini.", href: "/" },
@@ -23,15 +27,19 @@ export const STUDIO_PROJECTS: StudioProject[] = [
   { area: "portale", titolo: "Natura", testo: "Le specie.", href: "/natura" },
 ];
 
-export type LepiniLink = { code: string; to: string; hash?: string; label: string };
+export type LepiniLink = { code: string; to: string; hash?: string; label: string; external?: boolean };
 
 export const LEPINI_LINKS: LepiniLink[] = [
   { code: "digital", to: "/digitale", label: "Studio" },
   { code: "lab", to: "/lab", label: "Lab" },
   { code: "portale", to: "/", label: "Portale" },
+  { code: "genitori", to: "/digitale/genitori", label: "Genitori" },
   { code: "contatti", to: "/digitale", hash: "contatti", label: "Contatti" },
   { code: "legno", to: "/lab/legno", label: "Legno" },
   { code: "drone", to: "/lab/drone", label: "Drone" },
+  { code: "misure", to: "/lab/misure/", label: "Misure", external: true },
+  { code: "mattoncini", to: "/lab/mattoncini", label: "Mattoncini" },
+  { code: "scaffale", to: "/lab/scaffale", label: "Scaffale" },
 ];
 
 export const GRAFICA_DEFAULT = {

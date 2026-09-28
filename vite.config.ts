@@ -142,6 +142,44 @@ function authPopupPlugin(): Plugin {
   };
 }
 
+/** Static Misure app: keep the browser URL on /lab/misure/* while serving the shell. */
+function labMisureSpaPlugin(): Plugin {
+  return {
+    name: "lab-misure-spa",
+    configureServer(server) {
+      server.middlewares.use(labMisureSpa);
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(labMisureSpa);
+    },
+  };
+}
+
+function labMisureSpa(
+  req: { url?: string; method?: string },
+  res: { statusCode: number; setHeader: (k: string, v: string) => void; end: (b?: string) => void },
+  next: () => void,
+) {
+  const raw = req.url ?? "";
+  const qIndex = raw.indexOf("?");
+  const pathOnly = qIndex === -1 ? raw : raw.slice(0, qIndex);
+  const query = qIndex === -1 ? "" : raw.slice(qIndex);
+  if (pathOnly === "/lab/misure/index.html") {
+    res.statusCode = 302;
+    res.setHeader("Location", `/lab/misure/${query}`);
+    res.end();
+    return;
+  }
+  const inApp = pathOnly === "/lab/misure" || pathOnly === "/lab/misure/" || pathOnly.startsWith("/lab/misure/");
+  const asset =
+    pathOnly.startsWith("/lab/misure/assets/") ||
+    /\.(?:js|css|map|svg|png|jpe?g|webp|woff2?|ico|json|txt|webmanifest)$/i.test(pathOnly);
+  if (inApp && !asset) {
+    req.url = `/lab/misure/index.html${query}`;
+  }
+  next();
+}
+
 // `0.0.0.0:8080` is the live-preview contract — don't change host/port.
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
@@ -158,6 +196,7 @@ export default defineConfig(({ command, isPreview }) => ({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    labMisureSpaPlugin(),
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),

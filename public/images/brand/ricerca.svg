@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 148" fill="none" role="img" aria-label="Lepini Digital">
+  <title>Lepini Digital</title>
+  <g stroke="#8f5e32" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round">
+    <polygon fill="#c4a07a" fill-opacity=".28" points="18,118 52,78 88,118"/>
+    <polygon fill="#c4a07a" fill-opacity=".16" points="52,78 88,118 78,62"/>
+    <polygon fill="#c4a07a" fill-opacity=".22" points="52,78 78,62 108,78"/>
+    <polygon fill="#c4a07a" fill-opacity=".38" points="78,62 108,78 118,28"/>
+    <polygon fill="#c4a07a" fill-opacity=".2" points="108,78 88,118 142,118"/>
+    <polygon fill="#c4a07a" fill-opacity=".32" points="108,78 118,28 148,62"/>
+    <polygon fill="#c4a07a" fill-opacity=".18" points="118,28 148,62 168,48"/>
+    <polygon fill="#c4a07a" fill-opacity=".26" points="148,62 142,118 182,118"/>
+    <polygon fill="#c4a07a" fill-opacity=".14" points="148,62 168,48 182,118"/>
+    <polygon fill="none" points="18,118 78,62 118,28 168,48 182,118"/>
+    <path d="M52 78 L78 62 L108 78 L88 118 M108 78 L118 28 L148 62 L142 118 M78 62 L118 28 M148 62 L168 48"/>
+  </g>
+  <g transform="translate(82 52)" stroke="#7a4a28" stroke-width="2.2" stroke-linejoin="round">
+    <circle cx="18" cy="6" r="4.2" fill="#8f5e32"/>
+    <path d="M14 10 v10" fill="none"/>
+    <path d="M14 20 C10 28, 2 44, 2 52 C2 62, 9 68, 18 68 C27 68, 34 62, 34 52 C34 44, 26 28, 22 20 V10" fill="#f3efe6"/>
+    <path d="M6 54 C8 62, 12 66, 18 66 C24 66, 28 62, 30 54 C24 56, 12 56, 6 54Z" fill="#7a4a28" stroke="none"/>
+    <circle cx="14" cy="48" r="1.6" fill="#c4a07a" stroke="none"/>
+    <circle cx="20" cy="44" r="1.1" fill="#c4a07a" stroke="none"/>
+  </g>
+</svg>

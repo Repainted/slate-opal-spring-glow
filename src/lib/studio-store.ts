@@ -88,14 +88,23 @@ export type StudioLink = {
   at: number;
 };
 
+export type StudioApp = {
+  id: string;
+  area: StudioArea;
+  name: string;
+  html: string;
+  at: number;
+};
+
 function openDb(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB, 1);
+    const req = indexedDB.open(DB, 2);
     req.onupgradeneeded = () => {
       const db = req.result;
       if (!db.objectStoreNames.contains("files")) db.createObjectStore("files", { keyPath: "id" });
       if (!db.objectStoreNames.contains("lavori")) db.createObjectStore("lavori", { keyPath: "id" });
       if (!db.objectStoreNames.contains("links")) db.createObjectStore("links", { keyPath: "id" });
+      if (!db.objectStoreNames.contains("apps")) db.createObjectStore("apps", { keyPath: "id" });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
@@ -139,12 +148,15 @@ export const studioDb = {
   files: () => all<StudioFile>("files"),
   lavori: () => all<Lavoro>("lavori"),
   links: () => all<StudioLink>("links"),
+  apps: () => all<StudioApp>("apps"),
   saveFile: (row: StudioFile) => put("files", row),
   saveLavoro: (row: Lavoro) => put("lavori", row),
   saveLink: (row: StudioLink) => put("links", row),
+  saveApp: (row: StudioApp) => put("apps", row),
   deleteFile: (id: string) => remove("files", id),
   deleteLavoro: (id: string) => remove("lavori", id),
   deleteLink: (id: string) => remove("links", id),
+  deleteApp: (id: string) => remove("apps", id),
 };
 
 export function newId() {

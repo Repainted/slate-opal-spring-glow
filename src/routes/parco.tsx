@@ -4,6 +4,7 @@ import { Eyebrow } from "@/components/SectionHead";
 import { Button } from "@/components/ui/button";
 import { PARCO, SITI, VETTE } from "@/data/parco";
 import { titleFor } from "@/lib/seo";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/parco")({
   head: () => ({
@@ -20,29 +21,30 @@ export const Route = createFileRoute("/parco")({
 });
 
 function ParcoPage() {
+  const tr = useT();
   return (
     <SiteShell>
       <div className="mx-auto max-w-6xl px-5 py-12 md:px-12 md:py-16">
         <Eyebrow>Natura 2000 · {PARCO.codice}</Eyebrow>
         <h1 className="mt-3 max-w-3xl font-display text-5xl leading-[0.95] text-cream md:text-6xl">
-          Il parco che non c’è.
-          <span className="mt-3 block font-medium italic text-olive-light">E il crinale che sì.</span>
+          {tr("Il parco che non c’è.")}
+          <span className="mt-3 block font-medium italic text-olive-light">{tr("E il crinale che sì.")}</span>
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream-soft">{PARCO.nota}</p>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream-soft">{tr(PARCO.nota)}</p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Link to="/lab/parco">
-            <Button>Esplora in Lab</Button>
+            <Button>{tr("Esplora in Lab")}</Button>
           </Link>
           <Link to="/natura" className="self-center text-sm text-olive-light">
-            Schedario flora e fauna
+            {tr("Schedario flora e fauna")}
           </Link>
         </div>
 
         <dl className="mt-14 grid gap-px overflow-hidden rounded-xl bg-cream/10 sm:grid-cols-3">
           {[
-            [PARCO.codice, "Codice ZPS"],
-            [`${PARCO.ettari.toLocaleString("it-IT")} ha`, "Estensione"],
-            [PARCO.atto, "Misure di conservazione"],
+            [PARCO.codice, tr("Codice ZPS")],
+            [`${PARCO.ettari.toLocaleString("it-IT")} ha`, tr("Estensione")],
+            [PARCO.atto, tr("Misure di conservazione")],
           ].map(([k, l]) => (
             <div key={l} className="bg-navy-card px-6 py-6">
               <dt className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted">{l}</dt>

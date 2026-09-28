@@ -23,6 +23,7 @@ import { Route as ComuniIndexRouteImport } from './routes/comuni/index'
 import { Route as ComuniSlugRouteImport } from './routes/comuni/$slug'
 import { Route as DigitaleIndexRouteImport } from './routes/digitale.index'
 import { Route as DigitaleAreaRouteImport } from './routes/digitale.area'
+import { Route as DigitaleGenitoriRouteImport } from './routes/digitale.genitori'
 import { Route as DigitaleStudioRouteImport } from './routes/digitale.studio'
 import { Route as DigitaleTerritorioRouteImport } from './routes/digitale.territorio'
 import { Route as EsperienzeIndexRouteImport } from './routes/esperienze/index'
@@ -38,7 +39,9 @@ import { Route as LabBiosferaRouteImport } from './routes/lab/biosfera'
 import { Route as LabDroneRouteImport } from './routes/lab/drone'
 import { Route as LabFaggetaRouteImport } from './routes/lab/faggeta'
 import { Route as LabLegnoRouteImport } from './routes/lab/legno'
+import { Route as LabMattonciniRouteImport } from './routes/lab/mattoncini'
 import { Route as LabParcoRouteImport } from './routes/lab/parco'
+import { Route as LabScaffaleRouteImport } from './routes/lab/scaffale'
 import { Route as LabSentieriRouteImport } from './routes/lab/sentieri'
 import { Route as LabTramaRouteImport } from './routes/lab/trama'
 import { Route as LabVoloRouteImport } from './routes/lab/volo'
@@ -127,6 +130,11 @@ const DigitaleAreaRoute = DigitaleAreaRouteImport.update({
   path: '/area',
   getParentRoute: () => DigitaleRoute,
 } as any)
+const DigitaleGenitoriRoute = DigitaleGenitoriRouteImport.update({
+  id: '/genitori',
+  path: '/genitori',
+  getParentRoute: () => DigitaleRoute,
+} as any)
 const DigitaleStudioRoute = DigitaleStudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -202,9 +210,19 @@ const LabLegnoRoute = LabLegnoRouteImport.update({
   path: '/lab/legno',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabMattonciniRoute = LabMattonciniRouteImport.update({
+  id: '/lab/mattoncini',
+  path: '/lab/mattoncini',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabParcoRoute = LabParcoRouteImport.update({
   id: '/lab/parco',
   path: '/lab/parco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabScaffaleRoute = LabScaffaleRouteImport.update({
+  id: '/lab/scaffale',
+  path: '/lab/scaffale',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabSentieriRoute = LabSentieriRouteImport.update({
@@ -309,6 +327,7 @@ export interface FileRoutesByFullPath {
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/area': typeof DigitaleAreaRoute
+  '/digitale/genitori': typeof DigitaleGenitoriRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
@@ -322,7 +341,9 @@ export interface FileRoutesByFullPath {
   '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
   '/lab/legno': typeof LabLegnoRoute
+  '/lab/mattoncini': typeof LabMattonciniRoute
   '/lab/parco': typeof LabParcoRoute
+  '/lab/scaffale': typeof LabScaffaleRoute
   '/lab/sentieri': typeof LabSentieriRoute
   '/lab/trama': typeof LabTramaRoute
   '/lab/volo': typeof LabVoloRoute
@@ -357,6 +378,7 @@ export interface FileRoutesByTo {
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/area': typeof DigitaleAreaRoute
+  '/digitale/genitori': typeof DigitaleGenitoriRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
@@ -370,7 +392,9 @@ export interface FileRoutesByTo {
   '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
   '/lab/legno': typeof LabLegnoRoute
+  '/lab/mattoncini': typeof LabMattonciniRoute
   '/lab/parco': typeof LabParcoRoute
+  '/lab/scaffale': typeof LabScaffaleRoute
   '/lab/sentieri': typeof LabSentieriRoute
   '/lab/trama': typeof LabTramaRoute
   '/lab/volo': typeof LabVoloRoute
@@ -407,6 +431,7 @@ export interface FileRoutesById {
   '/storie': typeof StorieRoute
   '/comuni/$slug': typeof ComuniSlugRoute
   '/digitale/area': typeof DigitaleAreaRoute
+  '/digitale/genitori': typeof DigitaleGenitoriRoute
   '/digitale/studio': typeof DigitaleStudioRoute
   '/digitale/territorio': typeof DigitaleTerritorioRoute
   '/esperienze/calendario': typeof EsperienzeCalendarioRoute
@@ -420,7 +445,9 @@ export interface FileRoutesById {
   '/lab/drone': typeof LabDroneRoute
   '/lab/faggeta': typeof LabFaggetaRoute
   '/lab/legno': typeof LabLegnoRoute
+  '/lab/mattoncini': typeof LabMattonciniRoute
   '/lab/parco': typeof LabParcoRoute
+  '/lab/scaffale': typeof LabScaffaleRoute
   '/lab/sentieri': typeof LabSentieriRoute
   '/lab/trama': typeof LabTramaRoute
   '/lab/volo': typeof LabVoloRoute
@@ -458,6 +485,7 @@ export interface FileRouteTypes {
     | '/storie'
     | '/comuni/$slug'
     | '/digitale/area'
+    | '/digitale/genitori'
     | '/digitale/studio'
     | '/digitale/territorio'
     | '/esperienze/calendario'
@@ -471,7 +499,9 @@ export interface FileRouteTypes {
     | '/lab/drone'
     | '/lab/faggeta'
     | '/lab/legno'
+    | '/lab/mattoncini'
     | '/lab/parco'
+    | '/lab/scaffale'
     | '/lab/sentieri'
     | '/lab/trama'
     | '/lab/volo'
@@ -506,6 +536,7 @@ export interface FileRouteTypes {
     | '/storie'
     | '/comuni/$slug'
     | '/digitale/area'
+    | '/digitale/genitori'
     | '/digitale/studio'
     | '/digitale/territorio'
     | '/esperienze/calendario'
@@ -519,7 +550,9 @@ export interface FileRouteTypes {
     | '/lab/drone'
     | '/lab/faggeta'
     | '/lab/legno'
+    | '/lab/mattoncini'
     | '/lab/parco'
+    | '/lab/scaffale'
     | '/lab/sentieri'
     | '/lab/trama'
     | '/lab/volo'
@@ -555,6 +588,7 @@ export interface FileRouteTypes {
     | '/storie'
     | '/comuni/$slug'
     | '/digitale/area'
+    | '/digitale/genitori'
     | '/digitale/studio'
     | '/digitale/territorio'
     | '/esperienze/calendario'
@@ -568,7 +602,9 @@ export interface FileRouteTypes {
     | '/lab/drone'
     | '/lab/faggeta'
     | '/lab/legno'
+    | '/lab/mattoncini'
     | '/lab/parco'
+    | '/lab/scaffale'
     | '/lab/sentieri'
     | '/lab/trama'
     | '/lab/volo'
@@ -615,7 +651,9 @@ export interface RootRouteChildren {
   LabDroneRoute: typeof LabDroneRoute
   LabFaggetaRoute: typeof LabFaggetaRoute
   LabLegnoRoute: typeof LabLegnoRoute
+  LabMattonciniRoute: typeof LabMattonciniRoute
   LabParcoRoute: typeof LabParcoRoute
+  LabScaffaleRoute: typeof LabScaffaleRoute
   LabSentieriRoute: typeof LabSentieriRoute
   LabTramaRoute: typeof LabTramaRoute
   LabVoloRoute: typeof LabVoloRoute
@@ -738,6 +776,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DigitaleAreaRouteImport
       parentRoute: typeof DigitaleRoute
     }
+    '/digitale/genitori': {
+      id: '/digitale/genitori'
+      path: '/genitori'
+      fullPath: '/digitale/genitori'
+      preLoaderRoute: typeof DigitaleGenitoriRouteImport
+      parentRoute: typeof DigitaleRoute
+    }
     '/digitale/studio': {
       id: '/digitale/studio'
       path: '/studio'
@@ -843,11 +888,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabLegnoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/mattoncini': {
+      id: '/lab/mattoncini'
+      path: '/lab/mattoncini'
+      fullPath: '/lab/mattoncini'
+      preLoaderRoute: typeof LabMattonciniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/parco': {
       id: '/lab/parco'
       path: '/lab/parco'
       fullPath: '/lab/parco'
       preLoaderRoute: typeof LabParcoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/scaffale': {
+      id: '/lab/scaffale'
+      path: '/lab/scaffale'
+      fullPath: '/lab/scaffale'
+      preLoaderRoute: typeof LabScaffaleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/sentieri': {
@@ -974,6 +1033,7 @@ declare module '@tanstack/react-router' {
 
 interface DigitaleRouteChildren {
   DigitaleAreaRoute: typeof DigitaleAreaRoute
+  DigitaleGenitoriRoute: typeof DigitaleGenitoriRoute
   DigitaleStudioRoute: typeof DigitaleStudioRoute
   DigitaleTerritorioRoute: typeof DigitaleTerritorioRoute
   DigitaleIndexRoute: typeof DigitaleIndexRoute
@@ -981,6 +1041,7 @@ interface DigitaleRouteChildren {
 
 const DigitaleRouteChildren: DigitaleRouteChildren = {
   DigitaleAreaRoute: DigitaleAreaRoute,
+  DigitaleGenitoriRoute: DigitaleGenitoriRoute,
   DigitaleStudioRoute: DigitaleStudioRoute,
   DigitaleTerritorioRoute: DigitaleTerritorioRoute,
   DigitaleIndexRoute: DigitaleIndexRoute,
@@ -1013,7 +1074,9 @@ const rootRouteChildren: RootRouteChildren = {
   LabDroneRoute: LabDroneRoute,
   LabFaggetaRoute: LabFaggetaRoute,
   LabLegnoRoute: LabLegnoRoute,
+  LabMattonciniRoute: LabMattonciniRoute,
   LabParcoRoute: LabParcoRoute,
+  LabScaffaleRoute: LabScaffaleRoute,
   LabSentieriRoute: LabSentieriRoute,
   LabTramaRoute: LabTramaRoute,
   LabVoloRoute: LabVoloRoute,

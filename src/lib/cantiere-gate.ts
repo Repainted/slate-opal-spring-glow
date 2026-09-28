@@ -1,5 +1,5 @@
 const KEY = "cantiere-auth";
-const HASH = "d84610282b55765f1a67874044dd1b47b8eb882dca1de01031af2e5b44e078a4";
+const HASH = "f57b45894705f87228709be0e25a1f803d8b20078610bfffcf78a9f0f178d9f3";
 
 async function sha256hex(s: string) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));

@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { EVENTI } from "@/data/eventi";
 import { titleFor } from "@/lib/seo";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/calendario")({
   head: () => ({
@@ -17,27 +18,27 @@ export const Route = createFileRoute("/calendario")({
 });
 
 function CalendarioPage() {
+  const tr = useT();
   return (
     <SiteShell>
       <div className="mx-auto max-w-3xl px-5 py-12 md:px-12">
-        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-copper-light">Calendario</p>
-        <h1 className="mt-2 font-display text-5xl">Ritmi, non un feed</h1>
+        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-copper-light">{tr("Calendario")}</p>
+        <h1 className="mt-2 font-display text-5xl">{tr("Ritmi, non un feed")}</h1>
         <p className="mt-4 text-cream-soft">
-          Le date puntuali di sagre e concerti le pubblica già{" "}
+          {tr("Le date puntuali di sagre e concerti le pubblica già")}{" "}
           <a href="https://www.compagniadeilepini.it/eventi-monti-lepini/" className="text-olive-light">
             Compagnia dei Lepini
           </a>{" "}
-          e{" "}
+          {tr("e")}{" "}
           <a href="https://mybestlazio.it/" className="text-olive-light">
             MyBestLazio
           </a>
-          . Qui teniamo i fenomeni ricorrenti, con nota di verifica. Copiare il calendario altrui è il modo più veloce
-          per farlo morire.
+          . {tr("Qui teniamo i fenomeni ricorrenti, con nota di verifica. Copiare il calendario altrui è il modo più veloce per farlo morire.")}
         </p>
         <ol className="mt-10 space-y-5">
           {EVENTI.map((e) => (
             <li key={e.id} className="rounded-xl bg-navy-card p-5 shadow-[var(--shadow-border)]">
-              <p className="text-xs uppercase tracking-wider text-copper-light">{e.tipo}</p>
+              <p className="text-xs uppercase tracking-wider text-copper-light">{tr(e.tipo)}</p>
               <h2 className="mt-1 font-display text-2xl">{e.titolo}</h2>
               <p className="mt-1 text-sm text-muted">
                 {e.quando} · {e.luogo}

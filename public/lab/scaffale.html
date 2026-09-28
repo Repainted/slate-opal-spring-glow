@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scaffale Cablato 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#e9ecea; --panel:#ffffff; --ink:#1b2220; --muted:#5b6762; --line:#d2d8d5;
+  --accent:#d99a00; --accent-soft:#f6e7bf; --accent-ink:#1b1606;
+  --ok:#23915e; --warn:#c98a00; --bad:#d6403f;
+  --scene:#dfe3e1; --floor:#cfd4d1; --grid:#b9c0bc; --wall:#e6e8e4;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101413; --panel:#171d1b; --ink:#e4eae7; --muted:#95a39d; --line:#2a3330;
+    --accent:#f0b21a; --accent-soft:#3a2f10; --accent-ink:#1b1606;
+    --ok:#3cc285; --warn:#f0b21a; --bad:#f06463;
+    --scene:#1a201e; --floor:#232a28; --grid:#313a37; --wall:#2a302e;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101413; --panel:#171d1b; --ink:#e4eae7; --muted:#95a39d; --line:#2a3330;
+  --accent:#f0b21a; --accent-soft:#3a2f10; --accent-ink:#1b1606;
+  --ok:#3cc285; --warn:#f0b21a; --bad:#f06463;
+  --scene:#1a201e; --floor:#232a28; --grid:#313a37; --wall:#2a302e;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-block:16px;padding-inline:16px}
+.app{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px}
+.stage{position:relative;border-radius:10px;overflow:hidden;background:var(--scene);min-height:0;border:1px solid var(--line)}
+#c{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#c:active{cursor:grabbing}
+.viewbar{position:absolute;left:12px;top:12px;right:12px;display:flex;flex-wrap:wrap;gap:6px}
+.viewbar button{font:600 13px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;padding:8px 11px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.viewbar button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.viewbar button:focus-visible,.panel :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hint{position:absolute;left:12px;bottom:10px;right:12px;font-size:12px;color:var(--muted);pointer-events:none}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:auto;padding:18px 18px 22px;display:flex;flex-direction:column;gap:18px;min-height:0}
+.eyebrow{margin:0;font:500 11px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{margin:4px 0 6px;font:700 28px/1.05 var(--f-display);letter-spacing:.01em;text-wrap:balance}
+.lede{margin:0;color:var(--muted);font-size:14px}
+h2{margin:0 0 8px;font:600 13px/1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+section{border-top:1px solid var(--line);padding-top:14px}
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
+.toggles label{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+.toggles input{accent-color:var(--accent);width:16px;height:16px}
+.sliders{display:grid;gap:10px}
+.sl{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;font-size:14px}
+.sl output{font:500 13px var(--f-mono);font-variant-numeric:tabular-nums}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--accent)}
+.sl select{grid-column:1/-1;width:100%;font:inherit;padding:6px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:6px 10px;font-size:14px}
+dt{color:var(--muted)}
+dd{margin:0;font:500 13px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+dd.hi{color:var(--ink);background:var(--accent-soft);padding:1px 6px;border-radius:4px}
+#selText{margin:0;font-size:14px}
+#selText b{display:block;font-weight:600}
+.legend{display:grid;gap:6px;font-size:13px}
+.legend span{display:flex;align-items:center;gap:8px}
+.sw{width:14px;height:14px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,.15)}
+.note{margin:0;font-size:12px;color:var(--muted)}
+.costwrap{overflow-x:auto}
+table.cost{width:100%;border-collapse:collapse;font-size:13px}
+.cost th{font:600 11px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:right;padding:4px 4px 6px;border-bottom:1px solid var(--line)}
+.cost th:first-child,.cost td:first-child{text-align:left}
+.cost td{padding:5px 4px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;vertical-align:middle}
+.cost td.n{font-family:var(--f-mono);font-size:12px;white-space:nowrap}
+.cost input{width:62px;font:12px var(--f-mono);text-align:right;padding:3px 4px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink)}
+.cost small{display:block;color:var(--muted);font-size:11px}
+.btn{margin-top:12px;font:600 13px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+@media (max-width:860px){
+  html,body{height:auto}
+  .app{height:auto;grid-template-columns:1fr;grid-template-rows:62svh auto}
+  .panel{overflow:visible}
+}
+</style>
+
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <canvas id="c" aria-label="Modello 3D dello scaffale cablato"></canvas>
+    <div class="viewbar" role="group" aria-label="Viste">
+      <button data-view="pano" aria-pressed="true">Panoramica</button>
+      <button data-view="corsia" aria-pressed="false">Corsia</button>
+      <button data-view="modulo" aria-pressed="false">Modulo</button>
+      <button data-view="tele" aria-pressed="false">Telecamera</button>
+      <button data-view="rack" aria-pressed="false">Rack</button>
+      <button data-view="cassa" aria-pressed="false">Cassa</button>
+    </div>
+    <div class="hint">Trascina per ruotare · rotella o pinch per lo zoom · tocca un oggetto per i dettagli</div>
+  </div>
+
+  <aside class="panel">
+    <header>
+      <p class="eyebrow">F.lli Colaiacomo · concept</p>
+      <h1>Scaffale cablato</h1>
+      <p class="lede">Due gondole Brooklyn (200 × 135 cm, antracite) con cappello tecnico, LED nei porta-prezzi e telecamere grandangolari che guardano il lato di fronte. Tutto converge nel rack; la dashboard gira sull'iMac in cassa.</p>
+    </header>
+
+    <section>
+      <h2>Mostra</h2>
+      <div class="toggles">
+        <label><input type="checkbox" id="t-led" checked> LED accesi</label>
+        <label><input type="checkbox" id="t-fov" checked> Campo visivo</label>
+        <label><input type="checkbox" id="t-prod" checked> Merce</label>
+        <label><input type="checkbox" id="t-lab" checked> Etichette</label>
+        <label><input type="checkbox" id="t-alarm" checked> Zona sotto soglia</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Misure</h2>
+      <div class="sliders">
+        <div class="sl"><label for="s-tipo">Tipo di scaffale</label><select id="s-tipo">
+          <option value="gondola" selected>Gondola centrale Brooklyn 200 × 135 cm</option>
+          <option value="muro">Scaffale a parete generico 2 m</option>
+        </select></div>
+        <div class="sl"><label for="s-campata">Larghezza campata</label><output id="o-campata"></output><input type="range" id="s-campata" min="0.8" max="1.5" step="0.05"></div>
+        <div class="sl"><label for="s-prof">Profondità ripiano</label><output id="o-prof"></output><input type="range" id="s-prof" min="0.3" max="0.6" step="0.05"></div>
+        <div class="sl"><label for="s-alt">Altezza montanti</label><output id="o-alt"></output><input type="range" id="s-alt" min="1.2" max="2.5" step="0.05"></div>
+        <div class="sl"><label for="s-ripiani">Ripiani</label><output id="o-ripiani"></output><input type="range" id="s-ripiani" min="3" max="7" step="1"></div>
+        <div class="sl"><label for="s-campate">Campate per fila</label><output id="o-campate"></output><input type="range" id="s-campate" min="1" max="5" step="1"></div>
+        <div class="sl"><label for="s-corsia">Larghezza corsia</label><output id="o-corsia"></output><input type="range" id="s-corsia" min="0.9" max="2.0" step="0.05"></div>
+        <div class="sl"><label for="s-ottica">Ottica telecamera</label><select id="s-ottica">
+          <option value="std">Standard 75° (66° × 41°)</option>
+          <option value="wide" selected>Grandangolo 120° (102° × 67°)</option>
+          <option value="fish">Fisheye 160° (140° × 100°), con correzione</option>
+        </select></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Calcolo</h2>
+      <dl id="calc"></dl>
+    </section>
+
+    <section id="costi">
+      <h2>Costi · distinta</h2>
+      <div class="costwrap"><table class="cost">
+        <thead><tr><th>Voce</th><th>Q.tà</th><th>€/u</th><th>Totale €</th></tr></thead>
+        <tbody id="costBody"></tbody>
+      </table></div>
+      <div class="sl" style="margin-top:10px"><label for="s-margine">Margine sul costo</label><output id="o-margine"></output><input type="range" id="s-margine" min="0" max="100" step="5"></div>
+      <dl id="costTot" style="margin-top:10px"></dl>
+      <button type="button" id="copyBom" class="btn">Copia distinta (CSV)</button>
+      <p class="note" id="copyMsg" aria-live="polite" style="margin-top:6px">Prezzi IVA esclusa. Gondola dal listino GGM Moebel; il resto sono stime da verificare. I prezzi unitari si modificano nella tabella.</p>
+    </section>
+
+    <section id="sel">
+      <h2>Selezione</h2>
+      <p id="selText">Tocca un componente nel modello per leggerne la funzione.</p>
+    </section>
+
+    <section>
+      <h2>Legenda</h2>
+      <div class="legend">
+        <span><i class="sw" style="background:#3b3f43"></i>Struttura in acciaio antracite</span>
+        <span><i class="sw" style="background:#d99a00"></i>Canalina PoE + 24 V, innesti rapidi</span>
+        <span><i class="sw" style="background:#fff0c8"></i>LED sotto ripiano, luce fissa allo scatto</span>
+        <span><i class="sw" style="background:#1e2224"></i>Telecamera grandangolare PoE</span>
+        <span><i class="sw" style="background:#d6403f"></i>Zona sotto soglia (LED rosso)</span>
+      </div>
+    </section>
+
+    <p class="note">Misure ipotizzate, da sostituire con quelle reali. I valori nella dashboard dell'iMac sono dati di esempio. Potenze e risoluzioni sono stime.</p>
+  </aside>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/utils/BufferGeometryUtils.js"></script>
+<script>
+(function(){
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const PRESETS = {
+  gondola:{campata:1.0, prof:0.37, alt:1.35, ripiani:4, campate:2, corsia:1.20},
+  muro:{campata:1.0, prof:0.40, alt:2.00, ripiani:5, campate:3, corsia:1.20}
+};
+const P = Object.assign({tipo:'gondola', base:0.47, ottica:'wide'}, PRESETS.gondola);
+const OTTICHE = {std:{h:66,v:41,name:'standard 75°'}, wide:{h:102,v:67,name:'grandangolo 120°'}, fish:{h:140,v:100,name:'fisheye 160°'}};
+const S = {led:true, fov:true, prod:true, lab:true, alarm:true};
+const SENSOR_W = 4608; // 12 MP, stima
+
+/* ---------- renderer ---------- */
+const canvas = $('#c'), stage = $('#stage');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+const MAXANI = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.02, 100);
+const controls = new THREE.OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.maxPolarAngle = Math.PI * 0.495;
+controls.minDistance = 0.15; controls.maxDistance = 16;
+
+/* environment for reflections: a small lit room baked into a PMREM */
+(function(){
+  const pm = new THREE.PMREMGenerator(renderer);
+  const s = new THREE.Scene();
+  const room = new THREE.Mesh(new THREE.BoxGeometry(14, 6, 14), new THREE.MeshBasicMaterial({color:0x7f8683, side:THREE.BackSide}));
+  room.position.y = 3; s.add(room);
+  const lamp = (x,y,z,w,h,d,i)=>{ const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), new THREE.MeshBasicMaterial({color:new THREE.Color(i,i*0.97,i*0.92)})); m.position.set(x,y,z); s.add(m); };
+  lamp(0,5.9,0, 7,0.1,1.2, 7); lamp(-4,5.9,-3, 1,0.1,5, 5); lamp(4,5.9,3, 1,0.1,5, 5); lamp(-6.9,3,0, 0.1,2.5,7, 2.5); lamp(0,3,6.9, 6,2,0.1, 1.8);
+  scene.environment = pm.fromScene(s, 0.04).texture;
+  pm.dispose();
+})();
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x7d8480, 0.3));
+const sun = new THREE.DirectionalLight(0xfff4e6, 1.5);
+sun.position.set(3, 7, 5); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, {left:-6, right:6, top:6, bottom:-6, near:0.5, far:25});
+sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02;
+scene.add(sun);
+const fillL = new THREE.DirectionalLight(0xdfe8ff, 0.35); fillL.position.set(-4, 3, -3); scene.add(fillL);
+
+/* ---------- canvas textures ---------- */
+function canvasTex(w, h, draw, repeat){
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  draw(cv.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(cv);
+  t.encoding = THREE.sRGBEncoding; t.anisotropy = MAXANI;
+  if (repeat){ t.wrapS = t.wrapT = THREE.RepeatWrapping; }
+  return t;
+}
+function rr(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+const roundRect = rr;
+
+const T = {};
+T.slots = canvasTex(64, 128, (g,w,h)=>{
+  g.fillStyle = '#3a3e42'; g.fillRect(0,0,w,h);
+  g.fillStyle = 'rgba(255,255,255,0.05)'; g.fillRect(0,0,4,h); g.fillRect(w-4,0,4,h);
+  g.fillStyle = '#121416';
+  [10, 74].forEach(y=>{ rr(g, 16, y, 7, 34, 3); g.fill(); rr(g, 41, y, 7, 34, 3); g.fill(); g.fillRect(23, y+15, 18, 4); });
+}, true);
+T.peg = canvasTex(128, 128, (g,w,h)=>{
+  g.fillStyle = '#45494d'; g.fillRect(0,0,w,h);
+  g.fillStyle = '#1b1e21';
+  for (let i=0;i<4;i++) for (let j=0;j<4;j++){ g.beginPath(); g.arc(16+i*32, 16+j*32, 4.5, 0, Math.PI*2); g.fill(); }
+}, true);
+T.vent = canvasTex(128, 128, (g,w,h)=>{
+  g.fillStyle = '#2a2f31'; g.fillRect(0,0,w,h); g.fillStyle = '#0d0f10';
+  for (let y=10;y<h;y+=14) for (let x=8;x<w-8;x+=40){ rr(g, x, y, 32, 5, 2.5); g.fill(); }
+}, true);
+T.price = canvasTex(512, 64, (g,w,h)=>{
+  g.fillStyle = '#f4f4f0'; g.fillRect(0,0,w,h);
+  const prices = ['4,90','12,50','7,20','19,90'];
+  for (let i=0;i<4;i++){
+    const x = i*128 + 10;
+    g.fillStyle = i%2 ? '#ffe45c' : '#ffffff'; g.fillRect(x, 8, 100, 48);
+    g.strokeStyle = '#c9c9c0'; g.lineWidth = 2; g.strokeRect(x, 8, 100, 48);
+    g.fillStyle = '#111'; g.font = '600 24px "IBM Plex Mono", monospace'; g.fillText('€ ' + prices[i], x+8, 42);
+    g.fillStyle = '#555'; for (let b=0;b<14;b++) g.fillRect(x+8+b*6, 14, b%3?2:3, 8);
+  }
+}, true);
+function portTex(){
+  return canvasTex(512, 64, (g,w,h)=>{
+    g.fillStyle = '#1b1d1f'; g.fillRect(0,0,w,h);
+    for (let r=0;r<2;r++) for (let i=0;i<12;i++){
+      const x = 40 + i*36, y = 6 + r*29;
+      g.fillStyle = '#34383c'; g.fillRect(x, y, 28, 22);
+      g.fillStyle = '#070808'; g.fillRect(x+3, y+3, 22, 16); g.fillRect(x+10, y+19, 8, 3);
+    }
+    g.fillStyle = '#8a9096'; g.font = '500 11px "IBM Plex Mono", monospace'; g.fillText('1', 6, 20); g.fillText('24', 4, 50);
+  });
+}
+T.ports = portTex();
+T.ups = canvasTex(256, 64, (g,w,h)=>{
+  g.fillStyle = '#222527'; g.fillRect(0,0,w,h);
+  g.fillStyle = '#12324f'; g.fillRect(18, 14, 90, 36);
+  g.fillStyle = '#7fc4ff'; g.font = '500 13px "IBM Plex Mono", monospace'; g.fillText('230V', 26, 30); g.fillText('LOAD 38%', 26, 45);
+  g.fillStyle = '#3a3f43'; [140,170,200].forEach(x=>{ g.beginPath(); g.arc(x, 32, 9, 0, Math.PI*2); g.fill(); });
+  g.fillStyle = '#35d07f'; g.beginPath(); g.arc(230, 32, 4, 0, Math.PI*2); g.fill();
+});
+T.keys = canvasTex(256, 100, (g,w,h)=>{
+  g.fillStyle = '#d9dde1'; g.fillRect(0,0,w,h);
+  g.fillStyle = '#f7f8f9';
+  for (let r=0;r<6;r++) for (let i=0;i<14;i++){ rr(g, 6 + i*17.5, 6 + r*15.5, 14.5, 12.5, 2.5); g.fill(); }
+});
+T.kraft = canvasTex(256, 256, (g,w,h)=>{
+  g.fillStyle = '#b89668'; g.fillRect(0,0,w,h);
+  for (let i=0;i<900;i++){ g.fillStyle = `rgba(${Math.random()<.5?60:255},40,10,${Math.random()*0.06})`; g.fillRect(Math.random()*w, Math.random()*h, 2, 2); }
+  g.fillStyle = '#1d4f8f'; g.fillRect(24, 40, w-48, 70);
+  g.fillStyle = '#fff'; g.font = '700 40px "Barlow Semi Condensed", Arial Narrow, sans-serif'; g.fillText('MALTA M5', 40, 90);
+  g.fillStyle = '#2b2b2b'; g.font = '500 20px "IBM Plex Mono", monospace'; g.fillText('25 kg', 40, 150);
+});
+const signCache = {};
+function signTex(txt){
+  if (signCache[txt]) return signCache[txt];
+  return signCache[txt] = canvasTex(512, 72, (g,w,h)=>{
+    g.fillStyle = '#2d3135'; g.fillRect(0,0,w,h);
+    g.fillStyle = '#f0b21a'; g.fillRect(0, h-6, w, 6);
+    g.fillStyle = '#f4f6f5'; g.font = '700 40px "Barlow Semi Condensed", Arial Narrow, sans-serif';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(txt.split('').join(String.fromCharCode(8202)), w/2, h/2 - 2);
+  });
+}
+const signMats = {};
+function signMat(cat){ return signMats[cat] || (signMats[cat] = new THREE.MeshStandardMaterial({map:signTex(cat), roughness:0.45, emissive:0xffffff, emissiveMap:signTex(cat), emissiveIntensity:0.25})); }
+const CATEGORIE = ['VERNICI','SIGILLANTI','FISSAGGIO','UTENSILI','ELETTRICO','IDRAULICA','GIARDINO','COLLANTI'];
+
+const LABEL_BG = ['#c0392b','#2e6da4','#e2b33c','#3f8f5a','#ecebe6','#7a4b2a','#5b6b7a','#d35400','#6d3b8e','#1f7a7a','#262a2d','#9fb7c9'];
+const WORDS = ['PRO','MAX','FIX','COLOR','SIL','TOP','PLUS','EXTRA','FORTE','ECO','SMALTO','ACRIL'];
+const LABELS = LABEL_BG.map((bg,i)=>{
+  const t = canvasTex(256, 256, (g,w,h)=>{
+    g.fillStyle = bg; g.fillRect(0,0,w,h);
+    const light = ['#ecebe6','#e2b33c','#9fb7c9'].includes(bg);
+    g.fillStyle = light ? '#1d2124' : '#f5f3ee'; g.fillRect(0, 0, w, 44);
+    g.fillStyle = light ? '#f5f3ee' : bg; g.font = '600 26px "Barlow Semi Condensed", Arial Narrow, sans-serif'; g.fillText('ferramenta line', 14, 30);
+    g.fillStyle = light ? '#1d2124' : '#ffffff'; g.font = '700 64px "Barlow Semi Condensed", Arial Narrow, sans-serif';
+    g.fillText(WORDS[i % WORDS.length], 14, 130);
+    g.fillStyle = light ? 'rgba(0,0,0,.35)' : 'rgba(255,255,255,.55)';
+    for (let l=0;l<4;l++) g.fillRect(14, 156 + l*14, 120 - l*18, 6);
+    g.fillStyle = '#fff'; g.fillRect(150, 180, 92, 60);
+    g.fillStyle = '#111'; for (let b=0;b<30;b++) g.fillRect(156 + b*2.8, 186, (b%4===0)?2:1, 40);
+    g.fillStyle = LABEL_BG[(i+3)%LABEL_BG.length]; g.beginPath(); g.arc(200, 100, 26, 0, Math.PI*2); g.fill();
+  });
+  return new THREE.MeshStandardMaterial({map:t, roughness:0.5, metalness:0.0});
+});
+
+/* ---------- materials ---------- */
+const slotsMat = new THREE.MeshStandardMaterial({map:T.slots, metalness:0.5, roughness:0.45});
+const pegMat = new THREE.MeshStandardMaterial({map:T.peg, metalness:0.35, roughness:0.55});
+const priceMat = new THREE.MeshStandardMaterial({map:T.price, roughness:0.4});
+const M = {
+  upright: slotsMat,
+  frame:   new THREE.MeshStandardMaterial({color:0x3b3f43, metalness:0.55, roughness:0.42}),
+  shelf:   new THREE.MeshStandardMaterial({color:0x4d5155, metalness:0.5, roughness:0.45}),
+  kick:    new THREE.MeshStandardMaterial({color:0x26292c, metalness:0.4, roughness:0.6}),
+  panel:   pegMat,
+  race:    new THREE.MeshStandardMaterial({color:0xd99a00, roughness:0.5, metalness:0.1}),
+  conn:    new THREE.MeshStandardMaterial({color:0x202325, roughness:0.55}),
+  alu:     new THREE.MeshStandardMaterial({color:0xc7ccd0, metalness:0.9, roughness:0.28}),
+  clear:   new THREE.MeshStandardMaterial({color:0xffffff, transparent:true, opacity:0.18, roughness:0.05, depthWrite:false}),
+  cam:     new THREE.MeshStandardMaterial({color:0x1b1f22, roughness:0.35, metalness:0.2}),
+  bezel:   new THREE.MeshStandardMaterial({color:0x303539, roughness:0.25, metalness:0.8}),
+  lens:    new THREE.MeshStandardMaterial({color:0x0b1624, metalness:0.2, roughness:0.04}),
+  camLed:  new THREE.MeshStandardMaterial({color:0xff4444, emissive:0xff2020, emissiveIntensity:2}),
+  ledOn:   new THREE.MeshStandardMaterial({color:0xfff4d6, emissive:0xfff0c8, emissiveIntensity:2.2}),
+  ledOff:  new THREE.MeshStandardMaterial({color:0xe9e7df, roughness:0.4}),
+  ledRed:  new THREE.MeshStandardMaterial({color:0xff6b5e, emissive:0xff3b30, emissiveIntensity:2.2}),
+  wash:    new THREE.MeshBasicMaterial({color:0xffe6a6, transparent:true, opacity:0.16, blending:THREE.AdditiveBlending, depthWrite:false}),
+  washRed: new THREE.MeshBasicMaterial({color:0xff5040, transparent:true, opacity:0.24, blending:THREE.AdditiveBlending, depthWrite:false}),
+  fovLine: new THREE.LineBasicMaterial({color:0xd99a00, transparent:true, opacity:0.55}),
+  fovFill: new THREE.MeshBasicMaterial({color:0xd99a00, transparent:true, opacity:0.07, side:THREE.DoubleSide, depthWrite:false}),
+  rack:    new THREE.MeshStandardMaterial({color:0x2a2f31, metalness:0.5, roughness:0.45}),
+  vent:    new THREE.MeshStandardMaterial({map:T.vent, metalness:0.5, roughness:0.45}),
+  glass:   new THREE.MeshStandardMaterial({color:0x9fb4c0, transparent:true, opacity:0.16, roughness:0.02, metalness:0.1, depthWrite:false}),
+  unit:    new THREE.MeshStandardMaterial({color:0x24282a, roughness:0.45, metalness:0.4}),
+  ports:   new THREE.MeshStandardMaterial({map:T.ports, roughness:0.5}),
+  upsFace: new THREE.MeshStandardMaterial({map:T.ups, roughness:0.5, emissiveMap:T.ups, emissive:0x222222}),
+  mini:    new THREE.MeshStandardMaterial({color:0xcfd2d6, metalness:0.85, roughness:0.28}),
+  white:   new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:1.5}),
+  portOn:  new THREE.MeshStandardMaterial({color:0x33ff99, emissive:0x22ee88, emissiveIntensity:1.5}),
+  desk:    new THREE.MeshStandardMaterial({color:0x7c5f45, roughness:0.65}),
+  deskTop: new THREE.MeshStandardMaterial({color:0xe3ddd2, roughness:0.35}),
+  imac:    new THREE.MeshStandardMaterial({color:0xb9c6d4, metalness:0.6, roughness:0.3}),
+  chin:    new THREE.MeshStandardMaterial({color:0xd8e1ea, metalness:0.3, roughness:0.35}),
+  bezelBk: new THREE.MeshStandardMaterial({color:0x0c0d0e, roughness:0.15}),
+  keys:    new THREE.MeshStandardMaterial({map:T.keys, roughness:0.5}),
+  printer: new THREE.MeshStandardMaterial({color:0x2a2d30, roughness:0.4}),
+  paper:   new THREE.MeshStandardMaterial({color:0xfbfbf7, roughness:0.8}),
+  conduit: new THREE.MeshStandardMaterial({color:0x8c9094, roughness:0.5, metalness:0.2}),
+  cable:   new THREE.MeshStandardMaterial({color:0xb07f00, roughness:0.55}),
+  tin:     new THREE.MeshStandardMaterial({color:0xcfd3d6, metalness:0.9, roughness:0.3}),
+  wire:    new THREE.MeshStandardMaterial({color:0x9a9fa3, metalness:0.9, roughness:0.35}),
+  kraft:   new THREE.MeshStandardMaterial({map:T.kraft, roughness:0.85}),
+  nozzle:  new THREE.MeshStandardMaterial({color:0xf2f2ec, roughness:0.35, transparent:true, opacity:0.85}),
+  baseboard: new THREE.MeshStandardMaterial({color:0x5f6563, roughness:0.6}),
+  lan:     new THREE.LineDashedMaterial({color:0x5b6762, dashSize:0.12, gapSize:0.08}),
+  patch:   [0xf0c419, 0x2d7fd3, 0x9aa3a8, 0x35b26b].map(c=>new THREE.MeshStandardMaterial({color:c, roughness:0.45}))
+};
+const PLASTIC = [0xffffff, 0xd6402f, 0x2f6fbd, 0xf2c14e, 0x2c8a57, 0x1f2326, 0xe8e2d5].map(c=>new THREE.MeshStandardMaterial({color:c, roughness:0.38}));
+
+const floorMat = new THREE.MeshStandardMaterial({roughness:0.55, metalness:0.0});
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), floorMat);
+floor.rotation.x = -Math.PI/2; floor.receiveShadow = true; scene.add(floor);
+const wallMat = new THREE.MeshStandardMaterial({roughness:0.9});
+function applyTheme(){
+  scene.background = new THREE.Color(cssVar('--scene'));
+  const base = new THREE.Color(cssVar('--floor'));
+  if (floorMat.map) floorMat.map.dispose();
+  floorMat.map = canvasTex(512, 512, (g,w,h)=>{
+    const grout = base.clone().multiplyScalar(0.82).getStyle();
+    g.fillStyle = grout; g.fillRect(0,0,w,h);
+    for (let i=0;i<2;i++) for (let j=0;j<2;j++){
+      const c = base.clone().multiplyScalar(0.97 + ((i*7+j*3)%5)*0.012);
+      g.fillStyle = c.getStyle(); g.fillRect(i*256+3, j*256+3, 250, 250);
+      for (let s=0;s<260;s++){ g.fillStyle = `rgba(0,0,0,${Math.random()*0.035})`; g.fillRect(i*256+3+Math.random()*250, j*256+3+Math.random()*250, 2, 2); }
+    }
+  }, true);
+  floorMat.map.repeat.set(40/1.2, 40/1.2);
+  floorMat.needsUpdate = true;
+  wallMat.color.set(cssVar('--wall'));
+}
+applyTheme();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+
+/* ---------- geometry helpers ---------- */
+const GC = new Map();
+function cached(key, make){ let g = GC.get(key); if (!g){ g = make(); g.userData.cached = true; GC.set(key, g); } return g; }
+const qz = v => Math.round(v*400)/400;
+function boxG(w,h,d){ w=qz(w); h=qz(h); d=qz(d); return cached(`b${w}|${h}|${d}`, ()=>new THREE.BoxGeometry(w,h,d)); }
+function rboxG(w,h,d,r=0.004,seg=2){
+  w=qz(w); h=qz(h); d=qz(d);
+  r = Math.max(0.0005, Math.min(r, w/2-0.0005, h/2-0.0005, d/2-0.0005));
+  return cached(`rb${w}|${h}|${d}|${r}|${seg}`, ()=>{
+    const iw = w-2*r, ih = h-2*r, cr = Math.max(0, Math.min(r, iw/2, ih/2)*0.98);
+    const s = new THREE.Shape(), x = -iw/2, y = -ih/2;
+    if (cr > 0.0002){
+      s.moveTo(x+cr, y); s.lineTo(x+iw-cr, y); s.quadraticCurveTo(x+iw, y, x+iw, y+cr);
+      s.lineTo(x+iw, y+ih-cr); s.quadraticCurveTo(x+iw, y+ih, x+iw-cr, y+ih);
+      s.lineTo(x+cr, y+ih); s.quadraticCurveTo(x, y+ih, x, y+ih-cr);
+      s.lineTo(x, y+cr); s.quadraticCurveTo(x, y, x+cr, y);
+    } else { s.moveTo(x,y); s.lineTo(x+iw,y); s.lineTo(x+iw,y+ih); s.lineTo(x,y+ih); s.lineTo(x,y); }
+    const g = new THREE.ExtrudeGeometry(s, {depth:Math.max(0.0002, d-2*r), bevelEnabled:true, bevelThickness:r, bevelSize:r, bevelSegments:seg, curveSegments:seg+2});
+    g.translate(0, 0, -(Math.max(0.0002, d-2*r))/2);
+    g.computeVertexNormals();
+    return g;
+  });
+}
+function latheG(key, pts, seg=32){ return cached('l'+key, ()=>new THREE.LatheGeometry(pts.map(([x,y])=>new THREE.Vector2(Math.max(0,x),y)), seg)); }
+function cylG(rt, rb, h, seg=24, open=false){ rt=qz(rt); rb=qz(rb); h=qz(h); return cached(`c${rt}|${rb}|${h}|${seg}|${open}`, ()=>new THREE.CylinderGeometry(rt, rb, h, seg, 1, open)); }
+
+/* ---------- scene graph helpers ---------- */
+let root = null, pickables = [], switchPorts = [], dashTex = null;
+let prodBuckets = null; // Map(material -> geometries) merged at the end of build
+function tag(obj, info){ if (!info) return obj; obj.traverse(n=>{ if (n.isMesh){ n.userData.info = info; pickables.push(n); } }); return obj; }
+function mesh(geo, mat, x=0, y=0, z=0, parent=root, shadow=true){
+  const m = new THREE.Mesh(geo, mat); m.position.set(x,y,z);
+  if (shadow){ m.castShadow = true; m.receiveShadow = true; }
+  parent.add(m); return m;
+}
+function box(w,h,d,mat,x,y,z,info,shadow=true){ const m = mesh(boxG(w,h,d), mat, x, y, z, root, shadow); if (info) tag(m, info); return m; }
+function rbox(w,h,d,r,mat,x,y,z,info,parent=root){ const m = mesh(rboxG(w,h,d,r,3), mat, x, y, z, parent); if (info) tag(m, info); return m; }
+function addProd(geo, mat, matrix){
+  if (!prodBuckets.has(mat)) prodBuckets.set(mat, []);
+  const g = geo.index ? geo.toNonIndexed() : geo.clone();
+  g.clearGroups();
+  g.applyMatrix4(matrix);
+  prodBuckets.get(mat).push(g);
+}
+function flushProducts(){
+  prodBuckets.forEach((list, mat)=>{
+    if (!list.length) return;
+    const merged = THREE.BufferGeometryUtils.mergeBufferGeometries(list, false);
+    list.forEach(g=>g.dispose());
+    if (!merged) return;
+    const m = new THREE.Mesh(merged, mat); m.castShadow = true; m.receiveShadow = true; root.add(m);
+  });
+  prodBuckets.clear();
+}
+function label(text, x, y, z, width=0.9){
+  const cv = document.createElement('canvas'); cv.width = 768; cv.height = 128;
+  const g = cv.getContext('2d');
+  g.fillStyle = 'rgba(20,24,23,0.86)';
+  rr(g, 4, 14, 760, 100, 18); g.fill();
+  g.fillStyle = '#f0b21a'; g.fillRect(24, 44, 10, 40);
+  g.fillStyle = '#f2f5f3'; g.font = '600 52px "Barlow Semi Condensed", Arial Narrow, sans-serif';
+  g.textBaseline = 'middle'; g.fillText(text, 52, 66);
+  const w = Math.min(760, g.measureText(text).width + 80);
+  const tex = new THREE.CanvasTexture(cv); tex.encoding = THREE.sRGBEncoding;
+  tex.repeat.set(w/768, 1);
+  const mat = new THREE.SpriteMaterial({map:tex, depthTest:false, transparent:true, toneMapped:false});
+  mat.userData.own = true;
+  const sp = new THREE.Sprite(mat);
+  sp.scale.set(width * w/760, width*128/768, 1);
+  sp.center.set(0, 0.5);
+  sp.position.set(x,y,z); sp.renderOrder = 10; sp.userData.isLabel = true;
+  sp.visible = S.lab;
+  root.add(sp); return sp;
+}
+function disposeTree(o){
+  o.traverse(n=>{
+    if (n.geometry && !(n.geometry.userData && n.geometry.userData.cached)) n.geometry.dispose();
+    const mats = n.material ? (Array.isArray(n.material)?n.material:[n.material]) : [];
+    mats.forEach(m=>{ if (m.userData && m.userData.own){ if (m.map) m.map.dispose(); m.dispose(); } });
+  });
+}
+
+/* ---------- products ---------- */
+const _m = new THREE.Matrix4(), _q = new THREE.Quaternion(), _v = new THREE.Vector3(), _s = new THREE.Vector3(1,1,1), _e = new THREE.Euler();
+function place(geo, mat, x, y, z, ry=0, sx=1, sy=1, sz=1, rx=0){
+  _e.set(rx, ry, 0); _q.setFromEuler(_e); _v.set(x,y,z); _s.set(sx,sy,sz);
+  _m.compose(_v, _q, _s); addProd(geo, mat, _m);
+}
+function canGeo(r, H){
+  const k = `can${qz(r)}|${qz(H)}`;
+  return latheG(k, [[0,0],[r*0.95,0],[r,0.005],[r,H-0.012],[r*0.985,H-0.009],[r*0.985,H-0.005],[r*0.93,H-0.003],[r*0.9,H],[0,H]], 32);
+}
+function sprayGeo(r, H){
+  return latheG(`spr${qz(r)}|${qz(H)}`, [[0,0],[r*0.9,0],[r,0.004],[r,H*0.74],[r*0.86,H*0.8],[r*0.5,H*0.84],[r*0.44,H*0.86],[0,H*0.86]], 28);
+}
+function bottleGeo(r, H){
+  return latheG(`bot${qz(r)}|${qz(H)}`, [[0,0],[r*0.92,0],[r,0.006],[r,H*0.6],[r*0.8,H*0.72],[r*0.4,H*0.82],[r*0.34,H*0.84],[r*0.34,H*0.9],[0,H*0.9]], 28);
+}
+function bucketGeo(r1, r2, H){
+  return latheG(`bkt${qz(r1)}|${qz(r2)}|${qz(H)}`, [[0,0],[r1,0],[r1*1.01,0.01],[r2,H*0.93],[r2*1.04,H*0.94],[r2*1.04,H],[r2*0.99,H],[r2*0.99,H*0.985],[0,H*0.985]], 36);
+}
+// one product at (x, y, z); dz = direction into shelf depth (sign)
+function product(kind, x, y, z, s, lab, plast, rng, dirZ){
+  const ry = (rng()-0.5)*0.25;
+  if (kind==='box'){
+    place(boxG(s.w*0.94, s.h, s.d), lab, x, y + s.h/2, z, ry*0.3);
+  } else if (kind==='can'){
+    const r = s.w/2*0.95, H = s.h;
+    place(canGeo(r,H), M.tin, x, y, z, 0);
+    place(cylG(r*1.004, r*1.004, H*0.72, 32, true), lab, x, y + H*0.46, z, Math.PI + (dirZ>0?0:Math.PI) + ry);
+    place(cached(`hdl${qz(r)}`, ()=>new THREE.TorusGeometry(r*0.92, 0.0016, 6, 28, Math.PI)), M.wire, x, y + H, z, rng()*Math.PI, 1, 0.3, 1);
+  } else if (kind==='spray'){
+    const r = s.w/2*0.95, H = s.h;
+    place(sprayGeo(r,H), M.tin, x, y, z, 0);
+    place(cylG(r*1.004, r*1.004, H*0.6, 28, true), lab, x, y + H*0.4, z, (dirZ>0?Math.PI:0) + ry);
+    place(cylG(r*0.8, r*0.84, H*0.14, 24), plast, x, y + H*0.86 + H*0.07, z);
+  } else if (kind==='cart'){
+    const r = s.w/2*0.95, H = s.h;
+    place(cylG(r, r, H*0.74, 24), lab, x, y + H*0.37, z, (dirZ>0?Math.PI:0) + ry);
+    place(cylG(r*0.98, r*0.98, 0.012, 24), plast, x, y + 0.006, z);
+    place(cylG(r*0.12, r*0.38, H*0.26, 16), M.nozzle, x, y + H*0.74 + H*0.13, z);
+  } else if (kind==='bottle'){
+    const r = s.w/2*0.95, H = s.h;
+    place(bottleGeo(r,H), plast, x, y, z, 0);
+    place(cylG(r*0.36, r*0.36, H*0.1, 20), PLASTIC[5], x, y + H*0.95, z);
+    place(cylG(r*1.004, r*1.004, H*0.34, 28, true), lab, x, y + H*0.3, z, (dirZ>0?Math.PI:0) + ry);
+  } else if (kind==='bucket'){
+    const r1 = s.w/2*0.86, r2 = s.w/2, H = s.h;
+    place(bucketGeo(r1, r2, H), plast, x, y, z, 0);
+    const rb = r1 + (r2-r1)*0.22, rt = r1 + (r2-r1)*0.78;
+    place(cylG(rt*1.012, rb*1.012, H*0.56, 36, true), lab, x, y + H*0.5, z, (dirZ>0?Math.PI:0) + ry);
+    place(cached(`bh${qz(r2)}`, ()=>new THREE.TorusGeometry(r2*1.02, 0.003, 6, 32, Math.PI)), M.wire, x, y + H*0.9, z, ry + Math.PI/2, 1, 0.55, 1, 0);
+  } else if (kind==='sack'){
+    place(rboxG(s.w, s.h, s.d, Math.min(s.h*0.45, 0.045), 3), M.kraft, x, y + s.h/2, z, ry);
+    place(cached(`sackTop${qz(s.w)}|${qz(s.d)}`, ()=>new THREE.PlaneGeometry(s.w*0.7, s.d*0.62)), M.kraft, x, y + s.h + 0.0015, z, ry, 1, 1, 1, -Math.PI/2);
+  }
+}
+const SIZES = {
+  can:    [[0.11,0.125],[0.155,0.17],[0.19,0.21]],
+  spray:  [[0.066,0.22],[0.058,0.2]],
+  cart:   [[0.05,0.3]],
+  bottle: [[0.075,0.22],[0.09,0.28]],
+  bucket: [[0.3,0.33],[0.26,0.28]],
+  sack:   [[0.42,0.11,0.36]]
+};
+function zoneKinds(isBase, gap, rng){
+  if (isBase) return rng() < 0.5 ? ['bucket','sack'] : ['bucket','box'];
+  const all = ['can','can','spray','cart','bottle','box','box'];
+  const a = all[Math.floor(rng()*all.length)], b = all[Math.floor(rng()*all.length)];
+  return [a, b];
+}
+function fitSize(kind, gap, depth, rng){
+  if (kind==='box'){
+    const h = Math.min(gap*0.85, 0.06 + rng()*Math.max(0.04, gap*0.6));
+    return {w:0.07 + rng()*0.12, h, d:Math.min(depth-0.03, 0.12 + rng()*depth*0.6)};
+  }
+  const opts = SIZES[kind].filter(o=>o[1] < gap*0.92 && o[0] < depth);
+  if (!opts.length) return null;
+  const o = opts[Math.floor(rng()*opts.length)];
+  return kind==='sack' ? {w:o[0], h:o[1], d:o[2]} : {w:o[0], h:o[1], d:o[0]};
+}
+// fills one shelf zone; returns occupied width fraction
+function fillZone(cx, y, F, dk, gap, fill, isBase, rng){
+  const zAt = d => F.anchor + F.dir*d;
+  const kinds = zoneKinds(isBase, gap, rng);
+  let cursor = -P.campata/2 + 0.03, used = 0;
+  const usable = P.campata - 0.06;
+  let guard = 0;
+  while (cursor < P.campata/2 - 0.04 && guard++ < 60){
+    let kind = kinds[Math.floor(rng()*kinds.length)];
+    let s = fitSize(kind, gap, dk, rng);
+    if (!s){ kind = 'box'; s = fitSize('box', gap, dk, rng); }
+    const lab = LABELS[Math.floor(rng()*LABELS.length)];
+    const plast = PLASTIC[Math.floor(rng()*PLASTIC.length)];
+    const run = kind==='sack' || kind==='bucket' ? 1 + Math.floor(rng()*2) : 2 + Math.floor(rng()*4);
+    for (let i=0;i<run;i++){
+      const w = s.w + 0.006;
+      if (cursor + w > P.campata/2 - 0.02) break;
+      if (rng() < fill){
+        used += w;
+        if (S.prod){
+          const x = cx + cursor + w/2;
+          if (kind==='box' || kind==='sack'){
+            const z = zAt(dk - 0.02 - s.d/2);
+            const stack = kind==='sack' ? 1 + Math.floor(rng()*3) : (s.h*2 < gap*0.85 && rng()<0.35 ? 2 : 1);
+            for (let t=0;t<stack;t++) product(kind, x, y + t*(s.h+0.002), z, s, lab, plast, rng, F.dir);
+          } else {
+            const facings = Math.max(1, Math.min(3, Math.floor((dk-0.03)/(s.d+0.004))));
+            for (let f=0; f<facings; f++){
+              if (f>0 && rng() > fill) continue;
+              product(kind, x, y, zAt(dk - 0.02 - s.d/2 - f*(s.d+0.004)), s, lab, plast, rng, F.dir);
+            }
+          }
+        }
+      }
+      cursor += w;
+    }
+    cursor += 0.012;
+  }
+  return Math.min(1, used/usable);
+}
+
+/* ---------- parts ---------- */
+function bracketGeo(depth){
+  return cached(`brk${qz(depth)}`, ()=>{
+    const s = new THREE.Shape();
+    s.moveTo(0,0); s.lineTo(depth*0.92,0); s.lineTo(depth*0.92,-0.012); s.lineTo(0.06,-0.085); s.lineTo(0,-0.085); s.lineTo(0,0);
+    const g = new THREE.ExtrudeGeometry(s, {depth:0.004, bevelEnabled:false});
+    g.translate(0,0,-0.002); return g;
+  });
+}
+function shelfUnit(cx, y, dk, F, info, brackets){
+  const z = d => F.anchor + F.dir*d;
+  const W = P.campata - 0.012;
+  box(W, 0.012, dk, M.shelf, cx, y, z(dk/2), info);
+  box(W, 0.032, 0.003, M.shelf, cx, y-0.01, z(dk-0.0015), info);                         // front flange
+  box(W, 0.02, 0.003, M.shelf, cx, y-0.004, z(0.0015), null);                            // back flange
+  box(W-0.004, 0.028, 0.004, priceMat, cx, y-0.01, z(dk+0.002), info, false).material.map.repeat.set(P.campata/0.5, 1);
+  box(W-0.004, 0.03, 0.002, M.clear, cx, y-0.01, z(dk+0.005), null, false);
+  if (brackets){
+    [-1,1].forEach(sd=>{
+      const b = mesh(bracketGeo(dk), M.frame, cx + sd*(W/2 - 0.004), y-0.006, z(0), root);
+      b.rotation.y = -F.dir*Math.PI/2;
+    });
+  }
+}
+function ledUnder(cx, yCeil, dAbove, F, mat, info){
+  const z = d => F.anchor + F.dir*d;
+  box(P.campata-0.1, 0.01, 0.018, M.alu, cx, yCeil-0.011, z(dAbove-0.03), info, false);
+  box(P.campata-0.11, 0.004, 0.012, mat, cx, yCeil-0.0175, z(dAbove-0.03), info, false);
+  box(0.006, 0.012, 0.02, M.conn, cx - (P.campata-0.1)/2 - 0.003, yCeil-0.011, z(dAbove-0.03), null, false);
+}
+function cameraUnit(x, y, zc, dir, info){
+  const g = new THREE.Group(); g.position.set(x, y, zc); g.rotation.y = dir>0 ? 0 : Math.PI; root.add(g);
+  mesh(rboxG(0.052, 0.038, 0.034, 0.008, 3), M.cam, 0, 0, 0, g);
+  const bz = mesh(cylG(0.0145, 0.0145, 0.004, 32), M.bezel, 0, 0, 0.019, g); bz.rotation.x = Math.PI/2;
+  const br = mesh(cylG(0.0105, 0.0115, 0.01, 32), M.cam, 0, 0, 0.026, g); br.rotation.x = Math.PI/2;
+  const gl = mesh(cached('lensCap', ()=>new THREE.SphereGeometry(0.0095, 24, 10, 0, Math.PI*2, 0, Math.PI/2.4)), M.lens, 0, 0, 0.029, g); gl.rotation.x = Math.PI/2;
+  const ring = mesh(cached('lensRing', ()=>new THREE.TorusGeometry(0.0106, 0.0012, 8, 32)), M.alu, 0, 0, 0.031, g, false);
+  mesh(cached('camLed', ()=>new THREE.SphereGeometry(0.0016, 8, 6)), M.camLed, 0.019, 0.012, 0.0172, g, false);
+  mesh(boxG(0.03, 0.004, 0.02), M.bezel, 0, -0.019, 0, g, false);
+  mesh(boxG(0.008, 0.03, 0.008), M.frame, 0, 0.032, -0.006, g);
+  mesh(boxG(0.008, 0.008, 0.04), M.frame, 0, 0.045, -0.024, g);
+  mesh(boxG(0.018, 0.02, 0.006), M.conn, 0, 0.045, -0.046, g);
+  const cab = new THREE.CatmullRomCurve3([new THREE.Vector3(0,0.005,-0.017), new THREE.Vector3(0,0.0,-0.035), new THREE.Vector3(0.0,0.04,-0.05)]);
+  mesh(cached('camCab', ()=>new THREE.TubeGeometry(cab, 12, 0.0025, 6, false)), M.conn, 0, 0, 0, g, false);
+  tag(g, info);
+  return g;
+}
+
+/* ---------- layout ---------- */
+function layout(){
+  const L = P.campate * P.campata, x0 = -L/2;
+  const gond = P.tipo === 'gondola';
+  const top = gond ? P.alt - 0.12 : P.alt - 0.35;
+  const step = (top - 0.10) / (P.ripiani - 1);
+  const levels = []; for (let k=0;k<P.ripiani;k++) levels.push(0.10 + k*step);
+  const o = OTTICHE[P.ottica];
+  const d = gond ? P.corsia + 2*(P.base - P.prof) - 0.025 : P.corsia - 0.025;
+  const rad = a => a*Math.PI/180;
+  const hcov = 2*d*Math.tan(rad(o.h/2)), vcov = 2*d*Math.tan(rad(o.v/2));
+  const nV = Math.max(1, Math.ceil((P.alt - 0.05)/vcov));
+  const nH = Math.max(1, Math.ceil(P.campata/hcov));
+  const xw = L/2 + 1.1;
+  return {L, x0, levels, step, d, hcov, vcov, nV, nH, perCampata:nV*nH, xw, o};
+}
+
+/* ---------- build ---------- */
+function build(){
+  if (root){ scene.remove(root); disposeTree(root); }
+  root = new THREE.Group(); scene.add(root);
+  pickables = []; switchPorts = []; prodBuckets = new Map();
+  const G = layout();
+  const rng = mulberry32(20260926);
+  const zones = [];
+  const gond = P.tipo === 'gondola';
+  const c2 = P.corsia/2;
+  const alarmZone = {row:'A', c:Math.min(2, P.campate), k:Math.min(3, P.ripiani)};
+  const faces = [];
+  G.trunks = [];
+  const depthAt = k => (gond && k===0) ? P.base : P.prof;
+  const last = P.ripiani - 1;
+  const topCeil = gond ? P.alt + 0.2 : P.alt;
+  const topDepth = gond ? P.prof*0.85 : P.prof;
+  T.slots.repeat.set(1, P.alt/0.1);
+  T.peg.repeat.set(G.L/0.1, (P.alt-0.1)/0.1);
+
+  ['A','B'].forEach((id, i)=>{
+    const s = i===0 ? -1 : 1;
+    if (gond){
+      const spine = s*(c2 + P.base + 0.03);
+      faces.push({row:id, dir:-s, anchor:spine - s*0.015, aisle:true, spine});
+      faces.push({row:id, dir: s, anchor:spine + s*0.015, aisle:false, spine});
+      const colInfo = {t:'Colonna centrale', d:`Gondola Brooklyn: acciaio antracite, H ${Math.round(P.alt*100)} cm, fori a H. I ripiani sono a sbalzo sui due lati.`};
+      for (let q=0;q<=P.campate;q++){
+        const x = G.x0 + q*P.campata;
+        box(0.05, P.alt, 0.05, M.upright, x, P.alt/2, spine, colInfo);
+        box(0.056, 0.012, 0.056, M.kick, x, P.alt + 0.006, spine, null);
+        box(0.016, P.alt-0.12, 0.03, M.race, x + 0.034, 0.12 + (P.alt-0.12)/2, spine, {t:'Canalina verticale', d:'Corre lungo la colonna: PoE per le telecamere e 24 V per i LED di tutti i ripiani, su entrambi i lati.'});
+        box(0.03, 0.2, 0.03, M.frame, x, P.alt + 0.1, spine, null);
+        rbox(0.06, 0.06, 0.05, 0.008, M.conn, x, P.alt + 0.23, spine, {t:'Innesto rapido', d:'Connettore a incastro tra una gondola e la successiva: PoE e 24 V passano senza cavi nuovi.'});
+      }
+      box(G.L, P.alt - 0.1, 0.018, M.panel, 0, 0.1 + (P.alt-0.1)/2, spine, {t:'Schiena centrale forata', d:'Pannello tra i due lati della gondola; dentro passano i cavi.'});
+      box(G.L + 0.03, 0.04, 0.04, M.race, 0, P.alt + 0.23, spine, {t:`Dorsale superiore · gondola ${id}`, d:'Un solo cavo per gondola verso il rack, nascosto nel cappello tecnico.'});
+      G.trunks.push(new THREE.Vector3(G.L/2 + 0.02, P.alt + 0.23, spine));
+      label(`Gondola ${id}`, G.x0 - 0.05, P.alt + 0.5, spine, 0.6);
+    } else {
+      const front = s*c2, dir = -s;
+      faces.push({row:id, dir, anchor:front - dir*P.prof, aisle:true});
+      for (let q=0;q<=P.campate;q++){
+        const x = G.x0 + q*P.campata;
+        const zf = front - dir*0.02, zb = front - dir*(P.prof-0.02);
+        [zf, zb].forEach(z=>box(0.035, P.alt, 0.035, M.upright, x, P.alt/2, z, {t:'Montante', d:`Acciaio verniciato, ${Math.round(P.alt*100)} cm. Sul fronte porta la canalina verticale.`}));
+        // side bracing
+        const seg = 0.5, len = Math.hypot(seg, P.prof-0.04), ang = Math.atan2(seg, P.prof-0.04);
+        for (let yb=0.15; yb+seg < P.alt; yb+=seg){
+          const b = box(0.012, 0.012, len, M.frame, x, yb + seg/2, (zf+zb)/2, null);
+          b.rotation.x = ((Math.round(yb/seg))%2 ? 1 : -1) * ang * -dir;
+        }
+        [zf, zb].forEach(z=>box(0.06, 0.012, 0.06, M.kick, x, 0.006, z, null));
+        box(0.026, P.alt-0.1, 0.016, M.race, x, 0.1 + (P.alt-0.1)/2, front + dir*0.008, {t:'Canalina verticale', d:'Porta il cavo PoE alle telecamere e i 24 V ai LED di ogni ripiano.'});
+        rbox(0.055, 0.06, 0.045, 0.008, M.conn, x, P.alt+0.02, front, {t:'Innesto rapido', d:'Connettore a incastro tra un modulo e il successivo: PoE e 24 V passano senza cavi nuovi.'});
+      }
+      box(G.L + 0.03, 0.04, 0.03, M.race, 0, P.alt+0.02, front, {t:`Canalina superiore · fila ${id}`, d:'Dorsale del modulo: un solo cavo verso il rack per tutta la fila.'});
+      G.trunks.push(new THREE.Vector3(G.L/2 + 0.02, P.alt + 0.02, front));
+      label(`Fila ${id}`, G.x0 - 0.05, P.alt + 0.28, front - dir*P.prof/2, 0.55);
+    }
+  });
+
+  faces.forEach((F, fi)=>{
+    const z = d => F.anchor + F.dir*d;
+    if (gond){
+      const baseInfo = {t:'Base', d:`Zoccolo profondo ${Math.round(P.base*100)} cm con piedini regolabili: è il primo ripiano.`};
+      box(G.L, 0.014, P.base, M.shelf, 0, 0.093, z(P.base/2), baseInfo);
+      box(G.L - 0.02, 0.075, 0.012, M.kick, 0, 0.045, z(P.base - 0.03), baseInfo);
+      box(G.L, 0.03, 0.004, priceMat, 0, 0.078, z(P.base + 0.002), null, false);
+      for (let q=0;q<=P.campate*2;q++){
+        const x = G.x0 + q*P.campata/2;
+        mesh(cylG(0.016, 0.02, 0.012, 16), M.kick, x, 0.006, z(P.base - 0.05));
+        mesh(cylG(0.004, 0.004, 0.06, 8), M.alu, x, 0.04, z(P.base - 0.05));
+      }
+      // technical canopy
+      const canInfo = {t:'Cappello tecnico', d:'Mensola sopra la gondola: porta il LED del ripiano alto, la dorsale dei cavi e l\'insegna di reparto.'};
+      box(G.L, 0.02, topDepth, M.shelf, 0, topCeil, z(topDepth/2), canInfo);
+      box(G.L, 0.1, 0.014, M.frame, 0, topCeil + 0.035, z(topDepth + 0.007), canInfo);
+      for (let c=0;c<P.campate;c++){
+        const cx = G.x0 + (c+0.5)*P.campata;
+        const cat = CATEGORIE[(fi*3 + c) % CATEGORIE.length];
+        const mat = signMat(cat);
+        const sg = mesh(cached('signPlane'+qz(P.campata), ()=>new THREE.PlaneGeometry(P.campata-0.03, 0.085)), mat, cx, topCeil + 0.035, z(topDepth + 0.0145), root, false);
+        sg.rotation.y = F.dir > 0 ? 0 : Math.PI;
+        tag(sg, {t:`Insegna · ${cat}`, d:'Fascia di reparto sul cappello tecnico.'});
+      }
+    }
+    for (let c=0;c<P.campate;c++){
+      const cx = G.x0 + (c+0.5)*P.campata;
+      for (let k=0;k<P.ripiani;k++){
+        const y = G.levels[k], dk = depthAt(k);
+        const zoneName = `${F.row}${c+1}·R${k+1}`;
+        const isAlarm = S.alarm && F.aisle && F.row===alarmZone.row && c+1===alarmZone.c && k+1===alarmZone.k;
+        if (!(gond && k===0)){
+          shelfUnit(cx, y, dk, F, {t:`Ripiano ${zoneName}`, d:F.aisle ? `Zona monitorata ${zoneName}. ${Math.round(P.campata*100)} × ${Math.round(dk*100)} cm, porta-prezzi trasparente, LED nel profilo sotto il ripiano sopra.` : 'Lato esterno: lo inquadrano le telecamere della corsia accanto.'}, gond);
+        }
+        const ceil = k < last ? G.levels[k+1] : topCeil;
+        const dAbove = k < last ? depthAt(k+1) : topDepth;
+        const ledMat = !S.led ? M.ledOff : (isAlarm ? M.ledRed : M.ledOn);
+        ledUnder(cx, ceil, dAbove, F, ledMat, {t:`LED ${zoneName}`, d: isAlarm ? 'LED rosso: la zona è sotto soglia di riordino.' : 'Profilo in alluminio con LED 24 V e diffusore: si accende allo scatto, così ogni foto ha la stessa luce.'});
+        if (S.led){
+          const w = new THREE.Mesh(cached(`wash${qz(P.campata)}|${qz(dk)}`, ()=>new THREE.PlaneGeometry(P.campata-0.06, dk-0.04)), isAlarm ? M.washRed : M.wash);
+          w.rotation.x = -Math.PI/2; w.position.set(cx, y+0.008, z(dk/2)); w.renderOrder = 2; root.add(w);
+        }
+        const gap = ceil - y - 0.03;
+        const fill = isAlarm ? 0.12 : 0.6 + rng()*0.35;
+        const f = fillZone(cx, y + 0.006, F, dk, gap, fill, gond && k===0, rng);
+        if (F.aisle) zones.push({name:zoneName, row:F.row, c:c+1, k:k+1, fill:f, alarm:isAlarm});
+      }
+      if (!F.aisle) continue;
+      const mounts = [];
+      for (let k=1;k<P.ripiani;k++) mounts.push({y:G.levels[k]-0.04, d:depthAt(k)});
+      mounts.push({y:topCeil-0.04, d:topDepth});
+      const target = faces.find(f=>f.aisle && f.row!==F.row);
+      const tz = target.anchor + target.dir*(P.prof + 0.005);
+      const camOff = F.row==='A' ? 0.12 : -0.12;
+      for (let j=0;j<G.nV;j++){
+        const want = 0.05 + (P.alt-0.05)*(j+0.5)/G.nV;
+        const mnt = mounts.reduce((a,b)=>Math.abs(b.y-want)<Math.abs(a.y-want)?b:a);
+        for (let hI=0; hI<G.nH; hI++){
+          const camX = cx + camOff + (G.nH>1 ? (hI-(G.nH-1)/2)*(P.campata/G.nH) : 0);
+          const camY = mnt.y, camZ = z(mnt.d + 0.045);
+          const info = {t:`Telecamera ${F.row}${c+1}-${j+1}`, d:`Ottica ${G.o.name}, agganciata al porta-prezzi. Guarda il lato di fronte (${target.row}, campata ${c+1}) da ${G.d.toFixed(2)} m: copre ${G.hcov.toFixed(2)} × ${G.vcov.toFixed(2)} m.`};
+          cameraUnit(camX, camY, camZ, F.dir, info);
+          if (!G.cam1 && F.row==='A' && c===Math.min(1,P.campate-1)) G.cam1 = {x:camX, y:camY, z:camZ, dir:F.dir};
+          const apex = new THREE.Vector3(camX, camY, camZ + F.dir*0.03);
+          const x1 = camX - G.hcov/2, x2 = camX + G.hcov/2, y1 = camY - G.vcov/2, y2 = camY + G.vcov/2;
+          const corners = [[x1,y1],[x2,y1],[x2,y2],[x1,y2]].map(([a,b])=>new THREE.Vector3(a,b,tz));
+          const pts = [];
+          corners.forEach(cn=>pts.push(apex, cn));
+          for (let q=0;q<4;q++) pts.push(corners[q], corners[(q+1)%4]);
+          const lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), M.fovLine);
+          lines.visible = S.fov; lines.userData.isFov = true; root.add(lines);
+          const rect = new THREE.Mesh(new THREE.PlaneGeometry(G.hcov, G.vcov), M.fovFill);
+          rect.position.set(camX, camY, tz); rect.visible = S.fov; rect.userData.isFov = true; rect.renderOrder = 3; root.add(rect);
+        }
+      }
+    }
+  });
+  G.aisleA = faces.find(f=>f.aisle && f.row==='A');
+
+  if (S.alarm){
+    const az = G.aisleA;
+    label(`Zona A${alarmZone.c}·R${alarmZone.k} sotto soglia`, G.x0 + (alarmZone.c-0.5)*P.campata - 0.2, P.alt + (gond?0.55:0.3), az.anchor + az.dir*(P.prof + 0.1), 0.6);
+  }
+
+  flushProducts();
+  buildRoom(G);
+  buildRack(G);
+  buildCassa(G);
+  drawDashboard(zones, G);
+  updateCalc(G);
+  views = makeViews(G);
+}
+
+function buildRoom(G){
+  const xw = G.xw;
+  const wall = mesh(boxG(0.1, 2.6, 3.2), wallMat, xw+0.05, 1.3, 0); wall.castShadow = false;
+  box(0.012, 0.09, 3.2, M.baseboard, xw-0.006, 0.045, 0, null);
+}
+
+function buildRack(G){
+  const xw = G.xw;
+  const H = 0.5, D = 0.45, W = 0.6, cy = 1.55;
+  const g = new THREE.Group(); g.position.set(xw - D/2, cy, 0); g.rotation.y = -Math.PI/2; root.add(g);
+  const fz = D/2 - 0.05; // front rail plane (local +z = front)
+  const add = (geo, mat, x, y, z, shadow=true) => mesh(geo, mat, x, y, z, g, shadow);
+  add(rboxG(0.02, H, D, 0.005, 2), M.rack, -W/2+0.01, 0, 0);
+  add(rboxG(0.02, H, D, 0.005, 2), M.rack,  W/2-0.01, 0, 0);
+  add(boxG(W, 0.02, D), M.vent, 0,  H/2-0.01, 0);
+  add(boxG(W, 0.02, D), M.rack, 0, -H/2+0.01, 0);
+  add(boxG(W-0.02, H-0.02, 0.012), M.rack, 0, 0, -D/2+0.006);
+  [-0.241, 0.241].forEach(x=>add(boxG(0.016, H-0.04, 0.004), M.upright, x, 0, fz));
+  // door
+  const dz = D/2 + 0.006;
+  add(boxG(0.02, H, 0.012), M.rack, -W/2+0.01, 0, dz); add(boxG(0.02, H, 0.012), M.rack, W/2-0.01, 0, dz);
+  add(boxG(W, 0.02, 0.012), M.rack, 0, H/2-0.01, dz); add(boxG(W, 0.02, 0.012), M.rack, 0, -H/2+0.01, dz);
+  const glass = add(boxG(W-0.04, H-0.04, 0.004), M.glass, 0, 0, dz, false); glass.renderOrder = 4;
+  add(cylG(0.006, 0.006, 0.11, 12), M.alu, W/2-0.04, 0, dz+0.022);
+  [0.045,-0.045].forEach(y=>add(boxG(0.01, 0.01, 0.018), M.alu, W/2-0.04, y, dz+0.012));
+  add(cylG(0.008, 0.008, 0.01, 12), M.alu, W/2-0.04, -0.09, dz+0.006).rotation.x = Math.PI/2;
+
+  const U = 0.0445, uw = 0.482, ud = 0.3;
+  const uz = fz - ud/2;
+  const faceMats = front => [M.unit, M.unit, M.unit, M.unit, front, M.unit];
+  let y = H/2 - 0.04;
+  const pp = add(new THREE.BoxGeometry(uw, U, ud), faceMats(M.ports), 0, y, uz); pp.userData.own = true;
+  tag(pp, {t:'Patch panel 24 porte', d:'Qui arrivano i cavi delle gondole; le bretelle colorate vanno allo switch.'});
+  const yPP = y; y -= U + 0.012;
+  const sw = add(new THREE.BoxGeometry(uw, U, ud), faceMats(M.ports), 0, y, uz);
+  tag(sw, {t:'Switch PoE+ gestito', d:'Alimenta e collega tutte le telecamere. Il numero di porte dipende dalle campate: vedi il calcolo.'});
+  const ySW = y;
+  const ports = Math.min(24, needPorts(G));
+  const portX = i => -uw/2 + (40 + (i%12)*36 + 14)/512*uw;
+  const portY = (yc, i) => yc + (i<12 ? 0.0095 : -0.0085);
+  for (let p=0;p<ports;p++){
+    const led = add(boxG(0.004, 0.003, 0.002), M.portOn.clone(), portX(p) + 0.011, portY(ySW, p) + 0.009, fz + 0.001, false);
+    led.material.userData.own = true; switchPorts.push(led);
+    const x = portX(p), y0 = portY(yPP, p), y1 = portY(ySW, p);
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(x, y0, fz+0.004), new THREE.Vector3(x, y0-0.004, fz+0.03),
+      new THREE.Vector3(x+0.004, (y0+y1)/2, fz+0.045), new THREE.Vector3(x, y1+0.004, fz+0.03), new THREE.Vector3(x, y1, fz+0.004)]);
+    add(new THREE.TubeGeometry(curve, 20, 0.0024, 6, false), M.patch[p % M.patch.length], 0, 0, 0, false);
+    add(boxG(0.012, 0.009, 0.014), M.patch[p % M.patch.length], x, y0, fz+0.007, false);
+    add(boxG(0.012, 0.009, 0.014), M.patch[p % M.patch.length], x, y1, fz+0.007, false);
+  }
+  y -= U;
+  add(boxG(uw, 0.006, ud), M.rack, 0, y, uz);
+  const mac = add(rboxG(0.197, 0.036, 0.197, 0.012, 3), M.mini, -0.1, y + 0.021, fz - 0.11);
+  tag(mac, {t:'Mac mini', d:'Acquisizione degli scatti, analisi (OpenCV + detector), storico SQLite, lettura Access via ODBC e server della dashboard.'});
+  add(cached('macLed', ()=>new THREE.SphereGeometry(0.0012, 8, 6)), M.white, -0.1 + 0.08, y + 0.012, fz - 0.011, false);
+  add(cylG(0.08, 0.08, 0.003, 32), M.kick, -0.1, y + 0.0045, fz - 0.11);
+  y -= 0.028 + U;
+  const ups = add(new THREE.BoxGeometry(uw, 2*U, ud+0.05), faceMats(M.upsFace), 0, y, uz - 0.025);
+  tag(ups, {t:'UPS 2U', d:'Tiene acceso switch e Mac mini durante i cali di corrente, così lo storico non si interrompe.'});
+  tag(g.children[0], {t:'Rack tecnico 9U', d:'Armadio a muro 60 × 45 × 50 cm con porta in vetro: patch panel, switch PoE+, Mac mini e UPS. Si configura una volta e si replica.'});
+  [1,2,3,4,5].forEach(i=>tag(g.children[i], g.children[0].userData.info));
+  label('Rack tecnico 9U', xw - 0.8, cy + H/2 + 0.14, 0, 0.6);
+
+  // conduits from each gondola into the rack top
+  G.trunks.forEach(st=>{
+    const fz2 = st.z;
+    const topY = cy + H/2;
+    const curve = new THREE.CatmullRomCurve3([
+      st.clone(),
+      new THREE.Vector3(xw - 0.4, st.y, fz2),
+      new THREE.Vector3(xw - 0.1, st.y, fz2),
+      new THREE.Vector3(xw - 0.06, st.y + 0.05, fz2),
+      new THREE.Vector3(xw - 0.06, topY + 0.12, fz2*0.6),
+      new THREE.Vector3(xw - 0.06, topY + 0.14, fz2*0.2),
+      new THREE.Vector3(xw - 0.12, topY + 0.1, 0),
+      new THREE.Vector3(xw - 0.14, topY + 0.01, 0)
+    ], false, 'catmullrom', 0.2);
+    const t = mesh(new THREE.TubeGeometry(curve, 60, 0.014, 12, false), M.conduit, 0, 0, 0);
+    tag(t, {t:'Dorsale verso il rack', d:'Guaina con un cavo per gondola: PoE delle telecamere e alimentazione dei LED.'});
+    for (let i=1;i<6;i++){ const p = curve.getPointAt(i/6); mesh(cylG(0.019, 0.019, 0.012, 16), M.alu, p.x, p.y, p.z, root, false).rotation.z = Math.PI/2; }
+  });
+}
+
+function buildCassa(G){
+  const xc = G.x0 - 1.9, zc = 0.3;
+  const deskInfo = {t:'Banco cassa', d:'Qui gira la dashboard sull\'iMac.'};
+  rbox(0.7, 0.86, 1.5, 0.01, M.desk, xc, 0.47, zc, deskInfo);
+  box(0.66, 0.06, 1.46, M.kick, xc + 0.03, 0.03, zc, null);
+  rbox(0.82, 0.04, 1.62, 0.012, M.deskTop, xc, 0.92, zc, deskInfo);
+  for (let i=0;i<4;i++) box(0.004, 0.7, 0.01, M.kick, xc + 0.352, 0.47, zc - 0.6 + i*0.4, null, false);
+  const g = new THREE.Group(); g.position.set(xc, 0.94, zc); g.rotation.y = Math.PI/4; root.add(g);
+  const imacInfo = {t:'iMac alla cassa', d:'Apre la dashboard del Mac mini nel browser: stato zone, lista di riordino, discrepanze con Access. Amministrazione via Condivisione Schermo.'};
+  mesh(rboxG(0.15, 0.006, 0.14, 0.003, 2), M.imac, 0, 0.003, -0.05, g);
+  const st = mesh(rboxG(0.14, 0.2, 0.008, 0.003, 2), M.imac, 0, 0.1, -0.075, g); st.rotation.x = -0.18;
+  mesh(rboxG(0.547, 0.40, 0.012, 0.009, 3), M.imac, 0, 0.35, -0.02, g);
+  mesh(boxG(0.535, 0.305, 0.002), M.bezelBk, 0, 0.395, -0.013, g, false);
+  mesh(boxG(0.535, 0.075, 0.002), M.chin, 0, 0.195, -0.013, g, false);
+  const cv = document.createElement('canvas'); cv.width = 1024; cv.height = 600;
+  dashTex = new THREE.CanvasTexture(cv); dashTex.encoding = THREE.sRGBEncoding; dashTex.anisotropy = MAXANI;
+  const scrMat = new THREE.MeshBasicMaterial({map:dashTex, toneMapped:false}); scrMat.userData.own = true;
+  const scr = mesh(new THREE.PlaneGeometry(0.515, 0.29), scrMat, 0, 0.395, -0.0115, g, false);
+  const kb = mesh(rboxG(0.279, 0.007, 0.114, 0.003, 2), M.imac, 0.02, 0.0035, 0.2, g);
+  const keys = mesh(new THREE.PlaneGeometry(0.265, 0.1), M.keys, 0.02, 0.0072, 0.2, g, false); keys.rotation.x = -Math.PI/2;
+  const mouse = mesh(cached('mouse', ()=>new THREE.SphereGeometry(0.5, 24, 16)), M.imac, 0.23, 0.006, 0.2, g); mouse.scale.set(0.03, 0.012, 0.058);
+  [kb, keys, mouse].forEach(m=>tag(m, imacInfo));
+  g.children.slice(0, 6).forEach(m=>tag(m, imacInfo));
+  // receipt printer
+  const pr = new THREE.Group(); pr.position.set(xc + 0.05, 0.94, zc - 0.5); root.add(pr);
+  mesh(rboxG(0.14, 0.13, 0.19, 0.02, 3), M.printer, 0, 0.065, 0, pr);
+  const paper = mesh(boxG(0.08, 0.001, 0.07), M.paper, 0, 0.131, 0.1, pr, false); paper.rotation.x = -0.5;
+  tag(pr, {t:'Stampante scontrini', d:'Banco cassa: resta com\'è, il sistema non la tocca.'});
+  label('Cassa · iMac', xc - 0.3, 1.62, zc, 0.5);
+  const pts = [
+    new THREE.Vector3(G.xw - 0.02, 1.3, 0.35), new THREE.Vector3(G.xw - 0.02, 0.01, 0.35),
+    new THREE.Vector3(G.xw - 0.02, 0.01, 1.7), new THREE.Vector3(xc + 0.2, 0.01, 1.7),
+    new THREE.Vector3(xc + 0.2, 0.01, zc + 0.75)
+  ];
+  const ln = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), M.lan); ln.computeLineDistances(); root.add(ln);
+  label('LAN verso la cassa', 0, 0.12, 1.75, 0.5);
+  g.userData.screen = scr; buildCassa.group = g;
+}
+
+function drawDashboard(zones, G){
+  const cv = dashTex.image, g = cv.getContext('2d');
+  g.fillStyle = '#0f1413'; g.fillRect(0,0,1024,600);
+  g.fillStyle = '#f0b21a'; g.fillRect(0,0,1024,6);
+  g.fillStyle = '#e8eeeb'; g.font = '600 34px "Barlow Semi Condensed", Arial Narrow, sans-serif'; g.textBaseline = 'top';
+  g.fillText('Stato scaffali', 28, 24);
+  g.fillStyle = '#8fa099'; g.font = '400 18px "IBM Plex Mono", monospace';
+  g.fillText('ultimo scatto 18:30 · dati di esempio', 28, 66);
+  const cols = P.campate, levels = P.ripiani;
+  const gx = 28, gy = 108, gw = 600, rowGap = 22;
+  const blockH = (600 - gy - 30 - rowGap) / 2;
+  ['A','B'].forEach((r, ri)=>{
+    const by = gy + ri*(blockH + rowGap);
+    g.fillStyle = '#8fa099'; g.font = '600 18px "Barlow Semi Condensed", sans-serif';
+    g.fillText('FILA ' + r, gx, by);
+    const cw = (gw - 60) / cols, ch = (blockH - 26) / levels;
+    for (let c=1;c<=cols;c++) for (let k=1;k<=levels;k++){
+      const z = zones.find(q=>q.row===r && q.c===c && q.k===k);
+      const x = gx + 60 + (c-1)*cw, y = by + 24 + (levels-k)*ch;
+      const f = z ? z.fill : 0;
+      g.fillStyle = f < 0.3 ? '#d6403f' : f < 0.5 ? '#c98a00' : '#23915e';
+      roundRect(g, x+2, y+2, cw-4, ch-4, 5); g.fill();
+      g.fillStyle = '#0f1413'; g.font = '500 ' + Math.min(16, ch*0.45) + 'px "IBM Plex Mono", monospace';
+      g.fillText(`${r}${c}·R${k} ${Math.round(f*100)}%`, x+9, y + ch/2 - 8);
+    }
+  });
+  const lx = 660;
+  g.fillStyle = '#e8eeeb'; g.font = '600 22px "Barlow Semi Condensed", sans-serif'; g.fillText('Da riordinare', lx, 108);
+  const low = zones.filter(z=>z.fill<0.5).sort((a,b)=>a.fill-b.fill).slice(0,6);
+  g.font = '400 17px "IBM Plex Mono", monospace';
+  low.forEach((z,i)=>{ g.fillStyle = z.fill<0.3 ? '#f06463' : '#f0b21a'; g.fillText(`${z.name}  ${Math.round(z.fill*100)}%`, lx, 144 + i*28); });
+  if (!low.length){ g.fillStyle = '#8fa099'; g.fillText('nessuna zona sotto soglia', lx, 144); }
+  g.fillStyle = '#e8eeeb'; g.font = '600 22px "Barlow Semi Condensed", sans-serif'; g.fillText('Discrepanze Access', lx, 340);
+  g.font = '400 16px "IBM Plex Mono", monospace'; g.fillStyle = '#c7d2cd';
+  const al = zones.find(z=>z.alarm);
+  if (al){ g.fillText(`${al.name}: vista ${Math.round(al.fill*100)}%`, lx, 376); g.fillText('Access: 24 pz → verificare', lx, 400); }
+  else { g.fillStyle = '#8fa099'; g.fillText('nessuna', lx, 376); }
+  dashTex.needsUpdate = true;
+}
+
+function needPorts(G){ return G.perCampata * P.campate * 2; }
+
+function updateCalc(G){
+  const cams = needPorts(G);
+  const sw = [8,16,24,48].find(n => n >= cams + 2) || '48+';
+  const ledM = (P.campata-0.12) * P.ripiani * P.campate * 2;
+  const pxcm = SENSOR_W / (G.hcov*100) * (P.ottica==='fish' ? 0.7 : 1);
+  const watt = cams*4 + ledM*5;
+  const rows = [
+    ['Distanza telecamera → fronte opposto', `${G.d.toFixed(2)} m`],
+    ['Area coperta da una telecamera', `${G.hcov.toFixed(2)} × ${G.vcov.toFixed(2)} m`],
+    ['Telecamere per campata', `${G.perCampata}`],
+    ['Telecamere totali (2 file)', `${cams}`, true],
+    ['Switch PoE consigliato', `${sw} porte`, true],
+    ['Zone monitorate', `${P.ripiani * P.campate * 2}`],
+    ['LED sotto ripiano', `${ledM.toFixed(1)} m`],
+    ['Risoluzione sul ripiano (12 MP)', `≈ ${pxcm.toFixed(0)} px/cm`],
+    ['Potenza stimata PoE + LED', `≈ ${Math.round(watt)} W`]
+  ];
+  updateCost(G);
+  $('#calc').innerHTML = rows.map(([a,b,hi])=>`<dt>${a}</dt><dd${hi?' class="hi"':''}>${b}</dd>`).join('');
+}
+
+
+/* ---------- costs ---------- */
+const PRICE_DEF = {gondola:371.70, parete:120, cappello:45, canalina:25, cam:75, led:14, psu:35, ctrl:15, cavo:1.2, sw8:90, sw16:180, sw24:280, sw48:520, rack:150, ups:150, mac:0, ora:35};
+let PRICE = Object.assign({}, PRICE_DEF), MARGINE = 35, lastG = null, lastBom = [];
+try { Object.assign(PRICE, JSON.parse(localStorage.getItem('sc-prezzi')||'{}')); const m = localStorage.getItem('sc-margine'); if (m!==null) MARGINE = +m; } catch(e){}
+const eur = v => v.toLocaleString('it-IT',{minimumFractionDigits:2, maximumFractionDigits:2});
+function bom(G){
+  const gond = P.tipo==='gondola', campTot = P.campate*2;
+  const cams = needPorts(G);
+  const ledM = (P.campata-0.12) * P.ripiani * P.campate * 2;
+  const ledW = ledM*5;
+  const swN = [8,16,24,48].find(n => n >= cams + 2) || 48;
+  const cavo = Math.ceil(2*(G.L + (G.xw - G.L/2) + 2.5));
+  const ore = campTot*1.5 + 4;
+  const it = [];
+  if (gond) it.push({k:'gondola', v:'Gondola Brooklyn, per campata', s:'listino 743,39 € ogni 2 campate', q:campTot, u:'pz'});
+  else it.push({k:'parete', v:'Scaffale a parete, per campata', s:'stima', q:campTot, u:'pz'});
+  if (gond) it.push({k:'cappello', v:'Cappello tecnico, per lato', s:'autocostruito, stima', q:campTot*2, u:'pz'});
+  it.push({k:'canalina', v:'Canalina + innesti rapidi', s:'per campata', q:campTot, u:'pz'});
+  it.push({k:'cam', v:'Telecamera (Pi Zero 2 W + Cam 3 Wide + PoE)', s:'stima', q:cams, u:'pz'});
+  it.push({k:'led', v:'LED 24 V + profilo porta-prezzi', s:'al metro', q:+ledM.toFixed(1), u:'m'});
+  it.push({k:'psu', v:'Alimentatore 24 V 150 W', s:`LED ≈ ${Math.round(ledW)} W`, q:Math.max(1, Math.ceil(ledW/150)), u:'pz'});
+  it.push({k:'ctrl', v:'Controller LED (ESP32 + MOSFET)', s:'uno per fila', q:2, u:'pz'});
+  it.push({k:'cavo', v:'Cavo Cat6 dorsali', s:'al metro', q:cavo, u:'m'});
+  it.push({k:'sw'+swN, v:`Switch PoE+ ${swN} porte`, s:'gestito', q:1, u:'pz'});
+  it.push({k:'rack', v:'Rack 9U + patch panel', s:'', q:1, u:'pz'});
+  it.push({k:'ups', v:'UPS 2U', s:'', q:1, u:'pz'});
+  it.push({k:'mac', v:'Mac mini', s:'0 se già disponibile', q:1, u:'pz'});
+  it.push({k:'ora', v:'Montaggio e configurazione', s:'1,5 h per campata + 4 h rack', q:ore, u:'h', labor:true});
+  it.forEach(r=>{ r.p = PRICE[r.k]; r.t = r.q * r.p; });
+  return it;
+}
+function updateCost(G){
+  if (G) lastG = G; G = lastG; if (!G) return;
+  const it = bom(G); lastBom = it;
+  $('#costBody').innerHTML = it.map(r=>`<tr><td>${r.v}${r.s?`<small>${r.s}</small>`:''}</td><td class="n">${String(r.q).replace('.',',')} ${r.u}</td><td><input type="number" min="0" step="0.01" id="pr-${r.k}" data-k="${r.k}" value="${r.p}" aria-label="Prezzo unitario ${r.v}"></td><td class="n">${eur(r.t)}</td></tr>`).join('');
+  const hw = it.filter(r=>!r.labor).reduce((a,r)=>a+r.t,0);
+  const lab = it.filter(r=>r.labor).reduce((a,r)=>a+r.t,0);
+  const tot = hw + lab, prezzo = tot*(1+MARGINE/100);
+  const zone = P.ripiani * P.campate * 2;
+  $('#costTot').innerHTML = [
+    ['Materiali', eur(hw)+' €'], ['Manodopera', eur(lab)+' €'], ['Costo totale', eur(tot)+' €', true],
+    [`Prezzo al cliente (+${MARGINE}%)`, eur(prezzo)+' €', true], ['Costo per zona monitorata', eur(tot/zone)+' €'],
+    ['Solo sistema, senza scaffali', eur(tot - it.filter(r=>r.k==='gondola'||r.k==='parete').reduce((a,r)=>a+r.t,0))+' €']
+  ].map(([a,b,hi])=>`<dt>${a}</dt><dd${hi?' class="hi"':''}>${b}</dd>`).join('');
+}
+$('#costBody').addEventListener('change', e=>{
+  const k = e.target.dataset.k; if (!k) return;
+  PRICE[k] = Math.max(0, parseFloat(e.target.value)||0);
+  try { localStorage.setItem('sc-prezzi', JSON.stringify(PRICE)); } catch(err){}
+  updateCost();
+});
+$('#s-margine').value = MARGINE; $('#o-margine').textContent = MARGINE + '%';
+$('#s-margine').addEventListener('input', e=>{
+  MARGINE = +e.target.value; $('#o-margine').textContent = MARGINE + '%';
+  try { localStorage.setItem('sc-margine', MARGINE); } catch(err){}
+  updateCost();
+});
+$('#copyBom').addEventListener('click', ()=>{
+  const lines = ['Voce;Quantita;Unita;Prezzo unitario EUR;Totale EUR'].concat(lastBom.map(r=>`${r.v};${String(r.q).replace('.',',')};${r.u};${eur(r.p)};${eur(r.t)}`));
+  const txt = lines.join('\n');
+  const msg = $('#copyMsg');
+  navigator.clipboard.writeText(txt).then(()=>{ msg.textContent = 'Distinta copiata: incollala in Excel o in un foglio.'; })
+    .catch(()=>{ msg.textContent = 'Copia non consentita qui: ecco il testo da selezionare.'; msg.style.whiteSpace='pre-wrap'; msg.textContent = txt; });
+});
+
+/* ---------- views ---------- */
+let views = {};
+function makeViews(G){
+  const cxAlarm = G.x0 + (Math.min(2,P.campate)-0.5)*P.campata;
+  const scrPos = new THREE.Vector3(); let scrN = new THREE.Vector3(Math.SQRT1_2,0,Math.SQRT1_2);
+  const g = buildCassa.group;
+  g.updateMatrixWorld(true); g.userData.screen.getWorldPosition(scrPos);
+  return {
+    pano:   {p:[-0.6, 3.0, 5.2], t:[0.1, 0.7, 0]},
+    corsia: {p:[G.x0 - 0.7, 1.55, 0], t:[G.L/2, 1.0, 0]},
+    modulo: {p:[cxAlarm + 0.25, Math.min(1.25, P.alt*0.8), -(G.aisleA.anchor + G.aisleA.dir*P.prof) - 0.12], t:[cxAlarm, P.alt*0.45, G.aisleA.anchor + G.aisleA.dir*P.prof]},
+    tele:   G.cam1 ? {p:[G.cam1.x + 0.1, G.cam1.y + 0.03, G.cam1.z + G.cam1.dir*0.2], t:[G.cam1.x, G.cam1.y + 0.005, G.cam1.z]} : null,
+    rack:   {p:[G.xw - 1.5, 1.8, 0.9], t:[G.xw - 0.25, 1.55, 0]},
+    cassa:  {p:[scrPos.x + scrN.x*0.75, scrPos.y + 0.08, scrPos.z + scrN.z*0.75], t:[scrPos.x, scrPos.y, scrPos.z]}
+  };
+}
+let tween = null;
+function goView(name){
+  const v = views[name]; if (!v) return;
+  document.querySelectorAll('.viewbar button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.view===name));
+  const p1 = new THREE.Vector3(...v.p), t1 = new THREE.Vector3(...v.t);
+  if (reduceMotion){ camera.position.copy(p1); controls.target.copy(t1); controls.update(); return; }
+  tween = {p0:camera.position.clone(), t0:controls.target.clone(), p1, t1, s:performance.now(), dur:900};
+}
+document.querySelectorAll('.viewbar button').forEach(b=>b.addEventListener('click', ()=>goView(b.dataset.view)));
+
+/* ---------- picking ---------- */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+let down = null;
+canvas.addEventListener('pointerdown', e=>{ down = {x:e.clientX, y:e.clientY}; });
+canvas.addEventListener('pointerup', e=>{
+  if (!down || Math.hypot(e.clientX-down.x, e.clientY-down.y) > 5) return;
+  const r = canvas.getBoundingClientRect();
+  ndc.set(((e.clientX-r.left)/r.width)*2-1, -((e.clientY-r.top)/r.height)*2+1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObjects(pickables, false)[0];
+  $('#selText').innerHTML = hit ? `<b>${hit.object.userData.info.t}</b>${hit.object.userData.info.d}` : 'Nessun componente qui. Tocca telecamere, LED, canaline, rack o iMac.';
+});
+
+/* ---------- controls ---------- */
+const bindToggle = (id, key, rebuild) => $(id).addEventListener('change', e=>{
+  S[key] = e.target.checked;
+  if (rebuild) build();
+  else root.traverse(n=>{ if (key==='fov' && n.userData.isFov) n.visible = S.fov; if (key==='lab' && n.userData.isLabel) n.visible = S.lab; });
+});
+bindToggle('#t-led','led',true); bindToggle('#t-prod','prod',true); bindToggle('#t-alarm','alarm',true);
+bindToggle('#t-fov','fov',false); bindToggle('#t-lab','lab',false);
+
+const fmt = {campata:v=>`${Math.round(v*100)} cm`, prof:v=>`${Math.round(v*100)} cm`, alt:v=>`${Math.round(v*100)} cm`, corsia:v=>`${Math.round(v*100)} cm`, ripiani:v=>`${v}`, campate:v=>`${v}`};
+Object.keys(fmt).forEach(k=>{
+  const inp = $('#s-'+k), out = $('#o-'+k);
+  inp.value = P[k]; out.textContent = fmt[k](P[k]);
+  inp.addEventListener('input', ()=>{ P[k] = parseFloat(inp.value); out.textContent = fmt[k](P[k]); schedule(); });
+});
+$('#s-ottica').addEventListener('change', e=>{ P.ottica = e.target.value; build(); });
+$('#s-tipo').addEventListener('change', e=>{
+  P.tipo = e.target.value; Object.assign(P, PRESETS[P.tipo]);
+  Object.keys(fmt).forEach(k=>{ $('#s-'+k).value = P[k]; $('#o-'+k).textContent = fmt[k](P[k]); });
+  build(); goView('pano');
+});
+let pend = null;
+function schedule(){ if (pend) return; pend = requestAnimationFrame(()=>{ pend = null; build(); }); }
+
+/* ---------- resize + loop ---------- */
+function resize(){
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false); camera.aspect = w/Math.max(1,h); camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+
+build();
+const v0 = views.pano; camera.position.set(...v0.p); controls.target.set(...v0.t); controls.update();
+resize();
+
+const ease = t => t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
+function loop(now){
+  if (tween){
+    const k = Math.min(1, (now - tween.s)/tween.dur), e = ease(k);
+    camera.position.lerpVectors(tween.p0, tween.p1, e);
+    controls.target.lerpVectors(tween.t0, tween.t1, e);
+    if (k >= 1) tween = null;
+  }
+  if (!reduceMotion){
+    M.ledRed.emissiveIntensity = 1.1 + 0.7*Math.sin(now*0.005);
+    switchPorts.forEach((p,i)=>{ p.material.emissiveIntensity = (Math.sin(now*0.02 + i*1.7) > 0.2) ? 1.3 : 0.15; });
+  }
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>
