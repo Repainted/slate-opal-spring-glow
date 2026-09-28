@@ -62,7 +62,7 @@ function LabHome() {
             <ul className="flex snap-x snap-mandatory gap-4">
               <li className="w-[min(85vw,32rem)] shrink-0 snap-start">
                 <Link to="/lab/legno" className="group block h-full border border-ink/10 bg-paper-card hover:border-copper">
-                  <img src="/images/lab/legno.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
+                  <img src="/images/lab/legno-truciolo.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
                   <div className="p-5 md:p-6">
                     <p className="font-mono text-xs uppercase tracking-kicker text-copper">{tr("02 · A parte")}</p>
                     <h3 className="mt-2 font-display text-3xl">Legno</h3>
@@ -74,7 +74,7 @@ function LabHome() {
               </li>
               <li className="w-[min(85vw,32rem)] shrink-0 snap-start">
                 <Link to="/lab/drone" className="group block h-full border border-ink/10 bg-paper-card hover:border-copper">
-                  <img src="/images/lab/drone.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
+                  <img src="/images/lab/drone-sim.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
                   <div className="p-5 md:p-6">
                     <p className="font-mono text-xs uppercase tracking-kicker text-copper">{tr("03 · A parte")}</p>
                     <h3 className="mt-2 font-display text-3xl">Drone</h3>
@@ -86,7 +86,7 @@ function LabHome() {
               </li>
               <li className="w-[min(85vw,32rem)] shrink-0 snap-start">
                 <a href="/lab/misure/" className="group block h-full border border-ink/10 bg-paper-card hover:border-copper">
-                  <img src="/images/lab/misure.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
+                  <img src="/images/lab/misure-app.jpg" alt="" className="aspect-[16/9] w-full object-cover" />
                   <div className="p-5 md:p-6">
                     <p className="font-mono text-xs uppercase tracking-kicker text-copper">{tr("04 · A parte")}</p>
                     <h3 className="mt-2 font-display text-3xl">Misure</h3>
