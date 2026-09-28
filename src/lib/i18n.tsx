@@ -194,6 +194,7 @@ const EN: Record<string, string> = {
     "Roof, room, wall or portico. Plan, price list and quote. Not part of the Portal.",
   "Si salta sui mattoncini, si seguono i tesori e si apre il mondo dopo. Non fa parte del Portale.":
     "Jump the blocks, follow the treasures, then the world opens. Not part of the Portal.",
+  "Un gioco fatto qui. Si salta, si cercano i tesori.": "A game made here. You jump, you look for the treasures.",
   "Gondole con telecamere e LED nei porta-prezzi. Si gira il modello, esce la distinta. Non fa parte del Portale.":
     "Gondolas with cameras and LEDs in the price rails. Spin the model, get the bill of materials. Not part of the Portal.",
   "Due gondole, un cappello tecnico, le telecamere che guardano il fronte di fronte. Tutto arriva al rack. In cassa, l’iMac mostra le zone sotto soglia.":

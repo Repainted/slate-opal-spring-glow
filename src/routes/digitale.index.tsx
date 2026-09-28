@@ -60,6 +60,7 @@ function VetrinaRuota() {
 
 function StudioHome() {
   const tr = useT();
+  const [toy, setToy] = useState(false);
   return (
     <StudioShell>
       <JsonLd
@@ -232,6 +233,31 @@ function StudioHome() {
       </section>
 
       <ContattiStudio />
+      <div className="fixed bottom-5 right-5 z-30 flex flex-col items-end gap-3">
+        {toy ? (
+          <div className="w-60 rounded-2xl border border-ink/10 bg-paper p-4 shadow-[0_12px_40px_rgba(20,16,12,0.18)]">
+            <p className="font-display text-xl leading-none">Mattoncini</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+              {tr("Un gioco fatto qui. Si salta, si cercano i tesori.")}
+            </p>
+            <Link to="/lab/mattoncini" className="mt-3 inline-flex min-h-11 items-center text-sm text-copper">
+              {tr("Apri il gioco")}
+            </Link>
+            <Link to="/digitale/genitori" className="block text-sm text-copper">
+              {tr("Per i genitori")}
+            </Link>
+          </div>
+        ) : null}
+        <button
+          type="button"
+          aria-expanded={toy}
+          aria-label="Mattoncini"
+          onClick={() => setToy((v) => !v)}
+          className="size-14 overflow-hidden rounded-full border-2 border-white shadow-[0_8px_24px_rgba(20,16,12,0.22)]"
+        >
+          <img src="/images/lab/mattoncini-icon.jpg" alt="" className="size-full object-cover" />
+        </button>
+      </div>
     </StudioShell>
   );
 }
